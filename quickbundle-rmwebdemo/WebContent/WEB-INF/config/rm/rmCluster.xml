@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rm>
+	<org.quickbundle.project.init.RmConfig>
+		<!-- primary key prefix of this cluster node, range: 1000-9222 #change in production -->
+		<clusterIdPrefix>1000</clusterIdPrefix>
+		<!-- job scheduler is start #change in production -->
+		<schedulerStart>false</schedulerStart>
+		<!-- lazy start scheduler time(second), 0 or -1 ignore this -->
+		<schedulerStartLazy>0</schedulerStartLazy>
+	</org.quickbundle.project.init.RmConfig>
+
+	<!-- #change in production -->
+	<org.quickbundle.base.cloud.RmClusterConfig thisId="server1">
+		<node id="server1">
+			<user>server1</user>
+			<password>1</password>
+			<contextPath>/rmdemo</contextPath>
+			<urlPrefix>http://localhost:9999/rmdemo/</urlPrefix>
+			<webServiceUrl>http://localhost:9999/rmdemo/services/</webServiceUrl>
+		</node>
+		<!-- other cluster node -->
+		<node id="server2">
+			<user>server2</user>
+			<password>1</password>
+			<contextPath>/rmdemo</contextPath>
+			<urlPrefix>http://localhost:10000/rmdemo/</urlPrefix>
+			<webServiceUrl>http://localhost:10000/rmdemo/services/</webServiceUrl>
+		</node>
+	</org.quickbundle.base.cloud.RmClusterConfig>
+	
+	<org.quickbundle.project.login.RmSsoLogin>
+		<redirectGroup enable="false">
+			<redirectUrls >
+				<url>^.*\.do$</url>
+			</redirectUrls>
+			<redirectTargets>
+				<urlPrefix>http://localhost:10000/rmdemo/</urlPrefix>
+			</redirectTargets>
+		</redirectGroup>
+	</org.quickbundle.project.login.RmSsoLogin>
+</rm>

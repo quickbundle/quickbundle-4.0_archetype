@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rm>
+	<org.quickbundle.project.init.RmConfig>
+		<!-- war's home directory -->
+		<warHome>/qb_home/rmdemo</warHome>
+		<!-- RmIdFactory generate primary key from database? or from memory cache? #change in production -->
+		<generateIdFromDb>true</generateIdFromDb>
+		<!-- RmIdFactory init id batch, union all? -->
+		<initIdBatch>false</initIdBatch>
+		<!-- is cluster mode? or single node? (online user, etc...) #change in production -->
+		<clusterMode>true</clusterMode>
+		<!-- default page size of list page-->
+		<defaultPageSize>15</defaultPageSize>
+		<!-- is multiple database on one table -->
+		<multiDb>false</multiDb>
+		<!-- system is in debug mode #change in production -->
+		<systemDebugMode>true</systemDebugMode>
+		<!-- user only login once at the moment -->
+		<userUniqueLogin>true</userUniqueLogin>
+		<!-- this app's description -->
+		<appDescription>Demo System</appDescription>
+		<!-- log request executeTime and sql count? -->
+		<logRequest>true</logRequest>
+		<!-- move file to recycleBinFolder, instead of remove -->
+		<logicDeleteFile>true</logicDeleteFile>
+		<!-- recycle Bin Folder #change in production -->
+		<recycleBinFolder>/qb_home/rmdemo/recycle_bin</recycleBinFolder>
+		<defaultFont>微软雅黑,黑体</defaultFont>
+	</org.quickbundle.project.init.RmConfig>
+	
+	<!-- when log in, don't filter session -->
+	<org.quickbundle.project.filter.RmPrivilegeFilter>
+		<ignoreUrls>
+			<!-- ignore all url check 
+			<url>^.*$</url>
+			-->
+			<!-- static resource -->
+			<url>^.+\.(jpg|gif|png|js|htc|jpeg|bmp|ico|swf|css|zip|tgz|gz|rar|bz2|doc|xls|exe|pdf|ppt|txt|tar|mid|midi|wav|rtf)$</url>
+			<url>^/(css|images|js|media)/.*$</url>
+			<!-- login -->
+			<url>^/(|(index|heartbeat)\.jsp|RmLoginAction\.do)$</url>
+			<url>^/project/sample/(login|test)/.*$</url>
+			<!-- tools page -->
+			<url>^/jsp/support/(god|verify)/.*$</url>
+			<url>^/jsp/common/error/.*$</url>
+			<!-- soa -->
+			<url>^/(services|api)(|/.*)$</url>
+		</ignoreUrls>
+		<!-- valid business service url, to be monitor and log -->
+		<validBsUrlMatch>^.*((\.(jsp|do|py))|/[\w]*)$</validBsUrlMatch>
+	</org.quickbundle.project.filter.RmPrivilegeFilter>
+	
+	<org.quickbundle.project.RmProjectHelper>
+		<logFatal>
+			<mailTo>test@quickbundle.org</mailTo>
+		</logFatal>
+	</org.quickbundle.project.RmProjectHelper>
+</rm>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jQuery Mobile应用程序</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="css/jquery.mobile-1.0.1.css" rel="Stylesheet" type="text/css" />
+	<script src="js/jquery-1.6.4.js" type="text/javascript"></script>
+	<script src="js/jquery.jsonp.js" type="text/javascript"></script>
+	<script src="js/jquery.mobile-1.0.1.js" type="text/javascript"></script>
+	<script src="js/qbHtml5.base.js" type="text/javascript"></script>
+	<script src="js/qbHtml5.newreceipt.js" type="text/javascript"></script>
+	<script src="js/cordova-2.0.0.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="page1" data-role="page">
+	<div data-role="header"><h1>QuickBundle应用</h1></div>
+	<div data-role="content" class="content">
+	<div data-role="fieldcontain">
+	<label for="receiptApplicant">单据申请人:</label>
+    <input type="text" name="receiptApplicant" id="receiptApplicant" value=""  readonly='true'/>
+	</div>
+	<div data-role="fieldcontain">
+	<label for="receiptDate">单据申请日期:(YYYY-MM-DD)</label>
+    <input type="text" name="receiptDate" id="receiptDate" value=""  />
+	</div>
+	<div data-role="fieldcontain">
+	<label for="receiptTitle">单据申请标题:</label>
+    <input type="text" name="receiptTitle" id="receiptTitle" value=""  />
+	</div>
+	<div data-role="fieldcontain">
+	<label for="receiptDetail">单据内容:</label>
+    <textarea cols="40" rows="8" name="receiptDetail" id="receiptDetail"></textarea>
+	</div>
+	<a href="#" id="btnSub" data-role="button" rel="external" data-inline="true">保存</a>
+	<a href="#" id="btnCancel" data-role="button" rel="external" data-inline="true">取消</a>
+	</div>
+	<div data-role="footer" data-position="fixed">
+	  <h1>@2013 quickbundle</h1>
+	</div>
+</div>
+</body>
+</html>

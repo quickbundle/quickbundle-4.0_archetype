@@ -1,0 +1,54 @@
+/* 系统封面 */
+.load
+{
+  text-align:center;padding:10px;
+  line-height:1.8em
+}
+.load .t
+{
+  padding:5px 20px 5px 20px; font-family:"黑体";
+  color:#e63f38
+}
+.load .l
+{
+  color:#666;font-size:12px
+}
+.border_p01
+{
+  width:100%; height:3px; background:#e41400;
+  margin:0; padding:0
+}
+/* 列表区域 */
+.lst
+{
+  height:70%; margin:0px;
+  padding:8px 25px 8px 25px;
+}
+.lst a img
+{
+  padding:0px; max-height:13px; max-width:13px;
+  padding-top:0px;padding-bottom:0px;margin:0px
+}
+.lst a h3
+{
+  width:80%
+}
+/*超链接格式
+a {
+color:#3399FF;
+font-weight:Normal; /*CSS字体效果 普通 可以改成bold粗体 如果去除此行那么默认是不显示下划线的
+text-decoration:none; /*CSS下划线效果：无下划线
+}
+
+a:hover {
+color:#4499EE;
+text-decoration:none; /*CSS下划线效果：无下划线
+border-bottom: 1px #0099CC dotted /*CSS加一个只有下边的框 边框为虚线
+}*/
+/* li样式 */
+li {
+list-style-type:square;
+list-style-image:url(images/new_receipt.png);
+}
+/* icon */
+.ui-icon-delete-msg {background:url('/images/delete.png') no-repeat 0 0;}

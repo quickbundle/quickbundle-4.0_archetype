@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<items>
+	<key>中国石化</key>
+	<key>999,999,999</key>
+	<key><input type="checkbox" name="sel" value="1" onclick=""/></key>
+</items>

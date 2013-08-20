@@ -1,0 +1,105 @@
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<script>
+function addProject(form){
+	if(form.sid.value == "" || form.name.value == ""){
+		alert("请输入sid和name！");
+		return;
+	}
+	
+	var re = /^\d+$/;
+	if(re.test(form.sid.value) == false){
+		alert("sid必须是整数，因为是主键，所以不可以重复！");
+		return;
+	}
+	
+	var twin = parent.frames[0];
+	var citem = twin.getCurrentItem();
+	if(citem == null){
+		alert("请先选择一个节点");
+		return;
+	}
+	if(citem != null){
+	//	alert(citem.sid);
+		twin.addCongenerItem(citem, form.name.value, form.sid.value);
+	}else if(twin.isRootSelected() == true){
+		alert("root Selected");
+	}
+}
+
+function deleteProject(form){
+	
+	var twin = parent.frames[0];
+	var citem = twin.getCurrentItem();
+	if(citem != null)
+		twin.deleteItem(citem);
+}
+function addSubProject(form){
+	if(form.sid.value == "" || form.name.value == ""){
+		alert("请输入sid和name！");
+		return;
+	}
+	
+	var re = /^\d+$/;
+	if(re.test(form.sid.value) == false){
+		alert("sid必须是整数，因为是主键，所以不可以重复！");
+		return;
+	}	
+	
+	var twin = parent.frames[0];
+	var citem = twin.getCurrentItem();
+	if(citem == null){
+		alert("请先选择一个父亲节点");
+		return;
+	}	
+	if(citem != null){
+		twin.addSubItem(citem, form.name.value, form.sid.value);
+	}else if(twin.isRootSelected() == true){
+		twin.addSubItem(null, form.name.value, form.sid.value);
+	}
+}
+function moveProject(form){
+	var twin = parent.frames[0];
+	var item1 = twin.getItemBySid(18);
+	var item2 = twin.getItemBySid(9);
+	twin.dtMoveItem(item1, item2);
+}
+function moveProjectToSub(form){
+	var twin = parent.frames[0];
+	var item1 = twin.getItemBySid(18);
+	var item2 = twin.getItemBySid(9);
+	twin.dtMoveItemToSub(item1, item2);
+}
+</script>
+</HEAD>
+<BODY>
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%" height="100%">
+	<tr>
+		<td>
+			添加同类项：
+			<form>
+				sid（数字）:<input type="text" name="sid" value=""/>&nbsp;&nbsp;
+				name:<input type="text" name="name" value=""/>
+				<br/>
+				<input type="button" name="add" value="add" onClick="addProject(this.form)"/>
+				&nbsp;&nbsp;<input type="button" name="delete" value="delete" onClick="deleteProject(this.form)"/>
+				&nbsp;&nbsp;<input type="button" name="move" value="move" onClick="moveProject(this.form)"/>
+				&nbsp;&nbsp;<input type="button" name="movesub" value="moveSub" onClick="moveProjectToSub(this.form)"/>
+			</form>		
+		</td>
+		<td>
+			添加子项：
+			<form>
+				sid（数字）:<input type="text" name="sid" value=""/>&nbsp;&nbsp;
+				name:<input type="text" name="name" value=""/>
+				<br/>
+				<input type="button" name="add" value="add" onClick="addSubProject(this.form)"/>
+				&nbsp;&nbsp;<input type="button" name="delete" value="delete"/>
+			</form>			
+		</td>
+	</tr>
+</table>
+</BODY>
+</HTML>		

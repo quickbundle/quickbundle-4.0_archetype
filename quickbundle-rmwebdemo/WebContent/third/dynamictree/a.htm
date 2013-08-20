@@ -1,0 +1,96 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE></TITLE>
+<script type="text/javascript" src="dymictree.js"></script>
+<script type="text/javascript" src="debug.js"></script>
+<script type="text/javascript">
+
+treeMenu = new TreeMenu();
+treeMenuName = "FinanceTree";
+treeMenuImgDir = "img/";
+treeMenuRoot = '财务管理系统'; //根节点名称
+treeMenuOnClick = false;
+
+var i,j;
+var node1 = new Array();
+var node2 = new Array();
+var n=0,m,l;
+var treeInfoColumn, treeInfoColumn1;
+var tree = new Array();
+
+tree[n++] = new TreeMenuItem("系统设置","1","","");
+treeInfoColumn = new TreeMenu();
+tree[n-1].makeSubmenu(treeInfoColumn);
+m=0;
+node1[m++] = new TreeMenuItem("基础设置","2","","");
+
+node1[m++] = new TreeMenuItem("科目设置","3","","");
+
+for(i=0;i<m;i++){
+	treeInfoColumn.addItem(node1[i]);
+}
+tree[n++] = new TreeMenuItem("财务数据同步","4","","");
+treeInfoColumn = new TreeMenu();
+tree[n-1].makeSubmenu(treeInfoColumn);
+m=0;
+node1[m++] = new TreeMenuItem("数据库接口设置","5","","");
+
+node1[m++] = new TreeMenuItem("会计科目同步","6","","");
+
+node1[m++] = new TreeMenuItem("会计凭证同步","7","","");
+
+node1[m++] = new TreeMenuItem("映射往来个人","8","","");
+
+node1[m++] = new TreeMenuItem("映射往来单位","9","","");
+for(i=0;i<m;i++){
+	treeInfoColumn.addItem(node1[i]);
+}
+
+tree[n++] = new TreeMenuItem("凭证录入","10","","");
+treeInfoColumn = new TreeMenu();
+tree[n-1].makeSubmenu(treeInfoColumn);
+m=0;
+node1[m++] = new TreeMenuItem("切换录入","11","","");
+
+node1[m++] = new TreeMenuItem("付款类录入","12","","");
+
+node1[m++] = new TreeMenuItem("投资类录入","13","","");
+
+node1[m++] = new TreeMenuItem("发票录入","14","","");
+
+node1[m++] = new TreeMenuItem("往来个人","15","","");
+treeInfoColumn1 = new TreeMenu();
+node1[m-1].makeSubmenu(treeInfoColumn1);
+l=0;
+node2[l++] = new TreeMenuItem("应收款","16","","");
+node2[l++] = new TreeMenuItem("应付款","17","","");
+for(i=0;i<l;i++) {
+	treeInfoColumn1.addItem(node2[i]);
+}
+
+node1[m++] = new TreeMenuItem("往来单位","18","","");
+treeInfoColumn1 = new TreeMenu();
+node1[m-1].makeSubmenu(treeInfoColumn1);
+l=0;
+node2[l++] = new TreeMenuItem("应收款","19","","");
+node2[l++] = new TreeMenuItem("应付款","20","","");
+for(i=0;i<l;i++) {
+	treeInfoColumn1.addItem(node2[i]);
+}
+
+for(i=0;i<m;i++){
+	treeInfoColumn.addItem(node1[i]);
+}
+
+//将tree加入treeMenu
+for(i=0;i<n;i++){
+	treeMenu.addItem(tree[i]);
+}
+
+</script>
+</head>
+<body style="border:outset 0px #9EABC4;margin:0px;">
+<iframe name="ifr" src="a2.htm" scrolling="auto" width="100%" height="100%" frameborder="0"></iframe>
+</body>
+</html>
