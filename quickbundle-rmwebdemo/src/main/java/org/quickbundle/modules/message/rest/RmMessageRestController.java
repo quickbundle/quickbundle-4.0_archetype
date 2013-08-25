@@ -1,4 +1,4 @@
-package org.quickbundle.modules.rmmessage.rest;
+package org.quickbundle.modules.message.rest;
 
 import java.net.URI;
 import java.util.HashMap;
@@ -11,10 +11,10 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
 import org.quickbundle.base.web.page.RmPageVo;
-import org.quickbundle.modules.rmmessage.IRmMessageConstants;
-import org.quickbundle.modules.rmmessage.service.RmMessageService;
-import org.quickbundle.modules.rmmessage.vo.RmMessageVo;
-import org.quickbundle.modules.rmmessage.web.RmMessageController;
+import org.quickbundle.modules.message.IRmMessageConstants;
+import org.quickbundle.modules.message.service.RmMessageService;
+import org.quickbundle.modules.message.vo.RmMessageVo;
+import org.quickbundle.modules.message.web.RmMessageController;
 import org.quickbundle.third.spring.http.RmResponseEntityFactory;
 import org.quickbundle.tools.helper.RmJspHelper;
 import org.quickbundle.tools.helper.RmPopulateHelper;
@@ -45,7 +45,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @author 白小勇
  */
 @Controller
-@RequestMapping(value = "/api/rmmessage")
+@RequestMapping(value = "/api/message")
 public class RmMessageRestController implements IRmMessageConstants {
 
 	@Autowired
@@ -104,7 +104,7 @@ public class RmMessageRestController implements IRmMessageConstants {
 		rmMessageService.insert(vo);
 		//按照Restful风格约定，创建指向新任务的url, 也可以直接返回id或对象.
 		Long id = vo.getId();
-		URI uri = uriBuilder.path("/api/rmmessage/" + id).build().toUri();
+		URI uri = uriBuilder.path("/api/message/" + id).build().toUri();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(uri);
 		return new ResponseEntity<HttpHeaders>(headers, HttpStatus.CREATED);

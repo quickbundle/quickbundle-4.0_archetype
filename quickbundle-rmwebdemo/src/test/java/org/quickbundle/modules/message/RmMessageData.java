@@ -1,11 +1,11 @@
-package org.quickbundle.modules.rmmessage;
+package org.quickbundle.modules.message;
 
 import java.util.HashMap;
 import java.util.List;
 
 import org.quickbundle.base.beans.factory.RmBeanFactory;
-import org.quickbundle.modules.rmmessage.dao.RmMessageDao;
-import org.quickbundle.modules.rmmessage.vo.RmMessageVo;
+import org.quickbundle.modules.message.dao.RmMessageDao;
+import org.quickbundle.modules.message.vo.RmMessageVo;
 import org.quickbundle.project.test.RmWebTestCase;
 
 /**

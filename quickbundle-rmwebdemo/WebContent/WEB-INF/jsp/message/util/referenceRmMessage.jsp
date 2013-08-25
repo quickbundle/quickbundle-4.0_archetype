@@ -2,8 +2,8 @@
 <%@page import="java.util.List" %>
 <%@page import="org.quickbundle.tools.helper.RmVoHelper" %>
 <%@page import="org.quickbundle.base.web.page.RmPageVo"%>
-<%@page import="org.quickbundle.modules.rmmessage.vo.RmMessageVo" %>
-<%@page import="org.quickbundle.modules.rmmessage.IRmMessageConstants" %>
+<%@page import="org.quickbundle.modules.message.vo.RmMessageVo" %>
+<%@page import="org.quickbundle.modules.message.IRmMessageConstants" %>
 <%
 	String referenceInputType = String.valueOf(request.getAttribute(IRmMessageConstants.REQUEST_REFERENCE_INPUT_TYPE));
 	if(referenceInputType == null || referenceInputType.length() == 0 || (!"checkbox".equals(referenceInputType.toLowerCase()) && !"radio".equals(referenceInputType.toLowerCase()))) {
@@ -24,7 +24,7 @@
 <script type="text/javascript">
 	var rmActionName = "RmMessageAction";
 	function simpleQuery_onClick(){  //简单的模糊查询
-    	form.action="<%=request.getContextPath()%>/rmmessage/reference";
+    	form.action="<%=request.getContextPath()%>/message/reference";
     	form.submit();
   	}
 	function refresh_onClick(){  //刷新本页
@@ -65,7 +65,7 @@
 		<tr>
 			<td align="right"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("parent_message_id")%></td>
 			<td>
-				<input type="text" class="text_field_reference" hiddenInputId="parent_message_id" name="parent_message_id_name" inputName="<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("parent_message_id")%>" value="" /><input type="hidden" name="parent_message_id"><img class="refButtonClass" src="<%=request.getContextPath()%>/images/09.gif" onclick="javascript:getReference(new Array(form.parent_message_id, form.parent_message_id_name), '<%=request.getContextPath()%>/', '<%=request.getContextPath()%>/rmmessage//reference?referenceInputType=radio');"/>
+				<input type="text" class="text_field_reference" hiddenInputId="parent_message_id" name="parent_message_id_name" inputName="<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("parent_message_id")%>" value="" /><input type="hidden" name="parent_message_id"><img class="refButtonClass" src="<%=request.getContextPath()%>/images/09.gif" onclick="javascript:getReference(new Array(form.parent_message_id, form.parent_message_id_name), '<%=request.getContextPath()%>/', '<%=request.getContextPath()%>/message/reference?referenceInputType=radio');"/>
 			</td>
 			<td align="right"></td>
 			<td></td>

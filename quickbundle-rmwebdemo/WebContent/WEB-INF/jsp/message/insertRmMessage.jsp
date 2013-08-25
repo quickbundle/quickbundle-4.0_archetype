@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ page import="org.quickbundle.tools.helper.RmVoHelper" %>
-<%@ page import="org.quickbundle.modules.rmmessage.vo.RmMessageVo" %>
-<%@ page import="org.quickbundle.modules.rmmessage.IRmMessageConstants" %>
+<%@ page import="org.quickbundle.modules.message.vo.RmMessageVo" %>
+<%@ page import="org.quickbundle.modules.message.IRmMessageConstants" %>
 <%  //判断是否为修改页面
   	RmMessageVo resultVo = null;  //定义一个临时的vo变量
 	boolean isModify = false;  //定义变量,标识本页面是否修改(或者新增)
@@ -22,21 +22,27 @@
 <script type="text/javascript">
 	var rmActionName = "RmMessageAction";
 	function insert_onClick(){  //插入单条数据
-    	form.action="<%=request.getContextPath()%>/rmmessage/insert";
+    	form.action="<%=request.getContextPath()%>/message/insert";
 	    form.submit();
 	}
   	function update_onClick(id){  //保存修改后的单条数据
     	if(!getConfirm()) {  //如果用户在确认对话框中点"取消"
   			return false;
 		}
-	    form.action="<%=request.getContextPath()%>/rmmessage/update";
+	    form.action="<%=request.getContextPath()%>/message/update";
     	form.submit();
 	}
 </script>
 </head>
 <body>
 <form name="form" method="post">
-<br/>
+
+<div class="button_area">
+	<input type="button" class="button_ellipse" id="button_save" value="保存" onclickto="javascript:${action}_onClick()"/>
+	<input type="button" class="button_ellipse" id="button_cancel" value="取消" onclick="javascript:history.go(-1)"/>
+	<input type="reset" class="button_ellipse" id="button_reset" value="重置"/>
+</div>
+
 <table class="mainTable">
 	<tr>
 		<td align="right" width="20%">&nbsp;</td>
@@ -108,17 +114,56 @@
 	</tr>
 	</table>
   
-<input type="hidden" name="id" value="">
+<input type="hidden" name="id" value="" />
 
-<table align="center">
-	<tr>
-		<td><br>
-			<input type="button" class="button_ellipse" id="button_save" value="保存" onclickto="javascript:${action}_onClick()"/>
-			<input type="button" class="button_ellipse" id="button_cancel" value="取消" onclick="javascript:history.go(-1)"/>
-			<input type="reset" class="button_ellipse" id="button_reset" value="重置"/>
-		</td>
-	</tr>
-</table>
+<!-- child table begin -->
+<div id="rowTabs">
+    <ul>
+        <li><a href="#rowTabs-<%=IRmMessageConstants.TABLE_NAME_RM_MESSAGE_RECEIVER%>"><%=IRmMessageConstants.TABLE_NAME_DISPLAY_RM_MESSAGE_RECEIVER %>列表</a></li>
+        <li style="position:relative;float:right;padding-right:10px">
+            <input type="button" class="button_ellipse" id="button_addRow" value="增行" onclick="javascript:addRow_onClick()" title="增加一行"/>
+            <input type="button" class="button_ellipse" id="button_removeRow" value="删行" onclick="javascript:removeRow_onClick();" title="删除所选的行"/>
+            <input type="button" class="button_ellipse" id="button_copyRow" value="复制" onclick="javascript:copyRow_onClick();" title="复制所选的行"/>
+        </li>
+    </ul>
+    <div id="rowTabs-<%=IRmMessageConstants.TABLE_NAME_RM_MESSAGE_RECEIVER%>">
+        <div class="rowContainer">
+            <table class="rowTable" namespace="<%=IRmMessageConstants.TABLE_NAME_RM_MESSAGE_RECEIVER%>" id="rowTable">
+                <tr class="trheader">
+                    <td align="left" style="width:3%;"><input type="checkbox" class="rowCheckboxControl" style="display:none;"/>选择</td>
+                    <td align="left" style="width:8%;"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("message_id")%></td>
+                    <td align="left" style="width:8%;"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("receiver_id")%></td>
+                    <td align="left" style="width:8%;"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("is_handle")%></td>
+                    <td align="left" style="width:8%;"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("handle_date")%></td>
+                    <td align="left" style="width:8%;"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("handle_result")%></td>
+                </tr>
+                <!-- 新增行原型 -->
+                <tr class="rowPrototype">
+                    <td align="center"> 
+                        <input type="checkbox" name="rmRowSelecter"/>
+                        <input type="hidden" name="id"/>
+                    </td>
+                    <td>
+                        <input type="text" name="message_id" inputName="<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("message_id")%>" value="" />
+                    </td>
+                    <td>
+                        <input type="text" name="receiver_id" inputName="<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("receiver_id")%>" value="" />
+                    </td>
+                    <td>
+                        <input type="text" name="is_handle" inputName="<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("is_handle")%>" value="" />
+                    </td>
+                    <td>
+                        <input type="text" name="handle_date" inputName="<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("handle_date")%>" value="" />
+                    </td>
+                    <td>
+                        <input type="text" name="handle_result" inputName="<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("handle_result")%>" value="" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- child table end -->
 
 </form>
 </body>
@@ -127,6 +172,7 @@
 <%  //取出要修改的那条记录，并且回写表单
 	if(isModify) {  //如果本页面是修改页面
 		out.print(RmVoHelper.writeBackMapToForm(RmVoHelper.getMapFromVo(resultVo)));  //输出表单回写方法的脚本
+		out.print(RmVoHelper.writeBackListToRowTable(IRmMessageConstants.TABLE_NAME_RM_MESSAGE_RECEIVER, resultVo.getBody()));  //输出表单回写方法的脚本
   	}
 %>
 </script>

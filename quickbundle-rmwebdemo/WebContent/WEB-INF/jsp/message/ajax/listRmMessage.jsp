@@ -2,12 +2,12 @@
 <%@page import="org.quickbundle.project.IGlobalConstants"%>
 <%@page import="org.quickbundle.project.init.RmConfig"%>
 <%@page import="org.quickbundle.tools.helper.RmStringHelper"%>
-<%@ page import="org.quickbundle.modules.message.IMessageConstants" %>
+<%@ page import="org.quickbundle.modules.message.IRmMessageConstants" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title><%=IMessageConstants.TABLE_NAME_DISPLAY%></title>
+<title><%=IRmMessageConstants.TABLE_NAME_DISPLAY%></title>
 <jsp:include page="/jsp/include/rmGlobalAjax.jsp" />
 <script type="text/javascript">
 Ext.onReady(function(){
@@ -25,18 +25,18 @@ Ext.onReady(function(){
 				{
 					columnWidth: .33,
 					layout: 'form',
-					items: [{xtype: 'textfield', fieldLabel: '<%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("biz_keyword")%>', name: 'biz_keyword', anchor:'95%'}]
+					items: [{xtype: 'textfield', fieldLabel: '<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("biz_keyword")%>', name: 'biz_keyword', anchor:'95%'}]
 				},
 				{
 					columnWidth: .33,
 					layout: 'form',
-					items: [{xtype: 'textfield', fieldLabel: '<%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("sender_id")%>', name: 'sender_id', anchor:'95%'}]
+					items: [{xtype: 'textfield', fieldLabel: '<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("sender_id")%>', name: 'sender_id', anchor:'95%'}]
 				},
 				{
 					columnWidth: .33,
 					layout: 'form',
 					items: [{
-						xtype: 'referencefield', fieldLabel: '<%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("parent_message_id")%>', anchor:'95%', name: 'parent_message_id', 
+						xtype: 'referencefield', fieldLabel: '<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("parent_message_id")%>', anchor:'95%', name: 'parent_message_id', 
 						urlPath: '<%=request.getContextPath()%>/api/message/reference?referenceInputType=radio'
 					}]
 				}
@@ -48,17 +48,17 @@ Ext.onReady(function(){
 				{
 					columnWidth: .33,
 					layout: 'form',
-					items: [{xtype: 'textfield', fieldLabel: '<%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("owner_org_id")%>', name: 'owner_org_id', anchor:'95%'}]
+					items: [{xtype: 'textfield', fieldLabel: '<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("owner_org_id")%>', name: 'owner_org_id', anchor:'95%'}]
 				},
 				{
 					columnWidth: .33,
 					layout: 'form',
-					items: [{xtype: 'textfield', fieldLabel: '<%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("template_id")%>', name: 'template_id', anchor:'95%'}]
+					items: [{xtype: 'textfield', fieldLabel: '<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("template_id")%>', name: 'template_id', anchor:'95%'}]
 				},
 				{
 					columnWidth: .33,
 					layout: 'form',
-					items: [{xtype: 'textfield', fieldLabel: '<%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("is_affix")%>', name: 'is_affix', anchor:'95%'}]
+					items: [{xtype: 'textfield', fieldLabel: '<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("is_affix")%>', name: 'is_affix', anchor:'95%'}]
 				}
             ]
         },
@@ -68,12 +68,12 @@ Ext.onReady(function(){
 				{
 					columnWidth: .33,
 					layout: 'form',
-					items: [{xtype: 'textfield', fieldLabel: '<%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("record_id")%>', name: 'record_id', anchor:'95%'}]
+					items: [{xtype: 'textfield', fieldLabel: '<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("record_id")%>', name: 'record_id', anchor:'95%'}]
 				},
 				{
 					columnWidth: .33,
 					layout: 'form',
-					items: [{xtype: 'textfield', fieldLabel: '<%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("message_xml_context")%>', name: 'message_xml_context', anchor:'95%'}]
+					items: [{xtype: 'textfield', fieldLabel: '<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("message_xml_context")%>', name: 'message_xml_context', anchor:'95%'}]
 				}
             ]
         }
@@ -134,49 +134,49 @@ Ext.onReady(function(){
             selectionModel,
             //expander, //可点击展开的+号
             {
-                header: '<%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("id")%>',
+                header: '<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("id")%>',
                 dataIndex: 'id',
                 width: 0 //主键默认隐藏
             },
 		
 		
 			{
-                header: '<%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("biz_keyword")%>',
+                header: '<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("biz_keyword")%>',
                 dataIndex: 'biz_keyword',
                 editor: new fm.TextField({ allowBlank: false })
 			},
 			{
-                header: '<%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("sender_id")%>',
+                header: '<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("sender_id")%>',
                 dataIndex: 'sender_id',
                 editor: new fm.TextField({ allowBlank: false })
 			},
 			{
-                header: '<%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("parent_message_id")%>',
+                header: '<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("parent_message_id")%>',
                 dataIndex: 'parent_message_id',
 				editor: new fm.ReferenceField({ urlPath: '<%=request.getContextPath()%>/api/message/reference?referenceInputType=radio' })
 			},
 			{
-                header: '<%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("owner_org_id")%>',
+                header: '<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("owner_org_id")%>',
                 dataIndex: 'owner_org_id',
                 editor: new fm.TextField({  })
 			},
 			{
-                header: '<%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("template_id")%>',
+                header: '<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("template_id")%>',
                 dataIndex: 'template_id',
                 editor: new fm.TextField({  })
 			},
 			{
-                header: '<%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("is_affix")%>',
+                header: '<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("is_affix")%>',
                 dataIndex: 'is_affix',
                 editor: new fm.TextField({  })
 			},
 			{
-                header: '<%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("record_id")%>',
+                header: '<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("record_id")%>',
                 dataIndex: 'record_id',
                 editor: new fm.TextField({  })
 			},
 			{
-                header: '<%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("message_xml_context")%>',
+                header: '<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("message_xml_context")%>',
                 dataIndex: 'message_xml_context',
                 editor: new fm.TextField({  })
 			}
@@ -246,7 +246,7 @@ Ext.onReady(function(){
 
 	//主表格定义
     var grid = new Ext.grid.EditorGridPanel({
-        title: '<%=IMessageConstants.TABLE_NAME_DISPLAY%>列表',
+        title: '<%=IRmMessageConstants.TABLE_NAME_DISPLAY%>列表',
         store: store,
         colModel: columnModel,
         sm: selectionModel,

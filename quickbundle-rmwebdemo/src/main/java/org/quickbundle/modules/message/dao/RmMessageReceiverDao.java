@@ -7,14 +7,14 @@ import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.quickbundle.base.beans.factory.RmIdFactory;
-import org.quickbundle.modules.message.IMessageConstants;
+import org.quickbundle.modules.message.IRmMessageConstants;
 import org.quickbundle.modules.message.vo.RmMessageReceiverVo;
 import org.quickbundle.third.mybatis.ParaMap;
 import org.quickbundle.third.mybatis.RmSqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class RmMessageReceiverDao extends RmSqlSessionDaoSupport implements IMessageConstants {
+public class RmMessageReceiverDao extends RmSqlSessionDaoSupport implements IRmMessageConstants {
 
     /**
      * 插入单条记录，用id作主键

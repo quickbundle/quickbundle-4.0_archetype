@@ -2,16 +2,10 @@
 <%@ page import="org.quickbundle.tools.helper.RmVoHelper" %>
 <%@ page import="org.quickbundle.tools.helper.RmStringHelper" %>
 <%@ page import="org.quickbundle.modules.message.vo.RmMessageVo" %>
-<%@ page import="org.quickbundle.modules.message.IMessageConstants" %>
-<%  //判断是否只读
-	boolean isReadOnly = false;
-	if("1".equals(request.getAttribute(IMessageConstants.REQUEST_IS_READ_ONLY))) {
-		isReadOnly = true;
-	} 
-%>
+<%@ page import="org.quickbundle.modules.message.IRmMessageConstants" %>
 <%  //取出本条记录
 	RmMessageVo resultVo = null;  //定义一个临时的vo变量
-	resultVo = (RmMessageVo)request.getAttribute(IMessageConstants.REQUEST_BEAN);  //从request中取出vo, 赋值给resultVo
+	resultVo = (RmMessageVo)request.getAttribute(IRmMessageConstants.REQUEST_BEAN);  //从request中取出vo, 赋值给resultVo
 	RmVoHelper.replaceToHtml(resultVo);  //把vo中的每个值过滤
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -51,49 +45,49 @@
 		<td width="25%">&nbsp;</td>
 	</tr>
 	<tr>
-		<td align="right"><%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("biz_keyword")%>：</td>
+		<td align="right"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("biz_keyword")%>：</td>
 		<td>${bean.biz_keyword}&nbsp;</td>
 		<td align="right">&nbsp;</td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr>
-		<td align="right"><%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("sender_id")%>：</td>
+		<td align="right"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("sender_id")%>：</td>
 		<td>${bean.sender_id}&nbsp;</td>
 		<td align="right">&nbsp;</td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr>
-		<td align="right"><%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("parent_message_id")%>：</td>
+		<td align="right"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("parent_message_id")%>：</td>
 		<td>${bean.parent_message_id}&nbsp;</td>
 		<td align="right">&nbsp;</td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr>
-		<td align="right"><%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("owner_org_id")%>：</td>
+		<td align="right"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("owner_org_id")%>：</td>
 		<td>${bean.owner_org_id}&nbsp;</td>
 		<td align="right">&nbsp;</td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr>
-		<td align="right"><%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("template_id")%>：</td>
+		<td align="right"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("template_id")%>：</td>
 		<td>${bean.template_id}&nbsp;</td>
 		<td align="right">&nbsp;</td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr>
-		<td align="right"><%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("is_affix")%>：</td>
+		<td align="right"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("is_affix")%>：</td>
 		<td>${bean.is_affix}&nbsp;</td>
 		<td align="right">&nbsp;</td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr>
-		<td align="right"><%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("record_id")%>：</td>
+		<td align="right"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("record_id")%>：</td>
 		<td>${bean.record_id}&nbsp;</td>
 		<td align="right">&nbsp;</td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr>
-		<td align="right"><%=IMessageConstants.TABLE_COLUMN_DISPLAY.get("message_xml_context")%>：</td>
+		<td align="right"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY.get("message_xml_context")%>：</td>
 		<td colspan="3">${bean.message_xml_context}&nbsp;</td>
 	</tr>
 	</table>
@@ -103,17 +97,18 @@
 <!-- child table begin -->
 <div id="rowTabs">
     <ul>
-        <li><a href="#rowTabs-<%=IMessageConstants.TABLE_NAME_RM_MESSAGE_RECEIVER%>"><%=IMessageConstants.TABLE_NAME_DISPLAY_RM_MESSAGE_RECEIVER %>列表</a></li>
+        <li><a href="#rowTabs-<%=IRmMessageConstants.TABLE_NAME_RM_MESSAGE_RECEIVER%>"><%=IRmMessageConstants.TABLE_NAME_DISPLAY_RM_MESSAGE_RECEIVER %>列表</a></li>
+        <li><a href="#rowTabs-rm_m_message_user">关联用户列表</a></li>
     </ul>
-    <div id="rowTabs-<%=IMessageConstants.TABLE_NAME_RM_MESSAGE_RECEIVER%>">
+    <div id="rowTabs-<%=IRmMessageConstants.TABLE_NAME_RM_MESSAGE_RECEIVER%>">
         <div class="rowContainer">
-            <table class="rowTable" namespace="<%=IMessageConstants.TABLE_NAME_RM_MESSAGE_RECEIVER%>" id="rowTable">
+            <table class="rowTable" namespace="<%=IRmMessageConstants.TABLE_NAME_RM_MESSAGE_RECEIVER%>" id="rowTable">
                 <tr class="trheader">
-                    <td align="left" style="width:8%;"><%=IMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("message_id")%></td>
-                    <td align="left" style="width:8%;"><%=IMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("receiver_id")%></td>
-                    <td align="left" style="width:8%;"><%=IMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("is_handle")%></td>
-                    <td align="left" style="width:8%;"><%=IMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("handle_date")%></td>
-                    <td align="left" style="width:8%;"><%=IMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("handle_result")%></td>
+                    <td align="left" style="width:8%;"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("message_id")%></td>
+                    <td align="left" style="width:8%;"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("receiver_id")%></td>
+                    <td align="left" style="width:8%;"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("is_handle")%></td>
+                    <td align="left" style="width:8%;"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("handle_date")%></td>
+                    <td align="left" style="width:8%;"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("handle_result")%></td>
                 </tr>
             <c:forEach items="${bean.body}" var="v">
                 <tr>
@@ -127,17 +122,12 @@
             </table>
         </div>
     </div>
+    <div id="rowTabs-rm_m_message_user">
+        <iframe id="tabInfo_frame" src="<%=request.getContextPath()%>/message/rm_m_message_user?message_id=<%=resultVo.getId()%>" frameborder="0" width="100%" height="500px" scrolling="yes"/>
+    </div>
 </div>
 <!-- child table end -->
 
 </form>
 </body>
 </html>
-<script type="text/javascript">
-<%if(isReadOnly) {%>
-	rmActionName = "RmMessageReadOnlyAction";
-	rmJspPath = "/readonly";
-	rmHiddenFormElement(document.all["button_update"]);
-	rmHiddenFormElement(document.all["button_delete"]);
-<%}%>
-</script>

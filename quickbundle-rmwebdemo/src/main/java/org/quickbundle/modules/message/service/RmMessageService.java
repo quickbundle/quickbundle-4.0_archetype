@@ -1,25 +1,32 @@
 package org.quickbundle.modules.message.service;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import org.quickbundle.modules.message.IMessageConstants;
+import org.quickbundle.modules.message.IRmMessageConstants;
 import org.quickbundle.modules.message.dao.RmMessageDao;
 import org.quickbundle.modules.message.dao.RmMessageReceiverDao;
 import org.quickbundle.modules.message.vo.RmMessageReceiverVo;
 import org.quickbundle.modules.message.vo.RmMessageVo;
 import org.quickbundle.project.RmProjectHelper;
+import org.quickbundle.project.common.service.IRmCommonService;
+import org.quickbundle.tools.helper.RmStringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 //默认将类中的所有public函数纳入事务管理
 @Transactional(readOnly = true)
-public class MessageService implements IMessageConstants {
+public class RmMessageService implements IRmMessageConstants {
 
 	@Autowired
 	private RmMessageDao rmMessageDao;
@@ -165,6 +172,7 @@ public class MessageService implements IMessageConstants {
     
 	/**
 	 * 比较老数据集与新数据集，得出insert/delete/update的最优序列
+	 * 
 	 * @param vo
 	 * @param oldVos
 	 * @param newVos
@@ -194,7 +202,33 @@ public class MessageService implements IMessageConstants {
     	}
     	return result;
     }
-	
+
+	/**
+	 * 批量保存，没有主键的insert，有主键的update
+	 * 
+	 * @param vos 更新的VO对象数组
+	 * @return new int[2]{insert的记录数, update的记录数}	
+	 */
+	public int[] insertUpdateBatch(RmMessageVo[] vos) {
+		int[] sum_insert_update = new int[2];
+		List<RmMessageVo> lInsert = new ArrayList<RmMessageVo>();
+		List<RmMessageVo> lUpdate = new ArrayList<RmMessageVo>();
+		for (int i = 0; i < vos.length; i++) {
+			if(vos[i].getId() != null) {
+				lUpdate.add(vos[i]);
+			} else {
+				lInsert.add(vos[i]);
+			}
+		}
+		if(lInsert.size() > 0) {
+			sum_insert_update[0] = insert(lInsert.toArray(new RmMessageVo[0])).length;
+		}
+		if(lUpdate.size() > 0) {
+			sum_insert_update[1] = update(lUpdate.toArray(new RmMessageVo[0]));
+		}
+		return sum_insert_update;
+	}
+
     /**
      * 根据Id进行查询
      * 
@@ -220,7 +254,7 @@ public class MessageService implements IMessageConstants {
     }
 
     /**
-     * 功能: 通过查询条件获得所有的VO对象列表，不带翻页查全部，只查询必要的字段
+     * 通过查询条件获得所有的VO对象列表，不带翻页查全部，只查询必要的字段
      *
      * @param queryCondition 查询条件, queryCondition等于null或""时查询全部
      * @param orderStr 排序字段
@@ -231,7 +265,7 @@ public class MessageService implements IMessageConstants {
     }
 
     /**
-     * 功能: 通过查询条件获得所有的VO对象列表，带翻页，带排序字符，只查询必要的字段
+     * 通过查询条件获得所有的VO对象列表，带翻页，带排序字符，只查询必要的字段
      *
      * @param queryCondition 查询条件, queryCondition等于null或""时查询全部
      * @param orderStr 排序字符
@@ -244,7 +278,7 @@ public class MessageService implements IMessageConstants {
     }
     
     /**
-     * 功能: 通过查询条件获得所有的VO对象列表，带翻页，带排序字符，根据selectAllClumn判断是否查询所有字段
+     * 通过查询条件获得所有的VO对象列表，带翻页，带排序字符，根据selectAllClumn判断是否查询所有字段
      *
      * @param queryCondition 查询条件, queryCondition等于null或""时查询全部
      * @param orderStr 排序字符
@@ -265,6 +299,8 @@ public class MessageService implements IMessageConstants {
     }
     
     /**
+     * 按条件搜索，走MyBatis的XML文件的search
+     * 
      * @param searchPara 搜索参数的Map
      * @param orderStr 排序字符
      * @param startIndex 开始位置(第一条是1，第二条是2...)
@@ -274,5 +310,54 @@ public class MessageService implements IMessageConstants {
     public List<RmMessageVo> search(Map<String, Object> searchPara, String orderStr, int startIndex, int size) {
     	List<RmMessageVo> lResult = rmMessageDao.search(searchPara, orderStr, startIndex, size);
     	return lResult;
+    }
+    
+    /**
+     * 插入中间表RM_M_MESSAGE_USER数据
+     * 
+     * @param message_id
+     * @param user_ids
+     * @return 插入的user_id列表
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public String[] insertRm_m_message_user(String message_id, String[] user_ids) {
+    	if(user_ids.length == 0 || (user_ids.length == 1 &&user_ids[0].trim().length() == 0)) {
+    		return new String[0];
+    	}
+    	IRmCommonService cs = RmProjectHelper.getCommonServiceInstance();
+    	List<String> lExistId = cs.doQuery("select * from RM_M_MESSAGE_USER where MESSAGE_ID=" + message_id + " and USER_ID in(" + RmStringHelper.parseToString(user_ids) + ")", new RowMapper() {
+			public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return rs.getString("USER_ID");
+			}
+		});
+    	Set<String> sUser_id = new HashSet<String>();
+    	for(String user_id : user_ids) {
+    		if(!lExistId.contains(user_id)) {
+    			sUser_id.add(user_id);
+    		}
+    	}
+    	if(sUser_id.size() > 0) {
+        	String[][] aaValue = new String[sUser_id.size()][2];
+        	int index = 0;
+        	for (String user_id : sUser_id) {
+        		aaValue[index][0] = message_id;
+    			aaValue[index][1] = user_id;
+    			index ++;
+    		}
+        	cs.doUpdateBatch("insert into RM_M_MESSAGE_USER (MESSAGE_ID, USER_ID) VALUES(?, ?)", aaValue);
+    	}
+        return sUser_id.toArray(new String[0]);
+    }
+    
+    /**
+     * 删除中间表RM_M_MESSAGE_USER数据
+     * 
+     * @param message_id
+     * @param user_ids
+     * @return 删除的记录数
+     */
+    public int deleteRm_m_message_user(String message_id, String[] user_ids) {
+    	IRmCommonService cs = RmProjectHelper.getCommonServiceInstance();
+    	return cs.doUpdate("delete from RM_M_MESSAGE_USER where MESSAGE_ID=" + message_id + " and USER_ID in(" + RmStringHelper.parseToString(user_ids) + ")");
     }
 }

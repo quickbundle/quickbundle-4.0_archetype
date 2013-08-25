@@ -7,10 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.quickbundle.base.web.page.RmPageVo;
-import org.quickbundle.modules.message.IMessageConstants;
-import org.quickbundle.modules.message.service.MessageService;
+import org.quickbundle.modules.message.IRmMessageConstants;
+import org.quickbundle.modules.message.service.RmMessageService;
 import org.quickbundle.modules.message.vo.RmMessageReceiverVo;
 import org.quickbundle.modules.message.vo.RmMessageVo;
+import org.quickbundle.third.excel.StatisticExport;
 import org.quickbundle.tools.helper.RmJspHelper;
 import org.quickbundle.tools.helper.RmPopulateHelper;
 import org.quickbundle.tools.helper.RmSqlHelper;
@@ -46,10 +47,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 @RequestMapping(value = "/message")
-public class MessageController implements IMessageConstants {
+public class RmMessageController implements IRmMessageConstants {
 
 	@Autowired
-	private MessageService messageService;
+	private RmMessageService rmMessageService;
 	
 	/**
 	 * 简单查询，分页显示，支持表单回写
@@ -57,14 +58,14 @@ public class MessageController implements IMessageConstants {
 	@RequestMapping(value = "")
 	public String list(Model model, HttpServletRequest request) {
         String queryCondition = getQueryCondition(request);  //从request中获得查询条件
-        RmPageVo pageVo = RmJspHelper.transctPageVo(request, messageService.getCount(queryCondition));
+        RmPageVo pageVo = RmJspHelper.transctPageVo(request, rmMessageService.getCount(queryCondition));
         String orderStr = RmJspHelper.getOrderStr(request);  //得到排序信息
-        List<RmMessageVo> beans = messageService.list(queryCondition, orderStr, pageVo.getStartIndex(), pageVo.getPageSize());  //按条件查询全部,带排序
+        List<RmMessageVo> beans = rmMessageService.list(queryCondition, orderStr, pageVo.getStartIndex(), pageVo.getPageSize());  //按条件查询全部,带排序
         RmJspHelper.saveOrderStr(orderStr, request);  //保存排序信息
         model.addAttribute(REQUEST_QUERY_CONDITION, queryCondition);
         model.addAttribute(REQUEST_BEANS, beans);  //把结果集放入request
         model.addAttribute(REQUEST_WRITE_BACK_FORM_VALUES, RmVoHelper.getMapFromRequest((HttpServletRequest) request));  //回写表单
-		return "message/listMessage";
+		return "message/listRmMessage";
 	}
 	
 	/**
@@ -74,7 +75,7 @@ public class MessageController implements IMessageConstants {
 	public String insertForm(Model model) {
 		model.addAttribute("bean", new RmMessageVo());
 		model.addAttribute("action", "insert");
-		return "message/insertMessage";
+		return "message/insertRmMessage";
 	}
     
 	/**
@@ -85,7 +86,7 @@ public class MessageController implements IMessageConstants {
         RmVoHelper.markCreateStamp(request,vo);  //打创建时间,IP戳
         vo.setBody(RmPopulateHelper.populateVos(RmMessageReceiverVo.class, request, TABLE_PK_RM_MESSAGE_RECEIVER, TABLE_NAME_RM_MESSAGE_RECEIVER + RM_NAMESPACE_SPLIT_KEY));
         RmVoHelper.markCreateStamp(request, vo.getBody());
-        messageService.insert(vo);  //插入单条记录
+        rmMessageService.insert(vo);  //插入单条记录
         redirectAttributes.addFlashAttribute("message", "创建成功");
         return "redirect:/message";
 	}
@@ -95,10 +96,10 @@ public class MessageController implements IMessageConstants {
 	 */
 	@RequestMapping(value = "update/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable("id") String id, Model model) {
-		RmMessageVo bean = messageService.get(new Long(id));
+		RmMessageVo bean = rmMessageService.get(new Long(id));
         model.addAttribute(REQUEST_BEAN, bean);  //把vo放入request
         model.addAttribute("action", "update");
-		return "message/insertMessage";
+		return "message/insertRmMessage";
 	}
 	
 	/**
@@ -109,7 +110,7 @@ public class MessageController implements IMessageConstants {
 		RmVoHelper.markModifyStamp(request,vo);  //打修改时间,IP戳
 		vo.setBody(RmPopulateHelper.populateVos(RmMessageReceiverVo.class, request, TABLE_PK_RM_MESSAGE_RECEIVER, TABLE_NAME_RM_MESSAGE_RECEIVER + RM_NAMESPACE_SPLIT_KEY));
 		RmVoHelper.markModifyStamp(request, vo.getBody());
-        int count = messageService.update(vo);  //更新单条记录
+        int count = rmMessageService.update(vo);  //更新单条记录
         redirectAttributes.addFlashAttribute("message", "更新成功: " + count);
     	return "redirect:/message";
 	}
@@ -122,11 +123,11 @@ public class MessageController implements IMessageConstants {
 		int deleteCount = 0;  //定义成功删除的记录数
 		String id = request.getParameter(REQUEST_ID);
 		if(id != null && id.length() > 0) {
-			deleteCount = messageService.delete(new Long(id));
+			deleteCount = rmMessageService.delete(new Long(id));
 		} else {
 			Long[] ids = RmJspHelper.getLongArrayFromRequest(request, REQUEST_IDS); //从request获取多条记录id
 			if (ids != null && ids.length != 0) {
-				deleteCount += messageService.delete(ids);  //删除多条记录
+				deleteCount += rmMessageService.delete(ids);  //删除多条记录
 			}
 		}
 		redirectAttributes.addFlashAttribute("message", "删除成功: " + deleteCount);
@@ -138,12 +139,12 @@ public class MessageController implements IMessageConstants {
 	 */
 	@RequestMapping(value = "detail/{id}")
 	public String detail(@PathVariable("id") String id, Model model, HttpServletRequest request) {
-		RmMessageVo bean = messageService.get(new Long(id));
+		RmMessageVo bean = rmMessageService.get(new Long(id));
         model.addAttribute(REQUEST_BEAN, bean);  //把vo放入request
         if(RM_YES.equals(request.getParameter(REQUEST_IS_READ_ONLY))) {
         	model.addAttribute(REQUEST_IS_READ_ONLY, request.getParameter(REQUEST_IS_READ_ONLY));
         }
-		return "message/detailMessage";
+		return "message/detailRmMessage";
 	}
 	
 	/**
@@ -153,20 +154,81 @@ public class MessageController implements IMessageConstants {
 	public String reference(Model model, HttpServletRequest request) {
 		list(model, request);
 		model.addAttribute(REQUEST_REFERENCE_INPUT_TYPE, request.getParameter(REQUEST_REFERENCE_INPUT_TYPE));  //传送输入方式,checkbox或radio
-		return "message/util/referenceMessage";
+		return "message/util/referenceRmMessage";
 	}
 
+	/**
+	 * 表格式统计
+	 */
+	@RequestMapping(value = "statistic/table")
+	public String statisticTable(Model model, HttpServletRequest request) {
+        String rowKeyField = "parent_message_id";  //定义行统计关键字
+        String columnKeyField = "id";  //定义列统计关键字
+        String queryCondition = getQueryCondition(request);  //从request中获得查询条件
+        List<RmMessageVo> beans = rmMessageService.list(queryCondition, null);  //查询出全部结果
+        StatisticExport sh = new StatisticExport(beans, rowKeyField, columnKeyField, "父消息ID\\主键");
+        model.addAttribute(REQUEST_STATISTIC_HANDLER, sh);  //把结果集放入request
+        model.addAttribute(REQUEST_WRITE_BACK_FORM_VALUES, RmVoHelper.getMapFromRequest((HttpServletRequest) request));  //回写表单
+		return "message/util/statisticRmMessage_table";
+	}
+	
+	/**
+	 * 表格式统计
+	 */
+	@RequestMapping(value = "statistic/table/export")
+	public String statisticTableExport(Model model, HttpServletRequest request) {
+		statisticTable(model, request);
+		return "support/downloadStatisticExcel";
+	}
+	
+	/**
+	 * 图表式统计
+	 */
+	@RequestMapping(value = "statistic/chart")
+	public String statisticChart(Model model) {
+		return "message/util/statisticRmMessage_chart";
+	}
+	/**
+	 * Flash式统计
+	 */
+	@RequestMapping(value = "statistic/flash")
+	public String statisticFlash(Model model) {
+		return "message/util/statisticRmMessage_flash";
+	}
+	/**
+	 * Flash式统计
+	 */
+	@RequestMapping(value = "statistic/flash/data")
+	public String statisticFlashData(Model model) {
+		return "message/util/statisticRmMessage_flashData";
+	}
+	
+	/**
+	 * 跳转到导入页
+	 */
+	@RequestMapping(value = "import", method = RequestMethod.GET)
+	public String importDataForm(Model model) {
+		return "message/importRmMessage";
+	}
+	/**
+	 * 执行导入
+	 */
+	@RequestMapping(value = "import", method = RequestMethod.POST)
+	public String importData(Model model) {
+		model.addAttribute("isSubmit", "1");
+		return "message/importRmMessage";
+	}
 	/**
 	 * 跳转到Ajax页
 	 */
 	@RequestMapping(value = "ajax")
 	public String ajax(Model model) {
-		return "message/ajax/listMessage";
+		return "message/ajax/listRmMessage";
 	}
 
 	
     /**
-     * 功能: 从request中获得查询条件
+     * 从request中获得查询条件
      * @param request
      * @return 拼装好的SQL条件字符串
      */
@@ -196,5 +258,39 @@ public class MessageController implements IMessageConstants {
 			queryCondition = RmSqlHelper.appendQueryStr(lQuery.toArray(new String[0]));
         }
         return queryCondition;
+    }
+
+	/**
+	 * 跳转到中间表RM_M_MESSAGE_USER页
+	 */
+	@RequestMapping(value = "rm_m_message_user")
+	public String rm_m_message_user(Model model) {
+		return "message/middle/listRm_m_message_user";
+	}
+	
+    /**
+     * 插入中间表RM_M_MESSAGE_USER数据
+     */
+	@RequestMapping(value = "insertRm_m_message_user", method = RequestMethod.POST)
+    public String insertRm_m_message_user(HttpServletRequest request, @Valid RmMessageVo vo, RedirectAttributes redirectAttributes) {
+    	String message_id = request.getParameter("message_id");
+    	String[] user_ids = request.getParameter("user_ids").split(",");
+    	int count = rmMessageService.insertRm_m_message_user(message_id, user_ids).length;
+    	redirectAttributes.addFlashAttribute("message", "插入了" + count + "条记录!");
+    	redirectAttributes.addAttribute("message_id", message_id);
+    	return "redirect:/message/rm_m_message_user";
+    }
+    
+    /**
+     * 删除中间表RM_M_MESSAGE_USER数据
+     */
+	@RequestMapping(value = "deleteRm_m_message_user", method = RequestMethod.POST)
+    public String deleteRm_m_message_user(HttpServletRequest request, @Valid RmMessageVo vo, RedirectAttributes redirectAttributes) {
+    	String message_id = request.getParameter("message_id");
+    	String[] user_ids = request.getParameter("user_ids").split(",");
+    	int count = rmMessageService.deleteRm_m_message_user(message_id, user_ids);
+    	redirectAttributes.addFlashAttribute("message", "删除了" + count + "条记录!");
+    	redirectAttributes.addAttribute("message_id", message_id);
+    	return "redirect:/message/rm_m_message_user";
     }
 }
