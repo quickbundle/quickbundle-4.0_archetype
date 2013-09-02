@@ -7,10 +7,12 @@ import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.quickbundle.base.beans.factory.RmIdFactory;
+import org.quickbundle.config.RmConfig;
 import org.quickbundle.modules.message.IRmMessageConstants;
 import org.quickbundle.modules.message.vo.RmMessageVo;
 import org.quickbundle.third.mybatis.ParaMap;
 import org.quickbundle.third.mybatis.RmSqlSessionDaoSupport;
+import org.quickbundle.tools.helper.RmSqlHelper;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -66,7 +68,15 @@ public class RmMessageDao extends RmSqlSessionDaoSupport implements IRmMessageCo
      * @return 成功删除的记录数
      */
     public int delete(Long ids[]) {
-    	return getSqlSession().delete(namespace("deleteMulti"), ids);
+    	if(ids == null || ids.length == 0) {
+    		return 0;
+    	}
+    	int result = 0;
+    	List<Long[]> lIds = RmSqlHelper.splitPagingArray(ids, RmConfig.getSingleton().getMaxSqlInCount());
+    	for(Long[] thisIds : lIds) {
+    		result += getSqlSession().delete(namespace("deleteMulti"), thisIds);
+    	}
+    	return result;
     }
 
     /**

@@ -7,10 +7,12 @@ import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.quickbundle.base.beans.factory.RmIdFactory;
+import org.quickbundle.config.RmConfig;
 import org.quickbundle.modules.message.IRmMessageConstants;
 import org.quickbundle.modules.message.vo.RmMessageReceiverVo;
 import org.quickbundle.third.mybatis.ParaMap;
 import org.quickbundle.third.mybatis.RmSqlSessionDaoSupport;
+import org.quickbundle.tools.helper.RmSqlHelper;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -69,7 +71,12 @@ public class RmMessageReceiverDao extends RmSqlSessionDaoSupport implements IRmM
     	if(ids == null || ids.length == 0) {
     		return 0;
     	}
-    	return getSqlSession().delete(namespace("deleteMulti"), ids);
+    	int result = 0;
+    	List<Long[]> lIds = RmSqlHelper.splitPagingArray(ids, RmConfig.getSingleton().getMaxSqlInCount());
+    	for(Long[] thisIds : lIds) {
+    		result += getSqlSession().delete(namespace("deleteMulti"), thisIds);
+    	}
+    	return result;
     }
 
     /**
