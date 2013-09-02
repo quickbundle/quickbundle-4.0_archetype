@@ -10,8 +10,8 @@
 	if(request.getQueryString() != null) {
 		location_href = location_href + "?" + request.getQueryString();
 	}
-	location_href = location_href.replaceAll("[?&]rm_current_page=[\\d]*", "");
-	String str_current_page = location_href.indexOf("?") > -1 ? "&rm_current_page=" : "?rm_current_page=";
+	location_href = location_href.replaceAll("[?&]RM_CURRENT_PAGE=[\\d]*", "");
+	String str_current_page = location_href.indexOf("?") > -1 ? "&RM_CURRENT_PAGE=" : "?RM_CURRENT_PAGE=";
 %>
 <%
 	String css_p = request.getParameter("css_p");

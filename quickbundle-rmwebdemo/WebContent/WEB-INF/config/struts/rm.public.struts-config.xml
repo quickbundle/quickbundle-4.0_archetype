@@ -28,7 +28,7 @@
 		<forward name="listPage" path="/jsp/common/error/errAjax.jsp"/>
 		<forward name="toQueryAll" path="/jsp/common/error/errAjax.jsp"/>
 		<forward name="downloadStatisticFilePage" path="/jsp/support/statistic/downloadStatisticExcel.jsp"/>
-		<forward name="output_ajax_page" path="/jsp/support/ajax/output.jsp"/>
+		<forward name="OUTPUT_AJAX_PAGE" path="/jsp/support/ajax/output.jsp"/>
 		<!-- Ajax校验转向 -->
 		<forward name="xmlHttpRequest" path="/jsp/support/ajax/xmlHttpRequest.jsp" />
 		<forward name="login" path="/index.jsp"/>

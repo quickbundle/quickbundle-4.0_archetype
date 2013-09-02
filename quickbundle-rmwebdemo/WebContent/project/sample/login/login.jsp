@@ -52,7 +52,7 @@ function submit_onClick() {
 		<td nowrap align="right"><bean:message key="qb.password"/></td>
 		<td align="left"><input type="password" class="text_field" style="width:140px" name="password" maxLength="20" value="111111"></td>
 	</tr>
-	<%if(RmConfig.loginValidateVerifyCode()) { %>
+	<%if(RmConfig.getSingleton().isLoginValidateVerifyCode()) { %>
 	<tr height="15">
 		<td nowrap align="right"><bean:message key="qb.verifyCode"/></td>
 		<td align="left">

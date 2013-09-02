@@ -56,9 +56,9 @@
 			<!--查询全部页面的跳转，被其它方法调用-->
 			<forward name="toQueryAll" path="/RmAffixReadOnlyAction.do?cmd=queryAll" redirect="true"/>
 			<!--查询全部页面的跳转，跳到最终页面-->
-			<forward name="listPage" path="/modules/affix/rmaffix/listRmAffix.jsp?request_is_read_only=1"/>
+			<forward name="listPage" path="/modules/affix/rmaffix/listRmAffix.jsp?REQUEST_IS_READ_ONLY=1"/>
 			<!--详细页面的跳转-->
-			<forward name="detailPage" path="/modules/affix/rmaffix/detailRmAffix.jsp?request_is_read_only=1"/>
+			<forward name="detailPage" path="/modules/affix/rmaffix/detailRmAffix.jsp?REQUEST_IS_READ_ONLY=1"/>
 		</action>
 		<!--RmAffixCondition的struts跳转规则-->
 	    <action type="org.quickbundle.modules.affix.rmaffix.web.RmAffixConditionAction" scope="request" path="/RmAffixConditionAction" parameter="cmd">
@@ -106,9 +106,9 @@
 			<!--查询全部页面的跳转，被其它方法调用-->
 			<forward name="toQueryAll" path="/RmCodeTypeReadOnlyAction.do?cmd=queryAll" redirect="true"/>
 			<!--查询全部页面的跳转，跳到最终页面-->
-			<forward name="listPage" path="/modules/code/rmcodetype/listRmCodeType.jsp?request_is_read_only=1"/>
+			<forward name="listPage" path="/modules/code/rmcodetype/listRmCodeType.jsp?REQUEST_IS_READ_ONLY=1"/>
 			<!--详细页面的跳转-->
-			<forward name="detailPage" path="/modules/code/rmcodetype/detailRmCodeType.jsp?request_is_read_only=1"/>
+			<forward name="detailPage" path="/modules/code/rmcodetype/detailRmCodeType.jsp?REQUEST_IS_READ_ONLY=1"/>
 		</action>
 		<!--RmCodeTypeCondition的struts跳转规则-->
 	    <action type="org.quickbundle.modules.code.rmcodetype.web.RmCodeTypeConditionAction" scope="request" path="/RmCodeTypeConditionAction" parameter="cmd">

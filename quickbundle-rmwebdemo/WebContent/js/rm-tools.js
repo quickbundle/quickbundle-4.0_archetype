@@ -901,7 +901,7 @@ function getFormValue(inputObjString) {  //获取表单value
 
 function pushCondition(myArray, pageRealValue, operate1, operate2, thisField,stopTime,relationType) {  //压入查询条件
 	try {
-		form.rm_current_page.value=1;
+		form.RM_CURRENT_PAGE.value=1;
 	} catch(e){}
 	if(operate1 == undefined) {
 		operate1 = " like '%";

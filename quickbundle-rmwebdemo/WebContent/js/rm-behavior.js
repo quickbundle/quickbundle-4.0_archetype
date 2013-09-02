@@ -533,7 +533,7 @@ jQuery(function(){ //多附件批量上传
 					rmAffixLink += "&author=" + jQuery(this).attr("author");
 				}
 				if(jQuery(this).attr("tagName").toUpperCase() == "SPAN") {
-					rmAffixLink += '&request_is_read_only=1';
+					rmAffixLink += '&REQUEST_IS_READ_ONLY=1';
 				}
 				parentTd.insertAdjacentHTML('beforeEnd', '<iframe id="' + objId + '" width="100%" onload="this.height=this.contentWindow.document.body.scrollHeight + 30" name="contentFrame" frameBorder="0" scrolling="no"  src="' + rmAffixLink + '" />');
 			} else {

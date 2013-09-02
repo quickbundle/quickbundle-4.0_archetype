@@ -240,7 +240,7 @@
 	<layout:collectionItem width="30%" title="备注" property="remark" sortable="true">
 		<bean:define id="rmValue" name="rmBean" property="remark"/>
 		<bean:define id="pk" name="rmBean" property="id"/>
-		<%="1".equals(rmValue) ? "<a target='_blank' href='" + request.getContextPath() + "/third/swfupload/globalUpload.jsp?bs_keyword=" + IRmCodeTypeConstants.TABLE_NAME + "&record_id=" + pk + "&request_is_read_only=1'><img align='center' width='30' height='30' src='" + request.getContextPath() + "/images/icon/affix.gif' /></a>" : "" %>
+		<%="1".equals(rmValue) ? "<a target='_blank' href='" + request.getContextPath() + "/third/swfupload/globalUpload.jsp?bs_keyword=" + IRmCodeTypeConstants.TABLE_NAME + "&record_id=" + pk + "&REQUEST_IS_READ_ONLY=1'><img align='center' width='30' height='30' src='" + request.getContextPath() + "/images/icon/affix.gif' /></a>" : "" %>
 	</layout:collectionItem>
 	<layout:collectionItem width="8%" title="数据量" property="data_sum" sortable="true"/>
 

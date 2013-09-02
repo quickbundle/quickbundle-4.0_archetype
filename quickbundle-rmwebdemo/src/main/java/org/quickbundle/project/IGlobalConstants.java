@@ -79,16 +79,16 @@ public interface IGlobalConstants extends ICoreConstants, IRmCodeConstants {
     public final static String DESC_USABLE_STATUS_EVALUATE_ENABLE = DESC_USABLE_STATUS + "='" + RM_YES + "'";
     public final static String DESC_USABLE_STATUS_EVALUATE_DISABLE = DESC_USABLE_STATUS + "='" + RM_NO + "'";
     
-    public final static String REQUEST_IS_READ_ONLY = "request_is_read_only";
+    public final static String REQUEST_IS_READ_ONLY = "REQUEST_IS_READ_ONLY";
     public final static String REQUEST_STATISTIC_HANDLER = "statisticHandler";
     
-    public final static String FORWARD_OUTPUT_AJAX_PAGE = "output_ajax_page";
+    public final static String FORWARD_OUTPUT_AJAX_PAGE = "OUTPUT_AJAX_PAGE";
     public final static String REQUEST_OUTPUT_OBJECT = "REQUEST_OUTPUT_OBJECT";
     
     public final static String FORWARD_DOWNLOAD_STATISTIC_FILE_PAGE = "downloadStatisticFilePage";
     
-    public final static String RM_PAGE_SIZE = "rm_page_size";
-    public final static String RM_CURRENT_PAGE = "rm_current_page";
+    public final static String RM_PAGE_SIZE = "RM_PAGE_SIZE";
+    public final static String RM_CURRENT_PAGE = "RM_CURRENT_PAGE";
     public final static String RM_PAGE_VO = "RM_PAGE_VO";
     public final static String RM_ORDER_STR = "RM_ORDER_STR";
     
@@ -114,19 +114,19 @@ public interface IGlobalConstants extends ICoreConstants, IRmCodeConstants {
 	}
 
     //Action返回值的key
-    public final static String EXECUTE_ROW_COUNT = "execute_row_count";
+    public final static String EXECUTE_ROW_COUNT = "EXECUTE_ROW_COUNT";
     
     public final static String INSERT_FORM_ID = "INSERT_FORM_ID";
     
-    public final static String RM_AJAX_JSON = "rm_ajax_json";
+    public final static String RM_AJAX_JSON = "RM_AJAX_JSON";
     public final static String RM_JSON_TOTAL_COUNT = "totalCount";
-    public final static String RM_AJAX_RECORD_SIZE = "rm_ajax_record_size";
+    public final static String RM_AJAX_RECORD_SIZE = "RM_AJAX_RECORD_SIZE";
     public final static String RM_AJAX_SPLIT_KEY = "$";
     
     public final static String RM_NAMESPACE_SPLIT_KEY = "^";
     
     //工作流参数
-    public final static String WF_FORM_ID = "wf_form_id";
+    public final static String WF_FORM_ID = "WF_FORM_ID";
     public final static String REQUEST_WF_PROCESSID ="REQUEST_WF_PROCESSID";//工作流实例Id参数
     public final static String WF_LAST_PERSON ="WF_LAST_PERSON";
     public final static String WF_OWNER="WF_OWNER";
@@ -134,7 +134,5 @@ public interface IGlobalConstants extends ICoreConstants, IRmCodeConstants {
     public final static String WF_PROCESS_TYPE ="WF_PROCESS_TYPE";
     public final static String WF_DESC_ORDER_CODE = "WF_DESC_ORDER_CODE";
     public final static String WF_FORM_ID_P = "WF_FORM_ID_P";
-    
-    public final static String DESC_ORDER_CODE = "order_code";
     
 }

@@ -27,7 +27,7 @@
 	//饼图的链接定制
 	PieURLGenerator pug = new PieURLGenerator() {
 		public String generateURL(PieDataset dataset, Comparable key, int pieIndex) {
-			return contextPath + "/rmmessage?request_is_read_only=1&template_id=" + key;
+			return contextPath + "/rmmessage?REQUEST_IS_READ_ONLY=1&template_id=" + key;
 		}
 	};
 	//饼图2D
@@ -37,7 +37,7 @@
 	//柱图的链接定制
 	CategoryURLGenerator cug = new CategoryURLGenerator() {
 	    public String generateURL(CategoryDataset dataset, int series, int category) {
-	    	return contextPath + "/rmmessage?request_is_read_only=1&template_id=" + dataset.getColumnKey(series);
+	    	return contextPath + "/rmmessage?REQUEST_IS_READ_ONLY=1&template_id=" + dataset.getColumnKey(series);
 	    }
 	};
 	//柱图

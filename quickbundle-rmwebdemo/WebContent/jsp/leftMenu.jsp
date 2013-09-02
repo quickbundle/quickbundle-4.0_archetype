@@ -1,3 +1,4 @@
+<%@page import="org.quickbundle.tools.context.RmUrlHelper"%>
 <%@page import="org.quickbundle.orgauth.rmfunctionnode.vo.RmFunctionNodeVo"%>
 <%@ page contentType="text/html; charset=UTF-8" language="java"%>
 <%@page import="java.util.TreeMap"%>
@@ -71,10 +72,10 @@ body {margin:0;padding:0;font:12px;line-height:20px;background:#f4f4f4;}
 	<%}%>
 
 	<%
-				if("1".equals(vo.getType_is_leaf())) {
+				if("1".equals(vo.getIs_leaf())) {
 	%>
 			<div class="left_mt">
-			<iframe name="tree<%=vo.getId() %>" id="shortcutList" src="<%=RmProjectHelper.replaceParameter(vo.getRemark(), request)%>" frameborder="0"  width="100%" style="height:100%" scrolling="auto"></iframe>
+			<iframe name="tree<%=vo.getId() %>" id="shortcutList" src="<%=RmUrlHelper.replaceParameter(vo.getData_value(), request)%>" frameborder="0"  width="100%" style="height:100%" scrolling="auto"></iframe>
 	<%
 				} else {
 	%>
@@ -83,7 +84,7 @@ body {margin:0;padding:0;font:12px;line-height:20px;background:#f4f4f4;}
 				}
 				currentParentTotal_code = thisTotalCode;
 			} else if(thisTotalCode.startsWith(currentParentTotal_code)) {
-			    String link = RmProjectHelper.replaceParameter(vo.getData_value(), request);
+			    String link = RmUrlHelper.replaceParameter(vo.getData_value(), request);
 	%>
 									<ul>
 										<li>

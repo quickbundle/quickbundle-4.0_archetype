@@ -1,7 +1,5 @@
 package org.quickbundle.config;
 
-import org.quickbundle.config.RmBaseConfig;
-import org.quickbundle.config.RmBaseConfigVo;
 
 public final class RmConfig extends RmBaseConfig {
 	
