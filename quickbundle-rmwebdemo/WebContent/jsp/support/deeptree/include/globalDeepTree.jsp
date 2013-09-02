@@ -75,7 +75,7 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/jsp/support/deeptree/deeptree.js"></script>
 <script type="text/javascript">
 	var dir_base = "<%=request.getContextPath()%>";
-	var systemDebugMode = <%=RmConfig.systemDebugMode() ? "true" : "false"%>;
+	var systemDebugMode = <%=RmConfig.getSingleton().isSystemDebugMode() ? "true" : "false"%>;
 
 	//定义全局参数
 	var inputType = "<%=inputType%>";  //输入方式, 包括noInput, checkbox, radio

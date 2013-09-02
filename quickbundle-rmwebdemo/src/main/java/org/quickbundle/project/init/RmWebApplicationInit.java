@@ -48,7 +48,7 @@ public class RmWebApplicationInit implements ILoadOnStartup {
 			RmLogHelper.getLogger(this.getClass()).warn("warHome: " + warHome.getAbsolutePath() + " can not write");
 		}
 
-		if (RmConfig.systemDebugMode()) {
+		if (RmConfig.getSingleton().isSystemDebugMode()) {
 			RmLogHelper.getLogger(this.getClass()).info("System in debug mode......");
 		}
 
@@ -63,7 +63,7 @@ public class RmWebApplicationInit implements ILoadOnStartup {
 		initDatabaseProductName();
 
 		try {
-			if (RmConfig.systemDebugMode()) {
+			if (RmConfig.getSingleton().isSystemDebugMode()) {
 				IRmCodeService codeService = (IRmCodeService) RmBeanFactory.getBean(IRmCodeService.class.getName());
 				if (needExecuteInitTable()) {
 					// 初始化数据库的内置表，只会执行一次。如果要再执行，需手动删除/WEB-INF/config/sql/lockInitTable文件

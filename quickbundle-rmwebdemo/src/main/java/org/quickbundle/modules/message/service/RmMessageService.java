@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +17,7 @@ import org.quickbundle.modules.message.vo.RmMessageVo;
 import org.quickbundle.project.RmProjectHelper;
 import org.quickbundle.project.common.service.IRmCommonService;
 import org.quickbundle.tools.helper.RmStringHelper;
+import org.quickbundle.tools.helper.RmVoHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
@@ -129,7 +129,7 @@ public class RmMessageService implements IRmMessageConstants {
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	public int update(RmMessageVo vo) {
     	if(vo.getBody() != null) {
-    		List[] result = mergeVos(vo, rmMessageReceiverDao.list("message_id=" + vo.getId(), null, 1, Integer.MAX_VALUE, true), vo.getBody());
+    		List[] result = RmVoHelper.mergeVos(vo, TABLE_PK, rmMessageReceiverDao.list("message_id=" + vo.getId(), null, 1, Integer.MAX_VALUE, true), vo.getBody(), TABLE_PK_RM_MESSAGE_RECEIVER, "message_id");
     		rmMessageReceiverDao.insert((RmMessageReceiverVo[])result[0].toArray(new RmMessageReceiverVo[0]));
     		rmMessageReceiverDao.delete((Long[])result[1].toArray(new Long[0]));
     		rmMessageReceiverDao.update((RmMessageReceiverVo[])result[2].toArray(new RmMessageReceiverVo[0]));
@@ -152,7 +152,7 @@ public class RmMessageService implements IRmMessageConstants {
     	List<RmMessageReceiverVo> toUpdate = new ArrayList<RmMessageReceiverVo>();
     	for(RmMessageVo vo : vos) {
     		if(vo.getBody() != null) {
-        		List[] result = mergeVos(vo, rmMessageReceiverDao.list("message_id=" + vo.getId(), null, 1, Integer.MAX_VALUE, true), vo.getBody());
+        		List[] result = RmVoHelper.mergeVos(vo, TABLE_PK, rmMessageReceiverDao.list("message_id=" + vo.getId(), null, 1, Integer.MAX_VALUE, true), vo.getBody(), TABLE_PK_RM_MESSAGE_RECEIVER, "message_id");
         		toInsert.addAll(result[0]);
         		toDelete.addAll(result[1]);
         		toUpdate.addAll(result[2]);
@@ -169,39 +169,6 @@ public class RmMessageService implements IRmMessageConstants {
 		RmProjectHelper.log(LOG_TYPE_NAME, "批量更新了{}条记录", finalSum);
 		return finalSum;
 	}
-    
-	/**
-	 * 比较老数据集与新数据集，得出insert/delete/update的最优序列
-	 * 
-	 * @param vo
-	 * @param oldVos
-	 * @param newVos
-	 * @return
-	 */
-	@SuppressWarnings("rawtypes")
-	protected List[] mergeVos(RmMessageVo headVo, List<RmMessageReceiverVo> oldVos, List<RmMessageReceiverVo> newVos) {
-    	List<RmMessageReceiverVo> toInsert = new ArrayList<RmMessageReceiverVo>();
-    	List<Long> toDelete = new ArrayList<Long>();
-    	List<RmMessageReceiverVo> toUpdate = new ArrayList<RmMessageReceiverVo>();
-		List[] result = new List[]{toInsert, toDelete, toUpdate};
-    	Map<Long, RmMessageReceiverVo> oldVoMap = new HashMap<Long, RmMessageReceiverVo>();
-    	for(RmMessageReceiverVo oldVo : oldVos) {
-    		oldVoMap.put(oldVo.getId(), oldVo);
-    	}
-    	for(RmMessageReceiverVo newVo : newVos) {
-    		if(newVo.getId() != null && oldVoMap.containsKey(newVo.getId())){
-    			toUpdate.add(newVo);
-    			oldVoMap.remove(newVo.getId());
-    		} else {
-    			newVo.setMessage_id(headVo.getId());
-    			toInsert.add(newVo);
-    		}
-    	}
-    	for(Map.Entry<Long, RmMessageReceiverVo> en : oldVoMap.entrySet()) {
-    		toDelete.add(en.getKey());
-    	}
-    	return result;
-    }
 
 	/**
 	 * 批量保存，没有主键的insert，有主键的update

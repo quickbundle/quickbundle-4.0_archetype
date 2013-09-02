@@ -143,7 +143,7 @@ class ConnectionPool implements ConnectionPoolStatisticsIF {
     	//qb-rm
         StringBuilder sb = new StringBuilder();
         sb.append(Thread.currentThread().toString());
-        if(RmConfig.systemDebugMode()) {
+        if(RmConfig.getSingleton().isSystemDebugMode()) {
         	String callStack = Arrays.deepToString(Thread.currentThread().getStackTrace());
         	if(callStack.length() > 10000) {
         		callStack = callStack.substring(0, 10000);

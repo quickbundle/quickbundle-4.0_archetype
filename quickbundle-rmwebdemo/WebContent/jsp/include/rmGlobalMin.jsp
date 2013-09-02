@@ -4,7 +4,7 @@
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
 <script type="text/javascript">
 var dir_base = "<%=request.getContextPath()%>";
-var systemDebugMode = <%=RmConfig.systemDebugMode() ? "true" : "false"%>;
+var systemDebugMode = <%=RmConfig.getSingleton().isSystemDebugMode() ? "true" : "false"%>;
 function doInitDocument() {
 	if(!systemDebugMode) {
 		jQuery(document)[0].oncontextmenu = function() {return false;};

@@ -65,7 +65,7 @@ public class RmLoadXml {
         if(!loadXmlVo.isInit) {
         	doLoad(loadXmlVo, xmlFullPath);
         } else {
-        	if(RmConfig.systemDebugMode()) {
+        	if(RmConfig.getSingleton().isSystemDebugMode()) {
                 File docFile = new File(xmlFullPath);
                 if(docFile.lastModified() != loadXmlVo.lastModifiedTime) {
                 	loadXmlVo.isInit = false;

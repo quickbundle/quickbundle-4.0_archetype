@@ -71,7 +71,7 @@ A:ACTIVE {
 			<%=exceptionVo.getDescription() != null ? exceptionVo.getDescription() : RmStringHelper.prt(e.getLocalizedMessage())%>
 		</div>
 	</div>
-	<div style="display:<%=RmConfig.systemDebugMode() ? "block" : "none" %>;color:#FFFFFF">
+	<div style="display:<%=RmConfig.getSingleton().isSystemDebugMode() ? "block" : "none" %>;color:#FFFFFF">
 <% 
 		e.printStackTrace();
 		out.println(e.toString());

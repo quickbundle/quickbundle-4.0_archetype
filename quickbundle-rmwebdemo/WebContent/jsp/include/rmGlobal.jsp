@@ -5,7 +5,7 @@
 <script type="text/javascript"> 
 var dir_base = "<%=request.getContextPath()%>";
 var windowOpenReturnValue = null;
-var systemDebugMode = <%=RmConfig.systemDebugMode() ? "true" : "false"%>;
+var systemDebugMode = <%=RmConfig.getSingleton().isSystemDebugMode() ? "true" : "false"%>;
 var resetListJspQueryInputValue = true;
 var hiddenQueryDivValue = true;
 doInitForm = function(e){

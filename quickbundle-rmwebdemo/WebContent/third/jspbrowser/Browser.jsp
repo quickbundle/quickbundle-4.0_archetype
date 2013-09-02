@@ -1,5 +1,5 @@
 <%
-	if(!org.quickbundle.project.init.RmConfig.systemDebugMode()) {
+	if(!org.quickbundle.project.init.RmConfig.getSingleton().isSystemDebugMode()) {
 		out.println("you can not access this url in production mode!");
 		return;
 	}

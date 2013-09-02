@@ -19,10 +19,10 @@ public interface IRmMessageConstants extends IGlobalConstants {
     //表名、显示名
     public final static String TABLE_NAME = "RM_MESSAGE";
     public final static String TABLE_NAME_DISPLAY = "消息";
+    public final static String TABLE_PK = "id";
     //列名汉化
     @SuppressWarnings({ "unchecked", "serial" })
     public final static Map<String, String> TABLE_COLUMN_DISPLAY = new CaseInsensitiveMap(){{
-		
 		put("id","主键");
 		put("biz_keyword","业务关键字");
 		put("sender_id","发送人ID");
@@ -46,7 +46,6 @@ public interface IRmMessageConstants extends IGlobalConstants {
     //子表1-列名汉化
     @SuppressWarnings({"unchecked", "serial" })
     public final static Map<String, String> TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER = new CaseInsensitiveMap(){{
-		
 		put("id","主键");
 		put("message_id","消息ID");
 		put("receiver_id","接收人ID");

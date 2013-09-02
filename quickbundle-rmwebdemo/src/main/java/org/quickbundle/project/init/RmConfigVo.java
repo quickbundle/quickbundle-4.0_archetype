@@ -1,259 +1,165 @@
 package org.quickbundle.project.init;
 
-public class RmConfigVo {
-	
-	private String warHome = "/qb_home/default";
-	
-	/**
-	 * 		<!-- cloud node info collected automatically? or read from rm.xml? #change in production -->
-		<cloudNodeInfoAuto>false</cloudNodeInfoAuto>
-	 * @return 是集群模式？或单机？
-	 */
-	private boolean clusterMode = false;
+import java.io.File;
 
-	/**
-	 * @return 云节点信息是自动采集？还是从rm.xml中读取
-	 */
-	private boolean cloudNodeInfoAuto = false;
-    
-    /**
-     * 获得默认数据源的数据库类型，默认数据库类型是NULL
-     * IGlobalConstants.DATABASE_PRODUCT_NAME_...
-     */
-	private String databaseProductName = null;
-	
-    /**
-     * 是否水平拆分数据库，默认不拆分数据库
-     */
-    private boolean multiDb = false;
-	
-    /**
-     * 系统是否开发调试状态(性能很低，便利于开发调试。同时sql的?替换输出，日志记录了sql真实数据)
-     * 默认不是开发调试状态，是正式运行状态
-     */
-    private boolean systemDebugMode = true;
-	
-	/**
-	 * 本集群节点RmIdFactory产生的主键前缀
-	 */
-	private String clusterIdPrefix = "1000";
+import org.quickbundle.config.RmBaseConfigVo;
 
-	/**
-	 * 是否RmIdFactory每次从数据库中读取，生成id (用于多人clusterIdPrefix相同，而且要同时开发)
-	 */
-	private boolean generateIdFromDb = false;
+public class RmConfigVo extends RmBaseConfigVo {
 	
-	/**
-	 * RmIdFactory init id batch, union all?
-	 */
-	private boolean initIdBatch = false;
-
-	public boolean isInitIdBatch() {
-		return initIdBatch;
+	private RmBaseConfigVo singleton = null;
+	
+	RmConfigVo(RmBaseConfigVo singleton) {
+		super();
+		this.singleton = singleton;
 	}
-
-	public void setInitIdBatch(boolean initIdBatch) {
-		this.initIdBatch = initIdBatch;
-	}
-
-	/**
-	 * 系统用户是否唯一登录，同时登录会强制踢出第一个用户
-	 */
-	private boolean userUniqueLogin = true;
-
 	
-	/**
-	 * 默认的分页条数，默认按15条分页，会被rm.xml/rm/RmJspHelper/pageSize覆盖
-	 */
-	private int defaultPageSize = 15;
-	
-	/**
-	 * 默认的批处理条数，用于sql的union all条数
-	 */
-	private int defaultBatchSize = 10;
-	
-	/**
-	 * 是否启动任务调度
-	 */
-	private boolean schedulerStart = false;
-	
-	/**
-	 * 得到系统描述
-	 */
-	private String appDescription = "QuickBundle System";
-	
-	/**
-	 * 是否记录request的执行时间和SQL数量
-	 */
-	private boolean logRequest = true;
-	
-	/**
-	 * Python的Lib目录不存在时，自动解压缩
-	 */
-	private boolean createPythonLibIfNotExist = true;
-
-	/**
-	 * Perl的目录不存在时，自动解压缩
-	 */
-	private boolean createPerlIfNotExist = true;
-	
-	/**
-	 * 是否逻辑删除文件
-	 */
-	private boolean logicDeleteFile = false;
-	
-	/**
-	 * 逻辑删除的回收站文件夹
-	 */
-	private String recycleBinFolder = warHome + "/recycle_bin";
-	
-	/**
-	 * 是否记住当前url列表的在第几行
-	 */
-	private boolean rememberPage = false;
-	
-	/**
-	 * 默认字体
-	 */
-	private String defaultFont = null;
-
 	/**
 	 * @return the warHome
 	 */
 	public String getWarHome() {
-		return warHome;
+		return singleton.getWarHome();
 	}
 
 	/**
 	 * @param warHome the warHome to set
 	 */
-	public void setWarHome(String warHome) {
-		this.warHome = warHome;
+	protected void setWarHome(String warHome) {
+		super.set
+		singleton.s
+		super.
 	}
 
 	/**
-	 * @return the clusterMode
+	 * @return 是集群模式？或单机？
 	 */
-	boolean isClusterMode() {
-		return clusterMode;
+	public boolean isClusterMode() {
+		return singleton.isClusterMode();
 	}
 
 	/**
 	 * @param clusterMode the clusterMode to set
 	 */
-	void setClusterMode(boolean clusterMode) {
+	protected void setClusterMode(boolean clusterMode) {
 		this.clusterMode = clusterMode;
 	}
 
 	/**
-	 * @return the cloudNodeInfoAuto
+	 * @return 云节点信息是自动采集？还是从rm.xml中读取
 	 */
-	boolean isCloudNodeInfoAuto() {
-		return cloudNodeInfoAuto;
+	public boolean isCloudNodeInfoAuto() {
+		return singleton.isCloudNodeInfoAuto();
 	}
 
 	/**
 	 * @param cloudNodeInfoAuto the cloudNodeInfoAuto to set
 	 */
-	void setCloudNodeInfoAuto(boolean cloudNodeInfoAuto) {
+	protected void setCloudNodeInfoAuto(boolean cloudNodeInfoAuto) {
 		this.cloudNodeInfoAuto = cloudNodeInfoAuto;
 	}
 
 	/**
-	 * @return the databaseProductName
+	 * @return 获得默认数据源的数据库类型  IGlobalConstants.DATABASE_PRODUCT_NAME_...
 	 */
-	String getDatabaseProductName() {
-		return databaseProductName;
+	public String getDatabaseProductName() {
+		return singleton.getDatabaseProductName();
 	}
 
 	/**
 	 * @param databaseProductName the databaseProductName to set
 	 */
-	void setDatabaseProductName(String databaseProductName) {
+	protected void setDatabaseProductName(String databaseProductName) {
 		this.databaseProductName = databaseProductName;
 	}
 
 	/**
-	 * @return the multiDb
+	 * @return 是否水平拆分数据库
 	 */
-	boolean isMultiDb() {
-		return multiDb;
+	public boolean isMultiDb() {
+		return singleton.isMultiDb();
 	}
 
 	/**
 	 * @param multiDb the multiDb to set
 	 */
-	void setMultiDb(boolean multiDb) {
+	protected void setMultiDb(boolean multiDb) {
 		this.multiDb = multiDb;
 	}
 
 	/**
-	 * @return the systemDebugMode
+	 * @return 系统是否开发调试状态(系统综合运行性能较低，优化了应用启动速度。同时sql的?替换输出，日志记录了sql真实数据)
 	 */
-	boolean isSystemDebugMode() {
-		return systemDebugMode;
+	public boolean isSystemDebugMode() {
+		return singleton.isSystemDebugMode();
 	}
 
 	/**
 	 * @param systemDebugMode the systemDebugMode to set
 	 */
-	void setSystemDebugMode(boolean systemDebugMode) {
+	protected void setSystemDebugMode(boolean systemDebugMode) {
 		this.systemDebugMode = systemDebugMode;
 	}
 
 	/**
-	 * @return the clusterIdPrefix
+	 * @return 本集群节点RmIdFactory产生的主键前缀
 	 */
-	String getClusterIdPrefix() {
-		return clusterIdPrefix;
+	public String getClusterIdPrefix() {
+		return singleton.getClusterIdPrefix();
 	}
 
 	/**
 	 * @param clusterIdPrefix the clusterIdPrefix to set
 	 */
-	void setClusterIdPrefix(String clusterIdPrefix) {
+	protected void setClusterIdPrefix(String clusterIdPrefix) {
 		this.clusterIdPrefix = clusterIdPrefix;
 	}
 
 	/**
-	 * @return the generateIdFromDb
+	 * @return 是否RmIdFactory每次从数据库中读取，生成id (用于多人clusterIdPrefix相同，而且要同时开发)
 	 */
-	boolean isGenerateIdFromDb() {
-		return generateIdFromDb;
+	public boolean isGenerateIdFromDb() {
+		return singleton.isGenerateIdFromDb();
 	}
 
 	/**
 	 * @param generateIdFromDb the generateIdFromDb to set
 	 */
-	void setGenerateIdFromDb(boolean generateIdFromDb) {
+	protected void setGenerateIdFromDb(boolean generateIdFromDb) {
 		this.generateIdFromDb = generateIdFromDb;
 	}
 
+	public boolean isInitIdBatch() {
+		return singleton.isInitIdBatch();
+	}
+
+	protected void setInitIdBatch(boolean initIdBatch) {
+		this.initIdBatch = initIdBatch;
+	}
+	
 	/**
-	 * @return the userUniqueLogin
+	 * @return 系统用户是否唯一登录，同时登录会强制踢出第一个用户
 	 */
-	boolean isUserUniqueLogin() {
-		return userUniqueLogin;
+	public boolean isUserUniqueLogin() {
+		return singleton.isUserUniqueLogin();
 	}
 
 	/**
 	 * @param userUniqueLogin the userUniqueLogin to set
 	 */
-	void setUserUniqueLogin(boolean userUniqueLogin) {
+	protected void setUserUniqueLogin(boolean userUniqueLogin) {
 		this.userUniqueLogin = userUniqueLogin;
 	}
 
 	/**
-	 * @return the defaultPageSize
+	 * @return 默认的分页条数，会被rm.xml/rm/RmJspHelper/pageSize覆盖
 	 */
-	int getDefaultPageSize() {
-		return defaultPageSize;
+	public int getDefaultPageSize() {
+		return singleton.getDefaultPageSize();
 	}
 
 	/**
 	 * @param defaultPageSize the defaultPageSize to set
 	 */
-	void setDefaultPageSize(int defaultPageSize) {
+	protected void setDefaultPageSize(int defaultPageSize) {
 		this.defaultPageSize = defaultPageSize;
 	}
 
@@ -261,55 +167,55 @@ public class RmConfigVo {
 	 * @return the defaultBatchSize
 	 */
 	public int getDefaultBatchSize() {
-		return defaultBatchSize;
+		return singleton.getDefaultBatchSize();
 	}
 
 	/**
 	 * @param defaultBatchSize the defaultBatchSize to set
 	 */
-	public void setDefaultBatchSize(int defaultBatchSize) {
+	protected void setDefaultBatchSize(int defaultBatchSize) {
 		this.defaultBatchSize = defaultBatchSize;
 	}
 
 	/**
-	 * @return the schedulerStart
+	 * @return 是否启动任务调度
 	 */
-	boolean isSchedulerStart() {
-		return schedulerStart;
+	public boolean isSchedulerStart() {
+		return singleton.isSchedulerStart();
 	}
 
 	/**
 	 * @param schedulerStart the schedulerStart to set
 	 */
-	void setSchedulerStart(boolean schedulerStart) {
+	protected void setSchedulerStart(boolean schedulerStart) {
 		this.schedulerStart = schedulerStart;
 	}
 
 	/**
-	 * @return the appDescription
+	 * @return 得到系统简短描述
 	 */
-	String getAppDescription() {
-		return appDescription;
+	public String getAppDescription() {
+		return singleton.getAppDescription();
 	}
 
 	/**
 	 * @param appDescription the appDescription to set
 	 */
-	void setAppDescription(String appDescription) {
+	protected void setAppDescription(String appDescription) {
 		this.appDescription = appDescription;
 	}
 
 	/**
-	 * @return the logRequest
+	 * @return 是否记录request的执行时间和SQL数量
 	 */
-	boolean isLogRequest() {
-		return logRequest;
+	public boolean isLogRequest() {
+		return singleton.isLogRequest();
 	}
 
 	/**
 	 * @param logRequest the logRequest to set
 	 */
-	void setLogRequest(boolean logRequest) {
+	protected void setLogRequest(boolean logRequest) {
 		this.logRequest = logRequest;
 	}
 
@@ -317,13 +223,13 @@ public class RmConfigVo {
 	 * @return the createPythonLibIfNotExist
 	 */
 	public boolean isCreatePythonLibIfNotExist() {
-		return createPythonLibIfNotExist;
+		return singleton.isCreatePythonLibIfNotExist();
 	}
 
 	/**
 	 * @param createPythonLibIfNotExist the createPythonLibIfNotExist to set
 	 */
-	public void setCreatePythonLibIfNotExist(boolean createPythonLibIfNotExist) {
+	protected void setCreatePythonLibIfNotExist(boolean createPythonLibIfNotExist) {
 		this.createPythonLibIfNotExist = createPythonLibIfNotExist;
 	}
 	
@@ -331,13 +237,13 @@ public class RmConfigVo {
 	 * @return the createPerlIfNotExist
 	 */
 	public boolean isCreatePerlIfNotExist() {
-		return createPerlIfNotExist;
+		return singleton.getCreatePerlIfNotExist();
 	}
 
 	/**
 	 * @param createPerlIfNotExist the createPerlIfNotExist to set
 	 */
-	public void setCreatePerlIfNotExist(boolean createPerlIfNotExist) {
+	protected void setCreatePerlIfNotExist(boolean createPerlIfNotExist) {
 		this.createPerlIfNotExist = createPerlIfNotExist;
 	}
 
@@ -345,13 +251,13 @@ public class RmConfigVo {
 	 * @return the logicDeleteFile
 	 */
 	public boolean isLogicDeleteFile() {
-		return logicDeleteFile;
+		return singleton.getLogicDeleteFile();
 	}
 
 	/**
 	 * @param logicDeleteFile the logicDeleteFile to set
 	 */
-	public void setLogicDeleteFile(boolean logicDeleteFile) {
+	protected void setLogicDeleteFile(boolean logicDeleteFile) {
 		this.logicDeleteFile = logicDeleteFile;
 	}
 
@@ -359,30 +265,154 @@ public class RmConfigVo {
 	 * @return the recycleBinFolder
 	 */
 	public String getRecycleBinFolder() {
-		return recycleBinFolder;
+		return singleton.getRecycleBinFolder();
 	}
 
 	/**
 	 * @param recycleBinFolder the recycleBinFolder to set
 	 */
-	public void setRecycleBinFolder(String recycleBinFolder) {
+	protected void setRecycleBinFolder(String recycleBinFolder) {
 		this.recycleBinFolder = recycleBinFolder;
 	}
 
 	public boolean isRememberPage() {
-		return rememberPage;
+		return singleton.getRememberPage();
 	}
 
-	public void setRememberPage(boolean rememberPage) {
+	protected void setRememberPage(boolean rememberPage) {
 		this.rememberPage = rememberPage;
 	}
 
 	public String getDefaultFont() {
-		return defaultFont;
+		return singleton.getDefaultFont();
 	}
 
-	public void setDefaultFont(String defaultFont) {
+	protected void setDefaultFont(String defaultFont) {
 		this.defaultFont = defaultFont;
 	}
 
+	
+	//未加入rm.xml文件的配置
+	/**
+	 * 系统缓存检查周期
+	 * @return
+	 */
+	public long getCacheCheckInterval() {
+		return singleton.getCacheCheckInterval();
+	}
+	
+	/**
+	 * 是否全局监控
+	 * @return
+	 */
+	public boolean isGlobalMonitor() {
+		return singleton.isGlobalMonitor();
+	}
+	
+	/**
+	 * 系统缓存刷新周期
+	 * @return
+	 */
+	public long getCacheFlushInterval() {
+		return singleton.getCacheFlushInterval();
+	}
+	
+    /**
+     * 翻页是否用rs.absolute(index)的方案
+     */
+    public boolean isAbsolutePage() {
+    	return singleton.isAbsolutePage();
+    }
+    
+    /**
+     * 批处理sql的最大记录日志数量
+     */
+    public int getMaxLogSqlBatchSize() {
+    	return singleton.getMaxLogSqlBatchSize();
+    }
+	
+	/**
+	 * 系统用户登录是否DEMO状态(不校验用户数据库)
+	 */
+	public boolean isUserDemoMode() {
+		return singleton.isUserDemoMode();
+	}
+	
+	/**
+	 * 是否给insert和update的sql语句自动加ts
+	 */
+	public boolean isSqlUpdateAutoAppendTs() {
+		return singleton.isSqlUpdateAutoAppendTs();
+	}
+	
+	/**
+	 * 默认的临时文件夹
+	 */
+	public File getDefaultTempDir() {
+		return singleton.getDefaultTempDir();
+	}
+	
+	/**
+	 * 默认编码
+	 */
+	public String getDefaultEncode() {
+		return singleton.getDefaultEncode();
+	}
+	
+	/**
+	 * 默认实数数值的精度
+	 */
+	public int getDefaultNumberScale() {
+		return singleton.getDefaultNumberScale();
+	}
+	
+	/**
+	 * 登录时是否有校验码
+	 */
+	public boolean isLoginValidateVerifyCode() {
+		return singleton.isLoginValidateVerifyCode();
+	}
+	
+	/**
+	 * 登录是持否支持cookie
+	 */
+	public boolean isLoginCookie() {
+		return singleton.isLoginCookie;
+	}
+	
+	/**
+	 * cookie默认值365天
+	 */
+	public int getDefaultCookieAge() {
+		return singleton.getDefaultCookieAge();
+	}
+		
+	/**
+	 * ajax提交是否已json格式，还是post表单提交？
+	 */
+	public boolean isSubmitJson() {
+		return singleton.isSubmitJson();
+	}
+	
+	/**
+	 * 默认的树形编码起始值，适用于简单的纯数字树，每个节点下最多有900个子节点
+	 */
+	public String getDefaultTreeCodeFirst() {
+		return singleton.getDefaultTreeCodeFirst();
+	}
+    
+	/**
+	 * 指定最大循环次数，防止死循环
+	 */
+	public int getMaxCircleCount() {
+		return singleton.getMaxCircleCount();
+	}
+	
+	/**
+	 * 定义单实例全局缓存的最大容量，防止溢出攻击，如公开的url列表
+	 * @return
+	 */
+	public int getMaxCacheSize() {
+		return singleton.getMaxCacheSize();
+	}
 }

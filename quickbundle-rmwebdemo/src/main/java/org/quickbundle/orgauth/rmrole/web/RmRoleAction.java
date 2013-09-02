@@ -292,7 +292,7 @@ public class RmRoleAction extends RmDispatchAction implements IRmRoleConstants {
 		    	RmUserVo userVo = (RmUserVo)RmProjectHelper.getRmUserVo(request);
 		    	if(userVo !=null && !IOrgauthConstants.UserAdminType.ADMIN.value().equals(userVo.getAdmin_type()) && userVo.getParty_id_org()!=null){
 		    		RmCommonVo cVo = RmProjectHelper.getCommonServiceInstance().doQuery("select distinct(PR.CHILD_PARTY_CODE) from RM_PARTY_RELATION PR where PR.CHILD_PARTY_ID="+userVo.getParty_id_org()).get(0);
-		    		lQuery.add("exists(select * from RM_ROLE R2 left join RM_PARTY_RELATION PR on R2.OWNER_ORG_ID=" + RmSqlHelper.getFunction(RmSqlHelper.Function.TO_CHAR, RmConfig.getDatabaseProductName(), "PR.CHILD_PARTY_ID") + " where R2.USABLE_STATUS='1' and R2.ID=RM_ROLE.ID and PR.CHILD_PARTY_CODE like '" + cVo.getString("child_party_code") + "%') or IS_SYSTEM_LEVEL=1");
+		    		lQuery.add("exists(select * from RM_ROLE R2 left join RM_PARTY_RELATION PR on R2.OWNER_ORG_ID=" + RmSqlHelper.getFunction(RmSqlHelper.Function.TO_CHAR, RmConfig.getSingleton().getDatabaseProductName(), "PR.CHILD_PARTY_ID") + " where R2.USABLE_STATUS='1' and R2.ID=RM_ROLE.ID and PR.CHILD_PARTY_CODE like '" + cVo.getString("child_party_code") + "%') or IS_SYSTEM_LEVEL=1");
 		        }
 			}
 			

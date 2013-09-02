@@ -140,7 +140,7 @@ public class RmPrivilegeFilter implements Filter {
     		}
     		
 			//校验是否合法访问
-			if(RmConfig.userDemoMode()) { //demo模式不校验登录
+			if(RmConfig.getSingleton().isUserDemoMode()) { //demo模式不校验登录
 				filterChain.doFilter(request, response);
 			} else if(lCacheRequestUri.contains(shortUri) || setContainMatchString(sIgnoreUrl, shortUri)) { //如果是匿名用户允许访问的地址
 				filterChain.doFilter(request, response);

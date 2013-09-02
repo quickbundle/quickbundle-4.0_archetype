@@ -38,7 +38,7 @@ public class RmLoginAction extends RmDispatchAction implements IRmLoginConstants
         IRmLoginVo loginVo = null;
         //获得session，有可能不存在
         HttpSession session = RmJspHelper.getSession(request, false);
-        if(RmConfig.userDemoMode()) { //demo模式手动设置IRmLoginVo，用户login_id放入session，用于判断是否登录
+        if(RmConfig.getSingleton().isUserDemoMode()) { //demo模式手动设置IRmLoginVo，用户login_id放入session，用于判断是否登录
         	loginVo = new RmUserVo();
         	loginVo.setLogin_id(request.getParameter(Para.login_id.name()));
         	//确保产生session，并往session放入loginVo
@@ -46,7 +46,7 @@ public class RmLoginAction extends RmDispatchAction implements IRmLoginConstants
         	session.setAttribute(IGlobalConstants.RM_USER_VO, loginVo);
         	//demo模式不做任何校验，不初始化Service，不记录cookie，直接登录跳转
         	return directForward(mapping, form, request, response);
-        } else if(RmConfig.userUniqueLogin() && session != null && session.getAttribute(FORCE_LOGIN_VO) != null) { //有FORCE_LOGIN_VO是用户确认后二次登录
+        } else if(RmConfig.getSingleton().isUserUniqueLogin() && session != null && session.getAttribute(FORCE_LOGIN_VO) != null) { //有FORCE_LOGIN_VO是用户确认后二次登录
         	loginVo = (IRmLoginVo)session.getAttribute(FORCE_LOGIN_VO);
         	if(RM_YES.equals(request.getParameter(IRmLoginConstants.Para.is_force_login.name()))) {
         		//执行强制登录
@@ -58,7 +58,7 @@ public class RmLoginAction extends RmDispatchAction implements IRmLoginConstants
         	session.removeAttribute(FORCE_LOGIN_VO);
     	} else {
     		loginVo = loginNormal(mapping, form, request, response);
-    		if(RmConfig.userUniqueLogin() && loginVo.getLoginFailed() == null) {
+    		if(RmConfig.getSingleton().isUserUniqueLogin() && loginVo.getLoginFailed() == null) {
     			//检查用户是否唯一登录
     			UserUniqueLoginVo uniqueLoginVo = getLoginService().checkUniqueLogin(request, loginVo);
     			if(uniqueLoginVo != null) {
