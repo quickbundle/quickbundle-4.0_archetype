@@ -1,4 +1,4 @@
-﻿<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@page import="org.quickbundle.tools.helper.RmJspHelper"%>
 <%@page import="org.quickbundle.project.RmGlobalReference"%>
 <%@ page import="org.quickbundle.tools.helper.RmVoHelper" %>

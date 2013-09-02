@@ -1,3 +1,4 @@
+<%@page import="org.quickbundle.orgauth.rmfunctionnode.vo.RmFunctionNodeVo"%>
 <%@ page contentType="text/html; charset=UTF-8" language="java"%>
 <%@page import="java.util.TreeMap"%>
 <%@page import="java.util.Map"%>

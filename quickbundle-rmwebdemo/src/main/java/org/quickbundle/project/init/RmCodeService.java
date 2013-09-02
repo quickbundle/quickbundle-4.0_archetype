@@ -19,15 +19,16 @@ import org.dom4j.Element;
 import org.quickbundle.base.beans.factory.RmBeanFactory;
 import org.quickbundle.base.beans.factory.RmIdFactory;
 import org.quickbundle.base.exception.RmRuntimeException;
+import org.quickbundle.config.RmConfig;
 import org.quickbundle.itf.code.IRmCodeService;
-import org.quickbundle.project.IGlobalConstants;
-import org.quickbundle.project.RmProjectHelper;
 import org.quickbundle.modules.code.rmcodedata.service.IRmCodeDataService;
 import org.quickbundle.modules.code.rmcodedata.util.IRmCodeDataConstants;
 import org.quickbundle.modules.code.rmcodedata.vo.RmCodeDataVo;
 import org.quickbundle.modules.code.rmcodetype.service.IRmCodeTypeService;
 import org.quickbundle.modules.code.rmcodetype.util.IRmCodeTypeConstants;
 import org.quickbundle.modules.code.rmcodetype.vo.RmCodeTypeVo;
+import org.quickbundle.project.IGlobalConstants;
+import org.quickbundle.project.RmProjectHelper;
 import org.quickbundle.project.common.service.IRmCommonService;
 import org.quickbundle.tools.helper.RmSqlHelper;
 import org.quickbundle.tools.helper.RmVoHelper;
@@ -45,7 +46,7 @@ public class RmCodeService implements IRmCodeService {
 	 */
 	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public void executeInitTable() {
-		File sqlFolder = new File(RmPathHelper.getWebInfDir().toString() + File.separator + "config" + File.separator + "sql" + File.separator + RmConfig.getDatabaseProductName().toLowerCase());
+		File sqlFolder = new File(RmPathHelper.getWebInfDir().toString() + File.separator + "config" + File.separator + "sql" + File.separator + RmConfig.getSingleton().getDatabaseProductName().toLowerCase());
 		File[] aSqlFile = sqlFolder.listFiles(new FilenameFilter() {
 			public boolean accept(File dir, String name) {
 		        return Pattern.compile("^.+\\.sql$", Pattern.CASE_INSENSITIVE).matcher(name).find();
@@ -203,7 +204,7 @@ public class RmCodeService implements IRmCodeService {
             		index --;
             	}
             	circleCount ++;
-            	if(circleCount == RmConfig.maxCircleCount()) {
+            	if(circleCount == RmConfig.getSingleton().getMaxCircleCount()) {
             		lValue.add(preStr + to + affStr);
             		break;
             	}

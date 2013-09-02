@@ -60,4 +60,4 @@
 <%@page import="org.springframework.jdbc.core.RowMapper"%>
 <%@page import="org.quickbundle.util.RmKeyCountList"%>
 <%@page import="org.quickbundle.project.RmProjectHelper"%>
-<%@page import="org.quickbundle.modules.rmmessage.IRmMessageConstants"%>
+<%@page import="org.quickbundle.modules.message.IRmMessageConstants"%>

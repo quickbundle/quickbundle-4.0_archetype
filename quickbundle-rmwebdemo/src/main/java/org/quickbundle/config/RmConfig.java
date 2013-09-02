@@ -1,4 +1,4 @@
-package org.quickbundle.project.init;
+package org.quickbundle.config;
 
 import org.quickbundle.config.RmBaseConfig;
 import org.quickbundle.config.RmBaseConfigVo;

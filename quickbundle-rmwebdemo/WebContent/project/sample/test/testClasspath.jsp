@@ -81,7 +81,7 @@ public static String getStackTraceStr(Throwable t, int rows) {
 <form method="post">
 <div style="color:red;padding-top:3px">提示：多个类名用回车分隔<div>
 <textarea name="classNames" cols="80" rows="15"><%if(request.getParameter("classNames") != null && request.getParameter("classNames").trim().length() > 0){out.print(request.getParameter("classNames"));}else{%>
-org.quickbundle.project.init.RmConfig
+org.quickbundle.config.RmConfig
 org.springframework.util.Log4jConfigurer
 <%} %></textarea>
 <div><input type="submit" value="提交"></div>

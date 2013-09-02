@@ -8,12 +8,12 @@ import javax.servlet.http.HttpSession;
 
 import org.dom4j.Document;
 import org.quickbundle.base.beans.factory.RmBeanFactory;
+import org.quickbundle.config.RmLoadXml;
 import org.quickbundle.modules.log.ActionLog2DbService;
 import org.quickbundle.modules.log.ILogConstants;
 import org.quickbundle.modules.log.RmLogTypeCache;
 import org.quickbundle.modules.log.rmlog.vo.RmLogVo;
 import org.quickbundle.project.common.service.IRmCommonService;
-import org.quickbundle.project.init.RmLoadXml;
 import org.quickbundle.project.listener.RmAlarmCollector;
 import org.quickbundle.project.listener.RmGlobalMonitor;
 import org.quickbundle.project.listener.RmRequestMonitor;

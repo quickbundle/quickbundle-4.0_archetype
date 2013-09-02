@@ -1,9 +1,7 @@
-<%
-	if(!org.quickbundle.project.init.RmConfig.getSingleton().isSystemDebugMode()) {
+<%if(!org.quickbundle.config.RmConfig.getSingleton().isSystemDebugMode()) {
 		out.println("you can not access this url in production mode!");
 		return;
-	}
-%><%--
+	}%><%--
 	jsp File browser 1.2
 	Copyright (C) 2003-2006 Boris von Loesch
 	This program is free software; you can redistribute it and/or modify it under

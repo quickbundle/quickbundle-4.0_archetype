@@ -1,4 +1,4 @@
-package org.quickbundle.project.init;
+package org.quickbundle.config;
 
 import java.io.File;
 import java.net.MalformedURLException;

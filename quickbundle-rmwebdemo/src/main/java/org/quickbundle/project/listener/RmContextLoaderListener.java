@@ -11,7 +11,7 @@ import org.logicalcobwebs.proxool.ProxoolFacade;
 import org.quickbundle.base.beans.factory.RmBeanFactory;
 import org.quickbundle.base.cache.RmCacheHandler;
 import org.quickbundle.base.web.servlet.RmHolderServlet;
-import org.quickbundle.project.init.RmWebApplicationInit;
+import org.quickbundle.config.RmWebApplicationInit;
 import org.quickbundle.tools.support.buffer.FlushQueueThread;
 import org.quickbundle.tools.support.log.RmLogHelper;
 import org.quickbundle.tools.support.path.RmPathHelper;

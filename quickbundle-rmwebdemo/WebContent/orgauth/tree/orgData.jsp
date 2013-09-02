@@ -1,4 +1,4 @@
-﻿<%@page contentType="text/xml;charset=UTF-8" language="java" %><%
+<%@page contentType="text/xml;charset=UTF-8" language="java" %><%
 try {
 	DeepTreeXmlHandler dt = null;
 %><%@ include file="orgData_custom.jsp" %><%

@@ -1,4 +1,4 @@
-package org.quickbundle.project.init;
+package org.quickbundle.config;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -52,7 +52,7 @@ public class RmWebApplicationInit implements ILoadOnStartup {
 			RmLogHelper.getLogger(this.getClass()).info("System in debug mode......");
 		}
 
-		if (RmConfig.isGenerateIdFromDb()) {
+		if (RmConfig.getSingleton().isGenerateIdFromDb()) {
 			RmLogHelper.getLogger(this.getClass()).info("System generate primary key from database(not cache)...");
 		}
 
@@ -83,7 +83,7 @@ public class RmWebApplicationInit implements ILoadOnStartup {
 
 		// quartz begin
 		try {
-			if (RmConfig.isSchedulerStart()) {
+			if (RmConfig.getSingleton().isSchedulerStart()) {
 				long schedulerStartLazySecond = 0L;
 				try {
 					String schedulerStartLazy = RmProjectHelper.getRmClusterDoc().valueOf("/rm/org.quickbundle.project.init.RmConfig/schedulerStartLazy");

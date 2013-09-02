@@ -10,9 +10,9 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.quickbundle.base.beans.factory.RmBeanFactory;
+import org.quickbundle.config.RmConfig;
 import org.quickbundle.project.IGlobalConstants;
 import org.quickbundle.project.RmProjectHelper;
-import org.quickbundle.project.init.RmConfig;
 import org.quickbundle.project.listener.RmSessionListener;
 import org.quickbundle.third.struts.RmActionHelper;
 import org.quickbundle.third.struts.actions.RmDispatchAction;
@@ -74,7 +74,7 @@ public class RmLoginAction extends RmDispatchAction implements IRmLoginConstants
     	}
         if(loginVo.getLoginFailed() != null) { //登录失败
         	//清除cookie，不初始化Service跳转到重登录界面
-        	if(RmConfig.loginCookie()) {
+        	if(RmConfig.getSingleton().isLoginCookie()) {
         		RmJspHelper.clearProfile(request, response, Para.login_id.name());
         		RmJspHelper.clearProfile(request, response, Para.password.name());
         	}
@@ -88,7 +88,7 @@ public class RmLoginAction extends RmDispatchAction implements IRmLoginConstants
         getLoginService().executeInitUserInfo(request, loginVo);
 
         //把此次成功登录的帐号和密码写入cookie
-        if(RmConfig.loginCookie()) {
+        if(RmConfig.getSingleton().isLoginCookie()) {
         	if(request.getParameterValues(Para.is_cookie_login_status.name()) != null 
         			&& request.getParameterValues(Para.is_cookie_login_status.name()).length > 0
         			&& RM_YES.equals(request.getParameterValues(Para.is_cookie_login_status.name())[0])) {
@@ -165,7 +165,7 @@ public class RmLoginAction extends RmDispatchAction implements IRmLoginConstants
                 break;
             }
 
-        	if(!fromCookie && RmConfig.loginValidateVerifyCode()) {
+        	if(!fromCookie && RmConfig.getSingleton().isLoginValidateVerifyCode()) {
             	if(verifyCode == null || verifyCode.trim().length() == 0) {
                     alertStr = "请您输入验证码!";
                     sbLoginLog.append("failed, validate code is null");

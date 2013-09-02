@@ -1,4 +1,4 @@
-﻿<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@page import="org.quickbundle.orgauth.util.impl.RmOrgService"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.quickbundle.project.common.vo.RmCommonVo"%>

@@ -32,10 +32,10 @@ import org.quickbundle.base.cache.RmSqlCountCache;
 import org.quickbundle.base.cloud.RmClusterConfig;
 import org.quickbundle.third.struts.actions.RmDispatchAction;
 import org.quickbundle.base.web.page.RmPageVo;
+import org.quickbundle.config.RmConfig;
 import org.quickbundle.project.IGlobalConstants;
 import org.quickbundle.project.RmProjectHelper;
 import org.quickbundle.project.common.vo.RmCommonVo;
-import org.quickbundle.project.init.RmConfig;
 import org.quickbundle.project.listener.RmSessionListener;
 import org.quickbundle.project.login.IRmLoginConstants;
 import org.quickbundle.project.login.IRmSessionService;
@@ -363,7 +363,7 @@ public class RmUserAction extends RmDispatchAction implements IRmUserConstants {
 				lQuery.add("RM_PARTY_RELATION.CHILD_PARTY_CODE LIKE " +
 						"" +
 						"(select " +
-						RmSqlHelper.getFunction(RmSqlHelper.Function.CONCAT, RmConfig.getDatabaseProductName(), 
+						RmSqlHelper.getFunction(RmSqlHelper.Function.CONCAT, RmConfig.getSingleton().getDatabaseProductName(), 
 								"PR9.CHILD_PARTY_CODE", "'%'") +
 						" FROM RM_PARTY_RELATION PR9 WHERE PR9.CHILD_PARTY_ID=" + request.getParameter("parent_party_id") + 
 						")");
@@ -480,7 +480,7 @@ public class RmUserAction extends RmDispatchAction implements IRmUserConstants {
      * @throws Exception
      */
     public ActionForward queryOnlineUser(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
-    	if(RmConfig.isClusterMode()) {
+    	if(RmConfig.getSingleton().isClusterMode()) {
     		return queryOnlineUserCluster(mapping, form, request, response);
     	} else {
     		return queryOnlineUserLocalhost(mapping, form, request, response);

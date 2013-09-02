@@ -7,7 +7,7 @@
 <%@page import="org.quickbundle.third.excel.RmExcelHandler"%>
 <%@page import="org.quickbundle.third.struts.action.RmExceptionHandler"%>
 <%@page import="org.quickbundle.project.RmProjectHelper"%>
-<%@page import="org.quickbundle.project.init.RmConfig"%>
+<%@page import="org.quickbundle.config.RmConfig"%>
 <%try { %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>

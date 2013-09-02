@@ -11,7 +11,7 @@ import org.logicalcobwebs.concurrent.ReaderPreferenceReadWriteLock;
 import org.logicalcobwebs.concurrent.WriterPreferenceReadWriteLock;
 import org.logicalcobwebs.proxool.admin.Admin;
 import org.logicalcobwebs.proxool.util.FastArrayList;
-import org.quickbundle.project.init.RmConfig;
+import org.quickbundle.config.RmConfig;
 
 import java.sql.Connection;
 import java.sql.SQLException;

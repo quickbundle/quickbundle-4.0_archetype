@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rm>
-	<org.quickbundle.project.init.RmConfig>
+	<org.quickbundle.config.RmConfig>
 		<!-- primary key prefix of this cluster node, range: 1000-9222 #change in production -->
 		<clusterIdPrefix>1000</clusterIdPrefix>
 		<!-- job scheduler is start #change in production -->
 		<schedulerStart>false</schedulerStart>
 		<!-- lazy start scheduler time(second), 0 or -1 ignore this -->
 		<schedulerStartLazy>0</schedulerStartLazy>
-	</org.quickbundle.project.init.RmConfig>
+	</org.quickbundle.config.RmConfig>
 
 	<!-- #change in production -->
 	<org.quickbundle.base.cloud.RmClusterConfig thisId="server1">

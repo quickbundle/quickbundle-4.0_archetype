@@ -1,4 +1,4 @@
-﻿<%@page contentType="text/xml;charset=UTF-8" language="java" %><%
+<%@page contentType="text/xml;charset=UTF-8" language="java" %><%
 try {
 	String xmlStr = "";
 	//获取角色授权功能菜单数据
@@ -86,7 +86,7 @@ try {
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="org.springframework.jdbc.core.RowMapper"%>
-<%@page import="org.quickbundle.project.init.RmConfig"%>
+<%@page import="org.quickbundle.config.RmConfig"%>
 <%@page import="org.quickbundle.base.dao.RmJdbcTemplate"%>
 <%@page import="org.quickbundle.tools.helper.RmStringHelper"%>
 <%@page import="org.quickbundle.project.RmProjectHelper"%>

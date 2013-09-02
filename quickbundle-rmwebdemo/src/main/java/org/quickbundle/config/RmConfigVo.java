@@ -1,4 +1,4 @@
-package org.quickbundle.project.init;
+package org.quickbundle.config;
 
 import java.io.File;
 
@@ -24,9 +24,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	 * @param warHome the warHome to set
 	 */
 	protected void setWarHome(String warHome) {
-		super.set
-		singleton.s
-		super.
+		singleton.setWarHome(warHome);
 	}
 
 	/**
@@ -40,7 +38,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	 * @param clusterMode the clusterMode to set
 	 */
 	protected void setClusterMode(boolean clusterMode) {
-		this.clusterMode = clusterMode;
+		singleton.setClusterMode(clusterMode);
 	}
 
 	/**
@@ -54,7 +52,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	 * @param cloudNodeInfoAuto the cloudNodeInfoAuto to set
 	 */
 	protected void setCloudNodeInfoAuto(boolean cloudNodeInfoAuto) {
-		this.cloudNodeInfoAuto = cloudNodeInfoAuto;
+		singleton.setCloudNodeInfoAuto(cloudNodeInfoAuto);
 	}
 
 	/**
@@ -68,7 +66,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	 * @param databaseProductName the databaseProductName to set
 	 */
 	protected void setDatabaseProductName(String databaseProductName) {
-		this.databaseProductName = databaseProductName;
+		singleton.setDatabaseProductName(databaseProductName);
 	}
 
 	/**
@@ -82,7 +80,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	 * @param multiDb the multiDb to set
 	 */
 	protected void setMultiDb(boolean multiDb) {
-		this.multiDb = multiDb;
+		singleton.setMultiDb(multiDb);
 	}
 
 	/**
@@ -96,7 +94,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	 * @param systemDebugMode the systemDebugMode to set
 	 */
 	protected void setSystemDebugMode(boolean systemDebugMode) {
-		this.systemDebugMode = systemDebugMode;
+		singleton.setSystemDebugMode(systemDebugMode);
 	}
 
 	/**
@@ -110,7 +108,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	 * @param clusterIdPrefix the clusterIdPrefix to set
 	 */
 	protected void setClusterIdPrefix(String clusterIdPrefix) {
-		this.clusterIdPrefix = clusterIdPrefix;
+		singleton.setClusterIdPrefix(clusterIdPrefix);
 	}
 
 	/**
@@ -124,7 +122,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	 * @param generateIdFromDb the generateIdFromDb to set
 	 */
 	protected void setGenerateIdFromDb(boolean generateIdFromDb) {
-		this.generateIdFromDb = generateIdFromDb;
+		singleton.setGenerateIdFromDb(generateIdFromDb);
 	}
 
 	public boolean isInitIdBatch() {
@@ -132,7 +130,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	}
 
 	protected void setInitIdBatch(boolean initIdBatch) {
-		this.initIdBatch = initIdBatch;
+		singleton.setInitIdBatch(initIdBatch);
 	}
 	
 	/**
@@ -146,7 +144,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	 * @param userUniqueLogin the userUniqueLogin to set
 	 */
 	protected void setUserUniqueLogin(boolean userUniqueLogin) {
-		this.userUniqueLogin = userUniqueLogin;
+		singleton.setUserUniqueLogin(userUniqueLogin);
 	}
 
 	/**
@@ -160,7 +158,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	 * @param defaultPageSize the defaultPageSize to set
 	 */
 	protected void setDefaultPageSize(int defaultPageSize) {
-		this.defaultPageSize = defaultPageSize;
+		singleton.setDefaultPageSize(defaultPageSize);
 	}
 
 	/**
@@ -174,7 +172,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	 * @param defaultBatchSize the defaultBatchSize to set
 	 */
 	protected void setDefaultBatchSize(int defaultBatchSize) {
-		this.defaultBatchSize = defaultBatchSize;
+		singleton.setDefaultBatchSize(defaultBatchSize);
 	}
 
 	/**
@@ -188,7 +186,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	 * @param schedulerStart the schedulerStart to set
 	 */
 	protected void setSchedulerStart(boolean schedulerStart) {
-		this.schedulerStart = schedulerStart;
+		singleton.setSchedulerStart(schedulerStart);
 	}
 
 	/**
@@ -202,7 +200,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	 * @param appDescription the appDescription to set
 	 */
 	protected void setAppDescription(String appDescription) {
-		this.appDescription = appDescription;
+		singleton.setAppDescription(appDescription);
 	}
 
 	/**
@@ -216,7 +214,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	 * @param logRequest the logRequest to set
 	 */
 	protected void setLogRequest(boolean logRequest) {
-		this.logRequest = logRequest;
+		singleton.setLogRequest(logRequest);
 	}
 
 	/**
@@ -230,35 +228,21 @@ public class RmConfigVo extends RmBaseConfigVo {
 	 * @param createPythonLibIfNotExist the createPythonLibIfNotExist to set
 	 */
 	protected void setCreatePythonLibIfNotExist(boolean createPythonLibIfNotExist) {
-		this.createPythonLibIfNotExist = createPythonLibIfNotExist;
-	}
-	
-	/**
-	 * @return the createPerlIfNotExist
-	 */
-	public boolean isCreatePerlIfNotExist() {
-		return singleton.getCreatePerlIfNotExist();
-	}
-
-	/**
-	 * @param createPerlIfNotExist the createPerlIfNotExist to set
-	 */
-	protected void setCreatePerlIfNotExist(boolean createPerlIfNotExist) {
-		this.createPerlIfNotExist = createPerlIfNotExist;
+		singleton.setCreatePythonLibIfNotExist(createPythonLibIfNotExist);
 	}
 
 	/**
 	 * @return the logicDeleteFile
 	 */
 	public boolean isLogicDeleteFile() {
-		return singleton.getLogicDeleteFile();
+		return singleton.isLogicDeleteFile();
 	}
 
 	/**
 	 * @param logicDeleteFile the logicDeleteFile to set
 	 */
 	protected void setLogicDeleteFile(boolean logicDeleteFile) {
-		this.logicDeleteFile = logicDeleteFile;
+		singleton.setLogicDeleteFile(logicDeleteFile);
 	}
 
 	/**
@@ -272,15 +256,15 @@ public class RmConfigVo extends RmBaseConfigVo {
 	 * @param recycleBinFolder the recycleBinFolder to set
 	 */
 	protected void setRecycleBinFolder(String recycleBinFolder) {
-		this.recycleBinFolder = recycleBinFolder;
+		singleton.setRecycleBinFolder(recycleBinFolder);
 	}
 
 	public boolean isRememberPage() {
-		return singleton.getRememberPage();
+		return singleton.isRememberPage();
 	}
 
 	protected void setRememberPage(boolean rememberPage) {
-		this.rememberPage = rememberPage;
+		singleton.setRememberPage(rememberPage);
 	}
 
 	public String getDefaultFont() {
@@ -288,7 +272,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	}
 
 	protected void setDefaultFont(String defaultFont) {
-		this.defaultFont = defaultFont;
+		singleton.setDefaultFont(defaultFont);
 	}
 
 	
@@ -377,7 +361,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	 * 登录是持否支持cookie
 	 */
 	public boolean isLoginCookie() {
-		return singleton.isLoginCookie;
+		return singleton.isLoginCookie();
 	}
 	
 	/**

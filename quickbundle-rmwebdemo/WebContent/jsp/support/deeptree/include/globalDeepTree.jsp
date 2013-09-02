@@ -1,4 +1,4 @@
-﻿<%@page contentType="text/html;charset=UTF-8" language="java"%><%@page import="org.quickbundle.project.init.RmConfig"%><%@page import="org.quickbundle.tools.helper.RmStringHelper"%><%
+<%@page contentType="text/html;charset=UTF-8" language="java"%><%@page import="org.quickbundle.config.RmConfig"%><%@page import="org.quickbundle.tools.helper.RmStringHelper"%><%
 	String rootXmlSource = request.getParameter("rootXmlSource");
 	if(RmStringHelper.checkEmpty(rootXmlSource)){
 		rootXmlSource = (String)request.getAttribute("rootXmlSource");

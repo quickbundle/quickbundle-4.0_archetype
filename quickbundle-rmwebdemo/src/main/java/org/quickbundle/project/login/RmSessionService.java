@@ -14,10 +14,10 @@ import javax.servlet.http.HttpSession;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.quickbundle.base.beans.factory.RmBeanFactory;
 import org.quickbundle.base.cloud.RmClusterConfig;
+import org.quickbundle.config.RmConfig;
 import org.quickbundle.project.IGlobalConstants;
 import org.quickbundle.project.RmProjectHelper;
 import org.quickbundle.project.common.vo.RmCommonVo;
-import org.quickbundle.project.init.RmConfig;
 import org.quickbundle.project.listener.RmSessionListener;
 import org.quickbundle.project.login.RmUserVo.RmUserSessionVo;
 import org.quickbundle.tools.helper.RmPopulateHelper;
@@ -156,7 +156,7 @@ public class RmSessionService implements IRmSessionService {
 	public boolean forceLogoutUser(String user_id, String session_id) {
 		String msg = "您被管理员强制退出了，请重新登录。如有帐号异常，请联系管理员。";
 		boolean sendRemoteSuccess = false;
-		if(RmConfig.isClusterMode()) {
+		if(RmConfig.getSingleton().isClusterMode()) {
 			//销毁集群下兄弟节点的session
 			if(user_id != null && user_id.length() > 0) {
 				List<RmCommonVo> lvo = RmProjectHelper.getCommonServiceInstance().doQuery("select * from RM_USER_ONLINE_RECORD where user_id='" + user_id + "' and login_sign='" + session_id + "'");

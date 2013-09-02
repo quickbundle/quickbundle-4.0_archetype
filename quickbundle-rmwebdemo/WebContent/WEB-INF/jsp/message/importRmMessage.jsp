@@ -1,6 +1,6 @@
-<%@page import="org.quickbundle.modules.rmmessage.service.RmMessageService"%>
-<%@page import="org.quickbundle.third.fileupload.RmUploadHelper"%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@page import="org.quickbundle.modules.message.service.RmMessageService"%>
+<%@page import="org.quickbundle.third.fileupload.RmUploadHelper"%>
 <%@page import="java.io.File"%>
 <%@page import="jxl.Workbook"%>
 <%@page import="jxl.Sheet"%>
@@ -14,8 +14,8 @@
 <%@page import="org.quickbundle.tools.helper.io.RmZipHelper"%>
 <%@page import="org.quickbundle.tools.helper.RmVoHelper"%>
 <%@page import="org.quickbundle.base.beans.factory.RmBeanFactory"%>
-<%@ page import="org.quickbundle.modules.rmmessage.vo.RmMessageVo" %>
-<%@ page import="org.quickbundle.modules.rmmessage.IRmMessageConstants" %>
+<%@ page import="org.quickbundle.modules.message.vo.RmMessageVo" %>
+<%@ page import="org.quickbundle.modules.message.IRmMessageConstants" %>
 <%
 	boolean isSubmit = false;
 	if("1".equals(request.getParameter("isSubmit"))) {

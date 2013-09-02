@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.quickbundle.base.beans.factory.RmBeanFactory;
 import org.quickbundle.base.cloud.RmClusterConfig;
 import org.quickbundle.base.service.RmService;
+import org.quickbundle.config.RmConfig;
 import org.quickbundle.orgauth.IOrgauthConstants;
 import org.quickbundle.orgauth.rmuser.service.IRmUserService;
 import org.quickbundle.orgauth.rmuser.util.IRmUserConstants;
@@ -28,7 +29,6 @@ import org.quickbundle.orgauth.util.impl.RmOrgService;
 import org.quickbundle.project.IGlobalConstants;
 import org.quickbundle.project.RmProjectHelper;
 import org.quickbundle.project.common.vo.RmCommonVo;
-import org.quickbundle.project.init.RmConfig;
 import org.quickbundle.project.listener.RmGlobalMonitor;
 import org.quickbundle.project.listener.RmRequestMonitor;
 import org.quickbundle.project.listener.RmSessionListener;
@@ -112,7 +112,7 @@ public class RmLoginService extends RmService implements IRmLoginService {
 				uniqueLoginVo.setId(userVo.getId());
 			} else {
 				// 集群模式下，直接从数据库读取用户信息
-				if(!RmConfig.isClusterMode() || RmClusterConfig.getSelfId().equals(onlineRecordVo.getCluster_node_id())) {
+				if(!RmConfig.getSingleton().isClusterMode() || RmClusterConfig.getSelfId().equals(onlineRecordVo.getCluster_node_id())) {
 					return null;
 				}
 				RmUserSessionVo sessionVo = null;
@@ -157,7 +157,7 @@ public class RmLoginService extends RmService implements IRmLoginService {
 			String cluster_node_id = onlineRecordVo.getCluster_node_id();
 			String sessionId = onlineRecordVo.getLogin_sign();
 			//集群模式下，根据cluster_node_id找到某个兄弟节点，其session也要强制取代
-			if(RmConfig.isClusterMode() && !RmClusterConfig.getSelfId().equals(cluster_node_id)) {
+			if(RmConfig.getSingleton().isClusterMode() && !RmClusterConfig.getSelfId().equals(cluster_node_id)) {
 				try {
 					IRmSessionService remoteSs = RmSessionService.getRemoteSessionService(cluster_node_id);
 					if(remoteSs != null) {

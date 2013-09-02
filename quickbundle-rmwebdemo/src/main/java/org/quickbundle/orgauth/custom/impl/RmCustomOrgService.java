@@ -8,6 +8,7 @@ import java.util.Map;
 import org.quickbundle.base.beans.factory.RmBeanFactory;
 import org.quickbundle.base.cache.RmSqlCountCache;
 import org.quickbundle.base.service.RmService;
+import org.quickbundle.config.RmConfig;
 import org.quickbundle.orgauth.IOrgauthConstants;
 import org.quickbundle.orgauth.cache.RmPartyTypeCache;
 import org.quickbundle.orgauth.custom.IRmCustomOrgService;
@@ -29,7 +30,6 @@ import org.quickbundle.orgauth.rmuser.util.IRmUserConstants;
 import org.quickbundle.orgauth.rmuser.vo.RmUserVo;
 import org.quickbundle.project.RmProjectHelper;
 import org.quickbundle.project.common.vo.RmCommonVo;
-import org.quickbundle.project.init.RmConfig;
 import org.quickbundle.project.listener.RmRequestMonitor;
 import org.quickbundle.tools.helper.RmSqlHelper;
 import org.quickbundle.tools.helper.RmStringHelper;
@@ -153,7 +153,7 @@ public class RmCustomOrgService extends RmService implements IRmCustomOrgService
     	//用户物理删除
     	//result = getRmUserService().delete(ids);
     	//用户逻辑删除
-    	RmProjectHelper.getCommonServiceInstance().doUpdate("update RM_USER set USABLE_STATUS='0', LOGIN_ID =" + RmSqlHelper.getFunction(RmSqlHelper.Function.CONCAT, RmConfig.getDatabaseProductName(), "LOGIN_ID", "'$'", "ID") + " where ID in ("+RmStringHelper.parseToSQLString(ids)+")");
+    	RmProjectHelper.getCommonServiceInstance().doUpdate("update RM_USER set USABLE_STATUS='0', LOGIN_ID =" + RmSqlHelper.getFunction(RmSqlHelper.Function.CONCAT, RmConfig.getSingleton().getDatabaseProductName(), "LOGIN_ID", "'$'", "ID") + " where ID in ("+RmStringHelper.parseToSQLString(ids)+")");
     	getRmPartyService().deleteParty(ids);
     	RmSqlCountCache.clearCount(IRmUserConstants.TABLE_NAME);  //清除用户count记录数缓存
     	RmProjectHelper.log(IRmUserConstants.TABLE_LOG_TYPE_NAME, "删除了"+ids.length+"用户记录,id=" + RmStringHelper.parseToSQLString(ids));

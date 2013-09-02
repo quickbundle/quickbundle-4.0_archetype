@@ -9,14 +9,14 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import org.quickbundle.project.init.RmConfig;
+import org.quickbundle.config.RmConfig;
 
 /**
  * @author   
  * 实现编码过滤器
  */
 public class RmEncodingFilter implements Filter {
-	private String encoding = RmConfig.defaultEncode();
+	private String encoding = RmConfig.getSingleton().getDefaultEncode();
 	private FilterConfig filterConfig;
 
 	public RmEncodingFilter() {

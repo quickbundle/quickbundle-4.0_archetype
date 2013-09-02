@@ -12,9 +12,9 @@
 <%@ page import="org.quickbundle.base.web.page.RmPageVo"%>
 <%@ page import="org.quickbundle.tools.helper.RmStringHelper"%>
 <%@ page import="org.quickbundle.tools.helper.RmDateHelper"%>
-<%@ page import="org.quickbundle.modules.rmmessage.vo.RmMessageVo" %>
-<%@ page import="org.quickbundle.modules.rmmessage.IRmMessageConstants" %>
-<%@ page import="org.quickbundle.modules.rmmessage.service.RmMessageService" %>
+<%@ page import="org.quickbundle.modules.message.vo.RmMessageVo" %>
+<%@ page import="org.quickbundle.modules.message.IRmMessageConstants" %>
+<%@ page import="org.quickbundle.modules.message.service.RmMessageService" %>
 <%
 	RmMessageService service = RmBeanFactory.getBean(RmMessageService.class);
 	List<RmMessageVo> lResult = null;  //定义结果列表的List变量

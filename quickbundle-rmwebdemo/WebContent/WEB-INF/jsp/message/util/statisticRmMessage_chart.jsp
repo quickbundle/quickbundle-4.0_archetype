@@ -12,7 +12,7 @@
 <%@page import="org.jfree.chart.urls.PieURLGenerator"%>
 <%@page import="org.springframework.jdbc.core.RowMapper"%>
 <%@page import="org.quickbundle.project.RmProjectHelper"%>
-<%@page import="org.quickbundle.modules.rmmessage.IRmMessageConstants"%>
+<%@page import="org.quickbundle.modules.message.IRmMessageConstants"%>
 <%
 	WebChart chart = new WebChart();
 	List<String[]> lResult = RmProjectHelper.getCommonServiceInstance().doQuery("select template_id as rm_key, count(template_id) as rm_count from RM_MESSAGE group by template_id", new RowMapper() {

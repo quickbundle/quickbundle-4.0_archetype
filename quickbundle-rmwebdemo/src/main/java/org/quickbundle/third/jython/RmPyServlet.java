@@ -11,7 +11,7 @@ import org.python.core.PyString;
 import org.python.core.PySystemState;
 import org.python.util.PyServlet;
 import org.python.util.PythonInterpreter;
-import org.quickbundle.project.init.RmConfig;
+import org.quickbundle.config.RmConfig;
 import org.quickbundle.tools.helper.io.RmZipHelper;
 import org.quickbundle.tools.helper.xml.RmXmlHelper;
 import org.quickbundle.tools.support.log.RmLogHelper;
@@ -100,7 +100,7 @@ public class RmPyServlet extends PyServlet {
         String rootPath = getRootPath(servletContext);
         PySystemState sys = new PySystemState();
         //qb-rm
-        sys.setdefaultencoding(RmConfig.defaultEncode());
+        sys.setdefaultencoding(RmConfig.getSingleton().getDefaultEncode());
         PythonInterpreter interp = new PythonInterpreter(Py.newStringMap(), sys);
         sys.path.append(new PyString(rootPath));
 

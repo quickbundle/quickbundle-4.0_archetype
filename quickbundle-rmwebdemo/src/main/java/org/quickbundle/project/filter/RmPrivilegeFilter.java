@@ -20,11 +20,11 @@ import javax.servlet.http.HttpSession;
 import org.dom4j.Document;
 import org.dom4j.Node;
 import org.quickbundle.base.cloud.RmClusterConfig;
+import org.quickbundle.config.RmConfig;
 import org.quickbundle.orgauth.IOrgauthConstants;
 import org.quickbundle.orgauth.cache.RmFunctionNodeCache;
 import org.quickbundle.project.IGlobalConstants;
 import org.quickbundle.project.RmProjectHelper;
-import org.quickbundle.project.init.RmConfig;
 import org.quickbundle.project.listener.RmGlobalMonitor;
 import org.quickbundle.project.listener.RmRequestMonitor;
 import org.quickbundle.project.login.RmSsoLogin;
@@ -126,7 +126,7 @@ public class RmPrivilegeFilter implements Filter {
     			//2, 绑定request到当前线程
     			RmRequestMonitor.tlCurrentRequest.set(request);
     			
-    			if(RmConfig.isLogRequest()) {
+    			if(RmConfig.getSingleton().isLogRequest()) {
     				//3, 初始化sqlCount
     				RmRequestMonitor.tlSqlCount.set(new long[]{0, 0, 0, 0});
     			}
@@ -193,7 +193,7 @@ public class RmPrivilegeFilter implements Filter {
 			//处理权限end
 		} finally {
 			if(needClearTl) {
-				if(RmConfig.isLogRequest()) {
+				if(RmConfig.getSingleton().isLogRequest()) {
 					try {
 						//记录线程绑定的sql日志
 						RmRequestMonitor.logTlSqlCount((HttpServletRequest)request);
@@ -308,7 +308,7 @@ public class RmPrivilegeFilter implements Filter {
             	continue;
             }
             if(!lCacheRequestUri.contains(url)) {
-            	if(lCacheRequestUri.size() > RmConfig.maxCacheSize()) {
+            	if(lCacheRequestUri.size() > RmConfig.getSingleton().getMaxCacheSize()) {
             		lCacheRequestUri.remove(0);
             	}
             	lCacheRequestUri.add(url);

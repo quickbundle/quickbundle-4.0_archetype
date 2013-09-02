@@ -24,11 +24,11 @@ import org.quickbundle.base.beans.factory.RmBeanFactory;
 import org.quickbundle.base.cache.RmCacheHandler;
 import org.quickbundle.base.cache.RmSqlCountCache;
 import org.quickbundle.base.service.RmService;
+import org.quickbundle.config.RmConfig;
 import org.quickbundle.itf.cache.IRmCacheListener;
 import org.quickbundle.project.RmProjectHelper;
 import org.quickbundle.project.common.service.IRmCommonService;
 import org.quickbundle.project.common.vo.RmCommonVo;
-import org.quickbundle.project.init.RmConfig;
 import org.quickbundle.tools.helper.RmStringHelper;
 import org.quickbundle.tools.support.log.RmLogHelper;
 import org.springframework.jdbc.core.RowMapper;
@@ -299,8 +299,8 @@ public class RmFunctionNodeService extends RmService implements IRmFunctionNodeS
      */
     public void updateFunctionNode(String totalCode){
     	IRmCommonService cService = RmProjectHelper.getCommonServiceInstance();
-    	if(RmStringHelper.checkNotEmpty(totalCode)&& totalCode.length()>RmConfig.defaultTreeCodeFirst().length()){
-    		List<RmCommonVo> resultList =  cService.doQuery("select ID,IS_LEAF from RM_FUNCTION_NODE where  TOTAL_CODE='"+totalCode.substring(0, totalCode.length()-RmConfig.defaultTreeCodeFirst().length())+"' and ENABLE_STATUS=1");
+    	if(RmStringHelper.checkNotEmpty(totalCode)&& totalCode.length()>RmConfig.getSingleton().getDefaultTreeCodeFirst().length()){
+    		List<RmCommonVo> resultList =  cService.doQuery("select ID,IS_LEAF from RM_FUNCTION_NODE where  TOTAL_CODE='"+totalCode.substring(0, totalCode.length()-RmConfig.getSingleton().getDefaultTreeCodeFirst().length())+"' and ENABLE_STATUS=1");
     		if(resultList.size()>0){
     			RmCommonVo vo = resultList.get(0);
     			if(RmStringHelper.checkNotEmpty(vo.getString("is_leaf"))&&"1".equals(vo.getString("is_leaf"))){
@@ -315,8 +315,8 @@ public class RmFunctionNodeService extends RmService implements IRmFunctionNodeS
      */
     public void updateFunctionNodeParty(String totalCode,String id){
     	IRmCommonService cService = RmProjectHelper.getCommonServiceInstance();
-    	if(RmStringHelper.checkNotEmpty(totalCode)&& totalCode.length()>RmConfig.defaultTreeCodeFirst().length()){
-    		List<RmCommonVo> resultList =  cService.doQuery("SELECT ID,IS_LEAF FROM RM_FUNCTION_NODE WHERE  TOTAL_CODE like '"+totalCode.substring(0, totalCode.length()-RmConfig.defaultTreeCodeFirst().length())+"%' AND ENABLE_STATUS=1 AND ID !="+id);
+    	if(RmStringHelper.checkNotEmpty(totalCode)&& totalCode.length()>RmConfig.getSingleton().getDefaultTreeCodeFirst().length()){
+    		List<RmCommonVo> resultList =  cService.doQuery("SELECT ID,IS_LEAF FROM RM_FUNCTION_NODE WHERE  TOTAL_CODE like '"+totalCode.substring(0, totalCode.length()-RmConfig.getSingleton().getDefaultTreeCodeFirst().length())+"%' AND ENABLE_STATUS=1 AND ID !="+id);
     		if(resultList.size()==1){ 
     			RmCommonVo vo = resultList.get(0);
     			if(RmStringHelper.checkNotEmpty(vo.getString("is_leaf"))){

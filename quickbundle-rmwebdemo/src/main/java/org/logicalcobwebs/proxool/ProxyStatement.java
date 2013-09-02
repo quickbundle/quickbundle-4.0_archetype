@@ -12,7 +12,7 @@ import org.logicalcobwebs.cglib.proxy.MethodInterceptor;
 import org.logicalcobwebs.cglib.proxy.MethodProxy;
 import org.logicalcobwebs.cglib.proxy.InvocationHandler;
 import org.logicalcobwebs.proxool.proxy.InvokerFacade;
-import org.quickbundle.project.init.RmConfig;
+import org.quickbundle.config.RmConfig;
 import org.quickbundle.project.listener.RmGlobalMonitor;
 import org.quickbundle.project.listener.RmRequestMonitor;
 
@@ -77,7 +77,7 @@ class ProxyStatement extends AbstractProxyStatement implements MethodInterceptor
                 setSqlStatementIfNull((String) args[0]);
             }
             //qb-rm
-            if(sqlLogCount < RmConfig.maxLogSqlBatchSize()) {
+            if(sqlLogCount < RmConfig.getSingleton().getMaxLogSqlBatchSize()) {
             	appendToSqlLog();
             }
             sqlLogCount ++;
@@ -88,7 +88,7 @@ class ProxyStatement extends AbstractProxyStatement implements MethodInterceptor
         } else if (concreteMethod.getName().equals(EXECUTE_BATCH_METHOD)) {
             // executing a batch should do a trace
         	//qb-rm
-            if(sqlLogCount > RmConfig.maxLogSqlBatchSize()) {
+            if(sqlLogCount > RmConfig.getSingleton().getMaxLogSqlBatchSize()) {
             	getSqlLog().append(";[batchSize:" + sqlLogCount + "]");
             }
             long[] sqlCount = RmRequestMonitor.tlSqlCount.get();

@@ -47,8 +47,8 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.quickbundle.base.web.servlet.RmHolderServlet;
+import org.quickbundle.config.RmConfig;
 import org.quickbundle.project.IGlobalConstants;
-import org.quickbundle.project.init.RmConfig;
 import org.quickbundle.tools.helper.RmStringHelper;
 import org.quickbundle.tools.helper.xml.RmXmlHelper;
 import org.quickbundle.tools.support.log.RmLogHelper;
@@ -457,7 +457,7 @@ public class RmUploadHelper implements IGlobalConstants {
     public static void download(HttpServletRequest request, HttpServletResponse response, String saveName, String fileName, String uploadDir) throws UnsupportedEncodingException {
         response.setContentType("application/x-msdownload");
         
-        String fileName2 = URLEncoder.encode(fileName, RmConfig.defaultEncode());
+        String fileName2 = URLEncoder.encode(fileName, RmConfig.getSingleton().getDefaultEncode());
         /*
          * see http://support.microsoft.com/default.aspx?kbid=816868
          */

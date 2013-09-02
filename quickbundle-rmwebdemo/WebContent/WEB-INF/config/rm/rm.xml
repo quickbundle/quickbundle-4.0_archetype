@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rm>
-	<org.quickbundle.project.init.RmConfig>
+	<org.quickbundle.config.RmConfig>
 		<!-- war's home directory -->
 		<warHome>/qb_home/rmdemo</warHome>
 		<!-- RmIdFactory generate primary key from database? or from memory cache? #change in production -->
@@ -26,7 +26,7 @@
 		<!-- recycle Bin Folder #change in production -->
 		<recycleBinFolder>/qb_home/rmdemo/recycle_bin</recycleBinFolder>
 		<defaultFont>微软雅黑,黑体</defaultFont>
-	</org.quickbundle.project.init.RmConfig>
+	</org.quickbundle.config.RmConfig>
 	
 	<!-- when log in, don't filter session -->
 	<org.quickbundle.project.filter.RmPrivilegeFilter>

@@ -113,7 +113,7 @@
 		<init-param>
 			<param-name>init-classes</param-name>
 			<!-- implement classes of org.quickbundle.itf.ILoadOnStartup, split by "," -->
-			<param-value>org.quickbundle.project.init.RmWebApplicationInit</param-value>
+			<param-value>org.quickbundle.config.RmWebApplicationInit</param-value>
 		</init-param>
 		<load-on-startup>0</load-on-startup>
 	</servlet>

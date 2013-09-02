@@ -1,4 +1,4 @@
-﻿<%@page import="org.quickbundle.orgauth.cache.RmPartyTypeCache"%>
+<%@page import="org.quickbundle.orgauth.cache.RmPartyTypeCache"%>
 <%@page import="org.quickbundle.project.IGlobalConstants"%>
 <%@page import="org.quickbundle.tools.helper.RmJspHelper"%>
 <%@page import="org.quickbundle.tools.helper.RmStringHelper"%>

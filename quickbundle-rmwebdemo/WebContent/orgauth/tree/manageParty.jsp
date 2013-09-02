@@ -1,4 +1,4 @@
-﻿<%@page language="java" contentType="text/html;charset=UTF-8"%>
+<%@page language="java" contentType="text/html;charset=UTF-8"%>
 <%@page import="org.quickbundle.orgauth.IOrgauthConstants"%>
 <%@page import="org.quickbundle.orgauth.cache.RmPartyTypeCache"%>
 <%@page import="java.util.List"%>

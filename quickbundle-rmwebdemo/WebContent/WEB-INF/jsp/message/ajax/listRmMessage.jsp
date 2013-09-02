@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@page import="org.quickbundle.project.IGlobalConstants"%>
-<%@page import="org.quickbundle.project.init.RmConfig"%>
+<%@page import="org.quickbundle.config.RmConfig"%>
 <%@page import="org.quickbundle.tools.helper.RmStringHelper"%>
 <%@ page import="org.quickbundle.modules.message.IRmMessageConstants" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -221,7 +221,7 @@ Ext.onReady(function(){
 
 	//分页工具栏
 	var pagingToolbar = new Ext.PagingToolbar({
-        pageSize: <%=RmConfig.defaultPageSize()%>,
+        pageSize: <%=RmConfig.getSingleton().getDefaultPageSize()%>,
         store: store,
         displayInfo: true,
         displayMsg: '第{0}－{1}条 / 共{2}条',
@@ -263,7 +263,7 @@ Ext.onReady(function(){
     			var records = store.getModifiedRecords();
           		if(records != null && records.length > 0){
           			var params = {};
-<%if(RmConfig.isSubmitJson()) {%>
+<%if(RmConfig.getSingleton().isSubmitJson()) {%>
 					var json = [];
 					Ext.each(records, function(item) {
 						json.push(item.data);

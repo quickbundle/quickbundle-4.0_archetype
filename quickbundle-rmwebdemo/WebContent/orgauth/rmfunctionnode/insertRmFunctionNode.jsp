@@ -1,4 +1,5 @@
-﻿<%@page import="java.util.HashMap"%>
+<%@page import="org.quickbundle.project.RmProjectHelper"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@page import="java.util.List"%>
@@ -9,7 +10,7 @@
 <%@ page import="org.quickbundle.orgauth.rmfunctionnode.util.IRmFunctionNodeConstants" %>
 <%@page import="org.quickbundle.project.common.vo.RmCommonVo"%>
 <%@page import="org.quickbundle.tools.helper.RmStringHelper"%>
-<%@page import="org.quickbundle.project.init.RmConfig"%>
+<%@page import="org.quickbundle.config.RmConfig"%>
 <%  //判断是否为修改页面
   	RmFunctionNodeVo resultVo = null;  //定义一个临时的vo变量
 	boolean isModify = false;  //定义变量,标识本页面是否修改(或者新增)
@@ -21,7 +22,7 @@
 	}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@page import="org.quickbundle.project.RmProjectHelper"%>
+<%@page imorg.quickbundle.project.RmProjectHelperHelper"%>
 <html>
 <head>
 <%@ include file="/jsp/include/rmGlobal.jsp" %>
@@ -49,20 +50,20 @@
 	String default_total_code = "";
 	String parent_total_code =  request.getParameter("parent_total_code") ;
 	if(RmStringHelper.checkNotEmpty(parent_total_code)) {
-		List<RmCommonVo> lvo = RmProjectHelper.getCommonServiceInstance().doQuery("select max(TOTAL_CODE) max_total_code from RM_FUNCTION_NODE where TOTAL_CODE like '" + parent_total_code + "%' and length(TOTAL_CODE) = " + (parent_total_code.length()+RmConfig.defaultTreeCodeFirst().length()));
+		List<RmCommonVo> lvo = RmProjectHelper.getCommonServiceInstance().doQuery("select max(TOTAL_CODE) max_total_code from RM_FUNCTION_NODE where TOTAL_CODE like '" + parent_total_code + "%' and length(TOTAL_CODE) = " + (parent_total_code.length()+RmConfig.getSingleton().getDefaultTreeCodeFirst().length()));
 		if(lvo.size() > 0) {
 			String max_total_code = lvo.get(0).getString("max_total_code");
 			if(max_total_code != null && max_total_code.length() > 0) {
-				String temp_code = max_total_code.substring(max_total_code.length() - RmConfig.defaultTreeCodeFirst().length());
+				String temp_code = max_total_code.substring(max_total_code.length() - RmConfig.getSingleton().getDefaultTreeCodeFirst().length());
 				long nextLasePhaseCode = Long.valueOf(temp_code) + 1;
-				default_total_code = max_total_code.substring(0, max_total_code.length() - RmConfig.defaultTreeCodeFirst().length()) + nextLasePhaseCode;
+				default_total_code = max_total_code.substring(0, max_total_code.length() - RmConfig.getSingleton().getDefaultTreeCodeFirst().length()) + nextLasePhaseCode;
 				
 			} else {
-				default_total_code = parent_total_code + RmConfig.defaultTreeCodeFirst();
+				default_total_code = parent_total_code + RmConfig.getSingleton().getDefaultTreeCodeFirst();
 			}
 		}
 	} else {
-		default_total_code = RmConfig.defaultTreeCodeFirst();
+		default_total_code = RmConfig.getSingleton().getDefaultTreeCodeFirst();
 	}
 %>
 </head>

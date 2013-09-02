@@ -8,6 +8,7 @@ import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.quickbundle.config.RmConfig;
 import org.quickbundle.orgauth.IOrgauthConstants;
 import org.quickbundle.orgauth.cache.RmFunctionNodeCache;
 import org.quickbundle.orgauth.itf.IUtOrgTree;
@@ -15,7 +16,6 @@ import org.quickbundle.orgauth.rmfunctionnode.vo.RmFunctionNodeVo;
 import org.quickbundle.project.IGlobalConstants;
 import org.quickbundle.project.RmProjectHelper;
 import org.quickbundle.project.common.vo.RmCommonVo;
-import org.quickbundle.project.init.RmConfig;
 import org.quickbundle.tools.helper.RmSqlHelper;
 import org.quickbundle.tools.helper.RmStringHelper;
 import org.quickbundle.tools.helper.RmVoHelper;
@@ -323,8 +323,8 @@ public class RmOrgHelper implements IGlobalConstants{
 					sql.append("TOTAL_CODE like '"+totalCode+"%' and ");
 				}
 				sql.append(" ");
-				sql.append(RmSqlHelper.getFunction(RmSqlHelper.Function.LENGTH, RmConfig.getDatabaseProductName()));
-				sql.append("(TOTAL_CODE) = "+(RmConfig.defaultTreeCodeFirst().length()+totalCode.length()));
+				sql.append(RmSqlHelper.getFunction(RmSqlHelper.Function.LENGTH, RmConfig.getSingleton().getDatabaseProductName()));
+				sql.append("(TOTAL_CODE) = "+(RmConfig.getSingleton().getDefaultTreeCodeFirst().length()+totalCode.length()));
 				if(RmStringHelper.checkNotEmpty(enableStatus)&&"1".equals(enableStatus)) { 
 					sql.append(" and ENABLE_STATUS='1'");
 				}
@@ -332,9 +332,9 @@ public class RmOrgHelper implements IGlobalConstants{
 					sql.append(" and NODE_TYPE!='3'");
 				}
 				sql.append(" order by ");
-				sql.append(RmSqlHelper.getFunction(RmSqlHelper.Function.SUBSTR, RmConfig.getDatabaseProductName()));
+				sql.append(RmSqlHelper.getFunction(RmSqlHelper.Function.SUBSTR, RmConfig.getSingleton().getDatabaseProductName()));
 				sql.append("(TOTAL_CODE, 1, ");
-				sql.append(RmSqlHelper.getFunction(RmSqlHelper.Function.LENGTH, RmConfig.getDatabaseProductName()));
+				sql.append(RmSqlHelper.getFunction(RmSqlHelper.Function.LENGTH, RmConfig.getSingleton().getDatabaseProductName()));
 				sql.append("(TOTAL_CODE)-3)");
 				sql.append(", ORDER_CODE");
 				//sql.append(" order by TOTAL_CODE");
@@ -376,10 +376,10 @@ public class RmOrgHelper implements IGlobalConstants{
 						if(fnvo.getIcon() != null && fnvo.getIcon().startsWith("/")) {
 							dtv.setLogoImagePath(request.getContextPath() + fnvo.getIcon());
 						}
-						if(thisCode.length() == totalCode.length() + RmConfig.defaultTreeCodeFirst().length()) {
+						if(thisCode.length() == totalCode.length() + RmConfig.getSingleton().getDefaultTreeCodeFirst().length()) {
 							dt.addTreeNode(dtv);
 						} else {
-							dt.addTreeNode(thisCode.substring(0, thisCode.length()-RmConfig.defaultTreeCodeFirst().length()), dtv);
+							dt.addTreeNode(thisCode.substring(0, thisCode.length()-RmConfig.getSingleton().getDefaultTreeCodeFirst().length()), dtv);
 						}
 					}
 				}
@@ -404,10 +404,10 @@ public class RmOrgHelper implements IGlobalConstants{
 			}
 			DeepTreeVo dtv = new DeepTreeVo(cvo.getString("total_code"), cvo.getString("name"),isLeaf, "");
 			dtv.setDefaultOpen(defaultOpen);
-			if(cvo.getString("total_code").length() == RmConfig.defaultTreeCodeFirst().length()) {
+			if(cvo.getString("total_code").length() == RmConfig.getSingleton().getDefaultTreeCodeFirst().length()) {
 				dt.addTreeNode(dtv);
-			} else if(cvo.getString("total_code").length() > RmConfig.defaultTreeCodeFirst().length()) {
-				dt.addTreeNode(cvo.getString("total_code").substring(0, cvo.getString("total_code").length() - RmConfig.defaultTreeCodeFirst().length()), dtv);
+			} else if(cvo.getString("total_code").length() > RmConfig.getSingleton().getDefaultTreeCodeFirst().length()) {
+				dt.addTreeNode(cvo.getString("total_code").substring(0, cvo.getString("total_code").length() - RmConfig.getSingleton().getDefaultTreeCodeFirst().length()), dtv);
 			}
 		}
 		return dt;

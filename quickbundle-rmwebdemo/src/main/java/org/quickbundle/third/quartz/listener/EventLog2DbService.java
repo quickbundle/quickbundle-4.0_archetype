@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Queue;
 
 import org.quickbundle.base.beans.factory.RmBeanFactory;
-import org.quickbundle.project.init.RmConfig;
+import org.quickbundle.config.RmConfig;
 import org.quickbundle.third.quartz.rmschedulerevent.service.IRmSchedulerEventService;
 import org.quickbundle.third.quartz.rmschedulerevent.util.IRmSchedulerEventConstants;
 import org.quickbundle.third.quartz.rmschedulerevent.vo.RmSchedulerEventVo;
@@ -19,7 +19,7 @@ public class EventLog2DbService extends AbstractTaskQueue<RmSchedulerEventVo> {
 	}
 
 	EventLog2DbService() {
-		super.expire_interval = RmConfig.cacheFlushInterval();
+		super.expire_interval = RmConfig.getSingleton().getCacheFlushInterval();
 	}
 	
 	EventLog2DbService(String name) {

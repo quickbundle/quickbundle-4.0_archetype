@@ -1,10 +1,10 @@
-﻿<%@ page contentType="text/html; charset=UTF-8" session="false" language="java"%>
+<%@ page contentType="text/html; charset=UTF-8" session="false" language="java"%>
 <%@page import="java.util.Enumeration"%>
 <%@page import="org.quickbundle.project.IGlobalConstants"%>
 <%@page import="org.quickbundle.project.login.IRmLoginConstants"%>
 <%@page import="org.quickbundle.tools.helper.RmJspHelper"%>
 <%@page import="org.quickbundle.tools.helper.RmStringHelper"%>
-<%@page import="org.quickbundle.project.init.RmConfig"%>
+<%@page import="org.quickbundle.config.RmConfig"%>
 <%@page import="org.quickbundle.project.RmProjectHelper"%>
 <%
 	if(!"1".equals(request.getParameter("no_redirect"))) {
@@ -12,7 +12,7 @@
 		if(session != null && session.getAttribute(IGlobalConstants.RM_USER_VO) != null) {
 			response.sendRedirect(request.getContextPath() + "/"); //index.jsp
 		}
-		if (RmConfig.loginCookie() && !IRmLoginConstants.RM_YES.equals(request.getAttribute(IRmLoginConstants.NO_COOKIE)) && request.getAttribute("alertStr") == null) {
+		if (RmConfig.getSingleton().isLoginCookie() && !IRmLoginConstants.RM_YES.equals(request.getAttribute(IRmLoginConstants.NO_COOKIE)) && request.getAttribute("alertStr") == null) {
 			String login_id = RmJspHelper.getProfile(request, "login_id");
 			String password = RmJspHelper.getProfile(request, "password");
 			if (login_id != null && password != null && login_id.length() > 0 && password.length() > 0) {
