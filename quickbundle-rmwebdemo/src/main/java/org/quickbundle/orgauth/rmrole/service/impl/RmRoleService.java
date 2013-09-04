@@ -345,7 +345,7 @@ public class RmRoleService extends RmService implements IRmRoleService, IRmRoleC
         		List<RmPartyRoleVo> prList = new ArrayList<RmPartyRoleVo>();
             	for (String role_id1 : role_ids) {
             		if(RmStringHelper.checkNotEmpty(RmRequestMonitor.getCurrentThreadRequest().getParameter("company_id_"+role_id1))){
-            			String[] companyId =  RmStringHelper.parseStringToArray(RmRequestMonitor.getCurrentThreadRequest().getParameter("company_id_"+role_id1)) ;
+            			String[] companyId =  RmStringHelper.parseToArray(RmRequestMonitor.getCurrentThreadRequest().getParameter("company_id_"+role_id1)) ;
             			for(String cId:companyId){
                         	RmPartyRoleVo partyRoleVo = new RmPartyRoleVo();
                         	partyRoleVo.setRole_id(role_id1);

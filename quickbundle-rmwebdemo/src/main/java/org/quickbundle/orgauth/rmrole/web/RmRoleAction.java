@@ -372,8 +372,8 @@ public class RmRoleAction extends RmDispatchAction implements IRmRoleConstants {
         String role_id = request.getParameter("role_id");
         String function_node_code = request.getParameter("function_node_ids");        
         //重新添加授权记录和授权资源
-        String[] nodeCode = RmStringHelper.parseStringToArray(function_node_code);
-        String[] nodeCode_name = RmStringHelper.parseStringToArray(request.getParameter("function_node_id_names"));
+        String[] nodeCode = RmStringHelper.parseToArray(function_node_code);
+        String[] nodeCode_name = RmStringHelper.parseToArray(request.getParameter("function_node_id_names"));
         if(nodeCode != null && role_id!=null && (nodeCode.length>0 || role_id.trim().length()>0)){
         	List<RmFunctionNodeVo> lvo = new ArrayList<RmFunctionNodeVo>();
         	for(int i=0; i<nodeCode.length; i++) {

@@ -88,9 +88,7 @@ public class RmMessageService implements IRmMessageConstants {
     			bodyIdToDelete.add(bodyVo.getId());
     		}
     	}
-    	if(bodyIdToDelete.size() > 0) {
-    		rmMessageReceiverDao.delete(bodyIdToDelete.toArray(new Long[0]));
-    	}
+		rmMessageReceiverDao.delete(bodyIdToDelete.toArray(new Long[0]));
 		int sum = rmMessageDao.delete(id);
 		RmProjectHelper.log(LOG_TYPE_NAME, "删除了{}条记录,id={},子记录{}条", sum, id, bodyIdToDelete.size());
 		return sum;
@@ -112,9 +110,7 @@ public class RmMessageService implements IRmMessageConstants {
     			}
     		}
     	}
-    	if(bodyIdToDelete.size() > 0) {
-    		rmMessageReceiverDao.delete(bodyIdToDelete.toArray(new Long[0]));
-    	}
+		rmMessageReceiverDao.delete(bodyIdToDelete.toArray(new Long[0]));
 		int sum = rmMessageDao.delete(ids);
         RmProjectHelper.log(LOG_TYPE_NAME, "删除了{}条记录,ids={},子记录共{}条", sum, Arrays.toString(ids), bodyIdToDelete.size());
 		return sum;
@@ -287,9 +283,9 @@ public class RmMessageService implements IRmMessageConstants {
      * @return 插入的user_id列表
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    public String[] insertRm_m_message_user(String message_id, String[] user_ids) {
-    	if(user_ids.length == 0 || (user_ids.length == 1 &&user_ids[0].trim().length() == 0)) {
-    		return new String[0];
+    public Long[] insertRm_m_message_user(Long message_id, Long[] user_ids) {
+    	if(user_ids.length == 0 || (user_ids.length == 1 && String.valueOf(user_ids[0]).length() == 0)) {
+    		return new Long[0];
     	}
     	IRmCommonService cs = RmProjectHelper.getCommonServiceInstance();
     	List<String> lExistId = cs.doQuery("select * from RM_M_MESSAGE_USER where MESSAGE_ID=" + message_id + " and USER_ID in(" + RmStringHelper.parseToString(user_ids) + ")", new RowMapper() {
@@ -297,23 +293,23 @@ public class RmMessageService implements IRmMessageConstants {
 				return rs.getString("USER_ID");
 			}
 		});
-    	Set<String> sUser_id = new HashSet<String>();
-    	for(String user_id : user_ids) {
+    	Set<Long> sUser_id = new HashSet<Long>();
+    	for(Long user_id : user_ids) {
     		if(!lExistId.contains(user_id)) {
     			sUser_id.add(user_id);
     		}
     	}
     	if(sUser_id.size() > 0) {
-        	String[][] aaValue = new String[sUser_id.size()][2];
+    		Long[][] aaValue = new Long[sUser_id.size()][2];
         	int index = 0;
-        	for (String user_id : sUser_id) {
+        	for (Long user_id : sUser_id) {
         		aaValue[index][0] = message_id;
     			aaValue[index][1] = user_id;
     			index ++;
     		}
-        	cs.doUpdateBatch("insert into RM_M_MESSAGE_USER (MESSAGE_ID, USER_ID) VALUES(?, ?)", aaValue);
+        	cs.doUpdateBatch("insert into RM_M_MESSAGE_USER (MESSAGE_ID, USER_ID) values(?, ?)", aaValue);
     	}
-        return sUser_id.toArray(new String[0]);
+        return sUser_id.toArray(new Long[0]);
     }
     
     /**
@@ -323,7 +319,7 @@ public class RmMessageService implements IRmMessageConstants {
      * @param user_ids
      * @return 删除的记录数
      */
-    public int deleteRm_m_message_user(String message_id, String[] user_ids) {
+    public int deleteRm_m_message_user(Long message_id, Long[] user_ids) {
     	IRmCommonService cs = RmProjectHelper.getCommonServiceInstance();
     	return cs.doUpdate("delete from RM_M_MESSAGE_USER where MESSAGE_ID=" + message_id + " and USER_ID in(" + RmStringHelper.parseToString(user_ids) + ")");
     }

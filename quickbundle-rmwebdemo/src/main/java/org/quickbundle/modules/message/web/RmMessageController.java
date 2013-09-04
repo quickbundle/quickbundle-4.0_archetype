@@ -15,6 +15,7 @@ import org.quickbundle.third.excel.StatisticExport;
 import org.quickbundle.tools.helper.RmJspHelper;
 import org.quickbundle.tools.helper.RmPopulateHelper;
 import org.quickbundle.tools.helper.RmSqlHelper;
+import org.quickbundle.tools.helper.RmStringHelper;
 import org.quickbundle.tools.helper.RmVoHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -273,8 +274,8 @@ public class RmMessageController implements IRmMessageConstants {
      */
 	@RequestMapping(value = "insertRm_m_message_user", method = RequestMethod.POST)
     public String insertRm_m_message_user(HttpServletRequest request, @Valid RmMessageVo vo, RedirectAttributes redirectAttributes) {
-    	String message_id = request.getParameter("message_id");
-    	String[] user_ids = request.getParameter("user_ids").split(",");
+    	Long message_id = new Long(request.getParameter("message_id"));
+    	Long[] user_ids = RmStringHelper.parseToLongArray(request.getParameter("user_ids"));
     	int count = rmMessageService.insertRm_m_message_user(message_id, user_ids).length;
     	redirectAttributes.addFlashAttribute("message", "插入了" + count + "条记录!");
     	redirectAttributes.addAttribute("message_id", message_id);
@@ -286,8 +287,8 @@ public class RmMessageController implements IRmMessageConstants {
      */
 	@RequestMapping(value = "deleteRm_m_message_user", method = RequestMethod.POST)
     public String deleteRm_m_message_user(HttpServletRequest request, @Valid RmMessageVo vo, RedirectAttributes redirectAttributes) {
-    	String message_id = request.getParameter("message_id");
-    	String[] user_ids = request.getParameter("user_ids").split(",");
+    	Long message_id = new Long(request.getParameter("message_id"));
+    	Long[] user_ids = RmStringHelper.parseToLongArray(request.getParameter("user_ids"));
     	int count = rmMessageService.deleteRm_m_message_user(message_id, user_ids);
     	redirectAttributes.addFlashAttribute("message", "删除了" + count + "条记录!");
     	redirectAttributes.addAttribute("message_id", message_id);

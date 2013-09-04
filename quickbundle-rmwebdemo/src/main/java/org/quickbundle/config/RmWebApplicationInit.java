@@ -86,7 +86,7 @@ public class RmWebApplicationInit implements ILoadOnStartup {
 			if (RmConfig.getSingleton().isSchedulerStart()) {
 				long schedulerStartLazySecond = 0L;
 				try {
-					String schedulerStartLazy = RmProjectHelper.getRmClusterDoc().valueOf("/rm/org.quickbundle.project.init.RmConfig/schedulerStartLazy");
+					String schedulerStartLazy = RmProjectHelper.getRmClusterDoc().valueOf("/rm/org.quickbundle.config.RmConfig/schedulerStartLazy");
 					if (schedulerStartLazy.trim().length() > 0) {
 						schedulerStartLazySecond = Long.parseLong(schedulerStartLazy.trim());
 					}
@@ -177,83 +177,83 @@ public class RmWebApplicationInit implements ILoadOnStartup {
 
 		try {
 			// war应用的主目录
-			RmConfig.getSingleton().setWarHome(rmDoc.valueOf("/rm/org.quickbundle.project.init.RmConfig/warHome/text()"));
+			RmConfig.getSingleton().setWarHome(rmDoc.valueOf("/rm/org.quickbundle.config.RmConfig/warHome/text()"));
 		} catch (Exception e) {
 			RmLogHelper.error(RmWebApplicationInit.class, "setWarHome(): " + e.toString());
 		}
 
 		try {
 			// 是集群模式？或单机
-			RmConfig.getSingleton().setClusterMode(Boolean.parseBoolean(rmDoc.valueOf("/rm/org.quickbundle.project.init.RmConfig/clusterMode/text()")));
+			RmConfig.getSingleton().setClusterMode(Boolean.parseBoolean(rmDoc.valueOf("/rm/org.quickbundle.config.RmConfig/clusterMode/text()")));
 		} catch (Exception e) {
 			RmLogHelper.error(RmWebApplicationInit.class, "setClusterMode(): " + e.toString());
 		}
 		try {
 			// 集群节点是否自动收集？还是从rm.xml中读取
-			RmConfig.getSingleton().setCloudNodeInfoAuto(Boolean.parseBoolean(rmDoc.valueOf("/rm/org.quickbundle.project.init.RmConfig/cloudNodeInfoAuto/text()")));
+			RmConfig.getSingleton().setCloudNodeInfoAuto(Boolean.parseBoolean(rmDoc.valueOf("/rm/org.quickbundle.config.RmConfig/cloudNodeInfoAuto/text()")));
 		} catch (Exception e) {
 			RmLogHelper.error(RmWebApplicationInit.class, "setCloudNodeInfoAuto(): " + e.toString());
 		}
 
 		try {
 			// 是每次连接数据库产生最新主键？还是从缓存产生？
-			RmConfig.getSingleton().setGenerateIdFromDb(Boolean.parseBoolean(rmDoc.valueOf("/rm/org.quickbundle.project.init.RmConfig/generateIdFromDb/text()")));
+			RmConfig.getSingleton().setGenerateIdFromDb(Boolean.parseBoolean(rmDoc.valueOf("/rm/org.quickbundle.config.RmConfig/generateIdFromDb/text()")));
 		} catch (Exception e) {
 			RmLogHelper.error(RmWebApplicationInit.class, "setGenerateIdFromDb(): " + e.toString());
 		}
 		
 		try {
 			// RmIdFactory init id batch, union all?
-			RmConfig.getSingleton().setInitIdBatch(Boolean.parseBoolean(rmDoc.valueOf("/rm/org.quickbundle.project.init.RmConfig/initIdBatch/text()")));
+			RmConfig.getSingleton().setInitIdBatch(Boolean.parseBoolean(rmDoc.valueOf("/rm/org.quickbundle.config.RmConfig/initIdBatch/text()")));
 		} catch (Exception e) {
 			RmLogHelper.error(RmWebApplicationInit.class, "setGenerateIdFromDb(): " + e.toString());
 		}
 
 		try {
 			// 列表页默认分页数
-			RmConfig.getSingleton().setDefaultPageSize(Integer.parseInt(rmDoc.valueOf("/rm/org.quickbundle.project.init.RmConfig/defaultPageSize/text()")));
+			RmConfig.getSingleton().setDefaultPageSize(Integer.parseInt(rmDoc.valueOf("/rm/org.quickbundle.config.RmConfig/defaultPageSize/text()")));
 		} catch (Exception e) {
 			RmLogHelper.error(RmWebApplicationInit.class, "setDefaultPageSize(): " + e.toString());
 		}
 		try {
 			// 是否多数据库
-			RmConfig.getSingleton().setMultiDb(Boolean.parseBoolean(rmDoc.valueOf("/rm/org.quickbundle.project.init.RmConfig/multiDb/text()")));
+			RmConfig.getSingleton().setMultiDb(Boolean.parseBoolean(rmDoc.valueOf("/rm/org.quickbundle.config.RmConfig/multiDb/text()")));
 		} catch (Exception e) {
 			RmLogHelper.error(RmWebApplicationInit.class, "setMultiDb(): " + e.toString());
 		}
 		try {
 			// 系统是否开发调试状态
-			RmConfig.getSingleton().setSystemDebugMode(Boolean.parseBoolean(rmDoc.valueOf("/rm/org.quickbundle.project.init.RmConfig/systemDebugMode/text()")));
+			RmConfig.getSingleton().setSystemDebugMode(Boolean.parseBoolean(rmDoc.valueOf("/rm/org.quickbundle.config.RmConfig/systemDebugMode/text()")));
 		} catch (Exception e) {
 			RmLogHelper.error(RmWebApplicationInit.class, "setSystemDebugMode(): " + e.toString());
 		}
 
 		try {
 			// 系统用户是否唯一登录，同时登录会强制踢出第一个用户
-			RmConfig.getSingleton().setUserUniqueLogin(Boolean.parseBoolean(rmDoc.valueOf("/rm/org.quickbundle.project.init.RmConfig/userUniqueLogin/text()")));
+			RmConfig.getSingleton().setUserUniqueLogin(Boolean.parseBoolean(rmDoc.valueOf("/rm/org.quickbundle.config.RmConfig/userUniqueLogin/text()")));
 		} catch (Exception e) {
 			RmLogHelper.error(RmWebApplicationInit.class, "setUserUniqueLogin(): " + e.toString());
 		}
 
 		try {
 			// 初始化默认系统名称
-			RmConfig.getSingleton().setAppDescription(rmDoc.valueOf("/rm/org.quickbundle.project.init.RmConfig/appDescription/text()"));
+			RmConfig.getSingleton().setAppDescription(rmDoc.valueOf("/rm/org.quickbundle.config.RmConfig/appDescription/text()"));
 		} catch (Exception e) {
 			RmLogHelper.error(RmWebApplicationInit.class, "setAppDescription(): " + e.toString());
 		}
 
 		try {
 			// 是否记录request日志，用于分析执行时间和SQL数量
-			RmConfig.getSingleton().setLogRequest(Boolean.parseBoolean(rmDoc.valueOf("/rm/org.quickbundle.project.init.RmConfig/logRequest/text()")));
+			RmConfig.getSingleton().setLogRequest(Boolean.parseBoolean(rmDoc.valueOf("/rm/org.quickbundle.config.RmConfig/logRequest/text()")));
 		} catch (Exception e) {
 			RmLogHelper.error(RmWebApplicationInit.class, "setLogRequest(): " + e.toString());
 		}
 
 		try {
 			// 是否逻辑删除文件
-			RmConfig.getSingleton().setLogicDeleteFile(Boolean.parseBoolean(rmDoc.valueOf("/rm/org.quickbundle.project.init.RmConfig/logicDeleteFile/text()")));
+			RmConfig.getSingleton().setLogicDeleteFile(Boolean.parseBoolean(rmDoc.valueOf("/rm/org.quickbundle.config.RmConfig/logicDeleteFile/text()")));
 			// 逻辑删除的回收站文件夹
-			RmConfig.getSingleton().setRecycleBinFolder(rmDoc.valueOf("/rm/org.quickbundle.project.init.RmConfig/recycleBinFolder/text()"));
+			RmConfig.getSingleton().setRecycleBinFolder(rmDoc.valueOf("/rm/org.quickbundle.config.RmConfig/recycleBinFolder/text()"));
 		} catch (Exception e) {
 			RmLogHelper.error(RmWebApplicationInit.class, "setLogicDeleteFile(): " + e.toString());
 		}
@@ -262,13 +262,13 @@ public class RmWebApplicationInit implements ILoadOnStartup {
 
 		try {
 			// 本集群节点RmIdFactory产生的主键前缀
-			RmConfig.getSingleton().setClusterIdPrefix(rmClusterDoc.valueOf("/rm/org.quickbundle.project.init.RmConfig/clusterIdPrefix/text()"));
+			RmConfig.getSingleton().setClusterIdPrefix(rmClusterDoc.valueOf("/rm/org.quickbundle.config.RmConfig/clusterIdPrefix/text()"));
 		} catch (Exception e) {
 			RmLogHelper.error(RmWebApplicationInit.class, "setClusterIdPrefix(): " + e.toString());
 		}
 		try {
 			// 系统是否启动任务调度
-			RmConfig.getSingleton().setSchedulerStart(Boolean.parseBoolean(rmClusterDoc.valueOf("/rm/org.quickbundle.project.init.RmConfig/schedulerStart/text()")));
+			RmConfig.getSingleton().setSchedulerStart(Boolean.parseBoolean(rmClusterDoc.valueOf("/rm/org.quickbundle.config.RmConfig/schedulerStart/text()")));
 		} catch (Exception e) {
 			RmLogHelper.error(RmWebApplicationInit.class, "setSchedulerStart(): " + e.toString());
 		}
@@ -279,7 +279,7 @@ public class RmWebApplicationInit implements ILoadOnStartup {
 
 		try {
 			// 字体判断
-			RmConfig.getSingleton().setDefaultFont(rmClusterDoc.valueOf("/rm/org.quickbundle.project.init.RmConfig/defaultFont/text()"));
+			RmConfig.getSingleton().setDefaultFont(rmClusterDoc.valueOf("/rm/org.quickbundle.config.RmConfig/defaultFont/text()"));
 		} catch (Exception e) {
 			RmLogHelper.error(RmWebApplicationInit.class, "setSchedulerStart(): " + e.toString());
 		}
