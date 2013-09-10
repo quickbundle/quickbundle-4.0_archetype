@@ -123,7 +123,7 @@ public class RmMessageDao extends RmSqlSessionDaoSupport implements IRmMessageCo
      * @return 总记录数
      */
     public int getCount(String queryCondition) {
-    	return getSqlSession().selectOne(namespace("getCount"), queryCondition);
+    	return (Integer)getSqlSession().selectOne(namespace("getCount"), queryCondition);
     }
     
     /**
