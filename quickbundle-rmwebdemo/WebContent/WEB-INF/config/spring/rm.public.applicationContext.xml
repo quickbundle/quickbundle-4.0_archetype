@@ -30,7 +30,7 @@
 	</bean>
 	
 	<!-- 使用annotation自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
-	<context:component-scan base-package="org.quickbundle" name-generator="org.quickbundle.third.spring.context.annotation.RmAnnotationBeanNameGenerator">
+	<context:component-scan base-package="org.quickbundle,com" name-generator="org.quickbundle.third.spring.context.annotation.RmAnnotationBeanNameGenerator">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
@@ -42,7 +42,7 @@
     <bean id="ScrollableStatementHandlerInterceptor" class="org.quickbundle.third.mybatis.ScrollableStatementHandlerInterceptor" />
     <bean id="ScrollableResultSetHandlerInterceptor" class="org.quickbundle.third.mybatis.ScrollableResultSetHandlerInterceptor" />
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="mapperLocations" value="classpath*:org/quickbundle/**/*.xml" />
+        <property name="mapperLocations" value="classpath*:**/*Dao.xml" />
         <property name="dataSource" ref="dataSource" />
 		<property name="plugins">
 	        <array>
@@ -60,9 +60,13 @@
     <!-- scan for mappers and let them be autowired 
     	<property name="annotationClass" value="org.springside.examples.showcase.repository.mybatis.MyBatisRepository"/>
     -->
+    <bean id="BeanNameGenerator" class="org.quickbundle.third.spring.context.annotation.RmAnnotationBeanNameGenerator"></bean>
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="org.quickbundle.modules" />
+        <property name="basePackage" value="org.quickbundle,com" />
+    	<property name="nameGenerator" ref="BeanNameGenerator" />
+    	<property name="annotationClass" value="org.quickbundle.third.mybatis.MyBatisDao"/>
     </bean>
+
 
 	<!-- JSR303 Validator定义 -->
  	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />

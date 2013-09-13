@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
 	<!-- 自动扫描且只扫描@Controller -->
-	<context:component-scan base-package="org.quickbundle"
+	<context:component-scan base-package="org.quickbundle,com"
 		use-default-filters="true"
 		name-generator="org.quickbundle.third.spring.context.annotation.RmAnnotationBeanNameGenerator">
 		<context:include-filter type="annotation"
