@@ -53,6 +53,25 @@
 		<property name="writeNumbersAsStrings" value="true" />
 	</bean>
 
+    <!-- 定义数据绑定 -->
+    <bean
+        class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="webBindingInitializer">
+            <bean class="org.quickbundle.third.spring.web.bind.RmDataBinding" />
+        </property>
+        <!-- 
+        <property name="messageConverters">
+            <list>
+                <bean
+                    class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+                <bean
+                    class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
+                <bean
+                    class="org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter" />
+            </list>
+        </property>
+         -->
+    </bean>
 
 	<!-- 将无法mapping到Controller的path交给default servlet handler处理 -->
 	<mvc:default-servlet-handler />
