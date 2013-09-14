@@ -400,7 +400,7 @@ jQuery(function(){ //隔行变色
 	});
 });
 
-jQuery(function(){ //只读表单和日期元素
+function initStyleBehavior() {
 	jQuery(".text_field_readonly, .textarea_field_readonly, .text_field_reference_readonly, .text_field_half_readonly, .text_field_half_reference_readonly").each(function(){
 		jQuery(this).attr("readonly", true);
 		jQuery(this).mousedown(function(event){
@@ -451,6 +451,9 @@ jQuery(function(){ //只读表单和日期元素
 			};
 		}
 	});
+}
+jQuery(function(){ //只读表单和日期元素
+	initStyleBehavior();
 });
 
 jQuery(function(){ //限定字数的文本输入框

@@ -1853,6 +1853,7 @@ function initRowsStyle(rowTable) {
 			});
 		}
 	});
+	initStyleBehavior();
 }
 
 function getRowPrototype(rowTable) {
