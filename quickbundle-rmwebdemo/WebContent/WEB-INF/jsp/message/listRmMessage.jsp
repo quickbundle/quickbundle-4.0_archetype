@@ -4,6 +4,14 @@
 <%@page import="org.quickbundle.base.web.page.RmPageVo"%>
 <%@ page import="org.quickbundle.modules.message.vo.RmMessageVo" %>
 <%@ page import="org.quickbundle.modules.message.IRmMessageConstants" %>
+<%  //判断是否只读
+    boolean isReadOnly = false;
+    if("1".equals(request.getParameter(IRmMessageConstants.REQUEST_IS_READ_ONLY))) {
+        isReadOnly = true;
+    }else if("1".equals(request.getParameter(IRmMessageConstants.REQUEST_IS_READ_ONLY))){
+        isReadOnly = true;
+    }
+%>
 <%  //取出List
 	List<RmMessageVo> lResult = null;  //定义结果列表的List变量
 	if(request.getAttribute(IRmMessageConstants.REQUEST_BEANS) != null) {  //如果request中的beans不为空
@@ -15,7 +23,7 @@
 		session.setAttribute(IRmMessageConstants.REQUEST_QUERY_CONDITION, request.getAttribute(IRmMessageConstants.REQUEST_QUERY_CONDITION).toString());  //把查询条件放到session中
 		RmPageVo pageVo = (RmPageVo)request.getAttribute("RM_PAGE_VO");
 		session.setAttribute("RECORD_COUNT", String.valueOf(pageVo.getRecordCount()));
-		response.sendRedirect(request.getContextPath() + "/modules/message/message/exportRmMessage_custom.jsp");  //跳转到定制导出页面
+		response.sendRedirect(request.getContextPath() + "/message/exportCustom");  //跳转到定制导出页面
 		return;
 	}
 %>
@@ -26,6 +34,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><bean:message key="qb.web_title"/></title>
 <script type="text/javascript">
+<%if(!isReadOnly) {%>
 	function findCheckbox_onClick() {  //从多选框到修改页面
 		var ids = findSelections("checkbox_template","id");  //取得多选框的选择项
 		if(ids == null) {  //如果ids为空
@@ -50,25 +59,26 @@
     	form.action="<%=request.getContextPath()%>/message/delete?ids=" + ids;
     	form.submit();
 	}
-	function list_onClick(){  //简单的模糊查询
-    	form.action="<%=request.getContextPath()%>/message";
-    	form.submit();
-  	}
   	
 	function toImport_onClick() {  //到导入页面
 		window.location="<%=request.getContextPath()%>/message/import";
 	}
-	function export_onClick(){  //导出
-    	form.isExport.value="1";
-    	form.target="_blank";
-		form.submit();
- 		form.target="_self";	
-    	form.isExport.value="";
-   	}
    	
 	function toAdd_onClick() {  //到增加记录页面
 		window.location="<%=request.getContextPath()%>/message/insert";
 	}
+<%} %>
+    function list_onClick(){  //简单的模糊查询
+        form.action="<%=request.getContextPath()%>/message";
+        form.submit();
+    }
+    function export_onClick(){  //导出
+        form.isExport.value="1";
+        form.target="_blank";
+        form.submit();
+        form.target="_self";    
+        form.isExport.value="";
+    }
 	function refresh_onClick() {  //刷新本页
 		form.submit();
 	}
@@ -168,10 +178,11 @@
     <td width="1%"><img src="<%=request.getContextPath()%>/images/bg_mcontentL.gif" /></td>
     <td class="tableHeaderMiddleTd"><b><%=IRmMessageConstants.TABLE_NAME_DISPLAY %>列表</b></td>
     <td class="tableHeaderMiddleTd" width="60%" align="right">
+<%if(!isReadOnly) {%>
 		<input type="button" class="button_ellipse" id="button_toAdd" value="新增" onclick="javascript:toAdd_onClick();" title="跳转到新增页面"/>
 		<input type="button" class="button_ellipse" id="button_deleteMulti" value="删除" onclickto="javascript:deleteMulti_onClick();" title="删除所选的记录"/>
 		<input type="button" class="button_ellipse" id="button_findCheckbox" value="修改" onclick="javascript:findCheckbox_onClick();" title="跳转到修改所选的某条记录"/>
-		<input type="button" class="button_ellipse" id="button_toImport" value="导入" onclick="javascript:toImport_onClick()" title="导入数据"/>
+		<input type="button" class="button_ellipse" id="button_toImport" value="导入" onclick="javascript:toImport_onClick()" title="导入数据"/><%} %>
 		<input type="button" class="button_ellipse" id="button_export" value="导出" onclick="javascript:export_onClick();" title="按当前查询条件导出数据"/>
 		<input type="button" class="button_ellipse" id="button_refresh" value="刷新" onclickto="javascript:refresh_onClick();" title="刷新当前页面"/>
     </td>
@@ -210,6 +221,7 @@
 <input type="hidden" name="id" value="">
 <input type="hidden" name="isExport" value="">
 <input type="hidden" name="queryCondition" value="">
+<%=isReadOnly ? "<input type=\"hidden\" name=\"" + IRmMessageConstants.REQUEST_IS_READ_ONLY + "\" value=\"1\">" : ""%>
 
 <%--begin 生成页面汇总，正式部署前删除以下代码 --%>
 <div id="div_funcNode" style="padding:20px 10px 10px 0px; display:none" align="right">

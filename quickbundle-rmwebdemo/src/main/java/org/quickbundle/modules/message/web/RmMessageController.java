@@ -220,6 +220,20 @@ public class RmMessageController implements IRmMessageConstants {
 		return "message/importRmMessage";
 	}
 	/**
+	 * 定制导出
+	 */
+	@RequestMapping(value = "exportCustom", method = RequestMethod.GET)
+	public String exportCustom(Model model) {
+		return "message/exportRmMessage_custom";
+	}
+	/**
+	 * 执行导出
+	 */
+	@RequestMapping(value = "exportExcel", method = RequestMethod.POST)
+	public String exportExcel(Model model) {
+		return "message/exportRmMessage_excel";
+	}
+	/**
 	 * 跳转到Ajax页
 	 */
 	@RequestMapping(value = "ajax")

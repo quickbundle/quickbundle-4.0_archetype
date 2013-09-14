@@ -5,6 +5,14 @@
 <%@page import="org.quickbundle.project.RmProjectHelper"%>
 <%@page import="org.quickbundle.project.IGlobalConstants"%>
 <%@ include file="/jsp/include/web/g.jsp" %>
+<%  //判断是否只读
+    boolean isReadOnly = false;
+    if("1".equals(request.getAttribute(IGlobalConstants.REQUEST_IS_READ_ONLY))) {
+        isReadOnly = true;
+    } else if("1".equals(request.getParameter(IGlobalConstants.REQUEST_IS_READ_ONLY))){
+        isReadOnly = true;
+    } 
+%>
 <%  //取出List
 	String message_id = request.getParameter("message_id");
 	List<RmCommonVo> lvo = RmProjectHelper.getCommonServiceInstance().doQueryPage("select a.*, b.NAME as RM_DISPLAY_COLUMN from RM_M_MESSAGE_USER a join RM_USER b on a.USER_ID = b.ID where a.MESSAGE_ID=" + message_id);
@@ -17,6 +25,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><bean:message key="qb.web_title"/></title>
 <script type="text/javascript">
+<%if(!isReadOnly) {%>
 	function deleteMulti_onClick(){  //从多选框物理删除多条记录
  		var ids = findSelections("checkbox_template","id");  //取得多选框的选择项
 		if(ids == null)	{  //如果ids为空
@@ -37,7 +46,7 @@
 	    	form.action="<%=request.getContextPath()%>/message/insertRm_m_message_user";
 	    	form.submit();
 		}
-	}
+	} <%} %>
 	function refresh_onClick() {  //刷新本页
 		form.submit();
 	}
@@ -51,8 +60,9 @@
     <td width="1%"><img src="<%=request.getContextPath()%>/images/bg_mcontentL.gif" /></td>
     <td class="tableHeaderMiddleTd"><b>关联用户列表</b></td>
     <td class="tableHeaderMiddleTd" width="60%" align="right">
+<%if(!isReadOnly) {%>
 		<input type="button" class="button_ellipse" id="button_add" value="新增" onclick="javascript:add_onClick();" title="新增关联的用户"/>
-		<input type="button" class="button_ellipse" id="button_deleteMulti" value="删除" onclickto="javascript:deleteMulti_onClick();" title="删除所选的记录"/>
+		<input type="button" class="button_ellipse" id="button_deleteMulti" value="删除" onclickto="javascript:deleteMulti_onClick();" title="删除所选的记录"/> <%} %>
 		<input type="button" class="button_ellipse" id="button_refresh" value="刷新" onclickto="javascript:refresh_onClick();" title="刷新当前页面"/>
     </td>
     <td width="1%" align="right"><img src="<%=request.getContextPath()%>/images/bg_mcontentR.gif" /></td>

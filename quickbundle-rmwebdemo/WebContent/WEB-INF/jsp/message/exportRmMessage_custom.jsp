@@ -16,9 +16,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><bean:message key="qb.web_title"/></title>
 <script type="text/javascript">
-	var rmJspPath = "";
 	function export_onClick(){  //导出Excel
-		form.action="<%=request.getContextPath()%>/modules/message/rmmessage" + rmJspPath + "/exportRmMessage_excel.jsp";
+		form.action="<%=request.getContextPath()%>/message/exportExcel";
 		clickAllSelectMultiple(form.custom_column);
 		form.submit();
 	}

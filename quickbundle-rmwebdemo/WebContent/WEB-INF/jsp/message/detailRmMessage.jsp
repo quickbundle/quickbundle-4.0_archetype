@@ -3,6 +3,14 @@
 <%@ page import="org.quickbundle.tools.helper.RmStringHelper" %>
 <%@ page import="org.quickbundle.modules.message.vo.RmMessageVo" %>
 <%@ page import="org.quickbundle.modules.message.IRmMessageConstants" %>
+<%  //判断是否只读
+    boolean isReadOnly = false;
+    if("1".equals(request.getAttribute(IRmMessageConstants.REQUEST_IS_READ_ONLY))) {
+        isReadOnly = true;
+    } else if("1".equals(request.getParameter(IRmMessageConstants.REQUEST_IS_READ_ONLY))){
+        isReadOnly = true;
+    } 
+%>
 <%  //取出本条记录
 	RmMessageVo resultVo = null;  //定义一个临时的vo变量
 	resultVo = (RmMessageVo)request.getAttribute(IRmMessageConstants.REQUEST_BEAN);  //从request中取出vo, 赋值给resultVo
@@ -15,7 +23,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title><bean:message key="qb.web_title"/></title>
 <script type="text/javascript">
-	var rmActionName = "RmMessageAction";
+<%if(!isReadOnly) {%>
 	function find_onClick(){  //直接点到修改页面
 		window.location.href="<%=request.getContextPath()%>/message/update/" + $("#head_id").val();
 	}
@@ -25,15 +33,16 @@
 		}
 		form.action="<%=request.getContextPath()%>/message/delete";
 		form.submit();
-	}  
+	}  <%} %>
 </script>
 </head>
 <body>
 <form name="form" method="post">
 
 <div class="button_area">
+<%if(!isReadOnly) {%>
 	<input type="button" class="button_ellipse" id="button_update" value="修改" onclick="javascript:find_onClick();" />
-	<input type="button" class="button_ellipse" id="button_delete" value="删除" onclickto="javascript:delete_onClick();" />
+	<input type="button" class="button_ellipse" id="button_delete" value="删除" onclickto="javascript:delete_onClick();" /><%} %>
 	<input type="button" class="button_ellipse" id="button_back" value="返回"  onclick="javascript:history.go(-1);" />
 </div>
 
@@ -123,7 +132,7 @@
         </div>
     </div>
     <div id="rowTabs-rm_m_message_user">
-        <iframe id="tabInfo_frame" src="<%=request.getContextPath()%>/message/rm_m_message_user?message_id=<%=resultVo.getId()%>" frameborder="0" width="100%" height="500px" scrolling="yes"/>
+        <iframe id="tabInfo_frame" src="<%=request.getContextPath()%>/message/rm_m_message_user?message_id=<%=resultVo.getId()%><%if(isReadOnly) {%>&<%=IRmMessageConstants.REQUEST_IS_READ_ONLY %>=1<%} %>" frameborder="0" width="100%" height="500px" scrolling="yes"/>
     </div>
 </div>
 <!-- child table end -->
