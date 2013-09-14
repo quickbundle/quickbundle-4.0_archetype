@@ -23,7 +23,7 @@
 		session.setAttribute(IRmMessageConstants.REQUEST_QUERY_CONDITION, request.getAttribute(IRmMessageConstants.REQUEST_QUERY_CONDITION).toString());  //把查询条件放到session中
 		RmPageVo pageVo = (RmPageVo)request.getAttribute("RM_PAGE_VO");
 		session.setAttribute("RECORD_COUNT", String.valueOf(pageVo.getRecordCount()));
-		response.sendRedirect(request.getContextPath() + "/message/exportCustom");  //跳转到定制导出页面
+		response.sendRedirect(request.getContextPath() + "/message/export");  //跳转到定制导出页面
 		return;
 	}
 %>

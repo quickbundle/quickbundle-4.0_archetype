@@ -17,7 +17,7 @@
 <title><bean:message key="qb.web_title"/></title>
 <script type="text/javascript">
 	function export_onClick(){  //导出Excel
-		form.action="<%=request.getContextPath()%>/message/exportExcel";
+		form.action="<%=request.getContextPath()%>/message/export";
 		clickAllSelectMultiple(form.custom_column);
 		form.submit();
 	}

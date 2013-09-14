@@ -42,6 +42,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  *   data				 /message/statistic/flash/data
  * import page		GET	 /message/import
  * import action	POST /message/import
+ * export custom	GET	 /message/export
+ * export action	POST /message/export
  * ajax					 /message/ajax
  * 
  * @author 白小勇
@@ -222,15 +224,15 @@ public class RmMessageController implements IRmMessageConstants {
 	/**
 	 * 定制导出
 	 */
-	@RequestMapping(value = "exportCustom", method = RequestMethod.GET)
-	public String exportCustom(Model model) {
+	@RequestMapping(value = "export", method = RequestMethod.GET)
+	public String exportCustomForm(Model model) {
 		return "message/exportRmMessage_custom";
 	}
 	/**
 	 * 执行导出
 	 */
-	@RequestMapping(value = "exportExcel", method = RequestMethod.POST)
-	public String exportExcel(Model model) {
+	@RequestMapping(value = "export", method = RequestMethod.POST)
+	public String exportData(Model model) {
 		return "message/exportRmMessage_excel";
 	}
 	/**
