@@ -142,9 +142,7 @@
                     <td align="center"> 
                         <input type="checkbox" name="rmRowSelecter"/>
                         <input type="hidden" name="id"/>
-                    </td>
-                    <td>
-                        <input type="text" name="message_id" inputName="<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("message_id")%>" value="" />
+                        <input type="hidden" name="message_id"/>
                     </td>
                     <td>
                         <input type="text" name="receiver_id" inputName="<%=IRmMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("receiver_id")%>" value="" />
