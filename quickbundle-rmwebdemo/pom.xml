@@ -62,9 +62,9 @@
 		<url>http://bugs.quickbundle.org</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:git:https://github.com/quickbundle/java-archetype.git</connection>
-		<developerConnection>scm:git:https://github.com/quickbundle/java-archetype.git</developerConnection>
-		<url>https://github.com/quickbundle/java-archetype/tree/master/quickbundle-rmwebdemo</url>
+		<connection>scm:git:https://github.com/quickbundle/qb-archetype.git</connection>
+		<developerConnection>scm:git:https://github.com/quickbundle/qb-archetype.git</developerConnection>
+		<url>https://github.com/quickbundle/qb-archetype/tree/master/quickbundle-rmwebdemo</url>
 	</scm>
 
 	<build>
