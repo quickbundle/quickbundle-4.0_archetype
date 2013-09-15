@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.quickbundle</groupId>
 	<artifactId>quickbundle-rmwebdemo</artifactId>
-	<version>4.0.0-RELEASE</version>
+	<version>4.0.0</version>
 	<packaging>war</packaging>
 
 	<properties>
@@ -12,7 +12,7 @@
 		<war.dir>WebContent</war.dir>
 		<encoding>UTF-8</encoding>
 		<jdk.version>1.5</jdk.version>
-		
+		<quickbundle.version>4.0.0</quickbundle.version>
 		<!-- 主要依赖库的版本定义 -->
 		<struts.version>1.3.10</struts.version>
 		<spring.version>3.2.4.RELEASE</spring.version>
@@ -416,22 +416,22 @@ encoding/tools.bat=GBK]]>
 		<dependency>
 			<groupId>org.quickbundle</groupId>
 			<artifactId>quickbundle-core</artifactId>
-			<version>4.0.0-RELEASE</version>
+			<version>${quickbundle.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.quickbundle</groupId>
 			<artifactId>quickbundle-struts</artifactId>
-			<version>4.0.0-RELEASE</version>
+			<version>${quickbundle.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.quickbundle</groupId>
 			<artifactId>quickbundle-mybatis</artifactId>
-			<version>4.0.0-RELEASE</version>
+			<version>${quickbundle.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.quickbundle</groupId>
 			<artifactId>quickbundle-springweb</artifactId>
-			<version>4.0.0-RELEASE</version>
+			<version>${quickbundle.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.ant</groupId>
