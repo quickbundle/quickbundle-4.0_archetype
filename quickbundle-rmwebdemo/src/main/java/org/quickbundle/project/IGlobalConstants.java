@@ -46,25 +46,6 @@ public interface IGlobalConstants extends ICoreConstants, IRmCodeConstants {
     public final static String[] DESC_MODIFY_DATE = new String[]{"modify_date", "ts"};  //描述修改时间
     public final static String DESC_MODIFY_IP = "modify_ip";  //描述修改IP
     public final static String DESC_MODIFY_USER_ID = "modify_user_id";  //描述修改用户ID
-
-    //数据库定义
-	public final static String DATABASE_PRODUCT_NAME_MYSQL = "MySQL";
-    public final static String DATABASE_PRODUCT_NAME_ORACLE = "Oracle";
-	public final static String DATABASE_PRODUCT_NAME_DB2 = "DB2";
-	public final static String DATABASE_PRODUCT_NAME_SQLServer = "Microsoft SQL Server";
-	public final static String DATABASE_PRODUCT_NAME_H2 = "H2";
-	public final static String DATABASE_PRODUCT_NAME_HSQL = "HSQL Database Engine";
-	
-	public final static Map<String, String> DATABASE_PRODUCT_MAP = new HashMap<String, String>() {
-		{
-			this.put("com.mysql.jdbc.Driver", DATABASE_PRODUCT_NAME_MYSQL);
-			this.put("org.gjt.mm.mysql.Driver", DATABASE_PRODUCT_NAME_MYSQL);
-			this.put("oracle.jdbc.driver.OracleDriver", DATABASE_PRODUCT_NAME_ORACLE);
-			this.put("net.sourceforge.jtds.jdbc.Driver", DATABASE_PRODUCT_NAME_SQLServer);
-			this.put("org.h2.Driver", DATABASE_PRODUCT_NAME_MYSQL);
-		}
-	};
-	
 	
 	//不存在的ID
 	public final static String NOT_EXIST_ID = "NOT_EXIST_ID";

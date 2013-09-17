@@ -52,7 +52,7 @@
     	</property>
 	    <property name="configurationProperties">
 	        <props>
-	            <prop key="dialect">mysql</prop>
+	            <prop key="dialect">${mybatis.dialect}</prop>
 	        </props>
 	    </property>
     </bean>
