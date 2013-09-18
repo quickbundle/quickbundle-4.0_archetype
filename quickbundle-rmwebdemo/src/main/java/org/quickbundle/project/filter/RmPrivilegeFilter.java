@@ -155,7 +155,7 @@ public class RmPrivilegeFilter implements Filter {
 	    					if(RmSsoLogin.doRedirectUrl(request, response, filterChain, pUrl)) {
 	    						return; //跳转到其它服务器后, 忽略剩余过滤器
 	    					} else {
-	    						request.getRequestDispatcher("/jsp/common/error/err.jsp").forward(request, response);
+	    						request.getRequestDispatcher("/jsp/common/err.jsp").forward(request, response);
 	    					}
 	    					break;
 		    			}
@@ -178,7 +178,7 @@ public class RmPrivilegeFilter implements Filter {
     						ssoSuccess = true;
     						filterChain.doFilter(request, response);
     					} else {
-    						request.getRequestDispatcher("/jsp/common/error/err.jsp").forward(request, response);
+    						request.getRequestDispatcher("/jsp/common/err.jsp").forward(request, response);
     						return;
     					}
     					break;

@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ page errorPage="/jsp/common/error/err.jsp" %>
+<%@ page errorPage="/jsp/common/err.jsp" %>
 <%@ taglib uri="/WEB-INF/tld/struts-bean.tld" prefix="bean" %>
 <%@ taglib uri="/WEB-INF/tld/struts-layout.tld" prefix="layout" %>
 <%@page import="org.quickbundle.tools.helper.RmPopulateHelper"%>

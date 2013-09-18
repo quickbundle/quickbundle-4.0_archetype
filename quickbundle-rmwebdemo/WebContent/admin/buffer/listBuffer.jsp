@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page errorPage="/jsp/common/error/err.jsp" %>
+<%@ page errorPage="/jsp/common/err.jsp" %>
 <%@page import="org.quickbundle.tools.helper.RmDateHelper"%>
 <%@page import="org.quickbundle.tools.support.buffer.AbstractTaskQueue"%>
 <%@page import="java.util.concurrent.CopyOnWriteArrayList"%>

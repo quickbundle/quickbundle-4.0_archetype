@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="application/x-msdownload" pageEncoding="utf-8"  %>
-<%@ page errorPage="/jsp/common/error/err.jsp" %>
+<%@ page errorPage="/jsp/common/err.jsp" %>
 <%@page import="java.util.regex.Pattern"%>
 <%@page import="java.io.File"%>
 <%@page import="java.io.FileInputStream"%>

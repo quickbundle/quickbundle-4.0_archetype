@@ -38,6 +38,7 @@
 			<artifactId>org.quickbundle.mda.gc</artifactId>
 			<version>${quickbundle.version}</version>
 		</dependency>
+<!--
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -68,5 +69,6 @@
 			<artifactId>commons-collections</artifactId>
 			<version>3.2.1</version>
 		</dependency>
+-->
 	</dependencies>
 </project>

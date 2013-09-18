@@ -53,9 +53,6 @@ A:ACTIVE {
 
 <body>
 <div style="padding:50px;">
-	<div>
-		<img src="<%=request.getContextPath()%>/jsp/common/error/img/picsz1.gif" />
-	</div>
 <%
 	Throwable e = exception;
 	if (request.getAttribute("org.apache.struts.action.EXCEPTION") != null) {
@@ -65,7 +62,7 @@ A:ACTIVE {
 		RmExceptionVo exceptionVo = RmExceptionHandler.getException(e);
 %>
 	<div>
-		<div style="font-size:100%;">很抱歉，您的操作因遇到以下问题而中止，请<a href="javascript:toHome();" style="font-size:110%;">点击这里</a>返回上一页重试！如仍存在该问题，请与系统管理员联系。</div>
+		<div style="font-size:100%;">很抱歉，您的操作出错了，请<a href="javascript:toHome();" style="font-size:110%;">点击这里</a>返回上一页重试！如仍存在该问题，请与系统管理员联系。</div>
 		<div style="padding:10px;color:RED;font-weight:bold;font-size:130%;">
 			<span style="color:black;font-weight:normal;"><%=exceptionVo.getTitle() != null && exceptionVo.getTitle().length() > 0 ? exceptionVo.getTitle() + "：" : ""%></span>
 			<%=exceptionVo.getDescription() != null ? exceptionVo.getDescription() : RmStringHelper.prt(e.getLocalizedMessage())%>

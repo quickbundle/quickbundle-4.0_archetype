@@ -129,6 +129,9 @@
 	<logger name="org.springframework.jdbc.datasource">
         <level value="INFO"/>
 	</logger>
+	<logger name="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver">
+        <level value="DEBUG"/>
+	</logger>
     <!--hibernate的INFO较多,忽略之-->
 	<logger name="org.hibernate">
         <level value="WARN"/>

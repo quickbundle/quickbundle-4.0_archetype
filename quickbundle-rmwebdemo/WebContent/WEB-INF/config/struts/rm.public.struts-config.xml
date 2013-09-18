@@ -14,19 +14,19 @@
 	         handler="org.quickbundle.third.struts.action.RmExceptionHandler"
 	         key="GLOBAL_ERROR_CODE"
 	         scope="request"
-	         path="/jsp/common/error/err.jsp"
+	         path="/jsp/common/err.jsp"
 	         type="java.lang.Exception" />	 
 	</global-exceptions>
 	
 	<!-- ========== Global Forwards Configuration ============================== -->
 	<global-forwards>
-		<forward name="failure" path="/jsp/common/error/err.jsp" redirect="false"/>
-		<forward name="unknown-error" path="/jsp/common/error/err.jsp"/>
-		<forward name="error" path="/jsp/common/error/err.jsp"/>
-		<forward name="MessageAgentError" path="/jsp/common/error/err.jsp"/>
-		<forward name="MessageAgentErrorAjax" path="/jsp/common/error/errAjax.jsp"/>
-		<forward name="listPage" path="/jsp/common/error/errAjax.jsp"/>
-		<forward name="toQueryAll" path="/jsp/common/error/errAjax.jsp"/>
+		<forward name="failure" path="/jsp/common/err.jsp" redirect="false"/>
+		<forward name="unknown-error" path="/jsp/common/err.jsp"/>
+		<forward name="error" path="/jsp/common/err.jsp"/>
+		<forward name="MessageAgentError" path="/jsp/common/err.jsp"/>
+		<forward name="MessageAgentErrorAjax" path="/jsp/common/errAjax.jsp"/>
+		<forward name="listPage" path="/jsp/common/errAjax.jsp"/>
+		<forward name="toQueryAll" path="/jsp/common/errAjax.jsp"/>
 		<forward name="downloadStatisticFilePage" path="/jsp/support/statistic/downloadStatisticExcel.jsp"/>
 		<forward name="OUTPUT_AJAX_PAGE" path="/jsp/support/ajax/output.jsp"/>
 		<!-- Ajax校验转向 -->

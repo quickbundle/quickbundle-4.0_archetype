@@ -152,13 +152,13 @@
     </bean>
 
 	
-	<!-- Transaction manager for a single JDBC DataSource 
+	<!-- Transaction manager for a single JDBC DataSource -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
-	-->
 
-	<!-- for hibernate config -->
+
+	<!-- for hibernate config 
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="dataSource" ref="dataSource"/>
 		<property name="sessionFactory" ref="sessionFactory"/>
@@ -177,7 +177,7 @@
 			</props>
 		</property>
 	</bean>
-	
+	-->
 
 	<!-- ========================= ASPECT CONFIGURATION ======================== 
 			This definition creates auto-proxy infrastructure based on the given pointcut,
