@@ -1525,7 +1525,7 @@ function showMessage(msg, options) {
 		width: 400,
 		height: 300,
 		buttons: {
-			确认: function () {
+			OK: function () {
 				$(this).dialog("close");
 				window.location.href = options.redirectUrl;
 			}
@@ -1542,7 +1542,7 @@ function showErrorMessage(msg, options) {
 		width: 600,
 		height: 400,
 		buttons: {
-			确认: function () {
+			OK: function () {
 				$(this).dialog("close");
 			}
 		}
@@ -1688,25 +1688,28 @@ function FormatNumber(intInput) {
 
 var currentNamespace = "";
 jQuery(function(){
-	try {
-		// Tabs
-		jQuery('#rowTabs').tabs({
-	        show: function(e, ui) {
-	            if(ui.panel.id.length > "rowTabs-".length) {
-	            	currentNamespace = ui.panel.id.substring("rowTabs-".length);
-	            }
+	//Tabs
+	jQuery('#rowTabs').tabs({
+		create : function(e, ui) {
+			if(ui.panel.selector.length > "#rowTabs-".length) {
+				currentNamespace = ui.panel.selector.substring("#rowTabs-".length);
 			}
-	    });
-		//hover states on the static widgets
-		jQuery('#dialog_link, ul#icons li').hover(
-			function() { jQuery(this).addClass('ui-state-hover'); }, 
-			function() { jQuery(this).removeClass('ui-state-hover'); }
-		);
-	} catch(e){}
+		},
+		activate : function(e, ui) {
+			if(ui.newPanel.selector.length > "#rowTabs-".length) {
+				currentNamespace = ui.newPanel.selector.substring("#rowTabs-".length);
+			}
+		}
+	});
+	//hover states on the static widgets
+	jQuery('#dialog_link, ul#icons li').hover(
+		function() { jQuery(this).addClass('ui-state-hover'); }, 
+		function() { jQuery(this).removeClass('ui-state-hover'); }
+	);
 });
 
 function findRowTable(rowTableNamespace) {
-	return jQuery("table[className='rowTable'][namespace='" + rowTableNamespace + "']").get(0);
+	return jQuery("table[class='rowTable'][namespace='" + rowTableNamespace + "']").get(0);
 }
 
 var rowConfig={
@@ -1779,12 +1782,14 @@ function initRowsStyle(rowTable) {
 }
 
 function getRowPrototype(rowTable) {
+	if(rowTable == null || rowTable.rows == null || rowTable.rows.length == 0) {
+		return null;
+	}
 	for(var i=0; i<rowTable.rows.length; i++) {
 		if(jQuery(rowTable.rows[i]).hasClass("rowPrototype")) {
 			return rowTable.rows[i];
 		}
 	}
-	return null;
 }
 
 function removeRow_onClick(rowTableNamespace) {

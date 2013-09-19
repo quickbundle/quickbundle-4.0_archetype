@@ -40,7 +40,6 @@ table,td,input,div,span {
 
 button,submit,reset { /* 通用中文按纽 */
 	font-size: 12px;
-	height:18px;
 	position:relative;
 	top:-1px;
 	cursor:pointer;

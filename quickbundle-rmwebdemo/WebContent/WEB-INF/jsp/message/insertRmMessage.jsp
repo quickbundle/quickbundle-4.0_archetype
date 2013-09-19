@@ -154,7 +154,6 @@
             <table class="rowTable" namespace="<%=IRmMessageConstants.TABLE_NAME_RM_MESSAGE_RECEIVER%>" id="rowTable">
                 <tr class="trheader">
                     <td align="left" style="width:3%;"><input type="checkbox" class="rowCheckboxControl" style="display:none;"/>选择</td>
-                    <td align="left" style="width:8%;"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("message_id")%></td>
                     <td align="left" style="width:8%;"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("receiver_id")%></td>
                     <td align="left" style="width:8%;"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("is_handle")%></td>
                     <td align="left" style="width:8%;"><%=IRmMessageConstants.TABLE_COLUMN_DISPLAY_RM_MESSAGE_RECEIVER.get("handle_date")%></td>
