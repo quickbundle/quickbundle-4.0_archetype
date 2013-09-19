@@ -1,44 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>org.quickbundle</groupId>
-    <artifactId>quickbundle-phonegapdemo</artifactId>
-    <version>4.0.0</version>
-    <packaging>apk</packaging>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.quickbundle</groupId>
+	<artifactId>quickbundle-phonegapdemo</artifactId>
+	<version>4.0.0</version>
+	<packaging>apk</packaging>
 
-    <properties>
+	<properties>
 		<encoding>UTF-8</encoding>
 		<jdk.version>1.5</jdk.version>
 		<basedir>./</basedir>
-        <platform.version> 2.3.3</platform.version>
-    </properties>
-
-	<licenses>
-		<license>
-			<name>Apache 2</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-			<comments>A business-friendly OSS license</comments>
-		</license>
-	</licenses>
-	<organization>
-		<name>Quickbundle Team</name>
-		<url>http://quickbundle.org</url>
-	</organization>
-	<issueManagement>
-		<system>Bugzilla</system>
-		<url>http://bugs.quickbundle.org</url>
-	</issueManagement>
-	<scm>
-		<connection>scm:git:https://github.com/quickbundle/mobile-archetype.git</connection>
-		<developerConnection>scm:git:https://github.com/quickbundle/mobile-archetype.git</developerConnection>
-		<url>https://github.com/quickbundle/mobile-archetype/tree/master/quickbundle-phonegapdemo</url>
-	</scm>
+		<android-platform>10</android-platform>
+		<android.platform.version>2.3.3</android.platform.version>
+		<sdk.path>D:\dev\android\adt-bundle-windows-x86_64-20130522\sdk</sdk.path>
+	</properties>
 
 	<build>
 		<plugins>
-		<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
@@ -63,7 +42,6 @@ encoding/<project>=UTF-8]]>
 					<addGroupIdToProjectName>true</addGroupIdToProjectName>
 				</configuration>
 			</plugin>
-			-->
 			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
 				<version>2.1</version>
@@ -79,7 +57,6 @@ encoding/<project>=UTF-8]]>
 					</execution>
 				</executions>
 			</plugin>
-			<!--
 			<plugin>
 				<groupId>com.github.chrisprice</groupId>
 				<artifactId>phonegap-build-maven-plugin</artifactId>
@@ -104,42 +81,44 @@ encoding/<project>=UTF-8]]>
 					</execution>
 				</executions>
 			</plugin>
-			-->
-            <plugin>
-                <groupId>com.jayway.maven.plugins.android.generation2</groupId>
-                <artifactId>android-maven-plugin</artifactId>
-                <version>3.1.1</version>
-                <configuration>
-                    <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
-                    <assetsDirectory>${project.basedir}/assets</assetsDirectory>
-                    <resourceDirectory>${project.basedir}/res</resourceDirectory>
-                    <nativeLibrariesDirectory>${project.basedir}/src/main/native</nativeLibrariesDirectory>
-                    <sdk>
-                        <platform>10</platform>
-                    </sdk>
-                                        <undeployBeforeDeploy>true</undeployBeforeDeploy>
-                </configuration>
-                <extensions>true</extensions>
-            </plugin>
 
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
+			<plugin>
+				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+				<artifactId>android-maven-plugin</artifactId>
+				<version>3.6.1</version>
+				<configuration>
+					<androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
+					<assetsDirectory>${project.basedir}/assets</assetsDirectory>
+					<resourceDirectory>${project.basedir}/res</resourceDirectory>
+					<nativeLibrariesDirectory>${project.basedir}/src/main/native</nativeLibrariesDirectory>
+					<sdk>
+						<path>${sdk.path}</path>
+						<platform>${android-platform}</platform>
+					</sdk>
+					<undeployBeforeDeploy>true</undeployBeforeDeploy>
+				</configuration>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<encoding>${encoding}</encoding>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.google.android</groupId>
-            <artifactId>android</artifactId>
-            <version>${platform.version}</version>
-            <scope>provided</scope>
-        </dependency>
+	<dependencies>
+		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>android</artifactId>
+			<version>${android.platform.version}</version>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>maven_not_found</groupId>
 			<artifactId>cordova</artifactId>
@@ -152,6 +131,6 @@ encoding/<project>=UTF-8]]>
 			<artifactId>support-v4</artifactId>
 			<version>r7</version>
 		</dependency>
-    </dependencies>
+	</dependencies>
 
 </project>
