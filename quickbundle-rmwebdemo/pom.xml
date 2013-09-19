@@ -18,14 +18,14 @@
 		<spring.version>3.2.4.RELEASE</spring.version>
 		<mybatis.version>3.2.2</mybatis.version>
 		<mybatis-spring.version>1.2.0</mybatis-spring.version>
-		<hibernate.version>4.1.11.Final</hibernate.version>
+		<hibernate.version>4.1.12.Final</hibernate.version>
 		<hibernate-validator.version>4.3.1.Final</hibernate-validator.version>
 		<jackson.version>2.2.3</jackson.version>
 		<mail.version>1.4.7</mail.version>
 		<jstl.version>1.2</jstl.version>
 		<jxl.version>2.6.12</jxl.version>
 		<json-lib.version>2.4</json-lib.version>
-		<jfreechart.version>1.0.14</jfreechart.version>
+		<jfreechart.version>1.0.15</jfreechart.version>
 		<cxf.version>2.5.11</cxf.version>
 		<itext.version>2.1.7</itext.version>
 		<dom4j.version>1.6.1</dom4j.version>

@@ -8,9 +8,6 @@
 		<fileset dir="${war.dir}/WEB-INF/lib">
 			<include name="*.jar" />
 		</fileset>
-		<fileset dir="doc/lib">
-			<include name="*.jar" />
-		</fileset>
 	</path>
 
 	<target name="usage">
@@ -39,6 +36,8 @@
 			</fileset>
 			<fileset dir="src/test/java">
 				<exclude name="**/*.java" />
+			</fileset>
+			<fileset dir="src/test/resources">
 			</fileset>
 		</copy>
 	</target>
