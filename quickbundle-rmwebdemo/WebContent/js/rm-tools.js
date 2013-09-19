@@ -674,7 +674,8 @@ function ignoreWriteBackValue(inputObj) {
 	if(inputObj.parentElement == null || inputObj.parentElement.parentElement == null) {
 		return false;
 	}
-	if(jQuery(inputObj.parentElement.parentElement).attr("class").indexOf("rowPrototype") > -1) {
+	if(jQuery(inputObj.parentElement.parentElement).attr("class") != null 
+			&& jQuery(inputObj.parentElement.parentElement).attr("class").indexOf("rowPrototype") > -1) {
 		return true;
 	}
 	return false;
@@ -1689,18 +1690,21 @@ function FormatNumber(intInput) {
 var currentNamespace = "";
 jQuery(function(){
 	//Tabs
-	jQuery('#rowTabs').tabs({
-		create : function(e, ui) {
-			if(ui.panel.selector.length > "#rowTabs-".length) {
-				currentNamespace = ui.panel.selector.substring("#rowTabs-".length);
+	jQuery('#rowTabs').each(function() {
+		jQuery(this).tabs({
+			create : function(e, ui) {
+				if(ui.panel.selector.length > "#rowTabs-".length) {
+					currentNamespace = ui.panel.selector.substring("#rowTabs-".length);
+				}
+			},
+			activate : function(e, ui) {
+				if(ui.newPanel.selector.length > "#rowTabs-".length) {
+					currentNamespace = ui.newPanel.selector.substring("#rowTabs-".length);
+				}
 			}
-		},
-		activate : function(e, ui) {
-			if(ui.newPanel.selector.length > "#rowTabs-".length) {
-				currentNamespace = ui.newPanel.selector.substring("#rowTabs-".length);
-			}
-		}
+		});
 	});
+
 	//hover states on the static widgets
 	jQuery('#dialog_link, ul#icons li').hover(
 		function() { jQuery(this).addClass('ui-state-hover'); }, 
