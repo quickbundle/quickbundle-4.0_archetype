@@ -331,22 +331,22 @@ jQuery(function(){ //二级菜单
 
 jQuery(function(){ //所有按钮
 	jQuery(".button_ellipse").each(function(){
-		jQuery(this).attr("className", "btn3_mouseout");
+		jQuery(this).attr("class", "btn3_mouseout");
 		jQuery(this).mouseover(function(){
-			jQuery(this).attr("className", "btn3_mouseover");
+			jQuery(this).attr("class", "btn3_mouseover");
 		});
 		jQuery(this).mouseout(function(){
-			jQuery(this).attr("className", "btn3_mouseout");
+			jQuery(this).attr("class", "btn3_mouseout");
 		});
 		jQuery(this).mousedown(function(){
-			jQuery(this).attr("className", "btn3_mousedown");
+			jQuery(this).attr("class", "btn3_mousedown");
 		});
 		jQuery(this).mouseup(function(){
-			jQuery(this).attr("className", "btn3_mouseup");
+			jQuery(this).attr("class", "btn3_mouseup");
 		});
 		jQuery(this).click(function(event){
 			var onclickto = jQuery(this).attr("onclickto");
-			if(jQuery(this).next().attr("className") != "div_buttons") { //只要不是div_buttons之前的按钮，一律隐藏二级菜单
+			if(jQuery(this).next().attr("class") != "div_buttons") { //只要不是div_buttons之前的按钮，一律隐藏二级菜单
 				jQuery(".div_buttons").css("display", "none");
 			}
 			if( onclickto != null && (typeof onclickto.length != "undefined") && onclickto.length >= 0 ){
@@ -430,7 +430,7 @@ function initStyleBehavior() {
 			if(oldWidth.indexOf("px") > 0) {
 				oldWidth = (Number(oldWidth.substring(0, oldWidth.indexOf("px"))) + 18) + oldWidth.substring(oldWidth.indexOf("px"));
 			}
-			jQuery(this).attr("className", "Wdate");
+			jQuery(this).attr("class", "Wdate");
 			jQuery(this).css("width", oldWidth);
 			this.onclick = function() {
 				WdatePicker();

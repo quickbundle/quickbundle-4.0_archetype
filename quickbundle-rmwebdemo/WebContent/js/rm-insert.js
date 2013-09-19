@@ -1,4 +1,5 @@
-﻿var idxInput = new Array();  //需要监听的input数组列表
+﻿/*
+var idxInput = new Array();  //需要监听的input数组列表
 function initMyKeyDown() {  //初始化键盘监听
 	try {
 		var enabledInput = new Array('text','button','select-one','textarea');  //定义需要监听的input类型
@@ -59,6 +60,7 @@ if(window.addEventListener) {
 } else {
 	window.attachEvent("onload", initMyKeyDown);
 }
+*/
 
 jQuery(function(){
 	jQuery("body").append("<div id='div_out_qq' class='out_qq' style='position:absolute;'></div>");

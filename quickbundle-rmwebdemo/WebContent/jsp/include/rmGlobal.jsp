@@ -1,6 +1,6 @@
 <%@ page errorPage="/jsp/common/err.jsp" %><%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c"%><%@ taglib uri="/WEB-INF/tld/struts-bean.tld" prefix="bean" %><%@ taglib uri="/WEB-INF/tld/struts-layout.tld" prefix="layout" %><%@page import="org.quickbundle.config.RmConfig"%><%@page import="org.quickbundle.tools.support.log.RmLogHelper"%><%@page import="org.quickbundle.tools.helper.RmStringHelper"%><%@page import="org.quickbundle.tools.helper.RmJspHelper"%><%@page import="org.quickbundle.project.IGlobalConstants"%>
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery/jquery.form.js"></script>
 <script type="text/javascript"> 
 var dir_base = "<%=request.getContextPath()%>";
@@ -39,6 +39,6 @@ if(window.addEventListener) {
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/json2.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/datepicker/WdatePicker.js"></script>
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
-<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/js/jquery/css/smoothness/jquery-ui-1.8.15.custom.css"/>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery/jquery-ui-1.8.15.custom.min.js"></script>
+<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/js/jquery/css/smoothness/jquery-ui-1.10.3.custom.min.css"/>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery/jquery-ui-1.10.3.custom.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/rm-project.js"></script>

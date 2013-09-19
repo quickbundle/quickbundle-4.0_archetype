@@ -20,24 +20,47 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><bean:message key="qb.web_title"/></title>
 <script type="text/javascript">
-	var rmActionName = "RmMessageAction";
+	var options = {
+		target: '#msgdlg',
+		success: showResponse,
+		error: showError,
+		contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+		dataType:  'json',
+		redirectUrl: '<%=request.getContextPath()%>/message'
+    };
+	function showResponse(responseText, statusText, xhr, $form) {
+	  	showMessage(responseText.message, options);
+	}
+	function showError(xhr, ajaxOptions, thrownError) {
+	  	var result = JSON.parse(xhr.responseText);
+	  	showErrorMessage(result.error);
+		hideWait();
+		enableAllButton();
+	}
+	
+	function insertNext_onClick(){  //插入单条数据，成功后继续新增
+		options.url="<%=request.getContextPath()%>/message/insert";
+		options.redirectUrl = "<%=request.getContextPath()%>/message/insert";
+		$("#form1").ajaxSubmit(options);
+	}
 	function insert_onClick(){  //插入单条数据
-    	form.action="<%=request.getContextPath()%>/message/insert";
-	    form.submit();
+		options.url="<%=request.getContextPath()%>/message/insert";
+		$("#form1").ajaxSubmit(options);
 	}
   	function update_onClick(id){  //保存修改后的单条数据
     	if(!getConfirm()) {  //如果用户在确认对话框中点"取消"
   			return false;
 		}
-	    form.action="<%=request.getContextPath()%>/message/update";
-    	form.submit();
+    	options.url="<%=request.getContextPath()%>/message/update";
+    	$("#form1").ajaxSubmit(options);
 	}
 </script>
 </head>
 <body>
-<form name="form" method="post">
+<form name="form1" id="form1" method="post">
 
 <div class="button_area">
+<c:if test="${action=='insert'}">	<input type="button" class="button_ellipse" id="button_save_next" value="保存并新增" onclickto="javascript:${action}Next_onClick()"/></c:if>
 	<input type="button" class="button_ellipse" id="button_save" value="保存" onclickto="javascript:${action}_onClick()"/>
 	<input type="button" class="button_ellipse" id="button_cancel" value="取消" onclick="javascript:history.go(-1)"/>
 	<input type="reset" class="button_ellipse" id="button_reset" value="重置"/>

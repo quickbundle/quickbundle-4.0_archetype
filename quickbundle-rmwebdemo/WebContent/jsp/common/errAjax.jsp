@@ -1,6 +1,4 @@
-<%@page contentType="text/html; charset=UTF-8" language="java"%>
-<%@page import="net.sf.json.JSONObject"%>
-<%
+<%@page contentType="text/html; charset=UTF-8" language="java"%><%@page import="net.sf.json.JSONObject"%><%
 try {
 	String str = "";
 	if (request.getAttribute("org.apache.struts.action.EXCEPTION") != null) {

@@ -15,49 +15,42 @@
 	</context:component-scan>
 
 
-    <!-- 定义数据绑定 -->
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-        <property name="webBindingInitializer">
-            <bean class="org.quickbundle.third.spring.web.bind.RmDataBinding" />
-        </property>
-    </bean>
-
-	<mvc:annotation-driven>
-		<mvc:message-converters register-defaults="false">
-			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-				<property name="objectMapper" ref="jacksonObjectMapper" />
-				<property name="supportedMediaTypes">
-					<list>
-						<bean class="org.springframework.http.MediaType">
-							<constructor-arg index="0" value="application" />
-							<constructor-arg index="1" value="json" />
-							<constructor-arg index="2" value="UTF-8" />
-						</bean>
-					</list>
-				</property>
-			</bean>
-			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
-				<property name="supportedMediaTypes">
-					<list>
-						<bean class="org.springframework.http.MediaType">
-							<constructor-arg index="0" value="text" />
-							<constructor-arg index="1" value="plain" />
-							<constructor-arg index="2" value="UTF-8" />
-						</bean>
-						<bean class="org.springframework.http.MediaType">
-							<constructor-arg index="0" value="text" />
-							<constructor-arg index="1" value="html" />
-							<constructor-arg index="2" value="UTF-8" />
-						</bean>
-					</list>
-				</property>
-			</bean>
-		</mvc:message-converters>
-	</mvc:annotation-driven>
+	<!-- 定义数据绑定 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="webBindingInitializer">
+			<bean class="org.quickbundle.third.spring.web.bind.RmDataBinding" />
+		</property>
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+					<property name="objectMapper" ref="jacksonObjectMapper" />
+					<property name="supportedMediaTypes">
+						<list>
+							<value>application/json;charset=UTF-8</value>
+						</list>
+					</property>
+				</bean>
+				<bean
+					class="org.springframework.http.converter.StringHttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<value>text/plain;charset=UTF-8</value>
+							<value>text/html;charset=UTF-8</value>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
 	<bean id="jacksonObjectMapper"
 		class="org.quickbundle.third.spring.http.converter.json.RmObjectMapperSpringWeb">
 		<property name="writeNumbersAsStrings" value="true" />
 	</bean>
+
+	<mvc:annotation-driven />
+
 
 	<!-- 将无法mapping到Controller的path交给default servlet handler处理 -->
 	<mvc:default-servlet-handler />
@@ -67,6 +60,20 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- 总错误处理 -->
+	<bean id="exceptionResolver"
+		class="org.quickbundle.third.spring.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="defaultErrorView">
+			<value>/common/err</value>
+		</property>
+		<property name="defaultStatusCode">
+			<value>500</value>
+		</property>
+		<property name="warnLogCategory">
+			<value>org.quickbundle.third.spring.web.servlet.handler.SimpleMappingExceptionResolver</value>
+		</property>
 	</bean>
 
 	<!-- 定义无Controller的path<->view直接映射 <mvc:view-controller path="/" view-name="redirect:/home"/> -->

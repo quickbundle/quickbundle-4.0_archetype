@@ -712,86 +712,6 @@ function writeBackValue(inputName) {
 		}
 	});
 	return;
-	/*
-	var form = document.forms[0];
-	var obj = form.elements[inputName];
-	if(obj == undefined) {
-		return false;
-	}
-			
-	if(obj.value != undefined && (obj.type == null || obj.type.toLowerCase() != "checkbox")) {  //如果有value属性，直接赋值
-		obj.setAttribute("value", mForm[inputName]);			
-	} 
-	if(obj.length != undefined ) {  //没有value属性
-		var thisValue = mForm[inputName];
-		if(mForm[inputName][0] == undefined) {
-			thisValue = new Array();
-			thisValue[thisValue.length] = mForm[inputName];							
-		}
-		if(obj.length != null) {  //length不为空
-			var tempLength = obj.length;
-			for(var j=0; j<tempLength; j++) {
-				var thisObj = obj[j];
-				for(var k=0; k<thisValue.length; k++) {
-					if(thisObj.value == thisValue[k]) {  //如有选中，继续循环
-						if( thisObj.checked != undefined) {
-							thisObj.checked = true;	
-							break;									
-						} else if( thisObj.selected != undefined) {
-							thisObj.selected = true;								
-							break;
-						}
-					} else { //如没有选中，察看下一个
-						if( thisObj.checked != undefined) {
-							thisObj.checked = false;	
-						} else if( thisObj.selected != undefined) {
-							thisObj.selected = false;								
-						}	
-					}
-				}
-			}
-		} 	
-					
-	} else if (obj.type.toLowerCase() == "checkbox") {
-		var thisValue = mForm[inputName];
-		var thisObj = obj;
-		if((typeof thisValue) == "string") {
-			if(thisObj.value == thisValue) {  //如有选中，继续循环
-				if( thisObj.checked != undefined) {
-					thisObj.checked = true;	
-					//break;									
-				} else if( thisObj.selected != undefined) {
-					thisObj.selected = true;								
-					//break;
-				}
-			} else {                             //如没有选中，察看下一个
-				if( thisObj.checked != undefined) {
-					thisObj.checked = false;	
-				} else if( thisObj.selected != undefined) {
-					thisObj.selected = false;								
-				}	
-			}
-		} else {
-			for(var k=0; k<thisValue.length; k++) {
-				if(thisObj.value == thisValue[k]) {  //如有选中，继续循环
-					if( thisObj.checked != undefined) {
-						thisObj.checked = true;	
-						break;									
-					} else if( thisObj.selected != undefined) {
-						thisObj.selected = true;								
-						break;
-					}
-				} else {                             //如没有选中，察看下一个
-					if( thisObj.checked != undefined) {
-						thisObj.checked = false;	
-					} else if( thisObj.selected != undefined) {
-						thisObj.selected = false;								
-					}	
-				}
-			}
-		}
-	}
-	*/
 }
 	  
 function getFormValue(inputObjString) {  //获取表单value
@@ -924,34 +844,8 @@ function pushCondition(myArray, pageRealValue, operate1, operate2, thisField,sto
 		if(stopTime=="1"){
 		    temp = temp+" 23:59:59";
 		}
-		/*
-		if(temp.indexOf("_")!=-1 && temp.indexOf("B.SITE_NODE_ID=") ==-1){
-			temp=temp.replace(new RegExp("_","gm"),"\\\_");
-		}
-		*/
-		
         var tempVal = "";
-		/**
-		if(temp.indexOf("%")!=-1){
-            var tempArr = temp.split("%");
-            for(var i=0; i<tempArr.length; i++){
-				if(i!=tempArr.length-1){
-				    tempVal += tempArr[i]+"\\%";
-				}else{
-				    tempVal += tempArr[i];
-				}
-			}
-			if(tempVal.indexOf("%")!=-1){
-				tempVal=tempVal.replace(new RegExp("%","gm"),"\\\%");
-			}
-			myArray.push(" " + thisField + " " + operate1 + tempVal + operate2);
-			
-		    
-		}else{
-		 */
-		    myArray.push(" " + thisField + " " + operate1 + temp + operate2);
-		//}
-		
+		myArray.push(" " + thisField + " " + operate1 + temp + operate2);
 	} else if(relationType == "multiple") {
 		var targetValue = getFormValue(pageRealValue);
 		if(targetValue.indexOf(",") < 0) {
@@ -969,10 +863,7 @@ function pushCondition(myArray, pageRealValue, operate1, operate2, thisField,sto
 			myArray.push(strwhere);
 		}
 	}
-	
-
 }
-
 
 function writeValidateInfo(info, thisObj) {
 	var inputName = getInputNameFromObject(thisObj);
@@ -1000,7 +891,6 @@ function setRmInputError(_frm) {
 			//_frm.style.backgroundColor = "highlight";
 			//_frm.style.color = "white";
 		} 
-
 	} catch(e) {
 		alert(e.message);
 	}
@@ -1078,7 +968,6 @@ function DefIt(objname) {
 	}
 }
 function SelIt(objname,strurl) {
-
 	var btn1;
 	var btn2;
 	var maxTabs = 0;
@@ -1183,7 +1072,6 @@ function writeChildTableTabs(frameHeight, iSelect){
 			currentRowWidthSum += (leftWidth + 6);
 		}
 	}
-	
 	tabstr += "</table>";
 	tabstr += "</td>";
 	tabstr += "</tr>";
@@ -1242,10 +1130,8 @@ function getLayoutHiddenObjectById(id) {
 }
 
 /**
-* @author 冉闵
 * 启用或禁用按钮
 */
-
 function SetButtonEnabledState(sButtonID, bEnabledState){
 	var e = new Error();
 	try {
@@ -1255,7 +1141,6 @@ function SetButtonEnabledState(sButtonID, bEnabledState){
 	}catch (e) {
 		return;
 	}
-	
 	try {
 		var oBtnImage = eval("document.all." + sButtonID + "_Image");
 		oBtnImage.filters.Gray.enabled   = !bEnabledState;
@@ -1626,7 +1511,44 @@ function initProgress() {
 	if(document.getElementById("progress") == null) {
 		jQuery("body").append("<div id='progress' style='z-index:1000;position:absolute;display:none;border:1px black solid;padding:3px 3px 3px 3px;background-color:#FFFFFF;font-family: sans-serif;font-size: 90%'><img src='"+dir_base+"/images/waiting.gif' align='texttop'>请稍候...</div>");
 	}
+	if(document.getElementById("msgdlg") == null) {
+		jQuery("body").append("<div id='msgdlg' title='消息'></div>");
+	}
 }
+
+// 显示结果信息的对话框
+function showMessage(msg, options) {
+    $("#msgdlg").html(msg);
+    $("#dialog:ui-dialog").dialog("destroy");
+    $("#msgdlg").dialog({
+		modal: true,
+		width: 400,
+		height: 300,
+		buttons: {
+			确认: function () {
+				$(this).dialog("close");
+				window.location.href = options.redirectUrl;
+			}
+		}
+    });
+}
+
+// 显示结果信息的对话框
+function showErrorMessage(msg, options) {
+	$("#msgdlg").html(msg);
+	$("#dialog:ui-dialog").dialog("destroy");
+	$("#msgdlg").dialog({
+		modal: true,
+		width: 600,
+		height: 400,
+		buttons: {
+			确认: function () {
+				$(this).dialog("close");
+			}
+		}
+	});
+}
+  	
 function showWait(e) {
 	try {
 		initProgress();
@@ -1660,7 +1582,7 @@ function appInstallWaitHide() {
 
 function enableAllButton() {
 	jQuery(":button").each(function(){
-		frm.disabled = false;
+		this.disabled = false;
 	});
 }
 

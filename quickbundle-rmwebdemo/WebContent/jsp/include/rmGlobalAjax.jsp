@@ -22,7 +22,7 @@
     <script type="text/javascript" src="<%=request.getContextPath()%>/third/extjs/examples/ux/RowExpander.js"></script>
     
     <!-- 
-    <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery/jquery-1.9.1.min.js"></script>
     -->
     <script type="text/javascript">
     var dir_base = "<%=request.getContextPath()%>";

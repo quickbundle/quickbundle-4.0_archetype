@@ -1,7 +1,9 @@
 package org.quickbundle.modules.message.web;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -18,11 +20,16 @@ import org.quickbundle.tools.helper.RmSqlHelper;
 import org.quickbundle.tools.helper.RmStringHelper;
 import org.quickbundle.tools.helper.RmVoHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -84,14 +91,17 @@ public class RmMessageController implements IRmMessageConstants {
 	/**
 	 * 从页面表单获取信息注入vo，并插入单条记录
 	 */
-	@RequestMapping(value = "insert", method = RequestMethod.POST)
-	public String insert(HttpServletRequest request, @Valid RmMessageVo vo, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "insert", method = RequestMethod.POST, 
+			consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<?> insert(HttpServletRequest request, @Valid RmMessageVo vo, Errors errors) {
         RmVoHelper.markCreateStamp(request,vo);  //打创建时间,IP戳
         vo.setBody(RmPopulateHelper.populateVos(RmMessageReceiverVo.class, request, TABLE_PK_RM_MESSAGE_RECEIVER, TABLE_NAME_RM_MESSAGE_RECEIVER + RM_NAMESPACE_SPLIT_KEY));
         RmVoHelper.markCreateStamp(request, vo.getBody());
         rmMessageService.insert(vo);  //插入单条记录
-        redirectAttributes.addFlashAttribute("message", "创建成功");
-        return "redirect:/message";
+        Map<String, String> result = new HashMap<String, String>();
+        result.put("message", "新增成功: " + vo.getId());
+		return new ResponseEntity<Map<String, String>>(result, HttpStatus.CREATED);
 	}
 	
 	/**
@@ -108,14 +118,17 @@ public class RmMessageController implements IRmMessageConstants {
 	/**
 	 * 从页面表单获取信息注入vo，并修改单条记录
 	 */
-	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String update(HttpServletRequest request, @Valid RmMessageVo vo, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "update", method = RequestMethod.POST, 
+			consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<?> update(HttpServletRequest request, @Valid RmMessageVo vo, Errors errors) {
 		RmVoHelper.markModifyStamp(request,vo);  //打修改时间,IP戳
 		vo.setBody(RmPopulateHelper.populateVos(RmMessageReceiverVo.class, request, TABLE_PK_RM_MESSAGE_RECEIVER, TABLE_NAME_RM_MESSAGE_RECEIVER + RM_NAMESPACE_SPLIT_KEY));
 		RmVoHelper.markModifyStamp(request, vo.getBody());
-        int count = rmMessageService.update(vo);  //更新单条记录
-        redirectAttributes.addFlashAttribute("message", "更新成功: " + count);
-    	return "redirect:/message";
+        rmMessageService.update(vo);  //更新单条记录
+        Map<String, String> result = new HashMap<String, String>();
+        result.put("message", "修改成功: " + vo.getId());
+		return new ResponseEntity<Map<String, String>>(result, HttpStatus.CREATED);
 	}
 	
 	/**

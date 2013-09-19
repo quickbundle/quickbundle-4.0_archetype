@@ -25,7 +25,7 @@ def print_query_head(request, response):
     out.println('''<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript" src="/''' + war_name + '''/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="/''' + war_name + '''/js/jquery/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="profiler.js"></script>
 <title>LOG Profiler - ''')
     out.println(request.getParameter("cmd"))
