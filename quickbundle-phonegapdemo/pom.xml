@@ -5,7 +5,7 @@
 	<groupId>org.quickbundle</groupId>
 	<artifactId>quickbundle-phonegapdemo</artifactId>
 	<version>4.0.0</version>
-	<packaging>apk</packaging>
+	<packaging>war</packaging>
 
 	<properties>
 		<encoding>UTF-8</encoding>
@@ -13,7 +13,6 @@
 		<basedir>./</basedir>
 		<android-platform>10</android-platform>
 		<android.platform.version>2.3.3</android.platform.version>
-		<sdk.path>D:\dev\android\adt-bundle-windows-x86_64-20130522\sdk</sdk.path>
 	</properties>
 
 	<build>
@@ -38,29 +37,45 @@ encoding/<project>=UTF-8]]>
 					<additionalProjectnatures>
 						<projectnatures>org.eclipse.m2e.core.maven2Nature</projectnatures>
 					</additionalProjectnatures>
-					<projectNameTemplate>[artifactId]-[version]</projectNameTemplate>
+					<projectNameTemplate>[artifactId]</projectNameTemplate>
 					<addGroupIdToProjectName>true</addGroupIdToProjectName>
 				</configuration>
 			</plugin>
 			<plugin>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>2.1</version>
-				<configuration>
-					<attach>true</attach>
-				</configuration>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
 					<execution>
-						<phase>compile</phase>
+						<id>copy-dependencies</id>
+						<phase>initialize</phase>
 						<goals>
-							<goal>jar</goal>
+							<goal>copy-dependencies</goal>
 						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/libs</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+							<excludeScope>provided</excludeScope>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>${basedir}/libs</directory>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>com.github.chrisprice</groupId>
 				<artifactId>phonegap-build-maven-plugin</artifactId>
-				<version>0.0.4</version>
+				<version>0.0.6</version>
 				<executions>
 					<execution>
 						<id>phonegap-build</id>
@@ -71,17 +86,27 @@ encoding/<project>=UTF-8]]>
 						<configuration>
 							<platforms>
 								<platform>android</platform>
-								<platform>ios</platform>
 								<platform>winphone</platform>
-								<platform>webos</platform>
-								<platform>symbian</platform>
-								<platform>blackberry</platform>
+								<!-- <platform>ios</platform> -->
 							</platforms>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
-
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<encoding>${encoding}</encoding>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+					<excludes>
+						<excludes>org/quickbundle/*</excludes>
+					</excludes>
+				</configuration>
+			</plugin>
+			<!-- 
 			<plugin>
 				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 				<artifactId>android-maven-plugin</artifactId>
@@ -99,16 +124,7 @@ encoding/<project>=UTF-8]]>
 				</configuration>
 				<extensions>true</extensions>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
-				<configuration>
-					<encoding>${encoding}</encoding>
-					<source>${jdk.version}</source>
-					<target>${jdk.version}</target>
-				</configuration>
-			</plugin>
+			 -->
 		</plugins>
 	</build>
 
@@ -124,7 +140,7 @@ encoding/<project>=UTF-8]]>
 			<artifactId>cordova</artifactId>
 			<version>2.0.0</version>
 			<scope>system</scope>
-			<systemPath>${basedir}/res/lib/maven_not_found/cordova-2.0.0.jar</systemPath>
+			<systemPath>${basedir}/src/main/res/lib/maven_not_found/cordova-2.0.0.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>com.google.android</groupId>
@@ -132,5 +148,4 @@ encoding/<project>=UTF-8]]>
 			<version>r7</version>
 		</dependency>
 	</dependencies>
-
 </project>
