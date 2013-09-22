@@ -20,6 +20,7 @@ import java.util.List;
 		
 import org.quickbundle.base.cache.RmSqlCountCache;
 import org.quickbundle.base.service.RmService;
+import org.quickbundle.config.RmBaseConfig;
 import org.quickbundle.project.RmProjectHelper;
 import org.quickbundle.project.common.vo.RmCommonVo;
 
@@ -241,7 +242,7 @@ public class RmUserOnlineRecordService extends RmService implements IRmUserOnlin
      * @return
      */
     public RmUserOnlineRecordVo findLastLoginRecord(String user_id) {
-    	List<RmUserOnlineRecordVo> lvo = queryByCondition("USER_ID='" + user_id + "'", "LOGIN_TIME DESC", 1, 1, true);
+    	List<RmUserOnlineRecordVo> lvo = queryByCondition("USER_ID = " + user_id , "LOGIN_TIME DESC", 1, 1, true);
     	if(lvo.size() > 0) {
     		RmUserOnlineRecordVo vo = lvo.get(0);
     		if(vo.getLogout_time() == null) {
