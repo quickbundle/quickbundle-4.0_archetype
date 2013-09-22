@@ -39,8 +39,6 @@ import org.quickbundle.orgauth.rmuseronlinerecord.vo.RmUserOnlineRecordVo;
  */
 
 public class RmUserOnlineRecordService extends RmService implements IRmUserOnlineRecordService, IRmUserOnlineRecordConstants {
-	
-	private static String databaseProductName_DB2 = "DB2";
     
     /**
      * dao 表示: 数据访问层的实例
@@ -244,7 +242,7 @@ public class RmUserOnlineRecordService extends RmService implements IRmUserOnlin
      * @return
      */
     public RmUserOnlineRecordVo findLastLoginRecord(String user_id) {
-    	List<RmUserOnlineRecordVo> lvo = queryByCondition(parseColumn("USER_ID")+ "='" + user_id + "'", "LOGIN_TIME DESC", 1, 1, true);
+    	List<RmUserOnlineRecordVo> lvo = queryByCondition("USER_ID = " + user_id , "LOGIN_TIME DESC", 1, 1, true);
     	if(lvo.size() > 0) {
     		RmUserOnlineRecordVo vo = lvo.get(0);
     		if(vo.getLogout_time() == null) {
@@ -253,17 +251,4 @@ public class RmUserOnlineRecordService extends RmService implements IRmUserOnlin
     	}
     	return null;
     }    
-    
-    private String parseColumn(String idName) {
-    	StringBuilder result = new StringBuilder();
-    	String dpn = RmBaseConfig.getSingleton().getDatabaseProductName();
-    	if(dpn == null 
-    			|| databaseProductName_DB2.equals(dpn)
-    			|| dpn.startsWith(databaseProductName_DB2 + "/")) {
-    		result.append("char(").append(idName).append(")");
-    		return result.toString();
-    	} else {
-    		return idName;
-    	}
-    }
 }
