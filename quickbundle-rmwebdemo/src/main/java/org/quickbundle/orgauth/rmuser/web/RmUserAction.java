@@ -180,9 +180,9 @@ public class RmUserAction extends RmDispatchAction implements IRmUserConstants {
     		String pratyViewId = request.getParameter("view_id");
     		String partyTypeId = request.getParameter("party_type_id");
     		String isInherit = request.getParameter("isInherit");
-    		String[] parentPartyIds = RmStringHelper.strSplits(request.getParameter("organization_id"), ",");
-    		String[] parentPartyNames = RmStringHelper.strSplits(request.getParameter("organization_name"), ",");
-    		String[] oldParentPartyIds = RmStringHelper.strSplits(request.getParameter("oldParentPartyIds"), ",");
+    		String[] parentPartyIds = RmStringHelper.parseToArrayIgnoreEmpty(request.getParameter("organization_id"), ",");
+    		String[] parentPartyNames = RmStringHelper.parseToArrayIgnoreEmpty(request.getParameter("organization_name"), ",");
+    		String[] oldParentPartyIds = RmStringHelper.parseToArrayIgnoreEmpty(request.getParameter("oldParentPartyIds"), ",");
     		String oldName = request.getParameter("oldName");
     		count = RmCustomOrgService.getInstance().updateParty(vo, pratyViewId,oldName, partyTypeId, parentPartyIds,oldParentPartyIds ,isInherit);  //更新单条记录
     		vo.setOrganization_id("");

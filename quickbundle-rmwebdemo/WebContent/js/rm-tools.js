@@ -1751,7 +1751,7 @@ function addRow_onClick(rowTableNamespace){  //插入单条数据
 			}
 		});
 		jQuery(this).dblclick(function(){
-			var currentCbx = jQuery("input:checkbox[name*='rmRowSelecter'][disabled=false]", jQuery(this));
+			var currentCbx = jQuery("input:checkbox[name*='rmRowSelecter']:not(disabled)", jQuery(this));
 			currentCbx.attr("checked", currentCbx.attr("checked")!="checked");
 			resetRowStyle(this);
 		});
@@ -1761,7 +1761,7 @@ function addRow_onClick(rowTableNamespace){  //插入单条数据
 }
 
 function resetRowStyle(tr) {
-	var currentCbx = jQuery("input:checkbox[name*='rmRowSelecter'][disabled=false]", jQuery(tr));
+	var currentCbx = jQuery("input:checkbox[name*='rmRowSelecter']:not(disabled)", jQuery(tr));
 	if(currentCbx.attr("checked")=="checked") {
 		jQuery(tr).css("background-color", rowConfig.selectedColor);
 	} else {
@@ -1804,8 +1804,8 @@ function removeRow_onClick(rowTableNamespace) {
 	if(rowTable.rows.length <= 2){
 		alert("还没有要选中的记录");
 	}
-	var selecter = jQuery("input:checked[name*='rmRowSelecter'][disabled=false]", rowTable);
-	if(selecter.length==0&&rowTable.rows.length>2){
+	var selecter = jQuery("input:checked[name*='rmRowSelecter']:not(disabled)", rowTable);
+	if(selecter.length==0 && rowTable.rows.length>2){
 		  alert("请选择一条记录!");
 		  return false;
 	}
@@ -1838,7 +1838,7 @@ function copyRow_onClick(rowTableNamespace) {
 	if(rowTable.rows.length <= 2){
 		alert("还没有要选中的记录");
 	}
-	var selecter = jQuery("input:checkbox[name*='rmRowSelecter'][disabled=false]", rowTable);
+	var selecter = jQuery("input:checkbox[name*='rmRowSelecter']:not(disabled)", rowTable);
 	var selectedRowCount = 0;
 	selecter.each(function() {
 		if(this.checked) {
@@ -1874,7 +1874,7 @@ function copyRow_onClick(rowTableNamespace) {
 				}
 			});
 			jQuery(rowNew).dblclick(function(){
-				var currentCbx = jQuery("input:checkbox[name*='rmRowSelecter'][disabled=false]", jQuery(this));
+				var currentCbx = jQuery("input:checkbox[name*='rmRowSelecter']:not(disabled)", jQuery(this));
 				currentCbx.attr("checked", currentCbx.attr("checked")!="checked");
 				resetRowStyle(this);
 			});

@@ -213,7 +213,7 @@ public class RmCustomOrgService extends RmService implements IRmCustomOrgService
 				
 				//角色
 				System.out.println("==角色："+vo.getString("c1"));
-				String[] roles = RmStringHelper.strSplits(vo.getString("c1"),"#");
+				String[] roles = RmStringHelper.parseToArrayIgnoreEmpty(vo.getString("c1"),"#");
 				List<RmPartyRoleVo> roleVos = new ArrayList<RmPartyRoleVo>();
 				for(String s:roles){
 					List<RmCommonVo> rrList =RmProjectHelper.getCommonServiceInstance().doQuery("select * from RM_PARTY_ROLE rpr where rpr.role_id="+mRole.get(s).getId()+" and rpr.owner_party_id="+vo.getString("id"));

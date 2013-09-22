@@ -200,7 +200,7 @@ public class RmMessageService implements IRmMessageConstants {
      */
     public RmMessageVo get(Long id) {
 		RmMessageVo vo = rmMessageDao.get(id);
-		List<RmMessageReceiverVo> body = rmMessageReceiverDao.list("message_id=" + String.valueOf(id), null, 1, Integer.MAX_VALUE, true);
+		List<RmMessageReceiverVo> body = rmMessageReceiverDao.list("message_id=" + id, null, 1, Integer.MAX_VALUE, true);
 		vo.setBody(body);
 		return vo;
     }

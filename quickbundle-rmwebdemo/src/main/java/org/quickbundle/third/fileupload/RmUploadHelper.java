@@ -426,7 +426,7 @@ public class RmUploadHelper implements IGlobalConstants {
 //                }
                 returnInfo.add(fileInfo);
             } else {
-                mOtherValue.put(item.getFieldName(), RmStringHelper.iso2Gbk(item.getString()));
+                mOtherValue.put(item.getFieldName(), RmStringHelper.encode2Encode(item.getString(), "iso8859-1", "GBK"));
             }
         }
         return returnInfo.toArray();

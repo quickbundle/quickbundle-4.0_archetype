@@ -921,7 +921,7 @@ jQuery(function(){ //控制checkbox
 		jQuery(this).click(function() {
 			var thisTable = this.parentNode.parentNode.parentNode;
 			var controlChecked = this.checked;
-			jQuery("input:checkbox[name*='rmRowSelecter'][disabled=false]", thisTable).each(function() {
+			jQuery("input:checkbox[name*='rmRowSelecter']:not(disabled)", thisTable).each(function() {
 				if(this.checked != controlChecked) {
 					this.checked = controlChecked;
 				}
