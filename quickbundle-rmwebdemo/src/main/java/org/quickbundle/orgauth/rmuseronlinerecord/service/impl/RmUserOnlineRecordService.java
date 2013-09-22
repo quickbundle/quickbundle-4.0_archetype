@@ -17,13 +17,9 @@ package org.quickbundle.orgauth.rmuseronlinerecord.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-		
+
 import org.quickbundle.base.cache.RmSqlCountCache;
 import org.quickbundle.base.service.RmService;
-import org.quickbundle.config.RmBaseConfig;
-import org.quickbundle.project.RmProjectHelper;
-import org.quickbundle.project.common.vo.RmCommonVo;
-
 import org.quickbundle.orgauth.rmuseronlinerecord.dao.IRmUserOnlineRecordDao;
 import org.quickbundle.orgauth.rmuseronlinerecord.service.IRmUserOnlineRecordService;
 import org.quickbundle.orgauth.rmuseronlinerecord.util.IRmUserOnlineRecordConstants;

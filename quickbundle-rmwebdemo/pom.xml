@@ -39,7 +39,7 @@
 		<quartz.version>2.1.7</quartz.version>
 		<jetty.version>8.1.10.v20130312</jetty.version>
 
-		<!-- database -->
+		<!-- if your database is not mysql, change to real target belowing -->
 		<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
 		<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
 		<jdbc.driver.version>5.1.24</jdbc.driver.version>
