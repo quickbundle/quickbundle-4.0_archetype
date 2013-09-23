@@ -20,7 +20,7 @@
 String[] aTo_delete_affix = request.getParameterValues("to_delete_affix");
 if(aTo_delete_affix != null && aTo_delete_affix.length > 0) {
 	final HttpServlet thisJsp = this;
-	List<RmAffixVo> lResult = RmProjectHelper.getCommonServiceInstance().doQuery("SELECT * FROM RM_AFFIX WHERE ID IN (" + RmStringHelper.parseToSQLString(aTo_delete_affix) + ")", new RowMapper() {
+	List<RmAffixVo> lResult = RmProjectHelper.getCommonServiceInstance().query("SELECT * FROM RM_AFFIX WHERE ID IN (" + RmStringHelper.parseToSQLString(aTo_delete_affix) + ")", new RowMapper() {
 	    public RmAffixVo mapRow(ResultSet rs, int i) throws SQLException {
 		    	RmAffixVo vo = new RmAffixVo();
 		    	RmPopulateHelper.populate(vo, rs);

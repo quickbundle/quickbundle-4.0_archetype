@@ -8,7 +8,7 @@
 	org.dom4j.Document doc = null;
 	String strsql = request.getParameter("strsql");
 	if(strsql != null && strsql.length() >= 0) {
-		java.util.List lResult = RmProjectHelper.getCommonServiceInstance().doQuery(strsql, new org.springframework.jdbc.core.RowMapper() {
+		java.util.List lResult = RmProjectHelper.getCommonServiceInstance().query(strsql, new org.springframework.jdbc.core.RowMapper() {
 	        public Object mapRow(java.sql.ResultSet rs, int i) throws java.sql.SQLException {
 				RmCommonVo vo  = new RmCommonVo();
 				RmPopulateHelper.populate(vo, rs);

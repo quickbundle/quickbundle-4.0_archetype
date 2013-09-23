@@ -73,7 +73,7 @@ public class RmWebApplicationInit implements ILoadOnStartup {
 				codeService.executeInitCodeTypeDataByXml();
 			} else {
 				// 初始化ID
-				RmIdFactory.getIdFactory();
+				RmIdFactory.getIdGenerator();
 				// 初始化编码表数据
 				RmGlobalReference.getSingleton().initDataTotal();
 			}

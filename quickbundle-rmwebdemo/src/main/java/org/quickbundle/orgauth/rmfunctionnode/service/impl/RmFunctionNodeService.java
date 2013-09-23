@@ -344,14 +344,14 @@ public class RmFunctionNodeService extends RmService implements IRmFunctionNodeS
     		//删除当前节点和子节点
     		this.delete(functionNodeId.toArray(new String[0]));
     		//删除授权资源
-        	String[] authorizeResources = (String[])cService.doQuery("select AR.ID from RM_AUTHORIZE_RESOURCE AR where AR.OLD_RESOURCE_ID in ("+RmStringHelper.parseToSQLString(functionNodeCode.toArray(new String[0]))+") and AR.AUTHORIZE_ID="+IOrgauthConstants.Authorize.FUNCTION_NODE.id() , new RowMapper() {
+        	String[] authorizeResources = (String[])cService.query("select AR.ID from RM_AUTHORIZE_RESOURCE AR where AR.OLD_RESOURCE_ID in ("+RmStringHelper.parseToSQLString(functionNodeCode.toArray(new String[0]))+") and AR.AUTHORIZE_ID="+IOrgauthConstants.Authorize.FUNCTION_NODE.id() , new RowMapper() {
     			public Object mapRow(ResultSet rs, int i) throws SQLException {
     				return rs.getString("id");
     			}
     		}).toArray(new String[0]);    		
     		if(authorizeResources !=null && authorizeResources.length > 0 ){
 	    		//删除授权记录
-	        	String[] authorizeResourceRecords = (String[])cService.doQuery("select RAR.ID from RM_AUTHORIZE_RESOURCE_RECORD RAR where RAR.AUTHORIZE_RESOURCE_ID in ("+RmStringHelper.parseToSQLStringApos(authorizeResources)+")" , new RowMapper() {
+	        	String[] authorizeResourceRecords = (String[])cService.query("select RAR.ID from RM_AUTHORIZE_RESOURCE_RECORD RAR where RAR.AUTHORIZE_RESOURCE_ID in ("+RmStringHelper.parseToSQLStringApos(authorizeResources)+")" , new RowMapper() {
 	    			public Object mapRow(ResultSet rs, int i) throws SQLException {
 	    				return rs.getString("id");
 	    			}

@@ -271,7 +271,7 @@ public class RmAuthorizeResourceService extends RmService implements IRmAuthoriz
     	Map<String, IRmAuthorizeResourceVo> mResource = executeInitResource(bs_keyword, new String[]{old_resource_id});
     	String authorize_resource_id = mResource.keySet().toArray(new String[0])[0];
     	IRmCommonService cs = RmProjectHelper.getCommonServiceInstance();
-    	List<String> lExistId = cs.doQuery("SELECT * FROM RM_AUTHORIZE_RESOURCE_RECORD WHERE AUTHORIZE_RESOURCE_ID=" + authorize_resource_id + " AND PARTY_ID IN(" + RmStringHelper.parseToString(party_ids) + ")", new RowMapper() {
+    	List<String> lExistId = cs.query("SELECT * FROM RM_AUTHORIZE_RESOURCE_RECORD WHERE AUTHORIZE_RESOURCE_ID=" + authorize_resource_id + " AND PARTY_ID IN(" + RmStringHelper.parseToString(party_ids) + ")", new RowMapper() {
 			public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 				return rs.getString("PARTY_ID");
 			}
@@ -416,7 +416,7 @@ public class RmAuthorizeResourceService extends RmService implements IRmAuthoriz
 			throw new RmAuthorizeResourceException(bs_keyword + "未设置规则，不能进行默认初始化");
 		}
 		String sql = buildSql(authorize, buildSelectPhase(authorize), buildJoinTableColumnFull(authorize) + " in(" + RmStringHelper.parseToSQLStringApos(old_resource_ids) + ")", false);
-		RmProjectHelper.getCommonServiceInstance().doQuery(sql.toString(), new RowMapper() {
+		RmProjectHelper.getCommonServiceInstance().query(sql.toString(), new RowMapper() {
 			public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 				RmAuthorizeResourceVo vo = new RmAuthorizeResourceVo();
 				vo.setAuthorize_id(authorize.getId());

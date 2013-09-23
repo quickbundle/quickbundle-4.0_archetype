@@ -11,7 +11,7 @@
 <%
 String bs_keyword = request.getParameter("bs_keyword");
 String record_id = request.getParameter("record_id");
-	List<RmAffixVo> lResult = RmProjectHelper.getCommonServiceInstance().doQuery("SELECT * FROM RM_AFFIX WHERE BS_KEYWORD='" + bs_keyword + "' AND RECORD_ID='" + record_id + "' ORDER BY MODIFY_DATE DESC", new RowMapper() {
+	List<RmAffixVo> lResult = RmProjectHelper.getCommonServiceInstance().query("SELECT * FROM RM_AFFIX WHERE BS_KEYWORD='" + bs_keyword + "' AND RECORD_ID='" + record_id + "' ORDER BY MODIFY_DATE DESC", new RowMapper() {
 	    public RmAffixVo mapRow(ResultSet rs, int i) throws SQLException {
 	    	RmAffixVo vo = new RmAffixVo();
 	    	RmPopulateHelper.populate(vo, rs);

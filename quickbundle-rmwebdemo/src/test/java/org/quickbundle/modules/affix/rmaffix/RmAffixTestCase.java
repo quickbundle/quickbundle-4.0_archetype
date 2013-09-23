@@ -101,7 +101,7 @@ public class RmAffixTestCase extends RmWebTestCase implements IRmAffixConstants 
     public static void main2(String[] args) {
 	    RmWebTestCase.init();
 	    final IRmAffixService service = ((IRmAffixService)RmBeanFactory.getBean(IRmAffixConstants.SERVICE_KEY));
-	    final String[] ids= (String[])RmProjectHelper.getCommonServiceInstance().doQuery("select id from rm_affix", new RowMapper() {
+	    final String[] ids= (String[])RmProjectHelper.getCommonServiceInstance().query("select id from rm_affix", new RowMapper() {
 			public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 				return rs.getString("id");
 			}

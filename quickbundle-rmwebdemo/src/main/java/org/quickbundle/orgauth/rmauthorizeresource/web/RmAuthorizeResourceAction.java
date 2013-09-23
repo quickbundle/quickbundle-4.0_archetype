@@ -321,7 +321,7 @@ public class RmAuthorizeResourceAction extends RmDispatchAction implements IRmAu
     	String bs_keyword = request.getParameter("bs_keyword");
     	RmAuthorizeVo authorize = RmAuthorizeCache.getAuthorizeByBs_keyword(bs_keyword);
     	String old_resource_id = request.getParameter("old_resource_id");
-    	String authorize_resource_id = RmProjectHelper.getCommonServiceInstance().doQueryForObject("select id from rm_authorize_resource  where authorize_id=" + authorize.getId() + " and old_resource_id='" + old_resource_id + "'", new RowMapper() {
+    	String authorize_resource_id = RmProjectHelper.getCommonServiceInstance().queryForObject("select id from rm_authorize_resource  where authorize_id=" + authorize.getId() + " and old_resource_id='" + old_resource_id + "'", new RowMapper() {
 			public Object mapRow(ResultSet resultset, int i) throws SQLException {
 				return resultset.getString("id");
 			}

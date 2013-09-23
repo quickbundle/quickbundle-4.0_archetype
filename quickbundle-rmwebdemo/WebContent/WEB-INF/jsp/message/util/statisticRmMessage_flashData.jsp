@@ -1,6 +1,6 @@
 <%@ page contentType="application/json; charset=UTF-8" language="java" %><%
 	final RmKeyCountList<String> kc = new RmKeyCountList<String>(); 
-	RmProjectHelper.getCommonServiceInstance().doQuery("select template_id as rm_key, count(*) as rm_count from RM_MESSAGE group by template_id", new RowMapper() {
+	RmProjectHelper.getCommonServiceInstance().query("select template_id as rm_key, count(*) as rm_count from RM_MESSAGE group by template_id", new RowMapper() {
 	    public Object mapRow(ResultSet rs, int i) throws SQLException {
 	    	String key = rs.getString("rm_key");
 	    	kc.put(key == null ? "" : key, rs.getLong("rm_count"));

@@ -79,7 +79,7 @@ public class RmOrgService extends RmService implements IRmOrgService , IOrgauthC
 			} else {
 				sql_parentParty.append(" and PR.PARENT_PARTY_ID=" + parent_party_id);
 			}
-			List<String> lParentPartyCode = RmProjectHelper.getCommonServiceInstance().doQuery(sql_parentParty.toString(), new RowMapper() {
+			List<String> lParentPartyCode = RmProjectHelper.getCommonServiceInstance().query(sql_parentParty.toString(), new RowMapper() {
 			    public Object mapRow(ResultSet rs, int i) throws SQLException {
 			    	return rs.getString("CHILD_PARTY_CODE");
 			    }

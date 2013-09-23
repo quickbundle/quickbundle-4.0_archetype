@@ -9,7 +9,7 @@
 <%@page import="org.quickbundle.project.RmProjectHelper"%>
 <%
 	WebChart chart = new WebChart();
-	List lResult = RmProjectHelper.getCommonServiceInstance().doQuery("select type_keyword value, count(type_keyword) sum from RM_CODE_TYPE group by value", new RowMapper() {
+	List lResult = RmProjectHelper.getCommonServiceInstance().query("select type_keyword value, count(type_keyword) sum from RM_CODE_TYPE group by value", new RowMapper() {
 	    public Object mapRow(ResultSet rs, int i) throws SQLException {
 	    	return new String[]{rs.getString("value"), rs.getString("sum")};
 	    }

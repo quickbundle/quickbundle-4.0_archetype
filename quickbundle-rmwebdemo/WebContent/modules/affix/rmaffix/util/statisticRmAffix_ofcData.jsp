@@ -8,7 +8,7 @@
 <%@page import="org.quickbundle.modules.affix.rmaffix.util.IRmAffixConstants"%>
 <%
 	final RmKeyCountList<String> kc = new RmKeyCountList<String>(); 
-	RmProjectHelper.getCommonServiceInstance().doQuery("select mime_type as rm_key, count(mime_type) as rm_count from RM_AFFIX group by mime_type", new RowMapper() {
+	RmProjectHelper.getCommonServiceInstance().query("select mime_type as rm_key, count(mime_type) as rm_count from RM_AFFIX group by mime_type", new RowMapper() {
 	    public Object mapRow(ResultSet rs, int i) throws SQLException {
 	    	kc.put(rs.getString("rm_key"), rs.getLong("rm_count"));
 	    	return null;

@@ -268,7 +268,7 @@ public class RmPartyService extends RmService implements IRmPartyService, IRmPar
     	String[] authorize_resource_ids = mResource.keySet().toArray(new String[0]);
     	
     	IRmCommonService cs = RmProjectHelper.getCommonServiceInstance();
-    	List<String> lExistId = cs.doQuery("SELECT * FROM RM_AUTHORIZE_RESOURCE_RECORD WHERE PARTY_ID=" + party_id + " AND AUTHORIZE_RESOURCE_ID IN(" + RmStringHelper.parseToSQLStringApos(authorize_resource_ids) + ")", new RowMapper() {
+    	List<String> lExistId = cs.query("SELECT * FROM RM_AUTHORIZE_RESOURCE_RECORD WHERE PARTY_ID=" + party_id + " AND AUTHORIZE_RESOURCE_ID IN(" + RmStringHelper.parseToSQLStringApos(authorize_resource_ids) + ")", new RowMapper() {
 			public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 				return rs.getString("AUTHORIZE_RESOURCE_ID");
 			}

@@ -15,7 +15,7 @@
 <%@page import="org.quickbundle.modules.message.IRmMessageConstants"%>
 <%
 	WebChart chart = new WebChart();
-	List<String[]> lResult = RmProjectHelper.getCommonServiceInstance().doQuery("select template_id as rm_key, count(template_id) as rm_count from RM_MESSAGE group by template_id", new RowMapper() {
+	List<String[]> lResult = RmProjectHelper.getCommonServiceInstance().query("select template_id as rm_key, count(template_id) as rm_count from RM_MESSAGE group by template_id", new RowMapper() {
 	    public Object mapRow(ResultSet rs, int i) throws SQLException {
 	    	return new String[]{rs.getString("rm_key"), rs.getString("rm_count")};
 	    }

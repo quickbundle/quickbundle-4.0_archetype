@@ -288,7 +288,7 @@ public class RmMessageService implements IRmMessageConstants {
     		return new Long[0];
     	}
     	IRmCommonService cs = RmProjectHelper.getCommonServiceInstance();
-    	List<String> lExistId = cs.doQuery("select * from RM_M_MESSAGE_USER where MESSAGE_ID=" + message_id + " and USER_ID in(" + RmStringHelper.parseToString(user_ids) + ")", new RowMapper() {
+    	List<String> lExistId = cs.query("select * from RM_M_MESSAGE_USER where MESSAGE_ID=" + message_id + " and USER_ID in(" + RmStringHelper.parseToString(user_ids) + ")", new RowMapper() {
 			public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 				return rs.getString("USER_ID");
 			}

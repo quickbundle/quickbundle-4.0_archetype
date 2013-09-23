@@ -1752,7 +1752,7 @@ function addRow_onClick(rowTableNamespace){  //插入单条数据
 		});
 		jQuery(this).dblclick(function(){
 			var currentCbx = jQuery("input:checkbox[name*='rmRowSelecter']:not(disabled)", jQuery(this));
-			currentCbx.attr("checked", currentCbx.attr("checked")!="checked");
+			currentCbx.prop("checked", !currentCbx.prop("checked"));
 			resetRowStyle(this);
 		});
 	});
@@ -1762,7 +1762,7 @@ function addRow_onClick(rowTableNamespace){  //插入单条数据
 
 function resetRowStyle(tr) {
 	var currentCbx = jQuery("input:checkbox[name*='rmRowSelecter']:not(disabled)", jQuery(tr));
-	if(currentCbx.attr("checked")=="checked") {
+	if(currentCbx.prop("checked")) {
 		jQuery(tr).css("background-color", rowConfig.selectedColor);
 	} else {
 		jQuery(tr).css("background-color", jQuery(tr).attr("defaultColor"));
@@ -1941,7 +1941,7 @@ function copyRow_onClick(rowTableNamespace) {
 			});
 			jQuery(rowNew).dblclick(function(){
 				var currentCbx = jQuery("input:checkbox[name*='rmRowSelecter']:not(disabled)", jQuery(this));
-				currentCbx.attr("checked", currentCbx.attr("checked")!="checked");
+				currentCbx.prop("checked", !currentCbx.prop("checked"));
 				resetRowStyle(this);
 			});
 		}

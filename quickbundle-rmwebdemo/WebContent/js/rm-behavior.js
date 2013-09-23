@@ -374,15 +374,15 @@ jQuery(function(){ //复选框
 		var cbx = jQuery(this);
 		jQuery("input[name=" + jQuery(this).attr("hiddenInputId") + "]").each(function(){
 			if(jQuery(this).val() == '1') {
-				cbx.attr("checked", true);
+				cbx.prop("checked", true);
 			} else {
-				cbx.attr("checked", false);
+				cbx.prop("checked", false);
 				jQuery(this).val('0');
 			}
 		});
 		jQuery(this).click(function(event){
 			jQuery("input[name=" + jQuery(this).attr("hiddenInputId") + "]").each(function(){
-				jQuery(this).val(cbx.attr("checked") ? '1' : '0');
+				jQuery(this).val(cbx.prop("checked") ? '1' : '0');
 			});
 		});
 	});

@@ -207,7 +207,7 @@ public class RmLoginService extends RmService implements IRmLoginService {
 			
 			//取关联角色的团体ID
 			String sqlRole = "select ROLE_ID from RM_PARTY_ROLE where OWNER_PARTY_ID in(" + RmStringHelper.parseToSQLString(sParty_id.toArray(new String[0])) + ") and (OWNER_ORG_ID in(" + RmStringHelper.parseToSQLStringApos(sAncestor_party_id.toArray(new String[0])) + ") or OWNER_ORG_ID is null or OWNER_ORG_ID='')";
-			List<String> lRole_id = RmProjectHelper.getCommonServiceInstance().doQuery(sqlRole, new RowMapper() {
+			List<String> lRole_id = RmProjectHelper.getCommonServiceInstance().query(sqlRole, new RowMapper() {
 				public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 					return rs.getString("ROLE_ID");
 				}
@@ -228,7 +228,7 @@ public class RmLoginService extends RmService implements IRmLoginService {
 				RmStringHelper.parseToSQLString(sParty_id.toArray(new String[0])) + ") ";
 //				+ "order by " + RmSqlHelper.getFunction(RmSqlHelper.Function.SUBSTR, RmConfig.getDatabaseProductName()) +
 //				"(RM_FUNCTION_NODE.TOTAL_CODE, 1, LENGTH(RM_FUNCTION_NODE.TOTAL_CODE)-3), RM_FUNCTION_NODE.ORDER_CODE";
-		RmProjectHelper.getCommonServiceInstance().doQuery(sqlMenuList, new RowMapper() {
+		RmProjectHelper.getCommonServiceInstance().query(sqlMenuList, new RowMapper() {
 			public Object mapRow(ResultSet rs, int no) throws SQLException {
 				String totalCode = rs.getString("TOTAL_CODE");
 				String orderCode = rs.getString("ORDER_CODE");
