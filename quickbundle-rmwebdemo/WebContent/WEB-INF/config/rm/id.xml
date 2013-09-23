@@ -8,9 +8,6 @@
     <!-- table_name排重的xpath表达式 //table[@table_name=following::table/@table_name]/@table_name -->
     
 	<!--generateFromHere-->
-	
-	<!-- workflow begin -->
-	<!-- workflow end -->
 
 	<!-- orgauth begin -->
 	<table table_code="2028" table_name="RM_PARTY_ROLE" id_name="ID" />
@@ -46,8 +43,7 @@
 	<table table_code="2003" table_name="RM_AFFIX" id_name="ID"/>
 	<table table_code="2002" table_name="RM_CODE_DATA" id_name="ID"/>
 	<table table_code="2001" table_name="RM_CODE_TYPE" id_name="ID"/>
-	
-	
+
 	
 	<table table_code="3001" table_name="RM_MESSAGE" id_name="ID"/>
 	<table table_code="3002" table_name="RM_MESSAGE_RECEIVER" id_name="ID"/>
