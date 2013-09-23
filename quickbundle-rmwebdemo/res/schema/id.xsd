@@ -12,6 +12,7 @@
 						<xs:attribute name="table_name" type="xs:string" />
 						<xs:attribute name="id_name" type="xs:string" />
 						<xs:attribute name="multi_db" type="xs:string" />
+						<xs:attribute name="pk_class" type="xs:string" />
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>

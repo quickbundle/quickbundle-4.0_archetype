@@ -17,7 +17,7 @@
 		
 	<!--startProjectBeans-->
 	
-	<bean id="org.quickbundle.itf.base.IRmIdFactory" class="org.quickbundle.base.beans.factory.RmIdFactory"/>
+	<bean id="org.quickbundle.itf.base.IRmIdGenerator" class="org.quickbundle.base.beans.RmIdGenerator"/>
 	
 	<bean id="org.quickbundle.itf.code.IRmCodeService" class="org.quickbundle.project.init.RmCodeService"/>
 
