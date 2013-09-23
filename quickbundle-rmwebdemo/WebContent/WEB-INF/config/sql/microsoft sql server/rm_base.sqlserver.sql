@@ -268,3 +268,11 @@ alter table RM_CODE_DATA
       references RM_CODE_TYPE (ID)
 go
 
+create table RM_ID_POOL
+(
+   ID                   varchar(50) not null,
+   VERSION              int not null,
+   LAST_ID              bigint,
+   constraint PK_RM_ID_POOL primary key nonclustered (ID)
+)
+go

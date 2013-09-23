@@ -237,3 +237,12 @@ create index IDXU_QQDATA_RESOURCENAMEQQ on RM_QUICK_QUERY_DATA (
 alter table RM_QUICK_QUERY_DATA
    add constraint FK_RM_QUICK_REFERENCE_RM_QUICK foreign key (QUICK_QUERY_ID)
       references RM_QUICK_QUERY (ID);
+
+      
+create table RM_ID_POOL
+(
+   ID                   VARCHAR2(50) not null,
+   VERSION              NUMBER(11) not null,
+   LAST_ID              NUMBER(19),
+   constraint PK_RM_ID_POOL primary key (ID)
+);

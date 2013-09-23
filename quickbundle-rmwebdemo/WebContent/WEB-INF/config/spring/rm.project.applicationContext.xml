@@ -27,9 +27,9 @@
 
 	<!--RmCommon通用方法的bean-->
 	<bean id="IRmCommonService" class="org.quickbundle.project.common.service.impl.RmCommonService">
-		<property name="dao" ref="IRmCommonDao"/>
+		<property name="dao" ref="org.quickbundle.project.common.dao.RmCommonDao"/>
 	</bean>
-	<bean id="IRmCommonDao" class="org.quickbundle.project.common.dao.impl.RmCommonDao">
+	<bean id="org.quickbundle.project.common.dao.RmCommonDao" class="org.quickbundle.project.common.dao.RmCommonDao">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 

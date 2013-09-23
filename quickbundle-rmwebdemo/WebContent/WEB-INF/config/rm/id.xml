@@ -10,8 +10,8 @@
 	<!--generateFromHere-->
 
 	<!-- orgauth begin -->
-	<table table_code="2028" table_name="RM_PARTY_ROLE" id_name="ID" pk_class="char(19)"/>
-	<table table_code="2024" table_name="RM_AUTHORIZE" id_name="ID" pk_class="number(1,)"/>
+	<table table_code="2028" table_name="RM_PARTY_ROLE" id_name="ID" wrapper_class="org.quickbundle.base.beans.CharIdWrapper" wrapper_class_format="char(19)" />
+	<table table_code="2024" table_name="RM_AUTHORIZE" id_name="ID"/>
 	<table table_code="2018" table_name="RM_AUTHORIZE_RESOURCE" id_name="ID"/>
 	<table table_code="2017" table_name="RM_AUTHORIZE_RESOURCE_RECORD" id_name="ID"/>
 	<table table_code="2014" table_name="RM_FUNCTION_NODE" id_name="ID"/>
