@@ -91,7 +91,7 @@ public class RmLockHelper {
 	 * 释放该用户获得的所有业务锁
 	 */
 	public static void releaseLock(String user_id) {
-		if(getLockService().queryByCondition("USER_ID=" + user_id, null).size() > 0) {
+		if(getLockService().queryByCondition("USER_ID='" + user_id + "'", null).size() > 0) {
 			RmProjectHelper.getCommonServiceInstance().doUpdate("delete from RM_LOCK where USER_ID=" + user_id);
 		}
 	}
