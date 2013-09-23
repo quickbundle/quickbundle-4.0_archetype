@@ -1829,6 +1829,68 @@ function getTrIndex(table, tr) {
 	}
 	return -2;
 }
+/*根据浏览器（非IE）来获取innerHTML的value问题 start*/
+var Sys = {};
+var ua = navigator.userAgent.toLowerCase();
+if (window.ActiveXObject)
+Sys.ie = ua.match(/msie ([\d.]+)/)[1]
+else if (document.getBoxObjectFor)
+Sys.firefox = ua.match(/firefox\/([\d.]+)/)[1]
+else if (window.MessageEvent && !document.getBoxObjectFor)
+Sys.chrome = ua.match(/chrome\/([\d.]+)/)[1]
+else if (window.opera)
+Sys.opera = ua.match(/opera.([\d.]+)/)[1]
+else if (window.openDatabase)
+Sys.safari = ua.match(/version\/([\d.]+)/)[1];
+
+function setFFCHROME(obj,obj1){//FF下手动加值
+	//input 暂时实用文本域，有radio,checkbox,另外处理
+	var inputs=obj.getElementsByTagName("input");
+	var html=obj.innerHTML;
+	var allins=html.match(/<input .+?>/g);
+	for(var i=0;i<inputs.length;i++){
+		var tmp=allins[i].replace(/value=""/,'value="'+inputs[i].value+'"');
+		html=html.replace(allins[i],tmp);
+	}
+	//select
+	var selects=obj.getElementsByTagName("select");
+	for(var i=0;i<selects.length;i++){
+	    var tmp=selects[i].value;
+	    html=html.replace('<option value="'+tmp+'">','<option value="'+tmp+'" selected>');
+	}
+	var tareas=obj.getElementsByTagName("textarea");
+	for(var i=0;i<tareas.length;i++){
+		var tmp=tareas[i].value;
+		var tmp1=tareas[i].outerHTML;
+		var tmp2=tmp1.replace("><",">"+tmp+"<");
+		html=html.replace(tmp1,tmp2);
+	}
+	obj1.innerHTML=html;
+}
+
+
+/*火狐下需加这段代码以便支持outerHTML
+if(typeof(HTMLElement)!="undefined" && !window.opera){
+	HTMLElement.prototype.__defineGetter__("outerHTML",function(){
+		var a=this.attributes, str="<"+this.tagName, i=0;
+		for(i=a.length-1;i>=0;i--)
+		if(a[i].specified)
+		str+=" "+a[i].name+'="'+a[i].value+'"';
+		if(!this.canHaveChildren)
+		return (str+" />").toLowerCase();
+		return (str+">"+this.innerHTML+"</"+this.tagName+">").toLowerCase();
+	});
+	HTMLElement.prototype.__defineSetter__("outerHTML",function(s){
+		var d = document.createElement("DIV"); d.innerHTML = s;
+		for(var i=0; i<d.childNodes.length; i++)
+		this.parentNode.insertBefore(d.childNodes[i], this);
+		this.parentNode.removeChild(this);
+	});
+	HTMLElement.prototype.__defineGetter__("canHaveChildren",function(){
+		return !/^(area|base|basefont|col|frame|hr|img|br|input|isindex|link|meta|param)$/.test(this.tagName.toLowerCase());
+	});
+}*/
+/*根据浏览器（非IE）来获取innerHTML的value问题 end*/
 
 function copyRow_onClick(rowTableNamespace) {
 	if(rowTableNamespace == null) {
@@ -1860,7 +1922,11 @@ function copyRow_onClick(rowTableNamespace) {
 			var rowNew = thisTable.insertRow(-1);
 			for(var i=0; i<thisTr.cells.length; i++) {
 				var cellNew = rowNew.insertCell(-1);
-				cellNew.innerHTML = thisTr.cells[i].innerHTML;
+				if(Sys.ie){
+					cellNew.innerHTML = thisTr.cells[i].innerHTML;
+				} else {
+					setFFCHROME(thisTr.cells[i],cellNew);
+				}
 				if(thisTr.cells[i].style.display != null) {
 					cellNew.style.display = thisTr.cells[i].style.display;
 				}
