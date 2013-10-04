@@ -2,7 +2,6 @@
 <%@page import="org.quickbundle.base.beans.factory.RmBeanFactory"%>
 <%@page import="org.quickbundle.orgauth.util.impl.RmOrgService"%>
 <%@page import="org.quickbundle.orgauth.IOrgauthConstants"%>
-<%@page import="net.sf.json.JSONArray"%>
 <%@page import="org.quickbundle.project.common.vo.RmCommonVo"%>
 <%@page import="java.util.List"%>
 <%@page import="org.quickbundle.tools.helper.RmJspHelper"%>

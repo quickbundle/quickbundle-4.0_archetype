@@ -18,7 +18,6 @@
 		<spring.version>3.2.4.RELEASE</spring.version>
 		<mybatis.version>3.2.2</mybatis.version>
 		<mybatis-spring.version>1.2.0</mybatis-spring.version>
-		<hibernate.version>4.1.12.Final</hibernate.version>
 		<hibernate-validator.version>4.3.1.Final</hibernate-validator.version>
 		<jackson.version>2.2.3</jackson.version>
 		<mail.version>1.4.7</mail.version>
@@ -37,6 +36,7 @@
 		<jasperreports.version>4.7.1</jasperreports.version>
 		<quartz.version>2.1.7</quartz.version>
 		<jetty.version>8.1.10.v20130312</jetty.version>
+		<!-- <hibernate.version>4.1.12.Final</hibernate.version> -->
 
 		<!-- if your database is not mysql, change to real target belowing -->
 		<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
@@ -477,11 +477,20 @@ encoding/tools.bat=GBK]]>
 			<artifactId>jaxen</artifactId>
 			<version>1.1.4</version>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
+		 -->
+		<!-- JSR303  BeanValidator 
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator.version}</version>
+		</dependency>
+		-->
 		<dependency>
 			<groupId>com.lowagie</groupId>
 			<artifactId>itext</artifactId>
@@ -591,13 +600,7 @@ encoding/tools.bat=GBK]]>
 			<artifactId>jython</artifactId>
 			<version>${jython.version}</version>
 		</dependency>
-		<!-- JSR303  BeanValidator -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>${hibernate-validator.version}</version>
-		</dependency>
-		
+
         <!-- JSON begin -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>

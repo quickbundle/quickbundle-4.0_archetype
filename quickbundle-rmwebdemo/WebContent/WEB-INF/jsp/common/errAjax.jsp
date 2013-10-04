@@ -6,4 +6,4 @@ try {
 } catch(Exception e) {
 	e.printStackTrace();
 }
-%><%@page import="java.util.Map"%><%@page import="org.quickbundle.project.serializer.RmObjectMapper"%><%@page import="java.util.HashMap"%><%@page contentType="text/html; charset=UTF-8" language="java"%><%@page import="net.sf.json.JSONObject"%><%@ page isErrorPage="true" %>
+%><%@page import="java.util.Map"%><%@page import="org.quickbundle.project.serializer.RmObjectMapper"%><%@page import="java.util.HashMap"%><%@page contentType="text/html; charset=UTF-8" language="java"%><%@ page isErrorPage="true" %>

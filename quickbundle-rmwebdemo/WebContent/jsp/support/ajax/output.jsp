@@ -1,4 +1,4 @@
-<%@ page contentType="text/xml;charset=UTF-8" language="java" %><%@page import="java.util.HashMap"%><%@page import="java.util.Map"%><%@page import="org.quickbundle.project.serializer.RmObjectMapper"%><%@page import="org.quickbundle.base.vo.RmValueObject"%><%@page import="org.dom4j.Document"%><%@page import="org.quickbundle.tools.helper.xml.RmXmlConverter"%><%@page import="net.sf.json.JSONObject"%><%@page import="org.quickbundle.base.web.page.RmPageVo"%><%@page import="org.quickbundle.tools.helper.RmPopulateHelper"%><%@page import="java.sql.Date"%><%@page import="org.quickbundle.tools.helper.RmStringHelper"%><%@page import="net.sf.json.processors.JsonValueProcessor"%><%@page import="net.sf.json.processors.PropertyNameProcessor"%><%@page import="net.sf.json.processors.PropertyNameProcessorMatcher"%><%@page import="java.sql.Timestamp"%><%@page import="net.sf.json.JsonConfig"%><%@page import="net.sf.json.JSONArray"%><%@page import="java.util.List"%><%@page import="org.quickbundle.project.IGlobalConstants"%><%@page import="org.quickbundle.project.serializer.RmJsonConfig"%><%
+<%@ page contentType="text/xml;charset=UTF-8" language="java" %><%@page import="java.util.HashMap"%><%@page import="java.util.Map"%><%@page import="org.quickbundle.project.serializer.RmObjectMapper"%><%@page import="org.quickbundle.base.vo.RmValueObject"%><%@page import="org.dom4j.Document"%><%@page import="org.quickbundle.tools.helper.xml.RmXmlConverter"%><%@page import="org.quickbundle.base.web.page.RmPageVo"%><%@page import="org.quickbundle.tools.helper.RmPopulateHelper"%><%@page import="java.sql.Date"%><%@page import="org.quickbundle.tools.helper.RmStringHelper"%><%@page import="java.sql.Timestamp"%><%@page import="java.util.List"%><%@page import="org.quickbundle.project.IGlobalConstants"%><%@page import="org.quickbundle.project.serializer.RmJsonConfig"%><%
 try {
 	Object obj = request.getAttribute(IGlobalConstants.REQUEST_OUTPUT_OBJECT);
 	if(obj == null) {
@@ -28,13 +28,11 @@ try {
 				result.put(IGlobalConstants.REQUEST_BEANS, obj);
 				out.print(RmObjectMapper.getInstance().writeValueAsString(result));
 			} else if(obj instanceof int[]) {
-				JSONObject jo = new JSONObject();
-				jo.put(IGlobalConstants.EXECUTE_ROW_COUNT, JSONArray.fromObject(obj));
-				out.print(jo);
-			} else if(obj instanceof JSONObject) {
-				out.print(obj);
-			}  else if(obj instanceof RmValueObject) {
-				out.print(JSONObject.fromObject(obj));
+				Map result = new HashMap();
+				result.put(IGlobalConstants.EXECUTE_ROW_COUNT, obj);
+				out.print(RmObjectMapper.getInstance().writeValueAsString(result));
+			} else {
+				out.print(RmObjectMapper.getInstance().writeValueAsString(obj));
 			} 
 		}
 	}
