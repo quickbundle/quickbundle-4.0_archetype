@@ -23,7 +23,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	/**
 	 * @param warHome the warHome to set
 	 */
-	protected void setWarHome(String warHome) {
+	public void setWarHome(String warHome) {
 		singleton.setWarHome(warHome);
 	}
 
@@ -37,7 +37,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	/**
 	 * @param clusterMode the clusterMode to set
 	 */
-	protected void setClusterMode(boolean clusterMode) {
+	public void setClusterMode(boolean clusterMode) {
 		singleton.setClusterMode(clusterMode);
 	}
 
@@ -51,7 +51,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	/**
 	 * @param cloudNodeInfoAuto the cloudNodeInfoAuto to set
 	 */
-	protected void setCloudNodeInfoAuto(boolean cloudNodeInfoAuto) {
+	public void setCloudNodeInfoAuto(boolean cloudNodeInfoAuto) {
 		singleton.setCloudNodeInfoAuto(cloudNodeInfoAuto);
 	}
 
@@ -65,7 +65,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	/**
 	 * @param databaseProductName the databaseProductName to set
 	 */
-	protected void setDatabaseProductName(String databaseProductName) {
+	public void setDatabaseProductName(String databaseProductName) {
 		singleton.setDatabaseProductName(databaseProductName);
 	}
 
@@ -79,7 +79,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	/**
 	 * @param multiDb the multiDb to set
 	 */
-	protected void setMultiDb(boolean multiDb) {
+	public void setMultiDb(boolean multiDb) {
 		singleton.setMultiDb(multiDb);
 	}
 
@@ -93,7 +93,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	/**
 	 * @param systemDebugMode the systemDebugMode to set
 	 */
-	protected void setSystemDebugMode(boolean systemDebugMode) {
+	public void setSystemDebugMode(boolean systemDebugMode) {
 		singleton.setSystemDebugMode(systemDebugMode);
 	}
 
@@ -107,7 +107,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	/**
 	 * @param clusterIdPrefix the clusterIdPrefix to set
 	 */
-	protected void setClusterIdPrefix(String clusterIdPrefix) {
+	public void setClusterIdPrefix(String clusterIdPrefix) {
 		singleton.setClusterIdPrefix(clusterIdPrefix);
 	}
 
@@ -121,7 +121,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	/**
 	 * @param generateIdFromDb the generateIdFromDb to set
 	 */
-	protected void setGenerateIdFromDb(boolean generateIdFromDb) {
+	public void setGenerateIdFromDb(boolean generateIdFromDb) {
 		singleton.setGenerateIdFromDb(generateIdFromDb);
 	}
 
@@ -129,7 +129,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 		return singleton.isInitIdBatch();
 	}
 
-	protected void setInitIdBatch(boolean initIdBatch) {
+	public void setInitIdBatch(boolean initIdBatch) {
 		singleton.setInitIdBatch(initIdBatch);
 	}
 	
@@ -143,7 +143,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	/**
 	 * @param userUniqueLogin the userUniqueLogin to set
 	 */
-	protected void setUserUniqueLogin(boolean userUniqueLogin) {
+	public void setUserUniqueLogin(boolean userUniqueLogin) {
 		singleton.setUserUniqueLogin(userUniqueLogin);
 	}
 
@@ -157,7 +157,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	/**
 	 * @param defaultPageSize the defaultPageSize to set
 	 */
-	protected void setDefaultPageSize(int defaultPageSize) {
+	public void setDefaultPageSize(int defaultPageSize) {
 		singleton.setDefaultPageSize(defaultPageSize);
 	}
 
@@ -171,7 +171,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	/**
 	 * @param defaultBatchSize the defaultBatchSize to set
 	 */
-	protected void setDefaultBatchSize(int defaultBatchSize) {
+	public void setDefaultBatchSize(int defaultBatchSize) {
 		singleton.setDefaultBatchSize(defaultBatchSize);
 	}
 
@@ -185,7 +185,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	/**
 	 * @param schedulerStart the schedulerStart to set
 	 */
-	protected void setSchedulerStart(boolean schedulerStart) {
+	public void setSchedulerStart(boolean schedulerStart) {
 		singleton.setSchedulerStart(schedulerStart);
 	}
 
@@ -199,7 +199,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	/**
 	 * @param appDescription the appDescription to set
 	 */
-	protected void setAppDescription(String appDescription) {
+	public void setAppDescription(String appDescription) {
 		singleton.setAppDescription(appDescription);
 	}
 
@@ -213,7 +213,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	/**
 	 * @param logRequest the logRequest to set
 	 */
-	protected void setLogRequest(boolean logRequest) {
+	public void setLogRequest(boolean logRequest) {
 		singleton.setLogRequest(logRequest);
 	}
 
@@ -227,7 +227,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	/**
 	 * @param createPythonLibIfNotExist the createPythonLibIfNotExist to set
 	 */
-	protected void setCreatePythonLibIfNotExist(boolean createPythonLibIfNotExist) {
+	public void setCreatePythonLibIfNotExist(boolean createPythonLibIfNotExist) {
 		singleton.setCreatePythonLibIfNotExist(createPythonLibIfNotExist);
 	}
 
@@ -241,7 +241,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	/**
 	 * @param logicDeleteFile the logicDeleteFile to set
 	 */
-	protected void setLogicDeleteFile(boolean logicDeleteFile) {
+	public void setLogicDeleteFile(boolean logicDeleteFile) {
 		singleton.setLogicDeleteFile(logicDeleteFile);
 	}
 
@@ -255,7 +255,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	/**
 	 * @param recycleBinFolder the recycleBinFolder to set
 	 */
-	protected void setRecycleBinFolder(String recycleBinFolder) {
+	public void setRecycleBinFolder(String recycleBinFolder) {
 		singleton.setRecycleBinFolder(recycleBinFolder);
 	}
 
@@ -263,7 +263,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 		return singleton.isRememberPage();
 	}
 
-	protected void setRememberPage(boolean rememberPage) {
+	public void setRememberPage(boolean rememberPage) {
 		singleton.setRememberPage(rememberPage);
 	}
 
@@ -271,7 +271,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 		return singleton.getDefaultFont();
 	}
 
-	protected void setDefaultFont(String defaultFont) {
+	public void setDefaultFont(String defaultFont) {
 		singleton.setDefaultFont(defaultFont);
 	}
 
@@ -398,5 +398,26 @@ public class RmConfigVo extends RmBaseConfigVo {
 	 */
 	public int getMaxCacheSize() {
 		return singleton.getMaxCacheSize();
+	}
+	
+	/**
+	 * lazy start scheduler time(second), 0 or -1 ignore this | 延时启动scheduler的秒数
+	 */
+	private long schedulerStartLazy;
+
+	/**
+	 * lazy start scheduler time(second), 0 or -1 ignore this | 延时启动scheduler的秒数
+	 * @return
+	 */
+	public long getSchedulerStartLazy() {
+		return schedulerStartLazy;
+	}
+
+	/**
+	 * lazy start scheduler time(second), 0 or -1 ignore this | 延时启动scheduler的秒数
+	 * @param schedulerStartLazy
+	 */
+	public void setSchedulerStartLazy(long schedulerStartLazy) {
+		this.schedulerStartLazy = schedulerStartLazy;
 	}
 }

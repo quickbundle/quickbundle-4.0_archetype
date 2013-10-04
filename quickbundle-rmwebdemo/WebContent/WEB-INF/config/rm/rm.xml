@@ -3,28 +3,51 @@
 	<org.quickbundle.config.RmConfig>
 		<!-- war's home directory -->
 		<warHome>/qb_home/rmdemo</warHome>
-		<!-- RmIdFactory generate primary key from database? or from memory cache? #change in production -->
+		
+		<!-- RmIdFactory generate primary key from database? or from memory cache? #change in production 
+			是每次连接数据库产生最新主键？还是从缓存产生？ -->
 		<generateIdFromDb>true</generateIdFromDb>
+		
 		<!-- RmIdFactory init id batch, union all? -->
 		<initIdBatch>false</initIdBatch>
-		<!-- is cluster mode? or single node? (online user, etc...) #change in production -->
+		
+		<!-- is cluster mode? or single node? (online user, etc...) #change in production 
+			是集群模式？或单机 -->
 		<clusterMode>true</clusterMode>
-		<!-- default page size of list page-->
+		
+		<!-- default page size of list page 
+			列表页默认分页数 -->
 		<defaultPageSize>15</defaultPageSize>
-		<!-- is multiple database on one table -->
+		
+		<!-- is multiple database on one table 
+			是否水平拆分的多数据库 -->
 		<multiDb>false</multiDb>
-		<!-- system is in debug mode #change in production -->
+		
+		<!-- system is in debug mode #change in production 
+			系统是否开发调试状态 -->
 		<systemDebugMode>true</systemDebugMode>
-		<!-- user only login once at the moment -->
+		
+		<!-- user only login once at the moment 
+			系统用户是否唯一登录，同时登录会强制踢出第一个用户 -->
 		<userUniqueLogin>true</userUniqueLogin>
-		<!-- this app's description -->
+		
+		<!-- this app's description 
+			初始化默认系统名称 -->
 		<appDescription>Demo System</appDescription>
-		<!-- log request executeTime and sql count? -->
+		
+		<!-- log request executeTime and sql count? 
+			是否记录request日志，用于分析执行时间和SQL数量 -->
 		<logRequest>true</logRequest>
-		<!-- move file to recycleBinFolder, instead of remove -->
+		
+		<!-- move file to recycleBinFolder, instead of remove 
+			是否逻辑删除文件 -->
 		<logicDeleteFile>true</logicDeleteFile>
-		<!-- recycle Bin Folder #change in production -->
+		
+		<!-- recycle Bin Folder #change in production 
+			逻辑删除的回收站文件夹 -->
 		<recycleBinFolder>/qb_home/rmdemo/recycle_bin</recycleBinFolder>
+		
+		<!-- default font for report -->
 		<defaultFont>微软雅黑,黑体</defaultFont>
 	</org.quickbundle.config.RmConfig>
 	

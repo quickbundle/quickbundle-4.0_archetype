@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rm>
 	<org.quickbundle.config.RmConfig>
-		<!-- primary key prefix of this cluster node, range: 1000-9222 #change in production -->
+		<!-- primary key prefix of this cluster node, range: 1000-9222 #change in production 
+			本集群节点RmIdFactory产生的主键前缀 -->
 		<clusterIdPrefix>1000</clusterIdPrefix>
-		<!-- job scheduler is start #change in production -->
+		<!-- job scheduler is start #change in production 
+			系统是否启动任务调度 -->
 		<schedulerStart>false</schedulerStart>
-		<!-- lazy start scheduler time(second), 0 or -1 ignore this -->
-		<schedulerStartLazy>0</schedulerStartLazy>
+		<!-- lazy start scheduler time(second), 0 or -1 ignore this 
+			延时启动scheduler的秒数 -->
+		<schedulerStartLazy>30</schedulerStartLazy>
 	</org.quickbundle.config.RmConfig>
 
 	<!-- #change in production -->
