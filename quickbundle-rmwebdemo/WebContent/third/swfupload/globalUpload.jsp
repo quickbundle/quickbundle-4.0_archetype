@@ -1,16 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@page import="org.quickbundle.tools.helper.io.RmFileHelper"%>
-<%@page import="org.quickbundle.tools.helper.RmStringHelper"%>
-<%@page import="java.io.File"%>
-<%@page import="java.util.List"%>
-<%@page import="java.sql.SQLException"%>
-<%@page import="org.springframework.jdbc.core.RowMapper"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="org.quickbundle.tools.helper.RmPopulateHelper"%>
-<%@page import="org.quickbundle.modules.affix.rmaffix.vo.RmAffixVo"%>
-<%@ include file="/jsp/support/upload/i_getParameter.jsp" %>
-<%@page import="org.quickbundle.project.IGlobalConstants"%>
-<%  //判断是否只读
+<%@ page contentType="text/html; charset=UTF-8" language="java" %><%@ include file="/jsp/support/upload/i_getParameter.jsp" %><%
+    //判断是否只读
 	boolean isReadOnly = false;
 	if("1".equals(request.getParameter(IGlobalConstants.REQUEST_IS_READ_ONLY))) {
 		isReadOnly = true;
@@ -36,9 +25,9 @@ if(aTo_delete_affix != null && aTo_delete_affix.length > 0) {
 			RmFileHelper.delete(f);
 		}
 	if("json".equals(request.getParameter("output_type"))) {
-		JSONObject jo = new JSONObject();
-		jo.put("result", "删除成功！");
-		out.print(jo);
+		Map result = new HashMap();
+		result.put("result", "删除成功");
+		out.print(RmObjectMapper.getInstance().writeValueAsString(result));
 		return;
 	}
 }
@@ -220,3 +209,16 @@ $(document).ready(function () {
 </div>
 </body>
 </html>
+<%@page import="org.quickbundle.project.serializer.RmObjectMapper"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="org.quickbundle.tools.helper.io.RmFileHelper"%>
+<%@page import="org.quickbundle.tools.helper.RmStringHelper"%>
+<%@page import="java.io.File"%>
+<%@page import="java.util.List"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="org.springframework.jdbc.core.RowMapper"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="org.quickbundle.tools.helper.RmPopulateHelper"%>
+<%@page import="org.quickbundle.modules.affix.rmaffix.vo.RmAffixVo"%>
+<%@page import="org.quickbundle.project.IGlobalConstants"%>
