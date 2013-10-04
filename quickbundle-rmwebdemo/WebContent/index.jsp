@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" session="false" language="java" %>
 <%@page import="org.quickbundle.config.RmConfig"%>
-<%@page import="org.quickbundle.base.cloud.RmClusterConfig"%>
+<%@page import="org.quickbundle.config.RmClusterConfig"%>
 <%@page import="org.quickbundle.project.IGlobalConstants"%>
 <%@page import="org.quickbundle.tools.helper.RmJspHelper"%>
 <%@page import="org.quickbundle.project.RmProjectHelper"%>

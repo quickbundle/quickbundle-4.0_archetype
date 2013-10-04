@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.quickbundle.base.beans.factory.RmBeanFactory;
-import org.quickbundle.base.cloud.RmClusterConfig;
 import org.quickbundle.base.service.RmService;
+import org.quickbundle.config.RmClusterConfig;
 import org.quickbundle.config.RmConfig;
 import org.quickbundle.orgauth.IOrgauthConstants;
 import org.quickbundle.orgauth.rmuser.service.IRmUserService;

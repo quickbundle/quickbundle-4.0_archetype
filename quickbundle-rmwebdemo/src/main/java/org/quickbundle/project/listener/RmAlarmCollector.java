@@ -6,7 +6,7 @@ import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.quickbundle.base.cloud.RmClusterConfig;
+import org.quickbundle.config.RmClusterConfig;
 import org.quickbundle.project.RmProjectHelper;
 import org.quickbundle.tools.helper.RmStringHelper;
 

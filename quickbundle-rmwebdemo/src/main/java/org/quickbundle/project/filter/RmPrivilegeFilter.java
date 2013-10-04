@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 
 import org.dom4j.Document;
 import org.dom4j.Node;
-import org.quickbundle.base.cloud.RmClusterConfig;
+import org.quickbundle.config.RmClusterConfig;
 import org.quickbundle.config.RmConfig;
 import org.quickbundle.orgauth.IOrgauthConstants;
 import org.quickbundle.orgauth.cache.RmFunctionNodeCache;

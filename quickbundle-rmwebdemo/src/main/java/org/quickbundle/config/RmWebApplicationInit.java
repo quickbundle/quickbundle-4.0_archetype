@@ -34,6 +34,23 @@ import org.quickbundle.tools.support.path.RmPathHelper;
  */
 public class RmWebApplicationInit implements ILoadOnStartup {
 
+	/**
+	 * 初始化rm.xml
+	 */
+	public static void initRmConfig() {
+		Document rmDoc = RmProjectHelper.getRmDoc();
+		PopulateConfig pc = new PopulateConfig(RmConfig.getSingleton(), rmDoc);
+		pc.populate();
+		
+		Document rmClusterDoc = RmProjectHelper.getRmClusterDoc();
+		PopulateConfig pc2 = new PopulateConfig(RmConfig.getSingleton(), rmClusterDoc);
+		pc2.populate();
+		
+		{ // 集群模式的判断
+			RmConfig.getSingleton().setClusterMode(rmClusterDoc.selectNodes("/rm/org.quickbundle.base.cloud.RmClusterConfig/node").size() > 1);
+		}
+	}
+	
 	public void destroy(HttpServlet servlet) {
 
 	}
@@ -158,23 +175,6 @@ public class RmWebApplicationInit implements ILoadOnStartup {
 			} catch (SQLException e) {
 				throw new RmRuntimeException("关闭连接出错", e);
 			}
-		}
-	}
-
-	/**
-	 * 初始化rm.xml
-	 */
-	public static void initRmConfig() {
-		Document rmDoc = RmProjectHelper.getRmDoc();
-		PopulateConfig pc = new PopulateConfig(RmConfig.getSingleton(), rmDoc);
-		pc.populate();
-		
-		Document rmClusterDoc = RmProjectHelper.getRmClusterDoc();
-		PopulateConfig pc2 = new PopulateConfig(RmConfig.getSingleton(), rmClusterDoc);
-		pc2.populate();
-		
-		{ // 集群模式的判断
-			RmConfig.getSingleton().setClusterMode(rmClusterDoc.selectNodes("/rm/org.quickbundle.base.cloud.RmClusterConfig/node").size() > 1);
 		}
 	}
 

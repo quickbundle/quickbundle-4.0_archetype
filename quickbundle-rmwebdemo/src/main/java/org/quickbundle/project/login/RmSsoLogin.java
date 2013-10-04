@@ -11,9 +11,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.dom4j.Element;
-import org.quickbundle.base.cloud.RmClusterConfig;
 import org.quickbundle.base.exception.RmRuntimeException;
 import org.quickbundle.base.vo.RmValueObject;
+import org.quickbundle.config.RmClusterConfig;
 import org.quickbundle.project.IGlobalConstants;
 import org.quickbundle.project.RmProjectHelper;
 import org.quickbundle.project.secure.RmCryptoHelper;

@@ -28,7 +28,7 @@ import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.callback.UnsupportedCallbackException;
 
 import org.apache.ws.security.WSPasswordCallback;
-import org.quickbundle.base.cloud.RmClusterConfig;
+import org.quickbundle.config.RmClusterConfig;
 
 /**
  */
