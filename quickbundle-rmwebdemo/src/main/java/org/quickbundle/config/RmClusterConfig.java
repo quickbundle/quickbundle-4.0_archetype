@@ -41,25 +41,7 @@ public class RmClusterConfig {
 	}
 
 	static Document getRmClusterDoc() {
-		Class clz = null;
-		Object doc = null;
-		try {
-			clz = Class.forName("org.quickbundle.project.RmProjectHelper");
-			doc = clz.getMethod("getRmClusterDoc").invoke(clz, new Object[] {});
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		} catch (NoSuchMethodException e) {
-			throw new RuntimeException(e);
-		} catch (IllegalArgumentException e) {
-			throw new RuntimeException(e);
-		} catch (SecurityException e) {
-			throw new RuntimeException(e);
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
-		} catch (InvocationTargetException e) {
-			throw new RuntimeException(e);
-		}
-		return (Document) doc;
+		return RmLoadConfig.getRmClusterDoc();
 	}
 
 	static String guessSelfId() {

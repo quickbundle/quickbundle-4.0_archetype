@@ -21,6 +21,7 @@ import org.dom4j.Document;
 import org.dom4j.Node;
 import org.quickbundle.config.RmClusterConfig;
 import org.quickbundle.config.RmConfig;
+import org.quickbundle.config.RmLoadConfig;
 import org.quickbundle.orgauth.IOrgauthConstants;
 import org.quickbundle.orgauth.cache.RmFunctionNodeCache;
 import org.quickbundle.project.IGlobalConstants;
@@ -231,11 +232,11 @@ public class RmPrivilegeFilter implements Filter {
 		if(!isInitIgnoreUrlConf) { //双检锁初始化
 			synchronized (lockIgnoreUrlConf) {
 				if(!isInitIgnoreUrlConf) {
-					List<Node> lUrl = RmProjectHelper.getRmDoc().selectNodes("/rm/org.quickbundle.project.filter.RmPrivilegeFilter/ignoreUrls/url");
+					List<Node> lUrl = RmLoadConfig.getRmDoc().selectNodes("/rm/org.quickbundle.project.filter.RmPrivilegeFilter/ignoreUrls/url");
 					for(Node node : lUrl) {
 						sIgnoreUrl.add(node.getText().trim());
 					}
-					validBsUrlMatch = Pattern.compile(RmProjectHelper.getRmDoc().valueOf("/rm/org.quickbundle.project.filter.RmPrivilegeFilter/validBsUrlMatch/text()"));
+					validBsUrlMatch = Pattern.compile(RmLoadConfig.getRmDoc().valueOf("/rm/org.quickbundle.project.filter.RmPrivilegeFilter/validBsUrlMatch/text()"));
 					isInitIgnoreUrlConf = true;
 				}
 			}
@@ -243,7 +244,7 @@ public class RmPrivilegeFilter implements Filter {
 		if(!isInitRedirectUrlsConf) { //双检锁初始化处理待跳转的url
 			synchronized (lockRedirectUrlsConf) {
 				if(!isInitRedirectUrlsConf) {
-					Document rmClusterDoc = RmProjectHelper.getRmClusterDoc();
+					Document rmClusterDoc = RmLoadConfig.getRmClusterDoc();
 					if(rmClusterDoc.selectNodes("/rm/org.quickbundle.project.login.RmSsoLogin/redirectGroup[@enable='true']").size() > 0) {
 						sRedirectUrl = new HashSet<String>();
 						List<Node> lUrl = rmClusterDoc.selectNodes("/rm/org.quickbundle.project.login.RmSsoLogin/redirectGroup[@enable='true']/redirectUrls/url");

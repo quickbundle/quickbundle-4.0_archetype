@@ -1,4 +1,4 @@
-package org.quickbundle.config;
+package org.quickbundle.project.init;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,15 +12,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.dom4j.Document;
 import org.quickbundle.base.beans.factory.RmBeanFactory;
 import org.quickbundle.base.beans.factory.RmIdFactory;
 import org.quickbundle.base.exception.RmRuntimeException;
+import org.quickbundle.config.RmConfig;
 import org.quickbundle.itf.ILoadOnStartup;
 import org.quickbundle.itf.code.IRmCodeService;
 import org.quickbundle.project.IGlobalConstants;
 import org.quickbundle.project.RmGlobalReference;
-import org.quickbundle.project.RmProjectHelper;
 import org.quickbundle.tools.context.RmBeanHelper;
 import org.quickbundle.tools.helper.xml.RmXmlHelper;
 import org.quickbundle.tools.support.log.RmLogHelper;
@@ -33,46 +32,15 @@ import org.quickbundle.tools.support.path.RmPathHelper;
  * 
  */
 public class RmWebApplicationInit implements ILoadOnStartup {
-
-	/**
-	 * 初始化rm.xml
-	 */
-	public static void initRmConfig() {
-		Document rmDoc = RmProjectHelper.getRmDoc();
-		PopulateConfig pc = new PopulateConfig(RmConfig.getSingleton(), rmDoc);
-		pc.populate();
-		
-		Document rmClusterDoc = RmProjectHelper.getRmClusterDoc();
-		PopulateConfig pc2 = new PopulateConfig(RmConfig.getSingleton(), rmClusterDoc);
-		pc2.populate();
-		
-		{ // 集群模式的判断
-			RmConfig.getSingleton().setClusterMode(rmClusterDoc.selectNodes("/rm/org.quickbundle.base.cloud.RmClusterConfig/node").size() > 1);
-		}
-	}
 	
 	public void destroy(HttpServlet servlet) {
 
 	}
 
 	public void init(HttpServlet servlet) {
-		File warHome = new File(RmConfig.getSingleton().getWarHome());
-		if (!warHome.exists()) {
-			RmLogHelper.getLogger(this.getClass()).warn("warHome: " + warHome.getAbsolutePath() + " not exist");
-		} else if (!warHome.canRead()) {
-			RmLogHelper.getLogger(this.getClass()).warn("warHome: " + warHome.getAbsolutePath() + " can not read");
-		} else if (!warHome.canWrite()) {
-			RmLogHelper.getLogger(this.getClass()).warn("warHome: " + warHome.getAbsolutePath() + " can not write");
-		}
 
-		if (RmConfig.getSingleton().isSystemDebugMode()) {
-			RmLogHelper.getLogger(this.getClass()).info("System in debug mode......");
-		}
-
-		if (RmConfig.getSingleton().isGenerateIdFromDb()) {
-			RmLogHelper.getLogger(this.getClass()).info("System generate primary key from database(not cache)...");
-		}
-
+		check();
+		
 		// 初始化Spring Bean Factory
 		RmBeanFactory.getBeanFactory();
 
@@ -128,6 +96,25 @@ public class RmWebApplicationInit implements ILoadOnStartup {
 			RmLogHelper.getLogger(this.getClass()).error("调度器启动失败", e);
 		}
 		// quartz end
+	}
+	
+	void check() {
+		File warHome = new File(RmConfig.getSingleton().getWarHome());
+		if (!warHome.exists()) {
+			RmLogHelper.getLogger(this.getClass()).warn("warHome: " + warHome.getAbsolutePath() + " not exist");
+		} else if (!warHome.canRead()) {
+			RmLogHelper.getLogger(this.getClass()).warn("warHome: " + warHome.getAbsolutePath() + " can not read");
+		} else if (!warHome.canWrite()) {
+			RmLogHelper.getLogger(this.getClass()).warn("warHome: " + warHome.getAbsolutePath() + " can not write");
+		}
+
+		if (RmConfig.getSingleton().isSystemDebugMode()) {
+			RmLogHelper.getLogger(this.getClass()).info("System in debug mode......");
+		}
+
+		if (RmConfig.getSingleton().isGenerateIdFromDb()) {
+			RmLogHelper.getLogger(this.getClass()).info("System generate primary key from database(not cache)...");
+		}
 	}
 
 	/**

@@ -75,7 +75,8 @@ public class RmPyServlet extends PyServlet {
         }
         if (props.getProperty("python.home") == null
                 && baseProps.getProperty("python.home") == null) {
-            props.put("python.home", rootPath + "WEB-INF" + File.separator + "lib");
+            //props.put("python.home", rootPath + "WEB-INF" + File.separator + "lib");
+        	props.put("python.home", getDefaultPythonHome());
         }
         //qb-rm auto create jython lib dir if not exist
         if(RmConfig.getSingleton().isCreatePythonLibIfNotExist()) {
@@ -94,6 +95,11 @@ public class RmPyServlet extends PyServlet {
         PySystemState.add_package("javax.servlet.jsp.tagext");
         PySystemState.add_classdir(rootPath + "WEB-INF" + File.separator + "classes");
         PySystemState.add_extdir(rootPath + "WEB-INF" + File.separator + "lib", true);
+    }
+    
+    static String getDefaultPythonHome() {
+    	String result = RmConfig.getSingleton().getWarHome() + "/runtime/jython";
+    	return result;
     }
 
     protected static PythonInterpreter createInterpreter(ServletContext servletContext) {

@@ -11,7 +11,8 @@ import org.logicalcobwebs.proxool.ProxoolFacade;
 import org.quickbundle.base.beans.factory.RmBeanFactory;
 import org.quickbundle.base.cache.RmCacheHandler;
 import org.quickbundle.base.web.servlet.RmHolderServlet;
-import org.quickbundle.config.RmWebApplicationInit;
+import org.quickbundle.project.init.CustomSystemProperties;
+import org.quickbundle.project.init.LoadRmConfig;
 import org.quickbundle.tools.support.buffer.FlushQueueThread;
 import org.quickbundle.tools.support.log.RmLogHelper;
 import org.quickbundle.tools.support.path.RmPathHelper;
@@ -23,7 +24,9 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  * 集成自Spring的监听器
  */
 public class RmContextLoaderListener extends ContextLoaderListener {
-	static Logger log = RmLogHelper.getLogger(RmContextLoaderListener.class);
+	private Logger getLogger() {
+		return RmLogHelper.getLogger(RmContextLoaderListener.class);
+	}
 	
 	/*
 	 * 启动服务时，初始化
@@ -34,9 +37,10 @@ public class RmContextLoaderListener extends ContextLoaderListener {
 		//系统初始化时，缓存第一个ServletContext对象
 		RmHolderServlet.setDefaultServletContext(event.getServletContext());
 		//更新RmConfig配置
-		RmWebApplicationInit.initRmConfig();
+		CustomSystemProperties.getInstance().init();
+		LoadRmConfig.initRmConfig();
 		
-		log.info(RmPathHelper.initWarRoot());
+		getLogger().info(RmPathHelper.initWarRoot());
 		synchronized (RmBeanFactory.lockInitFactory) {
 			RmBeanFactory.setInitBeanStarted(true); //通知RmBeanFactory已开始启动BeanFactory
 			super.contextInitialized(event);
@@ -57,7 +61,7 @@ public class RmContextLoaderListener extends ContextLoaderListener {
 			//等待quartz线程安全停止
 			//doWaitForClearThread(10000, "org\\.quartz\\.simpl\\.SimpleThreadPool.*");
 		} catch (Exception e) {
-			log.error("scheduler.shutdown():" + e.toString());
+			getLogger().error("scheduler.shutdown():" + e.toString());
 		}
 		//quartz end
 		
@@ -66,7 +70,7 @@ public class RmContextLoaderListener extends ContextLoaderListener {
 			//等待RM-FlushQueue线程安全停止
 			doWaitForClearThread(3000, "RM-FlushQueue.*");
 		} catch (Exception e) {
-			log.error("FlushQueueThread.getSingleton().shutdown():" + e.toString());
+			getLogger().error("FlushQueueThread.getSingleton().shutdown():" + e.toString());
 		}
 		
 		try {
@@ -74,7 +78,7 @@ public class RmContextLoaderListener extends ContextLoaderListener {
 			//等待RM-CacheHandler线程安全停止
 			//doWaitForClearThread(5000, "RM-CacheHandler.*");
 		} catch (Exception e) {
-			log.error("RmCacheHandler.getSingleton().showdown():" + e.toString());
+			getLogger().error("RmCacheHandler.getSingleton().showdown():" + e.toString());
 		}
 		
 		try {
@@ -82,7 +86,7 @@ public class RmContextLoaderListener extends ContextLoaderListener {
 			//等待proxool连接池线程安全停止
 			//doWaitForClearThread(10000, "org\\.logicalcobwebs\\.proxool\\.admin\\.StatsRoller.*");
 		} catch (Exception e) {
-			log.error("ProxoolFacade.shutdown():" + e.toString());
+			getLogger().error("ProxoolFacade.shutdown():" + e.toString());
 		}
 		
 		//deregisterJdbcDriver();
@@ -100,9 +104,9 @@ public class RmContextLoaderListener extends ContextLoaderListener {
             Driver driver = drivers.nextElement();
             try {
                 DriverManager.deregisterDriver(driver);
-                log.info(String.format("deregistering jdbc driver: %s", driver));
+                getLogger().info(String.format("deregistering jdbc driver: %s", driver));
             } catch (SQLException e) {
-                log.error(String.format("Error deregistering driver %s", driver), e);
+                getLogger().error(String.format("Error deregistering driver %s", driver), e);
             }
 
         }
@@ -121,7 +125,7 @@ public class RmContextLoaderListener extends ContextLoaderListener {
 				String[] threadInfo = findMatchThread(patternThreadName);
 				if(threadInfo != null) {
 					if(waitTime > 0) {
-						log.info("wait " + threadInfo[0] + "(" + threadInfo[1] + ") for shutdown perfectly, elapsed time: " + waitTime + " ms");
+						getLogger().info("wait " + threadInfo[0] + "(" + threadInfo[1] + ") for shutdown perfectly, elapsed time: " + waitTime + " ms");
 					}
 					Thread.sleep(1000);
 					waitTime += 1000;
@@ -130,7 +134,7 @@ public class RmContextLoaderListener extends ContextLoaderListener {
 				}
 			}
 		} catch (Exception e) {
-			log.error("doWaitForClearThread():", e);
+			getLogger().error("doWaitForClearThread():", e);
 		}
 	}
 	

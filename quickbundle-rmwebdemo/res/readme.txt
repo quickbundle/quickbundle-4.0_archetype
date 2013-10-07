@@ -14,7 +14,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
 
 -------------优化服务器启动时间----------------
-org.quickbundle.config.RmWebApplicationInit#line.74，忽略每次启动检测数据字典初始化	
+org.quickbundle.project.init.RmWebApplicationInit#line.74，忽略每次启动检测数据字典初始化	
 //codeService.executeInitCodeTypeDataByXml();
 
 将部署文件context.xml或部署上下文参数中的reloadable属性改为false

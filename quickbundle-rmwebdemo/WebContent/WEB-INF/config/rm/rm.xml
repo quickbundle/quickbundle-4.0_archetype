@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rm>
+	<org.quickbundle.project.init.CustomSystemProperties>
+		<!-- for production -->
+		<rmdemo.root.home>${user.home}/.qbhome/rmdemo</rmdemo.root.home>
+		<!-- for tomcat debug
+		<rmdemo.root.home>${user.dir}/work/.qbhome/rmdemo</rmdemo.root.home>
+		-->
+		
+		<javamelody.storage-directory>${rmdemo.root.home}/javamelody</javamelody.storage-directory>
+	</org.quickbundle.project.init.CustomSystemProperties>
+	
 	<org.quickbundle.config.RmConfig>
 		<!-- war's home directory -->
-		<warHome>/qb_home/rmdemo</warHome>
+		<warHome>${rmdemo.root.home}</warHome>
 		
 		<!-- RmIdFactory generate primary key from database? or from memory cache? #change in production 
 			是每次连接数据库产生最新主键？还是从缓存产生？ -->
@@ -45,7 +55,7 @@
 		
 		<!-- recycle Bin Folder #change in production 
 			逻辑删除的回收站文件夹 -->
-		<recycleBinFolder>/qb_home/rmdemo/recycle_bin</recycleBinFolder>
+		<recycleBinFolder>${rmdemo.root.home}/recycle_bin</recycleBinFolder>
 		
 		<!-- default font for report -->
 		<defaultFont>微软雅黑,黑体</defaultFont>

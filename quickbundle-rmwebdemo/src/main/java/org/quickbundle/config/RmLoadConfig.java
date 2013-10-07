@@ -12,7 +12,7 @@ import org.quickbundle.project.RmProjectHelper;
 import org.quickbundle.tools.helper.xml.RmXmlHelper;
 import org.quickbundle.tools.support.path.RmPathHelper;
 
-public class RmLoadXml {
+public class RmLoadConfig {
     
 	public enum RmConfigEnum {
 		RM_XML("/WEB-INF/config/rm/rm.xml"),
@@ -25,18 +25,58 @@ public class RmLoadXml {
 			return path;
 		}
 	}
+	
+    /**
+     * 获得rm.xml的Document
+     * @return
+     */
+    public static Document getRmDoc() {
+        return RmLoadConfig.getSingleton().getInnerDoc(RmLoadConfig.RmConfigEnum.RM_XML.name(), RmLoadConfig.RmConfigEnum.RM_XML.getPath());
+    }
     
-	private static RmLoadXml singleton = new RmLoadXml();
+    /**
+     * 获得rmCluster.xml的Document
+     * @return
+     */
+    public static Document getRmClusterDoc() {
+        return  RmLoadConfig.getSingleton().getInnerDoc(RmLoadConfig.RmConfigEnum.RM_CLUSTER_XML.name(), getRmClusterXmlFile());
+    }
+ 
+    public static String getRmClusterXmlFile() {
+    	String path = RmLoadConfig.RmConfigEnum.RM_CLUSTER_XML.getPath();
+    	if(System.getProperty("nc.server.name") == null) {
+    		return path;
+    	}
+    	String ncServerName = System.getProperty("nc.server.name");
+    	File configDefault = new File(RmPathHelper.getWarDir().toString() + RmLoadConfig.RmConfigEnum.RM_CLUSTER_XML.getPath());
+    	File customDir = new File(configDefault.getParent() + "/" + ncServerName);
+    	if(!customDir.exists()) {
+    		return path;
+    	}
+    	File customDirConfig = new File(customDir.toString() + "/rmCluster.xml");
+    	if(customDirConfig.exists()) {
+    		String warPath = RmXmlHelper.formatToFile(RmPathHelper.getWarDir().toString());
+    		if(warPath.endsWith("/")) {
+    			warPath = warPath.substring(0, warPath.length() - 1);
+    		}
+    		String customDirConfigStr = RmXmlHelper.formatToFile(customDirConfig.toString());
+    		return customDirConfigStr.substring(warPath.length());
+    	} else {
+    		return path;
+    	}
+    }
+    
+	private static RmLoadConfig singleton = new RmLoadConfig();
 	
     /**
 	 * @return the singleton
 	 */
-	public static RmLoadXml getSingleton() {
+	public static RmLoadConfig getSingleton() {
 		return singleton;
 	}
 	
 	private Map<String, RmLoadXmlVo> mLoadXmlVo = new HashMap<String, RmLoadXmlVo>();
-	public RmLoadXml() {
+	public RmLoadConfig() {
 		RmConfigEnum[] ces = RmConfigEnum.values();
 		for(RmConfigEnum ce : ces) {
 			mLoadXmlVo.put(ce.name(), new RmLoadXmlVo());
@@ -93,6 +133,16 @@ public class RmLoadXml {
             }
         }
     }
+    
+
+	/** 
+	 * get war dir in this project, called by RmPathHelper.getWarDir
+	 * you can rewrite this
+	 * @return
+	 */
+	public static File getWarDirCustom() {
+		return null;
+	}
 }
 
 class RmLoadXmlVo {

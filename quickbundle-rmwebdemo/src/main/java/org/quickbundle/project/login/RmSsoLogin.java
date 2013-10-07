@@ -14,8 +14,8 @@ import org.dom4j.Element;
 import org.quickbundle.base.exception.RmRuntimeException;
 import org.quickbundle.base.vo.RmValueObject;
 import org.quickbundle.config.RmClusterConfig;
+import org.quickbundle.config.RmLoadConfig;
 import org.quickbundle.project.IGlobalConstants;
-import org.quickbundle.project.RmProjectHelper;
 import org.quickbundle.project.secure.RmCryptoHelper;
 import org.quickbundle.tools.helper.RmStringHelper;
 import org.quickbundle.tools.helper.RmUUIDHelper;
@@ -45,7 +45,7 @@ public class RmSsoLogin {
 			HttpServletRequest req = (HttpServletRequest)request;
 			HttpServletResponse res = (HttpServletResponse)response;
 			Element thisNode = null;
-			for(Object nodeObj : RmProjectHelper.getRmClusterDoc().selectNodes("/rm/org.quickbundle.project.login.RmSsoLogin/redirectGroup[@enable='true']/redirectUrls/url")) {
+			for(Object nodeObj : RmLoadConfig.getRmClusterDoc().selectNodes("/rm/org.quickbundle.project.login.RmSsoLogin/redirectGroup[@enable='true']/redirectUrls/url")) {
 				Element node = (Element)nodeObj;
 				if(node.getText().equals(pUrl)) {
 					thisNode = node;

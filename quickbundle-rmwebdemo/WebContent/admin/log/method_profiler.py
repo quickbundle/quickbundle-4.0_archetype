@@ -10,10 +10,12 @@ from qb.tools.support.log import analyse_qbrm_log
 from qb.tools.support.log import ui_public
 
 from javax.servlet.http import HttpServlet
-from org.quickbundle.project.init import RmConfig
+from org.quickbundle.config import RmConfig
+from org.quickbundle.config import RmConfigVo
 from org.quickbundle.project.profiler import RmProfilerHelper
 
-encode = RmConfig.defaultEncode()
+encode = RmConfig.getSingleton().defaultEncode()
+warHome = RmConfig.getSingleton().getWarHome()
 #log_file_encode = "gb18030"
 log_file_encode='utf-8'
 
@@ -40,7 +42,7 @@ class method_profiler (HttpServlet):
         if self.log_para == None:
             self.log_para = self.default_log_para
         if self.log_para == None:
-            self.log_para = '[request]\n/qb_home' + request.getContextPath() + '/logs/request.log*\n\n[sql]\n/qb_home' + request.getContextPath() + '/logs/sql.log*\n\n[method]\n/qb_home' + request.getContextPath() + '/logs/method.log*'
+            self.log_para = '[request]\n' + warHome + '/logs/request.log*\n\n[sql]\n' + warHome + '/logs/sql.log*\n\n[method]\n' + warHome + '/logs/method.log*'
             
         ui_public.print_query_head(request, response);
         result = ui_public.parse_log_para(request, response, self.log_para)

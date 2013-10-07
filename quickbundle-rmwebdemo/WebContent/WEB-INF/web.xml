@@ -19,15 +19,49 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/config/spring/*.xml</param-value>
 	</context-param>
+
+	<!-- encoding begin -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- encoding end -->
 	
+	<!-- url privilege begin -->
+	<filter>
+		<filter-name>RmPrivilegeFilter</filter-name>
+		<filter-class>org.quickbundle.project.filter.RmPrivilegeFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>RmPrivilegeFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- url privilege end -->
+
+	<listener>
+		<listener-class>org.quickbundle.project.listener.RmContextLoaderListener</listener-class>
+	</listener>
+	
+    <listener>
+        <listener-class>org.quickbundle.project.listener.RmSessionListener</listener-class>
+    </listener>
+
     <!-- javamelody begin -->
     <context-param>
         <param-name>javamelody.disabled</param-name>
         <param-value>false</param-value>
-    </context-param>
-    <context-param>
-        <param-name>javamelody.storage-directory</param-name>
-        <param-value>/qb_home/rmdemo/javamelody</param-value>
     </context-param>
     <context-param>
         <param-name>javamelody.monitoring-path</param-name>
@@ -66,45 +100,6 @@
         <listener-class>net.bull.javamelody.SessionListener</listener-class>
     </listener>
     <!-- javamelody end -->
-
-
-	<!-- encoding begin -->
-	<filter>
-		<filter-name>encodingFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-		<init-param>
-			<param-name>forceEncoding</param-name>
-			<param-value>true</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>encodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	<!-- encoding end -->
-	
-	<!-- url privilege begin -->
-	<filter>
-		<filter-name>RmPrivilegeFilter</filter-name>
-		<filter-class>org.quickbundle.project.filter.RmPrivilegeFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>RmPrivilegeFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	<!-- url privilege end -->
-
-    <listener>
-        <listener-class>org.quickbundle.project.listener.RmSessionListener</listener-class>
-    </listener>
-
-	<listener>
-		<listener-class>org.quickbundle.project.listener.RmContextLoaderListener</listener-class>
-	</listener>
 	
 	<!-- load-on-startup classes of this framework -->
 	<servlet>
@@ -113,7 +108,7 @@
 		<init-param>
 			<param-name>init-classes</param-name>
 			<!-- implement classes of org.quickbundle.itf.ILoadOnStartup, split by "," -->
-			<param-value>org.quickbundle.config.RmWebApplicationInit</param-value>
+			<param-value>org.quickbundle.project.init.RmWebApplicationInit</param-value>
 		</init-param>
 		<load-on-startup>0</load-on-startup>
 	</servlet>
@@ -194,10 +189,6 @@
 	<servlet>
 	    <servlet-name>PyServlet</servlet-name>
 	    <servlet-class>org.quickbundle.third.jython.RmPyServlet</servlet-class>
-        <init-param>
-             <param-name>python.home</param-name>
-             <param-value>/qb_home/rmdemo/runtime/jython</param-value>
-		</init-param>
 		<init-param>
              <param-name>skip_jython_initialization</param-name>
              <param-value>true</param-value>

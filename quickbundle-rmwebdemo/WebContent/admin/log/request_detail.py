@@ -10,10 +10,12 @@ from qb.tools.support.log import analyse_qbrm_log
 from qb.tools.support.log import ui_public
 
 from javax.servlet.http import HttpServlet
-from org.quickbundle.project.init import RmConfig
+from org.quickbundle.config import RmConfig
+from org.quickbundle.config import RmConfigVo
 from org.quickbundle.project.profiler import RmProfilerHelper
 
-encode = RmConfig.defaultEncode()
+encode = RmConfig.getSingleton().defaultEncode()
+warHome = RmConfig.getSingleton().getWarHome()
 #log_file_encode = "gb18030"
 log_file_encode='utf-8'
 max_row = 100

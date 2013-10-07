@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%--@page import="nc.bs.framework.common.NCLocator"--%>
-<%--@page import="org.quickbundle.project.listener.RmAlarmCollector"--%>
+<%--@page import="org.quickbundle.project.tools.RmAlarmCollector"--%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%!
 /**

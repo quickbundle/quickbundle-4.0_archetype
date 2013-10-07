@@ -1,4 +1,4 @@
-package org.quickbundle.project.tools.deploy;
+package org.quickbundle.project.tools;
 
 import java.io.File;
 

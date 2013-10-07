@@ -6,26 +6,23 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.dom4j.Document;
 import org.quickbundle.base.beans.factory.RmBeanFactory;
-import org.quickbundle.config.RmLoadXml;
+import org.quickbundle.config.RmLoadConfig;
 import org.quickbundle.modules.log.ActionLog2DbService;
 import org.quickbundle.modules.log.ILogConstants;
 import org.quickbundle.modules.log.RmLogTypeCache;
 import org.quickbundle.modules.log.rmlog.vo.RmLogVo;
 import org.quickbundle.project.common.service.IRmCommonService;
-import org.quickbundle.project.listener.RmAlarmCollector;
 import org.quickbundle.project.listener.RmGlobalMonitor;
 import org.quickbundle.project.listener.RmRequestMonitor;
 import org.quickbundle.project.login.IRmLoginVo;
 import org.quickbundle.project.login.RmUserVo;
 import org.quickbundle.project.mail.IRmMailService;
+import org.quickbundle.project.tools.RmAlarmCollector;
 import org.quickbundle.tools.context.RmBeanHelper;
 import org.quickbundle.tools.helper.RmDateHelper;
 import org.quickbundle.tools.helper.RmJspHelper;
-import org.quickbundle.tools.helper.xml.RmXmlHelper;
 import org.quickbundle.tools.support.log.RmLogHelper;
-import org.quickbundle.tools.support.path.RmPathHelper;
 import org.slf4j.Logger;
 import org.slf4j.helpers.FormattingTuple;
 import org.slf4j.helpers.MessageFormatter;
@@ -45,46 +42,6 @@ public final class RmProjectHelper implements IGlobalConstants{
     private RmProjectHelper() {
     }
     
-    /**
-     * 获得rm.xml的Document
-     * @return
-     */
-    public static Document getRmDoc() {
-        return RmLoadXml.getSingleton().getInnerDoc(RmLoadXml.RmConfigEnum.RM_XML.name(), RmLoadXml.RmConfigEnum.RM_XML.getPath());
-    }
-    
-    /**
-     * 获得rmCluster.xml的Document
-     * @return
-     */
-    public static Document getRmClusterDoc() {
-        return  RmLoadXml.getSingleton().getInnerDoc(RmLoadXml.RmConfigEnum.RM_CLUSTER_XML.name(), getRmClusterXmlFile());
-    }
- 
-    public static String getRmClusterXmlFile() {
-    	String path = RmLoadXml.RmConfigEnum.RM_CLUSTER_XML.getPath();
-    	if(System.getProperty("nc.server.name") == null) {
-    		return path;
-    	}
-    	String ncServerName = System.getProperty("nc.server.name");
-    	File configDefault = new File(RmPathHelper.getWarDir().toString() + RmLoadXml.RmConfigEnum.RM_CLUSTER_XML.getPath());
-    	File customDir = new File(configDefault.getParent() + "/" + ncServerName);
-    	if(!customDir.exists()) {
-    		return path;
-    	}
-    	File customDirConfig = new File(customDir.toString() + "/rmCluster.xml");
-    	if(customDirConfig.exists()) {
-    		String warPath = RmXmlHelper.formatToFile(RmPathHelper.getWarDir().toString());
-    		if(warPath.endsWith("/")) {
-    			warPath = warPath.substring(0, warPath.length() - 1);
-    		}
-    		String customDirConfigStr = RmXmlHelper.formatToFile(customDirConfig.toString());
-    		return customDirConfigStr.substring(warPath.length());
-    	} else {
-    		return path;
-    	}
-    }
- 
     /**
      * 获得通用的IRmCommonService
      * @return
@@ -297,7 +254,7 @@ public final class RmProjectHelper implements IGlobalConstants{
     		logFatal.error(subject);
     		logFatal.error(content);
     		IRmMailService mailService = (IRmMailService)RmBeanFactory.getBean("IRmMailService");
-    		mailService.send(RmProjectHelper.getRmDoc().valueOf("/rm/org.quickbundle.project.RmProjectHelper/logFatal/mailTo"), 
+    		mailService.send(RmLoadConfig.getRmDoc().valueOf("/rm/org.quickbundle.project.RmProjectHelper/logFatal/mailTo"), 
     				subject, content, null, null);
     		return true;
 		} catch (Exception e2) {
@@ -331,13 +288,4 @@ public final class RmProjectHelper implements IGlobalConstants{
 		RmBeanFactory.getBeanFactory().getBean(ActionLog2DbService.class).add(logVo);
 	}
     //system businessLog end
-
-	/** 
-	 * get war dir in this project, called by RmPathHelper.getWarDir
-	 * you can rewrite this
-	 * @return
-	 */
-	public static File getWarDirCustom() {
-		return null;
-	}
 }
