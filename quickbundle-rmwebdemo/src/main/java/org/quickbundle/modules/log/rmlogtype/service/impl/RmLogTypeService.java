@@ -18,16 +18,15 @@ package org.quickbundle.modules.log.rmlogtype.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.quickbundle.base.cache.RmCacheHandler;
-import org.quickbundle.base.cache.RmSqlCountCache;
 import org.quickbundle.base.service.RmService;
 import org.quickbundle.itf.cache.IRmCacheListener;
-
 import org.quickbundle.modules.log.RmLogTypeCache;
 import org.quickbundle.modules.log.rmlogtype.dao.IRmLogTypeDao;
 import org.quickbundle.modules.log.rmlogtype.service.IRmLogTypeService;
 import org.quickbundle.modules.log.rmlogtype.util.IRmLogTypeConstants;
 import org.quickbundle.modules.log.rmlogtype.vo.RmLogTypeVo;
+import org.quickbundle.project.cache.RmCacheHandler;
+import org.quickbundle.project.cache.RmSqlCountCache;
 
 /**
  * 功能、用途、现存BUG:

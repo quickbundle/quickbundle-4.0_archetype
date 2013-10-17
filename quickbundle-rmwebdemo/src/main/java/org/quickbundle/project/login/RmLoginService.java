@@ -112,7 +112,7 @@ public class RmLoginService extends RmService implements IRmLoginService {
 				uniqueLoginVo.setId(userVo.getId());
 			} else {
 				// 集群模式下，直接从数据库读取用户信息
-				if(!RmConfig.getSingleton().isClusterMode() || RmClusterConfig.getSelfId().equals(onlineRecordVo.getCluster_node_id())) {
+				if(!RmConfig.getSingleton().isClusterMode() || RmClusterConfig.getSingleton().getSelfId().equals(onlineRecordVo.getCluster_node_id())) {
 					return null;
 				}
 				RmUserSessionVo sessionVo = null;
@@ -157,7 +157,7 @@ public class RmLoginService extends RmService implements IRmLoginService {
 			String cluster_node_id = onlineRecordVo.getCluster_node_id();
 			String sessionId = onlineRecordVo.getLogin_sign();
 			//集群模式下，根据cluster_node_id找到某个兄弟节点，其session也要强制取代
-			if(RmConfig.getSingleton().isClusterMode() && !RmClusterConfig.getSelfId().equals(cluster_node_id)) {
+			if(RmConfig.getSingleton().isClusterMode() && !RmClusterConfig.getSingleton().getSelfId().equals(cluster_node_id)) {
 				try {
 					IRmSessionService remoteSs = RmSessionService.getRemoteSessionService(cluster_node_id);
 					if(remoteSs != null) {
@@ -264,7 +264,7 @@ public class RmLoginService extends RmService implements IRmLoginService {
 		IRmUserOnlineRecordService uorService = (IRmUserOnlineRecordService)RmBeanFactory.getBean(IRmUserOnlineRecordConstants.SERVICE_KEY);
 		RmUserOnlineRecordVo uorVo = new RmUserOnlineRecordVo();
 		uorVo.setUser_id(loginVo.getId());
-		uorVo.setCluster_node_id(RmClusterConfig.getSelfId());
+		uorVo.setCluster_node_id(RmClusterConfig.getSingleton().getSelfId());
 		uorVo.setLogin_time(RmDateHelper.getSysTimestamp());
 		uorVo.setLogin_ip(RmProjectHelper.getIp(request));
 		uorVo.setLogin_uuid(RmGlobalMonitor.uniqueUUID.get());

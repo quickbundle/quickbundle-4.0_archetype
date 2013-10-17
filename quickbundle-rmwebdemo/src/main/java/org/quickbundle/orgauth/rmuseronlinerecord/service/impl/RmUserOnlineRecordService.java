@@ -18,12 +18,12 @@ package org.quickbundle.orgauth.rmuseronlinerecord.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.quickbundle.base.cache.RmSqlCountCache;
 import org.quickbundle.base.service.RmService;
 import org.quickbundle.orgauth.rmuseronlinerecord.dao.IRmUserOnlineRecordDao;
 import org.quickbundle.orgauth.rmuseronlinerecord.service.IRmUserOnlineRecordService;
 import org.quickbundle.orgauth.rmuseronlinerecord.util.IRmUserOnlineRecordConstants;
 import org.quickbundle.orgauth.rmuseronlinerecord.vo.RmUserOnlineRecordVo;
+import org.quickbundle.project.cache.RmSqlCountCache;
 
 /**
  * 功能、用途、现存BUG:

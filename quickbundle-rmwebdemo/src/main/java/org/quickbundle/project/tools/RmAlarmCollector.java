@@ -21,10 +21,10 @@ public class RmAlarmCollector {
 	 */
 	public static String[] createInfo(Object msg, Throwable e) {
     	StringBuilder subject = new StringBuilder();
-    	if(RmClusterConfig.getLocalhostInfo() != null) {
-    		subject.append(RmClusterConfig.getLocalhostInfo().getLocalhostUrlPath());
+    	if(RmClusterConfig.getSingleton().getLocalhostInfo() != null) {
+    		subject.append(RmClusterConfig.getSingleton().getLocalhostInfo().getLocalhostUrlPath());
     	} else {
-    		subject.append(RmClusterConfig.getUrlPrefix(RmClusterConfig.getSelfId()));
+    		subject.append(RmClusterConfig.getSingleton().getUrlPrefix(RmClusterConfig.getSingleton().getSelfId()));
     	}
     	if(subject.toString().startsWith("http://")) {
     		subject.delete(0, "http://".length());

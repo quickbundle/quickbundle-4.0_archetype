@@ -9,10 +9,10 @@ import javax.servlet.ServletContextEvent;
 
 import org.logicalcobwebs.proxool.ProxoolFacade;
 import org.quickbundle.base.beans.factory.RmBeanFactory;
-import org.quickbundle.base.cache.RmCacheHandler;
+import org.quickbundle.project.cache.RmCacheHandler;
 import org.quickbundle.base.web.servlet.RmHolderServlet;
 import org.quickbundle.project.init.CustomSystemProperties;
-import org.quickbundle.project.init.LoadRmConfig;
+import org.quickbundle.project.init.LoadProjectConfig;
 import org.quickbundle.tools.support.buffer.FlushQueueThread;
 import org.quickbundle.tools.support.log.RmLogHelper;
 import org.quickbundle.tools.support.path.RmPathHelper;
@@ -38,7 +38,7 @@ public class RmContextLoaderListener extends ContextLoaderListener {
 		RmHolderServlet.setDefaultServletContext(event.getServletContext());
 		//更新RmConfig配置
 		CustomSystemProperties.getInstance().init();
-		LoadRmConfig.initRmConfig();
+		LoadProjectConfig.initRmConfig();
 		
 		getLogger().info(RmPathHelper.initWarRoot());
 		synchronized (RmBeanFactory.lockInitFactory) {

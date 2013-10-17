@@ -17,12 +17,12 @@ package org.quickbundle.modules.code.rmcodedata.service.impl;
 
 import java.util.List;
 
-import org.quickbundle.base.cache.RmSqlCountCache;
 import org.quickbundle.base.service.RmService;
 import org.quickbundle.modules.code.rmcodedata.dao.IRmCodeDataDao;
 import org.quickbundle.modules.code.rmcodedata.service.IRmCodeDataService;
 import org.quickbundle.modules.code.rmcodedata.util.IRmCodeDataConstants;
 import org.quickbundle.modules.code.rmcodedata.vo.RmCodeDataVo;
+import org.quickbundle.project.cache.RmSqlCountCache;
 
 /**
  * 功能、用途、现存BUG:

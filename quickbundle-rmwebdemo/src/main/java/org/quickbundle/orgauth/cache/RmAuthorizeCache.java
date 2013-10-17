@@ -5,12 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.quickbundle.base.beans.factory.RmBeanFactory;
-import org.quickbundle.base.cache.RmAbstractCache;
-import org.quickbundle.tools.support.log.RmLogHelper;
-
 import org.quickbundle.orgauth.rmauthorize.service.IRmAuthorizeService;
 import org.quickbundle.orgauth.rmauthorize.util.IRmAuthorizeConstants;
 import org.quickbundle.orgauth.rmauthorize.vo.RmAuthorizeVo;
+import org.quickbundle.project.cache.RmAbstractCache;
+import org.quickbundle.tools.support.log.RmLogHelper;
 
 
 public class RmAuthorizeCache extends RmAbstractCache {

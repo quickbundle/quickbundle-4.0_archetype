@@ -15,13 +15,13 @@ import org.quickbundle.tools.support.log.RmLogHelper;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 
-public class PopulateConfig {
+public class PopulateRmConfig {
 	private RmConfigVo config;
 	private Document doc;
 	
 	private Map<String, String> map;
 	
-	public PopulateConfig(RmConfigVo config, Document doc) {
+	public PopulateRmConfig(RmConfigVo config, Document doc) {
 		this.config = config;
 		this.doc = doc;
 		map = new HashMap<String, String>();

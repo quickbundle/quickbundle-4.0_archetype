@@ -13,22 +13,24 @@
 	</org.quickbundle.config.RmConfig>
 
 	<!-- #change in production -->
-	<org.quickbundle.base.cloud.RmClusterConfig thisId="server1">
-		<node id="server1">
-			<user>server1</user>
-			<password>1</password>
-			<contextPath>/rmdemo</contextPath>
-			<urlPrefix>http://localhost:9999/rmdemo/</urlPrefix>
-			<webServiceUrl>http://localhost:9999/rmdemo/services/</webServiceUrl>
-		</node>
-		<!-- other cluster node -->
-		<node id="server2">
-			<user>server2</user>
-			<password>1</password>
-			<contextPath>/rmdemo</contextPath>
-			<urlPrefix>http://localhost:10000/rmdemo/</urlPrefix>
-			<webServiceUrl>http://localhost:10000/rmdemo/services/</webServiceUrl>
-		</node>
+	<org.quickbundle.base.cloud.RmClusterConfig>
+		<org.quickbundle.project.init.DefaultLoadRmClusterConfig thisId="server1">
+			<node id="server1">
+				<user>server1</user>
+				<password>1</password>
+				<contextPath>/rmdemo</contextPath>
+				<urlPrefix>http://localhost:9999/rmdemo/</urlPrefix>
+				<webServiceUrl>http://localhost:9999/rmdemo/services/</webServiceUrl>
+			</node>
+			<!-- other cluster node -->
+			<node id="server2">
+				<user>server2</user>
+				<password>1</password>
+				<contextPath>/rmdemo</contextPath>
+				<urlPrefix>http://localhost:10000/rmdemo/</urlPrefix>
+				<webServiceUrl>http://localhost:10000/rmdemo/services/</webServiceUrl>
+			</node>
+		</org.quickbundle.project.init.DefaultLoadRmClusterConfig>
 	</org.quickbundle.base.cloud.RmClusterConfig>
 	
 	<org.quickbundle.project.login.RmSsoLogin>

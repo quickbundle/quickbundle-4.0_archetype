@@ -5,12 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.quickbundle.base.beans.factory.RmBeanFactory;
-import org.quickbundle.base.cache.RmAbstractCache;
-import org.quickbundle.tools.support.log.RmLogHelper;
-
 import org.quickbundle.orgauth.rmpartytype.service.IRmPartyTypeService;
 import org.quickbundle.orgauth.rmpartytype.util.IRmPartyTypeConstants;
 import org.quickbundle.orgauth.rmpartytype.vo.RmPartyTypeVo;
+import org.quickbundle.project.cache.RmAbstractCache;
+import org.quickbundle.tools.support.log.RmLogHelper;
 
 public class RmPartyTypeCache extends RmAbstractCache {
     private Map<String, RmPartyTypeVo> mPartyType;

@@ -38,10 +38,10 @@ public class RmPasswordCallback implements CallbackHandler {
     private Map<String, String> passwords = new HashMap<String, String>();
     
     public RmPasswordCallback() {
-    	List<String> lNodeId = RmClusterConfig.getOtherNodeId();
-    	lNodeId.add(RmClusterConfig.getSelfId());
+    	List<String> lNodeId = RmClusterConfig.getSingleton().getOtherNodeId();
+    	lNodeId.add(RmClusterConfig.getSingleton().getSelfId());
     	for(String nodeId : lNodeId) {
-    		passwords.putAll(RmClusterConfig.getAuth(nodeId));
+    		passwords.putAll(RmClusterConfig.getSingleton().getAuth(nodeId));
     	}
     }
 

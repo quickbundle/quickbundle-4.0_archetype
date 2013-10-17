@@ -28,7 +28,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.quickbundle.base.beans.factory.RmBeanFactory;
-import org.quickbundle.base.cache.RmSqlCountCache;
 import org.quickbundle.base.web.page.RmPageVo;
 import org.quickbundle.config.RmClusterConfig;
 import org.quickbundle.config.RmConfig;
@@ -39,6 +38,7 @@ import org.quickbundle.orgauth.rmuser.util.IRmUserConstants;
 import org.quickbundle.orgauth.rmuser.vo.RmUserVo;
 import org.quickbundle.project.IGlobalConstants;
 import org.quickbundle.project.RmProjectHelper;
+import org.quickbundle.project.cache.RmSqlCountCache;
 import org.quickbundle.project.common.vo.RmCommonVo;
 import org.quickbundle.project.listener.RmSessionListener;
 import org.quickbundle.project.login.IRmLoginConstants;
@@ -539,7 +539,7 @@ public class RmUserAction extends RmDispatchAction implements IRmUserConstants {
     		//最大非活动间隔
     		userVoNew.setMaxInactiveInterval(session.getMaxInactiveInterval() * 1000);
     		//登录服务器主机名
-    		userVoNew.setClusterNodeId(RmClusterConfig.getSelfId());
+    		userVoNew.setClusterNodeId(RmClusterConfig.getSingleton().getSelfId());
     		beans.add(userVoNew);
         }
         request.setAttribute(REQUEST_BEANS, beans);  //把结果集放入request

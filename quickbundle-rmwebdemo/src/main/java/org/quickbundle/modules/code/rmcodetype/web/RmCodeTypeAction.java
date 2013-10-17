@@ -24,7 +24,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.quickbundle.base.beans.factory.RmBeanFactory;
-import org.quickbundle.base.cache.RmCacheHandler;
+import org.quickbundle.project.cache.RmCacheHandler;
 import org.quickbundle.third.struts.actions.RmDispatchAction;
 import org.quickbundle.base.web.page.RmPageVo;
 import org.quickbundle.itf.cache.IRmCacheListener;

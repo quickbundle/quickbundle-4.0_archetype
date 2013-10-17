@@ -20,7 +20,7 @@
 	  address="/HelloWorld" />
  -->
  
-<bean id="IRmCacheHandler" class="org.quickbundle.base.cache.RmCacheHandler" />
+<bean id="IRmCacheHandler" class="org.quickbundle.project.cache.RmCacheHandler" />
 
 <jaxws:endpoint id="RmCacheHandler" implementor="#IRmCacheHandler" address="/RmCacheHandler" >
 		<jaxws:inInterceptors>

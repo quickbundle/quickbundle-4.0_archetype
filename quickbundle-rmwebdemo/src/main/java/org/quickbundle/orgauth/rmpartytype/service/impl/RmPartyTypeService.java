@@ -18,16 +18,15 @@ package org.quickbundle.orgauth.rmpartytype.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.quickbundle.base.cache.RmCacheHandler;
-import org.quickbundle.base.cache.RmSqlCountCache;
 import org.quickbundle.base.service.RmService;
 import org.quickbundle.itf.cache.IRmCacheListener;
-
 import org.quickbundle.orgauth.cache.RmPartyTypeCache;
 import org.quickbundle.orgauth.rmpartytype.dao.IRmPartyTypeDao;
 import org.quickbundle.orgauth.rmpartytype.service.IRmPartyTypeService;
 import org.quickbundle.orgauth.rmpartytype.util.IRmPartyTypeConstants;
 import org.quickbundle.orgauth.rmpartytype.vo.RmPartyTypeVo;
+import org.quickbundle.project.cache.RmCacheHandler;
+import org.quickbundle.project.cache.RmSqlCountCache;
 
 /**
  * 功能、用途、现存BUG:

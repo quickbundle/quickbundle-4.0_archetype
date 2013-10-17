@@ -28,7 +28,7 @@ import org.quickbundle.tools.support.path.RmPathHelper;
 /**
  * 初始化组件和服务
  * 
- * @author qb
+ * @author 白小勇
  * 
  */
 public class RmWebApplicationInit implements ILoadOnStartup {

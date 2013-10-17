@@ -25,19 +25,17 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.quickbundle.base.beans.factory.RmBeanFactory;
-import org.quickbundle.base.cache.RmSqlCountCache;
-import org.quickbundle.third.struts.actions.RmDispatchAction;
 import org.quickbundle.base.web.page.RmPageVo;
+import org.quickbundle.orgauth.rmuseronlinerecord.service.IRmUserOnlineRecordService;
+import org.quickbundle.orgauth.rmuseronlinerecord.util.IRmUserOnlineRecordConstants;
+import org.quickbundle.orgauth.rmuseronlinerecord.vo.RmUserOnlineRecordVo;
 import org.quickbundle.project.IGlobalConstants;
+import org.quickbundle.project.cache.RmSqlCountCache;
+import org.quickbundle.third.struts.actions.RmDispatchAction;
 import org.quickbundle.tools.helper.RmJspHelper;
 import org.quickbundle.tools.helper.RmPopulateHelper;
 import org.quickbundle.tools.helper.RmSqlHelper;
 import org.quickbundle.tools.helper.RmVoHelper;
-
-
-import org.quickbundle.orgauth.rmuseronlinerecord.service.IRmUserOnlineRecordService;
-import org.quickbundle.orgauth.rmuseronlinerecord.util.IRmUserOnlineRecordConstants;
-import org.quickbundle.orgauth.rmuseronlinerecord.vo.RmUserOnlineRecordVo;
 
 /**
  * 功能、用途、现存BUG:

@@ -4,13 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.quickbundle.base.beans.factory.RmBeanFactory;
-import org.quickbundle.base.cache.RmAbstractCache;
-import org.quickbundle.tools.support.log.RmLogHelper;
-import org.quickbundle.util.RmSequenceMap;
-
 import org.quickbundle.modules.log.rmlogtype.service.IRmLogTypeService;
 import org.quickbundle.modules.log.rmlogtype.util.IRmLogTypeConstants;
 import org.quickbundle.modules.log.rmlogtype.vo.RmLogTypeVo;
+import org.quickbundle.project.cache.RmAbstractCache;
+import org.quickbundle.tools.support.log.RmLogHelper;
+import org.quickbundle.util.RmSequenceMap;
 
 public class RmLogTypeCache extends RmAbstractCache {
     private Map<String, RmLogTypeVo> mLogType;

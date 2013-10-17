@@ -18,13 +18,13 @@ package org.quickbundle.modules.affix.rmaffix.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.quickbundle.base.cache.RmSqlCountCache;
 import org.quickbundle.base.service.RmService;
 import org.quickbundle.modules.affix.rmaffix.dao.IRmAffixDao;
 import org.quickbundle.modules.affix.rmaffix.service.IRmAffixService;
 import org.quickbundle.modules.affix.rmaffix.util.IRmAffixConstants;
 import org.quickbundle.modules.affix.rmaffix.vo.RmAffixVo;
 import org.quickbundle.project.RmProjectHelper;
+import org.quickbundle.project.cache.RmSqlCountCache;
 import org.quickbundle.tools.helper.RmStringHelper;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;

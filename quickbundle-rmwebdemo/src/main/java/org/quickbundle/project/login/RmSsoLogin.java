@@ -67,8 +67,8 @@ public class RmSsoLogin {
 				throw new RmRuntimeException("未配置跳转到的目标地址");
 			}
 			//带着sso信息跳转到目标服务器
-			if(RmClusterConfig.getLocalhostInfo() != null 
-					&& targetUrlPrefix.startsWith(RmClusterConfig.getLocalhostInfo().getLocalhostUrlPath())) {
+			if(RmClusterConfig.getSingleton().getLocalhostInfo() != null 
+					&& targetUrlPrefix.startsWith(RmClusterConfig.getSingleton().getLocalhostInfo().getLocalhostUrlPath())) {
 				//throw new RmRuntimeException("不能跳转到自身，可能导致循环跳转");
 				//如果判断为跳到本机，忽略跳转
 				filterChain.doFilter(request, response);
@@ -122,7 +122,7 @@ public class RmSsoLogin {
 			String[] ssoValueArgs = ssoValue.split(splictKeyRegex);
 			String nodeId = ssoValueArgs[0];
 			String sessionId = ssoValueArgs[2];
-			String callWsUrl = RmClusterConfig.getWsUrl(nodeId);
+			String callWsUrl = RmClusterConfig.getSingleton().getWsUrl(nodeId);
 			String address = callWsUrl + "RmSsoLogin";
 			JaxWsProxyFactoryBean jw = new JaxWsProxyFactoryBean();
 			jw.setServiceClass(IRmSsoService.class);
@@ -144,7 +144,7 @@ public class RmSsoLogin {
 	
 	public static RmSsoVo createInstance(String sessionId) {
 		RmSsoVo instance = new RmSsoVo();
-		instance.setNodeId(RmClusterConfig.getSelfId());
+		instance.setNodeId(RmClusterConfig.getSingleton().getSelfId());
 		instance.setExpired(String.valueOf(System.currentTimeMillis() + defaultExpired));
 		instance.setSessionId(sessionId);
 		instance.setHash(Md5Token.getInstance().getLongToken(Md5Token.getInstance().getLongToken(instance.nodeId + instance.expired + instance.sessionId) + privateKey));
