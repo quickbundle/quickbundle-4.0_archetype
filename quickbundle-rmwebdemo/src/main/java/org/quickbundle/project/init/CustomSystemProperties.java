@@ -32,11 +32,8 @@ public class CustomSystemProperties {
 	
 	@SuppressWarnings("unchecked")
 	public void init() {
-		List<Node> nodes = doc.selectNodes("/rm/org.quickbundle.project.init.CustomSystemProperties/node()");
+		List<Element> nodes = doc.selectNodes("/rm/org.quickbundle.project.init.CustomSystemProperties/*");
 		for(Node node : nodes) {
-			if(!(node instanceof Element)) {
-				continue;
-			}
 			Element ele = (Element) node;
 			String key = ele.getName();
 			String value = ele.getText().trim();

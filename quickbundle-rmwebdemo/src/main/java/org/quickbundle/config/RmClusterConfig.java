@@ -2,7 +2,7 @@ package org.quickbundle.config;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
-import org.quickbundle.project.init.DefaultLoadRmClusterConfig;
+import org.quickbundle.project.init.AbatractLoadClusterConfig;
 import org.quickbundle.project.init.LoadProjectConfig;
 
 
@@ -23,12 +23,12 @@ public class RmClusterConfig {
 
 	public static void main(String[] args) {
 		Document rmClusterDoc = RmLoadConfig.getRmClusterDoc();
-		Element eleLoadCluster = (Element) rmClusterDoc.selectSingleNode("/rm/org.quickbundle.base.cloud.RmClusterConfig/*[1]");
+		Element eleLoadCluster = (Element) rmClusterDoc.selectSingleNode("/rm/org.quickbundle.config.RmClusterConfig/*[1]");
 		String classNameLoadCluster = eleLoadCluster.getName();
 		try {
-			DefaultLoadRmClusterConfig lc = (DefaultLoadRmClusterConfig) LoadProjectConfig.class.getClassLoader().loadClass(classNameLoadCluster).newInstance();
-			lc.init();
-			RmClusterConfig.getSingleton().setLoadRmClusterConfig(lc);
+			AbatractLoadClusterConfig alcc = (AbatractLoadClusterConfig) LoadProjectConfig.class.getClassLoader().loadClass(classNameLoadCluster).newInstance();
+			alcc.init();
+			RmClusterConfig.getSingleton().setLoadClusterConfig(alcc);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

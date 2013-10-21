@@ -20,12 +20,12 @@ public class LoadProjectConfig {
 		PopulateRmConfig pc2 = new PopulateRmConfig(RmConfig.getSingleton(), rmClusterDoc);
 		pc2.populate();
 
-		Element eleLoadCluster = (Element) rmClusterDoc.selectSingleNode("/rm/org.quickbundle.base.cloud.RmClusterConfig/node[1]");
+		Element eleLoadCluster = (Element) rmClusterDoc.selectSingleNode("/rm/org.quickbundle.config.RmClusterConfig/*[1]");
 		String classNameLoadCluster = eleLoadCluster.getName();
 		try {
-			DefaultLoadRmClusterConfig lc = (DefaultLoadRmClusterConfig) LoadProjectConfig.class.getClassLoader().loadClass(classNameLoadCluster).newInstance();
-			lc.init();
-			RmClusterConfig.getSingleton().setLoadRmClusterConfig(lc);
+			AbatractLoadClusterConfig loadClusterConfig = (AbatractLoadClusterConfig) LoadProjectConfig.class.getClassLoader().loadClass(classNameLoadCluster).newInstance();
+			loadClusterConfig.init();
+			RmClusterConfig.getSingleton().setLoadClusterConfig(loadClusterConfig);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

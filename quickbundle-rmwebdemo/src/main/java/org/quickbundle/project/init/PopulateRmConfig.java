@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
-import org.dom4j.Node;
 import org.quickbundle.config.RmConfigVo;
 import org.quickbundle.tools.helper.RmStringHelper;
 import org.quickbundle.tools.support.log.RmLogHelper;
@@ -30,12 +29,8 @@ public class PopulateRmConfig {
 	@SuppressWarnings("unchecked")
 	public void populate() {
         BeanWrapper bw = new BeanWrapperImpl(config);
-		List<Node> nodes = doc.selectNodes("/rm/org.quickbundle.config.RmConfig/node()");
-		for(Node node : nodes) {
-			if(!(node instanceof Element)) {
-				continue;
-			}
-			Element ele = (Element) node;
+		List<Element> nodes = doc.selectNodes("/rm/org.quickbundle.config.RmConfig/*");
+		for(Element ele : nodes) {
 			String key = ele.getName();
 			String value = ele.getText().trim();
 			String newValue = parseValue(value);

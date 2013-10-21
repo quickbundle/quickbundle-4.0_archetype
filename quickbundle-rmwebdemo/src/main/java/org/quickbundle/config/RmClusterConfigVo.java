@@ -1,21 +1,23 @@
 package org.quickbundle.config;
 
-import java.net.InetAddress;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.dom4j.Element;
 import org.quickbundle.base.web.servlet.RmHolderServlet;
 import org.quickbundle.project.cache.RmCacheHandler;
-import org.quickbundle.project.init.DefaultLoadRmClusterConfig;
+import org.quickbundle.project.init.AbatractLoadClusterConfig;
 
 public class RmClusterConfigVo {
 	
 	private HostInfo localhostInfo = null;
 	private volatile boolean isInit = false;
 
+	public HostInfo getLocalhostInfo() {
+		return localhostInfo;
+	}
+	
 	public void initLocalhostInfo(HttpServletRequest request) {
 		if (!isInit) {
 			synchronized (RmClusterConfig.class) {
@@ -31,22 +33,14 @@ public class RmClusterConfigVo {
 		}
 	}
 
-	public HostInfo getLocalhostInfo() {
-		return localhostInfo;
-	}
-
-	private DefaultLoadRmClusterConfig loadRmClusterConfig;
+	private AbatractLoadClusterConfig loadClusterConfig;
 	
-	public DefaultLoadRmClusterConfig getLoadRmClusterConfig() {
-		return loadRmClusterConfig;
+	public AbatractLoadClusterConfig getLoadClusterConfig() {
+		return loadClusterConfig;
 	}
 
-	public void setLoadRmClusterConfig(DefaultLoadRmClusterConfig loadRmClusterConfig) {
-		this.loadRmClusterConfig = loadRmClusterConfig;
-	}
-
-	public Element getSelfNode() {
-		return loadRmClusterConfig.getSelfNode();
+	public void setLoadClusterConfig(AbatractLoadClusterConfig loadClusterConfig) {
+		this.loadClusterConfig = loadClusterConfig;
 	}
 
 	/**
@@ -65,7 +59,10 @@ public class RmClusterConfigVo {
 				RmCacheHandler.logCache.error("JavaEE version to low: " + e.toString());
 			}
 		}
-		return getSelfNode().valueOf("contextPath");
+		if(loadClusterConfig == null) {
+			return null;
+		}
+		return loadClusterConfig.getSelfNode().get("contextPath");
 	}
 
 	/**
@@ -74,14 +71,10 @@ public class RmClusterConfigVo {
 	 * @return
 	 */
 	public String getSelfId() {
-		if (RmBaseConfig.getSingleton().isCloudNodeInfoAuto()) {
-			try {
-				return InetAddress.getLocalHost().toString();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		if(loadClusterConfig == null) {
+			return null;
 		}
-		return getSelfNode().valueOf("@id");
+		return loadClusterConfig.getSelfNode().get("id");
 	}
 
 	/**
@@ -90,31 +83,45 @@ public class RmClusterConfigVo {
 	 * @return
 	 */
 	public String getSelfWsUrl() {
-		if (RmBaseConfig.getSingleton().isCloudNodeInfoAuto() && localhostInfo != null) {
-			String localhost = localhostInfo.getScheme() + "://" + localhostInfo.getServerName() + ":" + localhostInfo.getServerPort();
-			return localhost + getContextPath() + "/services/";
+		if(loadClusterConfig == null) {
+			return null;
 		}
-		return getSelfNode().valueOf("webServiceUrl");
+		return loadClusterConfig.getSelfNode().get("webServiceUrl");
 	}
 
 	public List<String> getOtherNodeId() {
-		return loadRmClusterConfig.getOtherNodeId();
+		if(loadClusterConfig == null) {
+			return null;
+		}
+		return loadClusterConfig.getOtherNodeId();
 	}
 
 	public Map<? extends String, ? extends String> getAuth(String nodeId) {
-		return loadRmClusterConfig.getAuth(nodeId);
+		if(loadClusterConfig == null) {
+			return null;
+		}
+		return loadClusterConfig.getAuth(nodeId);
 	}
 
 	public String getWsUrl(String clusterNodeId) {
-		return loadRmClusterConfig.getWsUrl(clusterNodeId);
+		if(loadClusterConfig == null) {
+			return null;
+		}
+		return loadClusterConfig.getWsUrl(clusterNodeId);
 	}
 
 	public Object getUrlPrefix(String selfId) {
-		return loadRmClusterConfig.getUrlPrefix(selfId);
+		if(loadClusterConfig == null) {
+			return null;
+		}
+		return loadClusterConfig.getUrlPrefix(selfId);
 	}
 
 	public Map<String, String> getOtherWsUrl() {
-		return loadRmClusterConfig.getOtherWsUrl();
+		if(loadClusterConfig == null) {
+			return null;
+		}
+		return loadClusterConfig.getOtherWsUrl();
 	}
 
 }

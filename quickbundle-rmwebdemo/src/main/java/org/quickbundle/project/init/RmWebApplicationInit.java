@@ -47,57 +47,14 @@ public class RmWebApplicationInit implements ILoadOnStartup {
 		// 初始化数据库类型
 		initDatabaseProductName();
 
-		try {
-			if (RmConfig.getSingleton().isSystemDebugMode()) {
-				IRmCodeService codeService = (IRmCodeService) RmBeanFactory.getBean(IRmCodeService.class.getName());
-				if (needExecuteInitTable()) {
-					// 初始化数据库的内置表，只会执行一次。如果要再执行，需手动删除/WEB-INF/config/sql/lockInitTable文件
-					codeService.executeInitTable();
-				}
-				// 从xml中初始化编码数据
-				codeService.executeInitCodeTypeDataByXml();
-			} else {
-				// 初始化ID
-				RmIdFactory.getIdGenerator();
-				// 初始化编码表数据
-				RmGlobalReference.getSingleton().initDataTotal();
-			}
-		} catch (Exception e) {
-			RmLogHelper.error(this.getClass(), "init rm error: " + e.toString());
-		}
+		//初始化库表数据
+		initData();
 
 		// quartz begin
-		try {
-			if (RmConfig.getSingleton().isSchedulerStart()) {
-				long schedulerStartLazySecond = RmConfig.getSingleton().getSchedulerStartLazy();
-				if (schedulerStartLazySecond <= 0) {
-					org.quartz.Scheduler scheduler = (org.quartz.Scheduler) RmBeanFactory.getBean(org.quickbundle.third.quartz.util.ISchedulerConstants.QUARTZ_SHEDULER);
-					scheduler.start();
-
-				} else {
-					final long finalSchedulerStartLazy = schedulerStartLazySecond;
-					Thread t = new Thread(new Runnable() {
-						public void run() {
-							try {
-								System.out.println("sleep for ejb ok begin, " + finalSchedulerStartLazy + " second");
-								Thread.sleep(1000 * finalSchedulerStartLazy);
-								System.out.println("sleep for ejb ok end");
-								org.quartz.Scheduler scheduler = (org.quartz.Scheduler) RmBeanFactory.getBean(org.quickbundle.third.quartz.util.ISchedulerConstants.QUARTZ_SHEDULER);
-								scheduler.start();
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						}
-					});
-					t.start();
-				}
-			}
-		} catch (Exception e) {
-			RmLogHelper.getLogger(this.getClass()).error("调度器启动失败", e);
-		}
+		initQuartz();
 		// quartz end
 	}
-	
+
 	void check() {
 		File warHome = new File(RmConfig.getSingleton().getWarHome());
 		if (!warHome.exists()) {
@@ -164,6 +121,60 @@ public class RmWebApplicationInit implements ILoadOnStartup {
 			}
 		}
 	}
+	
+	private void initData() {
+		try {
+			if (RmConfig.getSingleton().isSystemDebugMode()) {
+				IRmCodeService codeService = (IRmCodeService) RmBeanFactory.getBean(IRmCodeService.class.getName());
+				if (needExecuteInitTable()) {
+					// 初始化数据库的内置表，只会执行一次。如果要再执行，需手动删除/WEB-INF/config/sql/lockInitTable文件
+					codeService.executeInitTable();
+				}
+				// 从xml中初始化编码数据
+				codeService.executeInitCodeTypeDataByXml();
+			} else {
+				// 初始化ID
+				RmIdFactory.getIdGenerator();
+				// 初始化编码表数据
+				RmGlobalReference.getSingleton().initDataTotal();
+			}
+		} catch (Exception e) {
+			RmLogHelper.error(this.getClass(), "init rm error: " + e.toString());
+		}
+	}
+	
+	// quartz begin
+	private void initQuartz() {
+		try {
+			if (RmConfig.getSingleton().isSchedulerStart()) {
+				long schedulerStartLazySecond = RmConfig.getSingleton().getSchedulerStartLazy();
+				if (schedulerStartLazySecond <= 0) {
+					org.quartz.Scheduler scheduler = (org.quartz.Scheduler) RmBeanFactory.getBean(org.quickbundle.third.quartz.util.ISchedulerConstants.QUARTZ_SHEDULER);
+					scheduler.start();
+
+				} else {
+					final long finalSchedulerStartLazy = schedulerStartLazySecond;
+					Thread t = new Thread(new Runnable() {
+						public void run() {
+							try {
+								System.out.println("sleep for ejb ok begin, " + finalSchedulerStartLazy + " second");
+								Thread.sleep(1000 * finalSchedulerStartLazy);
+								System.out.println("sleep for ejb ok end");
+								org.quartz.Scheduler scheduler = (org.quartz.Scheduler) RmBeanFactory.getBean(org.quickbundle.third.quartz.util.ISchedulerConstants.QUARTZ_SHEDULER);
+								scheduler.start();
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
+					});
+					t.start();
+				}
+			}
+		} catch (Exception e) {
+			RmLogHelper.getLogger(this.getClass()).error("调度器启动失败", e);
+		}
+	}
+	// quartz end
 
 	public void service(HttpServlet servlet, HttpServletRequest request, HttpServletResponse response) throws ServletException {
 		// nothing

@@ -42,20 +42,6 @@ public class RmConfigVo extends RmBaseConfigVo {
 	}
 
 	/**
-	 * @return 云节点信息是自动采集？还是从rm.xml中读取
-	 */
-	public boolean isCloudNodeInfoAuto() {
-		return singleton.isCloudNodeInfoAuto();
-	}
-
-	/**
-	 * @param cloudNodeInfoAuto the cloudNodeInfoAuto to set
-	 */
-	public void setCloudNodeInfoAuto(boolean cloudNodeInfoAuto) {
-		singleton.setCloudNodeInfoAuto(cloudNodeInfoAuto);
-	}
-
-	/**
 	 * @return 获得默认数据源的数据库类型  IGlobalConstants.DATABASE_PRODUCT_NAME_...
 	 */
 	public String getDatabaseProductName() {

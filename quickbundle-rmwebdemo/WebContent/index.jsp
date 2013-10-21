@@ -6,7 +6,7 @@
 <%@page import="org.quickbundle.project.RmProjectHelper"%>
 <% 
 	try {
-		RmClusterConfig.initLocalhostInfo(request);
+		//RmClusterConfig.initLocalhostInfo(request);
 	} catch(Throwable e) {
 		e.printStackTrace();
 	}

@@ -13,8 +13,8 @@
 	</org.quickbundle.config.RmConfig>
 
 	<!-- #change in production -->
-	<org.quickbundle.base.cloud.RmClusterConfig>
-		<org.quickbundle.project.init.DefaultLoadRmClusterConfig thisId="server1">
+	<org.quickbundle.config.RmClusterConfig>
+		<org.quickbundle.project.init.LoadClusterConfigXml thisId="server1">
 			<node id="server1">
 				<user>server1</user>
 				<password>1</password>
@@ -30,8 +30,8 @@
 				<urlPrefix>http://localhost:10000/rmdemo/</urlPrefix>
 				<webServiceUrl>http://localhost:10000/rmdemo/services/</webServiceUrl>
 			</node>
-		</org.quickbundle.project.init.DefaultLoadRmClusterConfig>
-	</org.quickbundle.base.cloud.RmClusterConfig>
+		</org.quickbundle.project.init.LoadClusterConfigXml>
+	</org.quickbundle.config.RmClusterConfig>
 	
 	<org.quickbundle.project.login.RmSsoLogin>
 		<redirectGroup enable="false">
