@@ -11,6 +11,7 @@ import org.logicalcobwebs.proxool.ProxoolFacade;
 import org.quickbundle.base.beans.factory.RmBeanFactory;
 import org.quickbundle.project.cache.RmCacheHandler;
 import org.quickbundle.base.web.servlet.RmHolderServlet;
+import org.quickbundle.config.RmClusterConfig;
 import org.quickbundle.project.init.CustomSystemProperties;
 import org.quickbundle.project.init.LoadProjectConfig;
 import org.quickbundle.tools.support.buffer.FlushQueueThread;
@@ -40,7 +41,8 @@ public class RmContextLoaderListener extends ContextLoaderListener {
 		CustomSystemProperties.getInstance().init();
 		LoadProjectConfig.initRmConfig();
 		
-		getLogger().info(RmPathHelper.initWarRoot());
+		String initWarRootMsg = RmPathHelper.initWarRoot();
+		getLogger().info(initWarRootMsg);
 		synchronized (RmBeanFactory.lockInitFactory) {
 			RmBeanFactory.setInitBeanStarted(true); //通知RmBeanFactory已开始启动BeanFactory
 			super.contextInitialized(event);
@@ -58,7 +60,6 @@ public class RmContextLoaderListener extends ContextLoaderListener {
 		try {
 			org.quartz.Scheduler scheduler = org.quartz.impl.StdSchedulerFactory.getDefaultScheduler();
 			scheduler.shutdown(true);
-			//等待quartz线程安全停止
 			//doWaitForClearThread(10000, "org\\.quartz\\.simpl\\.SimpleThreadPool.*");
 		} catch (Exception e) {
 			getLogger().error("scheduler.shutdown():" + e.toString());
@@ -67,15 +68,20 @@ public class RmContextLoaderListener extends ContextLoaderListener {
 		
 		try {
 			FlushQueueThread.getSingleton().shutdown();
-			//等待RM-FlushQueue线程安全停止
 			doWaitForClearThread(3000, "RM-FlushQueue.*");
 		} catch (Exception e) {
 			getLogger().error("FlushQueueThread.getSingleton().shutdown():" + e.toString());
 		}
 		
 		try {
+			RmClusterConfig.getSingleton().destroy();
+			//doWaitForClearThread(3000, "NodeHeartbeat.*");
+		} catch (Exception e) {
+			getLogger().error("RmClusterConfig.getSingleton().destroy():" + e.toString());
+		}
+		
+		try {
 			RmCacheHandler.getSingleton().showdown();
-			//等待RM-CacheHandler线程安全停止
 			//doWaitForClearThread(5000, "RM-CacheHandler.*");
 		} catch (Exception e) {
 			getLogger().error("RmCacheHandler.getSingleton().showdown():" + e.toString());
@@ -83,7 +89,6 @@ public class RmContextLoaderListener extends ContextLoaderListener {
 		
 		try {
 			ProxoolFacade.shutdown(10000);
-			//等待proxool连接池线程安全停止
 			//doWaitForClearThread(10000, "org\\.logicalcobwebs\\.proxool\\.admin\\.StatsRoller.*");
 		} catch (Exception e) {
 			getLogger().error("ProxoolFacade.shutdown():" + e.toString());

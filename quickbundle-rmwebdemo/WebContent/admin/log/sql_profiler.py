@@ -12,7 +12,7 @@ from qb.tools.support.log import ui_public
 from javax.servlet.http import HttpServlet
 from org.quickbundle.config import RmConfig
 from org.quickbundle.config import RmConfigVo
-from org.quickbundle.project.profiler import RmProfilerHelper
+from org.quickbundle.third.jython import JythonSqlProfiler
 
 encode = RmConfig.getSingleton().defaultEncode()
 warHome = RmConfig.getSingleton().getWarHome()
@@ -156,7 +156,7 @@ class sql_profiler (HttpServlet):
         try:
     #        strsql = re.sub(p_id, '@id', special_sql.upper())
     #        strsql = p_ids.sub('@ids', strsql)
-            strsql = RmProfilerHelper.getReplaceSql(special_sql, p_id, p_ids) #改为java的正则
+            strsql = JythonSqlProfiler.getReplaceSql(special_sql, p_id, p_ids) #改为java的正则
             return strsql
         except:
             print traceback.format_exc()

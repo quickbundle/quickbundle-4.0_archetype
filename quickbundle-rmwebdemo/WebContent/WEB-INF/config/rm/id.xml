@@ -10,7 +10,7 @@
 	<!--generateFromHere-->
 
 	<!-- orgauth begin -->
-	<table table_code="2028" table_name="RM_PARTY_ROLE" id_name="ID" wrapper_class="org.quickbundle.base.beans.NumberFromOneIdWrapper"/>
+	<table table_code="2028" table_name="RM_PARTY_ROLE" id_name="ID" wrapper_class="org.quickbundle.base.beans.idwrapper.NumberIncrementWrapper"/>
 	<table table_code="2024" table_name="RM_AUTHORIZE" id_name="ID"/>
 	<table table_code="2018" table_name="RM_AUTHORIZE_RESOURCE" id_name="ID"/>
 	<table table_code="2017" table_name="RM_AUTHORIZE_RESOURCE_RECORD" id_name="ID"/>

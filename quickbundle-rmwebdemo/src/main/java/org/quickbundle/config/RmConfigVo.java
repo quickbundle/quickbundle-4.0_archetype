@@ -56,20 +56,6 @@ public class RmConfigVo extends RmBaseConfigVo {
 	}
 
 	/**
-	 * @return 是否水平拆分数据库
-	 */
-	public boolean isMultiDb() {
-		return singleton.isMultiDb();
-	}
-
-	/**
-	 * @param multiDb the multiDb to set
-	 */
-	public void setMultiDb(boolean multiDb) {
-		singleton.setMultiDb(multiDb);
-	}
-
-	/**
 	 * @return 系统是否开发调试状态(系统综合运行性能较低，优化了应用启动速度。同时sql的?替换输出，日志记录了sql真实数据)
 	 */
 	public boolean isSystemDebugMode() {
@@ -86,37 +72,15 @@ public class RmConfigVo extends RmBaseConfigVo {
 	/**
 	 * @return 本集群节点RmIdFactory产生的主键前缀
 	 */
-	public String getClusterIdPrefix() {
-		return singleton.getClusterIdPrefix();
+	public String getShardingPrefix() {
+		return singleton.getShardingPrefix();
 	}
 
 	/**
-	 * @param clusterIdPrefix the clusterIdPrefix to set
+	 * @param shardingPrefix the shardingPrefix to set
 	 */
-	public void setClusterIdPrefix(String clusterIdPrefix) {
-		singleton.setClusterIdPrefix(clusterIdPrefix);
-	}
-
-	/**
-	 * @return 是否RmIdFactory每次从数据库中读取，生成id (用于多人clusterIdPrefix相同，而且要同时开发)
-	 */
-	public boolean isGenerateIdFromDb() {
-		return singleton.isGenerateIdFromDb();
-	}
-
-	/**
-	 * @param generateIdFromDb the generateIdFromDb to set
-	 */
-	public void setGenerateIdFromDb(boolean generateIdFromDb) {
-		singleton.setGenerateIdFromDb(generateIdFromDb);
-	}
-
-	public boolean isInitIdBatch() {
-		return singleton.isInitIdBatch();
-	}
-
-	public void setInitIdBatch(boolean initIdBatch) {
-		singleton.setInitIdBatch(initIdBatch);
+	public void setShardingPrefix(String shardingPrefix) {
+		singleton.setShardingPrefix(shardingPrefix);
 	}
 	
 	/**
@@ -159,20 +123,6 @@ public class RmConfigVo extends RmBaseConfigVo {
 	 */
 	public void setDefaultBatchSize(int defaultBatchSize) {
 		singleton.setDefaultBatchSize(defaultBatchSize);
-	}
-
-	/**
-	 * @return 是否启动任务调度
-	 */
-	public boolean isSchedulerStart() {
-		return singleton.isSchedulerStart();
-	}
-
-	/**
-	 * @param schedulerStart the schedulerStart to set
-	 */
-	public void setSchedulerStart(boolean schedulerStart) {
-		singleton.setSchedulerStart(schedulerStart);
 	}
 
 	/**
@@ -385,12 +335,28 @@ public class RmConfigVo extends RmBaseConfigVo {
 	public int getMaxCacheSize() {
 		return singleton.getMaxCacheSize();
 	}
+
+	/**
+	 * 是否启动任务调度
+	 */
+	private boolean schedulerStart = false;
+	/**
+	 * @return 是否启动任务调度
+	 */
+	public boolean isSchedulerStart() {
+		return schedulerStart;
+	}
+	/**
+	 * @param schedulerStart the schedulerStart to set
+	 */
+	void setSchedulerStart(boolean schedulerStart) {
+		this.schedulerStart = schedulerStart;
+	}
 	
 	/**
 	 * lazy start scheduler time(second), 0 or -1 ignore this | 延时启动scheduler的秒数
 	 */
 	private long schedulerStartLazy;
-
 	/**
 	 * lazy start scheduler time(second), 0 or -1 ignore this | 延时启动scheduler的秒数
 	 * @return
@@ -398,7 +364,6 @@ public class RmConfigVo extends RmBaseConfigVo {
 	public long getSchedulerStartLazy() {
 		return schedulerStartLazy;
 	}
-
 	/**
 	 * lazy start scheduler time(second), 0 or -1 ignore this | 延时启动scheduler的秒数
 	 * @param schedulerStartLazy

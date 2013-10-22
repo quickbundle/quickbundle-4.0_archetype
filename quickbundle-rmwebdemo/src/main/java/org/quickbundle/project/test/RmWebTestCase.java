@@ -31,7 +31,6 @@ public class RmWebTestCase extends TestCase {
 	protected void setUp() throws Exception {
 	    init();
 	}
-	
     
     /**
      * 初始化log4j和Spring配置

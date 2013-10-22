@@ -28,7 +28,7 @@ import org.springframework.jdbc.core.RowMapper;
 @WebService(targetNamespace="http://login.project.quickbundle.org/", endpointInterface = "org.quickbundle.project.login.IRmSessionService")
 public class RmSessionService implements IRmSessionService {
 	public static IRmSessionService getRemoteSessionService(String clusterNodeId) {
-		String callWsUrl = RmClusterConfig.getSingleton().getWsUrl(clusterNodeId);
+		String callWsUrl = RmClusterConfig.getSingleton().getSelfNode().get(RmClusterConfig.NodeKey.webServiceUrl.name());
 		if(callWsUrl == null) {
 			return null;
 		}

@@ -3,7 +3,7 @@ package org.quickbundle.third.quartz;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.quickbundle.project.tools.RmAlarmCollector;
+import org.quickbundle.project.test.RmAlarmCollector;
 import org.quickbundle.tools.helper.RmStringHelper;
 import org.quickbundle.tools.support.log.RmLogHelper;
 import org.slf4j.Logger;

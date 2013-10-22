@@ -12,7 +12,6 @@
 	  <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
 	  <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
    
-   
 <!-- 
 	<jaxws:endpoint 
 	  id="helloWorld" 
@@ -29,7 +28,7 @@
 					<map>
 						<entry key="action" value="UsernameToken"></entry>
 						<entry key="passwordType" value="PasswordText" />
-						<entry key="passwordCallbackClass" value="org.quickbundle.tools.webservice.RmPasswordCallback" />
+						<entry key="passwordCallbackClass" value="org.quickbundle.third.webservice.RmPasswordCallback" />
 					</map>
 				</constructor-arg>
 			</bean>
@@ -41,11 +40,6 @@
 
 <jaxws:endpoint id="IRmSessionService" implementor="org.quickbundle.project.login.RmSessionService" address="/RmSession" >
 </jaxws:endpoint>
-
-<!-- 
-<jaxws:endpoint id="IRmUser2JsprunService_soa" implementor="org.quickbundle.third.jsprun.impl.RmUser2JsprunService" address="/RmUser2Jsprun" >
-</jaxws:endpoint>
--->
 
 </beans>
 <!-- END SNIPPET: beans -->

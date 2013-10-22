@@ -1,8 +1,5 @@
 package org.quickbundle.project;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.quickbundle.ICoreConstants;
 import org.quickbundle.modules.code.IRmCodeConstants;
 

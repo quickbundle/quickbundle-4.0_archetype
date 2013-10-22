@@ -3,9 +3,9 @@
 	<org.quickbundle.project.init.CustomSystemProperties>
 		<!-- for production -->
 		<rmdemo.root.home>${user.home}/.qbhome/rmdemo</rmdemo.root.home>
-		<!-- for tomcat debug
-		<rmdemo.root.home>${user.dir}/work/.qbhome/rmdemo</rmdemo.root.home>
-		-->
+		
+		<!-- for tomcat debug 
+		<rmdemo.root.home>${user.dir}/work/.qbhome/rmdemo</rmdemo.root.home> -->
 		
 		<javamelody.storage-directory>${rmdemo.root.home}/javamelody</javamelody.storage-directory>
 	</org.quickbundle.project.init.CustomSystemProperties>
@@ -14,13 +14,6 @@
 		<!-- war's home directory -->
 		<warHome>${rmdemo.root.home}</warHome>
 		
-		<!-- RmIdFactory generate primary key from database? or from memory cache? #change in production 
-			是每次连接数据库产生最新主键？还是从缓存产生？ -->
-		<generateIdFromDb>true</generateIdFromDb>
-		
-		<!-- RmIdFactory init id batch, union all? -->
-		<initIdBatch>false</initIdBatch>
-		
 		<!-- is cluster mode? or single node? (online user, etc...) #change in production 
 			是集群模式？或单机 -->
 		<clusterMode>true</clusterMode>
@@ -28,10 +21,6 @@
 		<!-- default page size of list page 
 			列表页默认分页数 -->
 		<defaultPageSize>15</defaultPageSize>
-		
-		<!-- is multiple database on one table 
-			是否水平拆分的多数据库 -->
-		<multiDb>false</multiDb>
 		
 		<!-- system is in debug mode #change in production 
 			系统是否开发调试状态 -->

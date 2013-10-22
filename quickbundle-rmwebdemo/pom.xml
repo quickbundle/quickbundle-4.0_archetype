@@ -35,7 +35,6 @@
 		<javamelody.version>1.46.0</javamelody.version>
 		<jasperreports.version>4.7.1</jasperreports.version>
 		<quartz.version>2.1.7</quartz.version>
-		<jetty.version>8.1.13.v20130916</jetty.version>
 
 		<!-- if your database is not mysql, change to real target belowing -->
 		<jdbc.driver.groupId>mysql</jdbc.driver.groupId>

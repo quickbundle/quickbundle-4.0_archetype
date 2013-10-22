@@ -22,12 +22,21 @@ public class LoadProjectConfig {
 
 		Element eleLoadCluster = (Element) rmClusterDoc.selectSingleNode("/rm/org.quickbundle.config.RmClusterConfig/*[1]");
 		String classNameLoadCluster = eleLoadCluster.getName();
+		AbstractClusterConfigLoader loadClusterConfig = null;;
 		try {
-			AbatractLoadClusterConfig loadClusterConfig = (AbatractLoadClusterConfig) LoadProjectConfig.class.getClassLoader().loadClass(classNameLoadCluster).newInstance();
-			loadClusterConfig.init();
-			RmClusterConfig.getSingleton().setLoadClusterConfig(loadClusterConfig);
-		} catch (Exception e) {
+			loadClusterConfig = (AbstractClusterConfigLoader) LoadProjectConfig.class.getClassLoader().loadClass(classNameLoadCluster).newInstance();
+		} catch (InstantiationException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
+		loadClusterConfig.init();
+		RmClusterConfig.setSingleton(loadClusterConfig);
+		RmConfig.getSingleton().setShardingPrefix(loadClusterConfig.getSelfNode().get(RmClusterConfig.NodeKey.shardingPrefix.name()));
 	}
 }

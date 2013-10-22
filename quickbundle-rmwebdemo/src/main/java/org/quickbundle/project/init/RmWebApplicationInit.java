@@ -68,10 +68,6 @@ public class RmWebApplicationInit implements ILoadOnStartup {
 		if (RmConfig.getSingleton().isSystemDebugMode()) {
 			RmLogHelper.getLogger(this.getClass()).info("System in debug mode......");
 		}
-
-		if (RmConfig.getSingleton().isGenerateIdFromDb()) {
-			RmLogHelper.getLogger(this.getClass()).info("System generate primary key from database(not cache)...");
-		}
 	}
 
 	/**

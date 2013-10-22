@@ -12,7 +12,6 @@ from qb.tools.support.log import ui_public
 from javax.servlet.http import HttpServlet
 from org.quickbundle.config import RmConfig
 from org.quickbundle.config import RmConfigVo
-from org.quickbundle.project.profiler import RmProfilerHelper
 
 encode = RmConfig.getSingleton().defaultEncode()
 warHome = RmConfig.getSingleton().getWarHome()

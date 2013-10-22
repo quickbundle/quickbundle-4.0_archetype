@@ -1,4 +1,4 @@
-package org.quickbundle.tools.support.webservice;
+package org.quickbundle.third.webservice;
 
 import java.sql.Timestamp;
 import java.util.Date;

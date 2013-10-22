@@ -8,7 +8,6 @@ import traceback
 
 from javax.servlet.http import HttpServlet
 from org.quickbundle.project.init import RmConfig
-from org.quickbundle.project.profiler import RmProfilerHelper
 
 encode = RmConfig.defaultEncode()
 #log_file_encode = "gb18030"

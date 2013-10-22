@@ -56,9 +56,9 @@ public class RmSsoLogin {
 				throw new RmRuntimeException("配置文件读取错误");
 			}
 			String targetUrlPrefix = null;
-			for(Object urlPrefixObj : thisNode.selectNodes("../../redirectTargets/urlPrefix")) {
+			for(Object baseUrlObj : thisNode.selectNodes("../../redirectTargets/baseUrl")) {
 				//TODO 可扩展为负载均衡算法
-				Element eleUrlPrefix = (Element)urlPrefixObj;
+				Element eleUrlPrefix = (Element)baseUrlObj;
 				targetUrlPrefix = eleUrlPrefix.getText();
 				break;
 			}
@@ -67,8 +67,8 @@ public class RmSsoLogin {
 				throw new RmRuntimeException("未配置跳转到的目标地址");
 			}
 			//带着sso信息跳转到目标服务器
-			if(RmClusterConfig.getSingleton().getLocalhostInfo() != null 
-					&& targetUrlPrefix.startsWith(RmClusterConfig.getSingleton().getLocalhostInfo().getLocalhostUrlPath())) {
+			if(RmClusterConfig.getLocalhostInfo() != null 
+					&& targetUrlPrefix.startsWith(RmClusterConfig.getLocalhostInfo().getLocalhostUrlPath())) {
 				//throw new RmRuntimeException("不能跳转到自身，可能导致循环跳转");
 				//如果判断为跳到本机，忽略跳转
 				filterChain.doFilter(request, response);
@@ -122,7 +122,7 @@ public class RmSsoLogin {
 			String[] ssoValueArgs = ssoValue.split(splictKeyRegex);
 			String nodeId = ssoValueArgs[0];
 			String sessionId = ssoValueArgs[2];
-			String callWsUrl = RmClusterConfig.getSingleton().getWsUrl(nodeId);
+			String callWsUrl = RmClusterConfig.getSingleton().getSelfNode().get(RmClusterConfig.NodeKey.webServiceUrl.name());
 			String address = callWsUrl + "RmSsoLogin";
 			JaxWsProxyFactoryBean jw = new JaxWsProxyFactoryBean();
 			jw.setServiceClass(IRmSsoService.class);

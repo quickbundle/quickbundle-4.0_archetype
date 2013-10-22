@@ -135,7 +135,7 @@ public class RmPrivilegeFilter implements Filter {
     			needClearTl = true;
     		}
     		try {
-    			RmClusterConfig.getSingleton().initLocalhostInfo(req);
+    			RmClusterConfig.initLocalhostInfo(req);
     		} catch(Throwable e) {
     			logError.warn("initLocalhostInfo: " + e.toString() + " cause:" + e.getCause());
     		}

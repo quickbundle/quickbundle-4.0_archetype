@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rm>
 	<org.quickbundle.config.RmConfig>
-		<!-- primary key prefix of this cluster node, range: 1000-9222 #change in production 
-			本集群节点RmIdFactory产生的主键前缀 -->
-		<clusterIdPrefix>1000</clusterIdPrefix>
 		<!-- job scheduler is start #change in production 
 			系统是否启动任务调度 -->
 		<schedulerStart>false</schedulerStart>
@@ -14,23 +11,27 @@
 
 	<!-- #change in production -->
 	<org.quickbundle.config.RmClusterConfig>
-		<org.quickbundle.project.init.LoadClusterConfigXml thisId="server1">
+		<org.quickbundle.project.init.ClusterConfigLoaderXml thisId="server1">
 			<node id="server1">
+				<!-- primary key prefix of this cluster node, range: 1000-9222 #change in production 
+					本集群节点RmIdFactory产生的主键前缀 -->
+				<shardingPrefix>1000</shardingPrefix>
 				<user>server1</user>
 				<password>1</password>
 				<contextPath>/rmdemo</contextPath>
-				<urlPrefix>http://localhost:9999/rmdemo/</urlPrefix>
+				<baseUrl>http://localhost:9999/rmdemo/</baseUrl>
 				<webServiceUrl>http://localhost:9999/rmdemo/services/</webServiceUrl>
 			</node>
 			<!-- other cluster node -->
 			<node id="server2">
+				<shardingPrefix>1002</shardingPrefix>
 				<user>server2</user>
 				<password>1</password>
 				<contextPath>/rmdemo</contextPath>
-				<urlPrefix>http://localhost:10000/rmdemo/</urlPrefix>
+				<baseUrl>http://localhost:10000/rmdemo/</baseUrl>
 				<webServiceUrl>http://localhost:10000/rmdemo/services/</webServiceUrl>
 			</node>
-		</org.quickbundle.project.init.LoadClusterConfigXml>
+		</org.quickbundle.project.init.ClusterConfigLoaderXml>
 	</org.quickbundle.config.RmClusterConfig>
 	
 	<org.quickbundle.project.login.RmSsoLogin>
@@ -39,7 +40,7 @@
 				<url>^.*\.do$</url>
 			</redirectUrls>
 			<redirectTargets>
-				<urlPrefix>http://localhost:10000/rmdemo/</urlPrefix>
+				<baseUrl>http://localhost:10000/rmdemo/</baseUrl>
 			</redirectTargets>
 		</redirectGroup>
 	</org.quickbundle.project.login.RmSsoLogin>
