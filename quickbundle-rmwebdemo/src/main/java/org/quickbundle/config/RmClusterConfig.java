@@ -39,6 +39,7 @@ public class RmClusterConfig {
 					localhostInfo.setServerName(request.getServerName());
 					localhostInfo.setServerPort(request.getServerPort());
 					localhostInfo.setContextPath(request.getContextPath());
+					singleton.refreshHostInfo(RmClusterConfig.getLocalhostInfo());
 					isInit = true;
 				}
 			}

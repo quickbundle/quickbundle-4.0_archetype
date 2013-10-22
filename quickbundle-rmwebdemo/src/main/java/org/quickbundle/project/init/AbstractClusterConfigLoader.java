@@ -26,7 +26,7 @@ public abstract class AbstractClusterConfigLoader {
 	
 	private void updateNodeHeartbeat(String baseUrl) {
 		String sql = "update RM_NODE_HEARTBEAT set VERSION=VERSION+1, BASE_URL=? where ID=?";
-		RmBeanHelper.getCommonServiceInstance().doUpdate(sql, new String[]{baseUrl, getSelfId()});
+		RmBeanHelper.getCommonServiceInstance().doUpdate(sql, new Object[]{baseUrl, getSelfId()});
 	}
 	public Map<String, String> getSelfNode() {
 		return selfNode;
@@ -82,7 +82,8 @@ public abstract class AbstractClusterConfigLoader {
 			.append("://")
 			.append(hostInfo.getServerName())
 			.append(":")
-			.append(hostInfo.getServerPort());
+			.append(hostInfo.getServerPort())
+			.append(hostInfo.getContextPath());
 		return result.toString();
 	}
 }

@@ -37,9 +37,6 @@
 	<table table_code="2051" table_name="RM_NOTICE" id_name="ID"/>
 	<!-- system end -->
 
-	<table table_code="1001" table_name="RM_QUICK_QUERY" id_name="ID"/>
-	<table table_code="1001" table_name="RM_QUICK_QUERY_DATA" id_name="ID"/>
-
 	<table table_code="2003" table_name="RM_AFFIX" id_name="ID"/>
 	<table table_code="2002" table_name="RM_CODE_DATA" id_name="ID"/>
 	<table table_code="2001" table_name="RM_CODE_TYPE" id_name="ID"/>

@@ -92,7 +92,7 @@ public class RmWebApplicationInit implements ILoadOnStartup {
 			RmConfig.getSingleton().setDatabaseProductName(conn.getMetaData().getDatabaseProductName());
 		} catch (Exception e) {
 			try { // 尝试从jdbc.properties猜测数据库类型
-				File fJdbc = new File(RmPathHelper.getWebInfDir() + "/config/jdbc/jdbc.properties");
+				File fJdbc = new File(this.getClass().getResource("config/jdbc.properties").getFile());
 				if (fJdbc.exists()) {
 					Properties pJdbc = new Properties();
 					pJdbc.load(new FileInputStream(fJdbc));

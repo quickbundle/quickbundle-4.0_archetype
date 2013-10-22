@@ -25,16 +25,24 @@
 			<list>
 				<value>classpath:config/mail.properties</value>
 				<value>classpath:config/jdbc.properties</value>
-				<value>classpath:config/project.properties</value>
 			</list>
 		</property>
 	</bean>
 	
 	<!-- 使用annotation自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
-	<context:component-scan base-package="${base.package}" name-generator="org.quickbundle.third.spring.context.annotation.RmAnnotationBeanNameGenerator">
+	<context:component-scan base-package="org.quickbundle,hello.helloworld" name-generator="org.quickbundle.third.spring.context.annotation.RmAnnotationBeanNameGenerator">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
-
+    
+    <!-- scan for mappers and let them be autowired 
+    	<property name="annotationClass" value="org.springside.examples.showcase.repository.mybatis.MyBatisRepository"/>
+    -->
+    <bean id="BeanNameGenerator" class="org.quickbundle.third.spring.context.annotation.RmAnnotationBeanNameGenerator"></bean>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="org.quickbundle,hello.helloworld" />
+    	<property name="nameGenerator" ref="BeanNameGenerator" />
+    	<property name="annotationClass" value="org.quickbundle.third.mybatis.MyBatisDao"/>
+    </bean>
 
     <!-- define the SqlSessionFactory 
     	<property name="mapperLocations" value="classpath:/mybatis/*Mapper.xml" />
@@ -57,17 +65,6 @@
 	        </props>
 	    </property>
     </bean>
-    
-    <!-- scan for mappers and let them be autowired 
-    	<property name="annotationClass" value="org.springside.examples.showcase.repository.mybatis.MyBatisRepository"/>
-    -->
-    <bean id="BeanNameGenerator" class="org.quickbundle.third.spring.context.annotation.RmAnnotationBeanNameGenerator"></bean>
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="${base.package}" />
-    	<property name="nameGenerator" ref="BeanNameGenerator" />
-    	<property name="annotationClass" value="org.quickbundle.third.mybatis.MyBatisDao"/>
-    </bean>
-
 
 	<!-- JSR303 Validator定义 -->
  	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />

@@ -48,6 +48,8 @@ public class RmContextLoaderListener extends ContextLoaderListener {
 			super.contextInitialized(event);
 			RmBeanFactory.setBeanFactory(WebApplicationContextUtils.getWebApplicationContext(event.getServletContext()));
 		}
+		
+		LoadProjectConfig.initClusterConfig();
 	}
 
 	/* 

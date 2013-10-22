@@ -11,6 +11,7 @@
 
 	<!-- #change in production -->
 	<org.quickbundle.config.RmClusterConfig>
+		<org.quickbundle.project.init.ClusterConfigLoaderDb />
 		<org.quickbundle.project.init.ClusterConfigLoaderXml thisId="server1">
 			<node id="server1">
 				<!-- primary key prefix of this cluster node, range: 1000-9222 #change in production 

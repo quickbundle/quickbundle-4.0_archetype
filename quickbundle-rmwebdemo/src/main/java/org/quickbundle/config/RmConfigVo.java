@@ -349,7 +349,7 @@ public class RmConfigVo extends RmBaseConfigVo {
 	/**
 	 * @param schedulerStart the schedulerStart to set
 	 */
-	void setSchedulerStart(boolean schedulerStart) {
+	public void setSchedulerStart(boolean schedulerStart) {
 		this.schedulerStart = schedulerStart;
 	}
 	

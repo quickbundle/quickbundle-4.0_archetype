@@ -6,8 +6,10 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.quickbundle.config.RmClusterConfig;
 import org.quickbundle.config.RmConfig;
 import org.quickbundle.tools.context.RmBeanHelper;
+import org.quickbundle.tools.helper.RmDateHelper;
 import org.quickbundle.tools.helper.RmSqlHelper;
 
 public class NodeHeartbeatDaemon {
@@ -47,10 +49,15 @@ public class NodeHeartbeatDaemon {
 	public void start() {
 		executor.scheduleWithFixedDelay(new Runnable() {
 			public void run() {
-				String sql = "update RM_NODE_HEARTBEAT set version=version+1, LAST_HEARTBEAT=" + RmSqlHelper.getFunction(RmSqlHelper.Function.SYSDATE, RmConfig.getSingleton().getDatabaseProductName());
-				RmBeanHelper.getCommonServiceInstance().doUpdate(sql);
+				if(RmConfig.getSingleton().getDatabaseProductName() != null) {
+					String sql = "update RM_NODE_HEARTBEAT set VERSION=VERSION+1, LAST_HEARTBEAT=" + RmSqlHelper.getFunction(RmSqlHelper.Function.SYSDATE, RmConfig.getSingleton().getDatabaseProductName()) + " where ID=?";
+					RmBeanHelper.getCommonServiceInstance().doUpdate(sql, new Object[]{RmClusterConfig.getSingleton().getSelfId()});
+				} else {
+					String sql = "update RM_NODE_HEARTBEAT set VERSION=VERSION+1, LAST_HEARTBEAT=? where ID=?";
+					RmBeanHelper.getCommonServiceInstance().doUpdate(sql, new Object[]{RmDateHelper.getSysTimestamp(), RmClusterConfig.getSingleton().getSelfId()});
+				}
 			}
-		}, 0, 30, TimeUnit.SECONDS);
+		}, 1000, RmConfig.getSingleton().getNodeHeartbeatInterval(), TimeUnit.MILLISECONDS);
 	}
 	
 	public void shutdown() {

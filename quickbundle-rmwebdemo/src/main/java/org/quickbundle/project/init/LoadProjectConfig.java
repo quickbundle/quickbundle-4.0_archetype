@@ -19,8 +19,10 @@ public class LoadProjectConfig {
 		Document rmClusterDoc = RmLoadConfig.getRmClusterDoc();
 		PopulateRmConfig pc2 = new PopulateRmConfig(RmConfig.getSingleton(), rmClusterDoc);
 		pc2.populate();
-
-		Element eleLoadCluster = (Element) rmClusterDoc.selectSingleNode("/rm/org.quickbundle.config.RmClusterConfig/*[1]");
+	}
+	
+	public static void initClusterConfig() {
+		Element eleLoadCluster = (Element) RmLoadConfig.getRmClusterDoc().selectSingleNode("/rm/org.quickbundle.config.RmClusterConfig/*[1]");
 		String classNameLoadCluster = eleLoadCluster.getName();
 		AbstractClusterConfigLoader loadClusterConfig = null;;
 		try {

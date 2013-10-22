@@ -10,6 +10,7 @@ import org.quickbundle.config.RmClusterConfig.NodeKey;
 import org.quickbundle.config.RmConfig;
 import org.quickbundle.project.common.vo.RmCommonVo;
 import org.quickbundle.tools.context.RmBeanHelper;
+import org.quickbundle.tools.helper.RmDateHelper;
 import org.quickbundle.tools.helper.RmSqlHelper;
 import org.quickbundle.tools.helper.RmUUIDHelper;
 import org.quickbundle.tools.support.log.RmLogHelper;
@@ -50,7 +51,7 @@ public class ClusterConfigLoaderDb extends AbstractClusterConfigLoader {
 	}
 	
 	private String buildWhereActive() {
-		return RmSqlHelper.getFunction(RmSqlHelper.Function.SYSDATE, RmConfig.getSingleton().getDatabaseProductName())  + "-LAST_HEARTBEAT < 60000";
+		return RmSqlHelper.getFunction(RmSqlHelper.Function.SYSDATE, RmConfig.getSingleton().getDatabaseProductName())  + "-LAST_HEARTBEAT < 60";
 	}
 
 	private String createShardingPrefix() {
@@ -58,8 +59,8 @@ public class ClusterConfigLoaderDb extends AbstractClusterConfigLoader {
 		List<String> maxIds = RmBeanHelper.getCommonServiceInstance().queryForList(sqlMax, String.class);
 		long shardingPrefix = getMaxIdOrDefault(maxIds.size() == 0 ? null : maxIds.get(0));
 		String sqlInsert = "insert into RM_NODE_HEARTBEAT (ID, VERSION, SHARDING_PREFIX, LAST_HEARTBEAT) " +
-				"values (?, 1, ?, " +  RmSqlHelper.getFunction(RmSqlHelper.Function.SYSDATE, RmConfig.getSingleton().getDatabaseProductName()) + ")";
-		RmBeanHelper.getCommonServiceInstance().doUpdate(sqlInsert, new Object[]{getSelfId(), shardingPrefix});
+				"values (?, ?, ?, ?)";
+		RmBeanHelper.getCommonServiceInstance().doUpdate(sqlInsert, new Object[]{getSelfId(), 1, shardingPrefix, RmDateHelper.getSysTimestamp()});
 		return String.valueOf(shardingPrefix);
 	}
 	
@@ -100,5 +101,7 @@ public class ClusterConfigLoaderDb extends AbstractClusterConfigLoader {
 	@Override
 	public void destroy() {
 		NodeHeartbeatDaemon.getSingleton().shutdown();
+		String sql = "delete from RM_NODE_HEARTBEAT where ID=?";
+		RmBeanHelper.getCommonServiceInstance().doUpdate(sql, new Object[]{getSelfId()});
 	}
 }
