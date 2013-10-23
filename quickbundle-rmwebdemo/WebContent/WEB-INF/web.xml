@@ -79,10 +79,9 @@
         <param-name>javamelody.displayed-counters</param-name>
         <param-value>error,log</param-value>
     </context-param>
-    <!-- #change in production -->
     <context-param>
         <param-name>javamelody.system-actions-enabled</param-name>
-        <param-value>true</param-value>
+        <param-value>false</param-value>
     </context-param>
     <context-param>
         <param-name>javamelody.quartz-default-listener-disabled</param-name>
@@ -185,7 +184,7 @@
 	</servlet-mapping>
 	<!-- proxool end -->
 
-	<!-- jython begin #change in production -->
+	<!-- jython begin -->
 	<servlet>
 	    <servlet-name>PyServlet</servlet-name>
 	    <servlet-class>org.quickbundle.third.jython.RmPyServlet</servlet-class>

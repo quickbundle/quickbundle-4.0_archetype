@@ -23,7 +23,6 @@ import org.quickbundle.project.RmGlobalReference;
 import org.quickbundle.tools.context.RmBeanHelper;
 import org.quickbundle.tools.helper.xml.RmXmlHelper;
 import org.quickbundle.tools.support.log.RmLogHelper;
-import org.quickbundle.tools.support.path.RmPathHelper;
 
 /**
  * 初始化组件和服务
@@ -56,6 +55,11 @@ public class RmWebApplicationInit implements ILoadOnStartup {
 	}
 
 	void check() {
+		if (RmConfig.getSingleton().isSystemDebugMode()) {
+			RmLogHelper.getLogger(this.getClass()).warn("########## System in DEBUG mode, please modify rm.xml=>\"systemDebugMode=false\" in production ##########");
+			RmLogHelper.getLogger(this.getClass()).warn("########## 系统当前是开发调试模式，在生产环境中请修改rm.xml=>\"systemDebugMode=false\" ##########");
+		}
+		
 		File warHome = new File(RmConfig.getSingleton().getWarHome());
 		if (!warHome.exists()) {
 			RmLogHelper.getLogger(this.getClass()).warn("warHome: " + warHome.getAbsolutePath() + " not exist");
@@ -65,9 +69,7 @@ public class RmWebApplicationInit implements ILoadOnStartup {
 			RmLogHelper.getLogger(this.getClass()).warn("warHome: " + warHome.getAbsolutePath() + " can not write");
 		}
 
-		if (RmConfig.getSingleton().isSystemDebugMode()) {
-			RmLogHelper.getLogger(this.getClass()).info("System in debug mode......");
-		}
+
 	}
 
 	/**

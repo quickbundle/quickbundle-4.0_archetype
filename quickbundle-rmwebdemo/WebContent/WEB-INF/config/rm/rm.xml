@@ -11,20 +11,16 @@
 	</org.quickbundle.project.init.CustomSystemProperties>
 	
 	<org.quickbundle.config.RmConfig>
+		<!-- system is in debug mode #change in production 
+			系统是否开发调试状态 -->
+		<systemDebugMode>true</systemDebugMode>
+		
 		<!-- war's home directory -->
 		<warHome>${rmdemo.root.home}</warHome>
-		
-		<!-- is cluster mode? or single node? (online user, etc...) #change in production 
-			是集群模式？或单机 -->
-		<clusterMode>true</clusterMode>
 		
 		<!-- default page size of list page 
 			列表页默认分页数 -->
 		<defaultPageSize>15</defaultPageSize>
-		
-		<!-- system is in debug mode #change in production 
-			系统是否开发调试状态 -->
-		<systemDebugMode>true</systemDebugMode>
 		
 		<!-- user only login once at the moment 
 			系统用户是否唯一登录，同时登录会强制踢出第一个用户 -->
@@ -42,7 +38,7 @@
 			是否逻辑删除文件 -->
 		<logicDeleteFile>true</logicDeleteFile>
 		
-		<!-- recycle Bin Folder #change in production 
+		<!-- recycle Bin Folder
 			逻辑删除的回收站文件夹 -->
 		<recycleBinFolder>${rmdemo.root.home}/recycle_bin</recycleBinFolder>
 		
