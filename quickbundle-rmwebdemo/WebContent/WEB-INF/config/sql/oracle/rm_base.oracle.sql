@@ -238,11 +238,21 @@ alter table RM_QUICK_QUERY_DATA
    add constraint FK_RM_QUICK_REFERENCE_RM_QUICK foreign key (QUICK_QUERY_ID)
       references RM_QUICK_QUERY (ID);
 
-      
+
 create table RM_ID_POOL
 (
    ID                   VARCHAR2(50) not null,
-   VERSION              NUMBER(11) not null,
+   VERSION              NUMBER(19) not null,
    LAST_ID              NUMBER(19),
    constraint PK_RM_ID_POOL primary key (ID)
+);
+
+create table RM_NODE_HEARTBEAT
+(
+   ID                   VARCHAR2(50) not null,
+   VERSION              NUMBER(19) not null,
+   SHARDING_PREFIX		NUMBER(19),
+   LAST_HEARTBEAT		DATE,
+   BASE_URL				VARCHAR2(200),
+   constraint PK_RM_NODE_HEARTBEAT primary key (ID)
 );

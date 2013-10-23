@@ -122,3 +122,13 @@ create table RM_ID_POOL
    LAST_ID              bigint,
    primary key (ID)
 );
+
+create table RM_NODE_HEARTBEAT
+(
+   ID                   varchar(50) not null,
+   VERSION              bigint not null,
+   SHARDING_PREFIX		bigint,
+   LAST_HEARTBEAT		DATETIME,
+   BASE_URL				varchar(200),
+   primary key (ID)
+);

@@ -276,3 +276,14 @@ create table RM_ID_POOL
    constraint PK_RM_ID_POOL primary key nonclustered (ID)
 )
 go
+
+create table RM_NODE_HEARTBEAT
+(
+   ID                   varchar(50) not null,
+   VERSION              bigint not null,
+   SHARDING_PREFIX		bigint,
+   LAST_HEARTBEAT		DATETIME,
+   BASE_URL				varchar(200),
+   constraint PK_RM_NODE_HEARTBEAT primary key (ID)
+)
+go
