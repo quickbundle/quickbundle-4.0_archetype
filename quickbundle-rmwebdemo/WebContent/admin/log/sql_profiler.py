@@ -14,7 +14,7 @@ from org.quickbundle.config import RmConfig
 from org.quickbundle.config import RmConfigVo
 from org.quickbundle.third.jython import JythonSqlProfiler
 
-encode = RmConfig.getSingleton().defaultEncode()
+encode = RmConfig.getSingleton().getDefaultEncode()
 warHome = RmConfig.getSingleton().getWarHome()
 #log_file_encode = "gb18030"
 log_file_encode='utf-8'
