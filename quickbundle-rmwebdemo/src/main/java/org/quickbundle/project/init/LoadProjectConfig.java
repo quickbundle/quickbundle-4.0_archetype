@@ -2,6 +2,7 @@ package org.quickbundle.project.init;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -37,7 +38,8 @@ public class LoadProjectConfig {
 		String classNameLoadCluster = eleLoadCluster.getName();
 		AbstractClusterConfigLoader loadClusterConfig = null;;
 		try {
-			loadClusterConfig = (AbstractClusterConfigLoader) LoadProjectConfig.class.getClassLoader().loadClass(classNameLoadCluster).newInstance();
+			Class clazzLcc = LoadProjectConfig.class.getClassLoader().loadClass(classNameLoadCluster);
+			loadClusterConfig = (AbstractClusterConfigLoader) clazzLcc.getConstructor(Element.class).newInstance(eleLoadCluster.createCopy());
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -45,6 +47,18 @@ public class LoadProjectConfig {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} catch (SecurityException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}

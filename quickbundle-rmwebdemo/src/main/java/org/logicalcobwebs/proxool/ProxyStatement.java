@@ -5,21 +5,17 @@
  */
 package org.logicalcobwebs.proxool;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.logicalcobwebs.cglib.proxy.MethodInterceptor;
-import org.logicalcobwebs.cglib.proxy.MethodProxy;
-import org.logicalcobwebs.cglib.proxy.InvocationHandler;
-import org.logicalcobwebs.proxool.proxy.InvokerFacade;
-import org.quickbundle.config.RmConfig;
-import org.quickbundle.project.listener.RmGlobalMonitor;
-import org.quickbundle.project.listener.RmRequestMonitor;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Statement;
-import java.sql.Connection;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.logicalcobwebs.cglib.proxy.MethodInterceptor;
+import org.logicalcobwebs.cglib.proxy.MethodProxy;
+import org.logicalcobwebs.proxool.proxy.InvokerFacade;
+import org.quickbundle.config.RmConfig;
+import org.quickbundle.project.listener.RmRequestMonitor;
 
 /**
  * Delegates to Statement for all calls. But also, for all execute methods, it

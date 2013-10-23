@@ -7,11 +7,6 @@ import org.quickbundle.orgauth.rmrole.util.IRmRoleConstants;
 import org.quickbundle.orgauth.rmuser.util.IRmUserConstants;
 
 public interface IOrgauthConstants extends IGlobalConstants {
-	/**
-	 * 编码分隔关键字，废弃
-	 */
-	//public final static String CODE_SPLIT_KEY = "$";
-	//public final static String CODE_SPLIT_KEY_REGEX = "\\$";
     
     /**
      * 定义当前系统的根节点编码

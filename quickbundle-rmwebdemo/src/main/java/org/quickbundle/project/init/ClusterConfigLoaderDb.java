@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.dom4j.Element;
 import org.quickbundle.base.web.servlet.RmHolderServlet;
 import org.quickbundle.config.RmClusterConfig;
 import org.quickbundle.config.RmClusterConfig.NodeKey;
@@ -17,6 +18,10 @@ import org.quickbundle.tools.support.log.RmLogHelper;
 
 public class ClusterConfigLoaderDb extends AbstractClusterConfigLoader {
 	
+	public ClusterConfigLoaderDb(Element eleClusterConfigLoader) {
+		super(eleClusterConfigLoader);
+	}
+
 	public void init() {
 		if (RmHolderServlet.getDefaultServletContext() != null) {
 			try {
@@ -80,7 +85,11 @@ public class ClusterConfigLoaderDb extends AbstractClusterConfigLoader {
     }
    
 	protected String firstValue() {
-		return "1001";
+		String result = eleLoadCluster.valueOf("@firstShardingPrefix");
+		if(result.length() == 0) {
+			result = "1000";
+		}
+		return result;
 	}
 	
 	public Map<String, Map<String, String>> getNodes() {

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.dom4j.Element;
 import org.quickbundle.config.HostInfo;
 import org.quickbundle.config.RmClusterConfig;
 import org.quickbundle.config.RmClusterConfig.NodeKey;
@@ -12,6 +13,11 @@ import org.quickbundle.tools.context.RmBeanHelper;
 import org.quickbundle.util.RmSequenceMap;
 
 public abstract class AbstractClusterConfigLoader {
+	protected Element eleLoadCluster;
+	public AbstractClusterConfigLoader(Element eleLoadCluster) {
+		this.eleLoadCluster = eleLoadCluster;
+	}
+	
 	protected Map<String, String> selfNode = new HashMap<String, String>();
 	
 	public abstract void init();

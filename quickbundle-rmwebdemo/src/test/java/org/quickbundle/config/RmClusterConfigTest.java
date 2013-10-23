@@ -20,4 +20,8 @@ public class RmClusterConfigTest {
 //		System.out.println(RmClusterConfig.getSingleton().getOtherWsUrl());
 //		System.out.println(RmClusterConfig.getSingleton().getAuth("server1"));
 	}
+	
+	public static void main(String[] args) {
+		System.out.println(String.valueOf(Long.MAX_VALUE).length());
+	}
 }
