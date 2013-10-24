@@ -61,6 +61,9 @@ public class RmOrgAuthSqlHelper implements IGlobalConstants{
 			throw new RmRuntimeException("权限的配置规则为空，不能构建join模式的sql");
 		}
 		Element eleTable = (Element)authRule.selectSingleNode("/authorize/consumer/table[@sql_after_from='" + sqlAfterFrom.toUpperCase() + "']");
+		if(eleTable == null) {
+			throw new RmRuntimeException("权限的配置规则出错，未找到规则:" + "/authorize/consumer/table[@sql_after_from='" + sqlAfterFrom.toUpperCase() + "']");
+		}
 		String join_table = eleTable.valueOf("@join_table");
 		String join_table_column = eleTable.valueOf("@join_table_column");
 		String join_table_column_full = authRule.valueOf("@join_table_column_full");

@@ -145,9 +145,7 @@ public class RmPyServlet extends HttpServlet {
         String rootPath = getRootPath(servletContext);
         PySystemState sys = new PySystemState();
         //qb-rm
-        System.out.println(sys.getdefaultencoding());
-        sys.setdefaultencoding("utf-8");
-        System.out.println(sys.getdefaultencoding());
+        sys.setdefaultencoding(RmConfig.getSingleton().getDefaultEncode());
         PythonInterpreter interp = new PythonInterpreter(Py.newStringMap(), sys);
         sys.path.append(new PyString(rootPath));
 

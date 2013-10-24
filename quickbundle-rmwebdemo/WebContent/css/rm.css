@@ -396,7 +396,7 @@ td.listCss {
 	display:none;
 }
 .button_area {
-	float:right;
+	text-align: right;
 	padding-right:20px;
 	padding-top: 10px;
 	padding-bottom: 5px;
