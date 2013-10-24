@@ -22,7 +22,6 @@ import org.quickbundle.modules.code.rmcodedata.dao.IRmCodeDataDao;
 import org.quickbundle.modules.code.rmcodedata.service.IRmCodeDataService;
 import org.quickbundle.modules.code.rmcodedata.util.IRmCodeDataConstants;
 import org.quickbundle.modules.code.rmcodedata.vo.RmCodeDataVo;
-import org.quickbundle.project.cache.RmSqlCountCache;
 
 /**
  * 功能、用途、现存BUG:
@@ -68,7 +67,6 @@ public class RmCodeDataService extends RmService implements IRmCodeDataService, 
     public String insert(RmCodeDataVo vo) {
         String id = getDao().insert(vo);
         //RmProjectHelper.log(TABLE_LOG_TYPE_NAME, "插入了1条记录,id=" + String.valueOf(id));
-        RmSqlCountCache.clearCount(TABLE_NAME);  //清除count记录数缓存
 		return id;
     }
     
@@ -81,7 +79,6 @@ public class RmCodeDataService extends RmService implements IRmCodeDataService, 
     public String[] insert(RmCodeDataVo[] vos) {
         String[] aId = getDao().insert(vos);
         //RmProjectHelper.log(TABLE_LOG_TYPE_NAME, "插入了" + vos.length + "条记录,id=" + RmStringHelper.ArrayToString(aId, ","));
-        RmSqlCountCache.clearCount(TABLE_NAME);  //清除count记录数缓存
         return aId;
     }
 
@@ -94,7 +91,6 @@ public class RmCodeDataService extends RmService implements IRmCodeDataService, 
     public int delete(String id) {
 		int sum = getDao().delete(id);
 		//RmProjectHelper.log(TABLE_LOG_TYPE_NAME, "删除了" + sum + "条记录,id=" + String.valueOf(id));
-		RmSqlCountCache.clearCount(TABLE_NAME);  //清除count记录数缓存
 		return sum;
     }
 
@@ -107,7 +103,6 @@ public class RmCodeDataService extends RmService implements IRmCodeDataService, 
     public int delete(String ids[]) {
 		int sum = getDao().delete(ids);
         //RmProjectHelper.log(TABLE_LOG_TYPE_NAME, "删除了" + sum + "条记录,id=" + RmStringHelper.ArrayToString(ids, ","));
-		RmSqlCountCache.clearCount(TABLE_NAME);  //清除count记录数缓存
 		return sum;
     }
 
@@ -132,7 +127,6 @@ public class RmCodeDataService extends RmService implements IRmCodeDataService, 
     public int update(RmCodeDataVo vo) {
 		int sum = getDao().update(vo);
         //RmProjectHelper.log(TABLE_LOG_TYPE_NAME, "更新了" + sum + "条记录,id=" + String.valueOf(vo.getId()));
-		RmSqlCountCache.clearCount(TABLE_NAME);  //清除count记录数缓存
 		return sum;
     }
 

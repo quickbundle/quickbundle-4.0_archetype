@@ -23,7 +23,7 @@ public class RmMessageData {
 
 	public static void main(String[] args) {
 		RmWebTestCase.init();
-		RmMessageDao dao = RmBeanFactory.getBeanFactory().getBean(RmMessageDao.class);
+		RmMessageDao dao = RmBeanFactory.getBean(RmMessageDao.class);
 		List result = dao.search(new HashMap<String, Object>() {
 			{
 				this.put("biz_keyword", "abc");

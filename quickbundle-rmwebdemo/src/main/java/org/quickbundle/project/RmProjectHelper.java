@@ -283,7 +283,7 @@ public final class RmProjectHelper implements IGlobalConstants{
 	 * @param logVo
 	 */
 	public static void insertDbLog(RmLogVo logVo) {
-		RmBeanFactory.getBeanFactory().getBean(ActionLog2DbService.class).add(logVo);
+		RmBeanFactory.getBean(ActionLog2DbService.class).add(logVo);
 	}
     //system businessLog end
 }

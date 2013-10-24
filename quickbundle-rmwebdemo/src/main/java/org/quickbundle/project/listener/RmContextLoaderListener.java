@@ -13,6 +13,7 @@ import org.quickbundle.project.cache.RmCacheHandler;
 import org.quickbundle.base.web.servlet.RmHolderServlet;
 import org.quickbundle.config.RmClusterConfig;
 import org.quickbundle.project.init.CustomSystemProperties;
+import org.quickbundle.project.init.InitDatabaseHelper;
 import org.quickbundle.project.init.LoadProjectConfig;
 import org.quickbundle.tools.support.buffer.FlushQueueThread;
 import org.quickbundle.tools.support.log.RmLogHelper;
@@ -48,6 +49,7 @@ public class RmContextLoaderListener extends ContextLoaderListener {
 			super.contextInitialized(event);
 			RmBeanFactory.setBeanFactory(WebApplicationContextUtils.getWebApplicationContext(event.getServletContext()));
 		}
+		InitDatabaseHelper.initDatabase();
 		
 		LoadProjectConfig.initClusterConfig();
 	}

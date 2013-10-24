@@ -85,7 +85,7 @@ public class RmCodeService implements IRmCodeService {
         }
         Document doc = null;
 		try {
-			doc = RmXmlHelper.parse(RmPathHelper.getWebInfDir() + File.separator + "config" + File.separator + "rm" + File.separator + "initCodeTypeData.xml");
+			doc = RmXmlHelper.parse(RmPathHelper.getWebInfDir() + "/config/rm/initCodeTypeData.xml");
 		} catch (MalformedURLException e1) {
 			throw new RmRuntimeException("initCodeTypeData.xml配置错误", e1);
 		} catch (DocumentException e1) {

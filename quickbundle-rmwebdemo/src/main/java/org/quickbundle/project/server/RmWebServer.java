@@ -31,11 +31,10 @@ import org.slf4j.LoggerFactory;
 public class RmWebServer {
 	
 	private static int maxFindDeep4WebAppDir = 16;
-	static String defaultWebAppDir = null;
-	static {
-		defaultWebAppDir = findWebAppDir();
-		System.setProperty(Constants.LOG4J_DEFAULT_CONFIGURATION_KEY, formatToUrl(defaultWebAppDir + "/WEB-INF/config/log4j/log4j.properties"));
-	}
+//	static String defaultWebAppDir = null;
+//	static {
+//		defaultWebAppDir = findWebAppDir();
+//	}
     protected static final Logger log = LoggerFactory.getLogger(RmWebServer.class);
 
     protected static final String DEFAULT_WEBAPP_DIR = System.getProperty(

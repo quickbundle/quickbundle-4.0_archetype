@@ -11,13 +11,10 @@
  */
 package org.quickbundle.project.test;
 
-import java.io.FileNotFoundException;
-
 import junit.framework.TestCase;
 
 import org.quickbundle.base.beans.factory.RmBeanFactory;
-import org.quickbundle.tools.support.path.RmPathHelper;
-import org.springframework.util.Log4jConfigurer;
+import org.quickbundle.project.init.InitDatabaseHelper;
 
 /**
  * 功能、用途、现存BUG:
@@ -36,11 +33,7 @@ public class RmWebTestCase extends TestCase {
      * 初始化log4j和Spring配置
      */
     public final synchronized static void init() {
-    	try {
-			Log4jConfigurer.initLogging(RmPathHelper.getWarName() + "/WEB-INF/config/log4j/log4j.properties");
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException(e);
-		}
         RmBeanFactory.getBeanFactory();
+        InitDatabaseHelper.initDatabaseProductName();
     }
 }
