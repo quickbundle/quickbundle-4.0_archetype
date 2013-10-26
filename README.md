@@ -1,7 +1,6 @@
 quickbundle骨架工程
 ================================================
 目前包含：JavaEE标准版、跨平台的Mobile端phonegap版<br/>
-待增加：安全强化的JavaEE版
 
 quickbundle-rmwebdemo
 ------------------------------------------------
@@ -59,6 +58,3 @@ quickbundle-phonegapdemo
 		3，cd /quickbundle-phonegapdemo> mvn clean install -Dmaven.test.skip=true
 		4，apk、xap等文件，在$M2_REPO/org/quickbundle/quickbundle-phonegapdemo/4.0.0
 
-quickbundle-securitydemo
-------------------------------------------------
-对JavaEE标准版，以“Build Security In”的思想彻底重构之后的注重安全的应用骨架。适用场景：对安全有一定要求的企业应用、互联网应用后端。
