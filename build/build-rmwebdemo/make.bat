@@ -15,6 +15,7 @@ call :extractJar org.quickbundle.mda.mvm-4.0.0
 
 echo copy quickbundle-rmwebdemo...
 cd ..\..\..\..\..\quickbundle-rmwebdemo
+rem call mvn clean eclipse:clean eclipse:eclipse
 call mvn clean
 cd ..
 echo extract quickbundle-rmwebdemo.jar...
