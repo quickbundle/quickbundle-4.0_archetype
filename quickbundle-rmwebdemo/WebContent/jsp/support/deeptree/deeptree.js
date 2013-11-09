@@ -155,7 +155,7 @@ $(function(){
 	
 	function translateParentToLeaf(thisDiv) {  //把父节点变成叶子
 		thisDiv.style.display = "none";
-		var thisParent = thisDiv.previousSibling;
+		var thisParent = $(thisDiv).prev().get(0);
 		if(thisParent == undefined || thisParent == null || thisParent.getAttribute("type") != "parent") {
 			return false;
 		}

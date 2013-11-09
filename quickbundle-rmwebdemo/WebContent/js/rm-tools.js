@@ -1832,16 +1832,18 @@ function getTrIndex(table, tr) {
 /*根据浏览器（非IE）来获取innerHTML的value问题 start*/
 var Sys = {};
 var ua = navigator.userAgent.toLowerCase();
-if (window.ActiveXObject)
-Sys.ie = ua.match(/msie ([\d.]+)/)[1]
-else if (document.getBoxObjectFor)
-Sys.firefox = ua.match(/firefox\/([\d.]+)/)[1]
-else if (window.MessageEvent && !document.getBoxObjectFor)
-Sys.chrome = ua.match(/chrome\/([\d.]+)/)[1]
-else if (window.opera)
-Sys.opera = ua.match(/opera.([\d.]+)/)[1]
-else if (window.openDatabase)
-Sys.safari = ua.match(/version\/([\d.]+)/)[1];
+try{
+	if (window.ActiveXObject)
+		Sys.ie = ua.match(/msie ([\d.]+)/)[1]
+	else if (document.getBoxObjectFor)
+		Sys.firefox = ua.match(/firefox\/([\d.]+)/)[1]
+	else if (window.MessageEvent && !document.getBoxObjectFor)
+		Sys.chrome = ua.match(/chrome\/([\d.]+)/)[1]
+	else if (window.opera)
+		Sys.opera = ua.match(/opera.([\d.]+)/)[1]
+	else if (window.openDatabase)
+		Sys.safari = ua.match(/version\/([\d.]+)/)[1];
+}catch(e){}
 
 function setFFCHROME(obj,obj1){//FF下手动加值
 	//input 暂时实用文本域，有radio,checkbox,另外处理
