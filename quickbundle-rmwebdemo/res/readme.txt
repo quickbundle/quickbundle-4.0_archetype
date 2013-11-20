@@ -20,7 +20,7 @@ org.quickbundle.project.init.RmWebApplicationInit#line.74，忽略每次启动�
 将部署文件context.xml或部署上下文参数中的reloadable属性改为false
 <Context path="/rmdemo" docBase="D:\apps\QbRmWebDemo\rmdemo" debug="0" reloadable="false" privileged="true">
 
------------------Tomcat配置------------------
+-----------------Tomcat配置  server.xml------------------
     <Executor name="tomcatThreadPool" namePrefix="catalina-exec-" maxThreads="1500" minSpareThreads="4"/>
     <Connector port="9999" protocol="HTTP/1.1" 
                connectionTimeout="20000" 
