@@ -694,9 +694,9 @@ function writeBackValue(inputName) {
 				var thisSelected = false;
 				if(typeof objValue == "string") {
 					thisSelected = thisJ.val() == objValue;
-				} else if(typeof objValue == "object") {
-					for(var obj0 in objValue) {
-						if(obj0 == thisJ.val()) {
+				} else if(typeof objValue == "object" && objValue.length != null) {
+					for(var i=0; i<objValue.length; i++) {
+						if(objValue[i] == thisJ.val()) {
 							thisSelected = true;
 							break;
 						}
