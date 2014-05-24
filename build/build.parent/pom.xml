@@ -52,12 +52,20 @@
 							<goal>run</goal>
 						</goals>
 						<configuration>
+<!--
 							<target description="run the bat">
 								<echo>execute make.bat</echo>
 								<exec dir="." executable="cmd.exe">
 									<arg line=" /c make.bat"/>
 								</exec>
 							</target>
+-->
+                                                        <target description="run the bat">
+                                                                <echo>execute make.sh</echo>
+                                                                <exec dir="." executable="sh">
+                                                                        <arg line=" make.sh"/>
+                                                                </exec>
+                                                        </target>
 						</configuration>
 					</execution>
 				</executions>
