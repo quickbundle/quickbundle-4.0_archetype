@@ -26,11 +26,10 @@ extractJar org.quickbundle.mda.mvm-4.0.0
 
 echo copy quickbundle-rmwebdemo...
 cd ../../../../../quickbundle-rmwebdemo
-#mvn clean eclipse:clean eclipse:eclipse
-mvn clean
+mvn clean eclipse:clean eclipse:eclipse
+#mvn clean
 cd ..
 echo extract quickbundle-rmwebdemo.jar...
 jar cfM build/build-rmwebdemo/target/quickbundle-rmwebdemo.jar quickbundle-rmwebdemo
 cd build/build-rmwebdemo/target/eclipse/plugins/org.quickbundle.mda.gp-4.0.0/t/j1
 jar xfM ../../../../../quickbundle-rmwebdemo.jar
-
